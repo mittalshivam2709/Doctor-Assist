@@ -1,0 +1,17 @@
+.expanding-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .expanding-box-header {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .expanding-box-content {
+    padding: 10px;
+  }
+  
