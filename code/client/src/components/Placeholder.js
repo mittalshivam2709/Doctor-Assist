@@ -1,17 +1,7 @@
-import React, { useState } from 'react';
-import '../../public/expandingBox.css'; 
-
-const ExpandingBox = ({ title, content }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleToggle = () => {
-    setExpanded(!expanded);
-  };
-
-  return (
-    <div className="expanding-box" onClick={handleToggle}>
-      <div className="expanding-box-header">{title}</div>
-      {expanded && <div className="expanding-box-content">{content}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+const Placeholder = () => {
+    return (
+      <p>
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
         malesuada, tellus nec aliquet interdum, turpis massa vulputate felis,
         non facilisis nulla tortor eu nulla. Nunc in nisi mauris. Vivamus auctor
         tortor quis nunc aliquet, consectetur semper turpis hendrerit.
@@ -31,10 +21,9 @@ const ExpandingBox = ({ title, content }) => {
         molestie facilisis tortor. Ut auctor at orci eget molestie. Etiam
         pharetra nisl ut accumsan semper. Mauris at dapibus tortor, nec
         ultricies metus. Duis scelerisque diam nec risus pellentesque faucibus.
-        Sed sed blandit mauris. Vivamus congue magna non tristique accumsan.</div>}
-      
-    </div>
-  );
-};
+        Sed sed blandit mauris. Vivamus congue magna non tristique accumsan.
+      </p>
+    );
+  };
 
-export default ExpandingBox;
+  export default Placeholder;
