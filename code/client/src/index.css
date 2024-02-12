@@ -15,7 +15,7 @@ body {
 }
 
 .column:first-child {
-  flex: 0 0 25%; /* First column occupies 25% of the width */
+  flex: 0 0 28%; /* First column occupies 25% of the width */
 }
 
 .column:last-child {
@@ -36,4 +36,8 @@ body {
 
 .expanding-box-content {
   padding: 10px;
+}
+
+.bg-red{
+  background-color: red;
 }

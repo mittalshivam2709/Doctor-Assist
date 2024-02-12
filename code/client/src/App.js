@@ -3,7 +3,7 @@ import Placeholder from "./components/Placeholder";
 
 function App() {
   return (
-    <div className="flex-container">
+    <div className="flex-container wrapper">
       <div className="column">
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
         {Array.from({ length: 10 }).map((_, index) => (
