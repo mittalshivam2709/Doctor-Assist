@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../index.css";
 import LoremIpsum from "../utils/loremipsum";
-import data from "../utils/data";
+// import data from "../utils/data";
 
-const Dropdown = ({ title, content, color = "red" }) => {
+const Dropdown = ({ data }) => {
   // const {AmbulanceNo, Problem} = data[0];
   const {
     AmbulanceNo,
@@ -19,7 +19,15 @@ const Dropdown = ({ title, content, color = "red" }) => {
     "ERCP advice": ERCPAdvice,
     "Event during transport": EventDuringTransport,
     id,
-  } = data[0];
+  } = data;
+  var color = "green";
+  if( CriticalCase == "yes" ){
+    color = "red"
+  }
+  else {
+    color = "blue";
+  }
+ 
   const [expanded, setExpanded] = useState(false);
 
   const handleToggle = () => {
