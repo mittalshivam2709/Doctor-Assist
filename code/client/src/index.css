@@ -48,3 +48,18 @@ body {
   margin-bottom: 10px;
   background-color: #E3EEFE;
 }
+.custom-navbar{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+}
+.custom-navbar img{
+  margin-left: 5px;
+  width: 113px;
+  height: 64px;
+}
