@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+  background: #3d70b2;
+}
+.flex-container {
+  display: flex;
+  height: 100vh;
+}
+
+.column {
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+}
+
+.column:first-child {
+  flex: 0 0 25%; /* First column occupies 25% of the width */
+}
+
+.column:last-child {
+  flex: 1; /* Second column takes up the remaining space */
+}
+.expanding-box {
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.expanding-box-header {
+  padding: 10px;
+  background-color: #E3EEFE;
+}
+.expanding-box-header *{
+  margin-left: 1%;
+}
+.expanding-box-content {
+  padding: 10px;
+}
+
+.bg-red{
+  background-color: red;
+}
+.inbox-box {
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #E3EEFE;
+}
+.custom-navbar{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+}
+.custom-navbar img{
+  margin-left: 5px;
+  width: 113px;
+  height: 64px;
+}
