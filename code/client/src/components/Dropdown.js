@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../index.css";
 import LoremIpsum from "../utils/loremipsum";
-// import data from "../utils/data";
+import { ChatState } from "../context/ChatProvider";
+
+
 
 const Dropdown = ({ data }) => {
   // const {AmbulanceNo, Problem} = data[0];
@@ -27,10 +29,12 @@ const Dropdown = ({ data }) => {
   else {
     color = "blue";
   }
- 
+  const {chatState, setSelectedChat} = ChatState();
   const [expanded, setExpanded] = useState(false);
 
-  const handleToggle = () => {
+  const handleToggle = (id) => {
+    console.log("CSV", id);
+    setSelectedChat(id);
     setExpanded(!expanded);
   };
 
@@ -40,7 +44,7 @@ const Dropdown = ({ data }) => {
     >
       <div
         className={`expanding-box-header bg-${expanded ? color : "white"} text-${expanded ? "white" : "black"}`}
-        onClick={handleToggle}
+        onClick={() => {handleToggle(id)}}
         style={{
           backgroundImage: expanded
             ? `linear-gradient(to right, ${color} 100%, #E3EEFE 100%)`

@@ -20,10 +20,10 @@ const Homepage = () => {
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <Template />
 
-        {/* {data.map((item) => (
-          <Dropdown data={item} />
-        ))} */}
         {data.map((item) => (
+          <Dropdown data={item} />
+        ))}
+        {/* {data.map((item) => (
           <button
             key={item.id}
             onClick={() => handleButtonClick(item.id)}
@@ -31,7 +31,7 @@ const Homepage = () => {
           >
           BUTTONS   
           </button>
-        ))}
+        ))} */}
       </div>
       <div className="column">
         <h1 className="text-3xl font-bold underline">Second column</h1>
