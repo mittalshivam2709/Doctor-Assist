@@ -3,16 +3,18 @@ import Navbar from "./components/Navbar";
 import Placeholder from "./components/Placeholder";
 import Template from "./components/Template";
 import Homepage from "./pages/Homepage";
+import { Provider } from 'react-redux';
+import store from "./state/dropdownStore";
 
 function App() {
   
     return (
     
-    <div>
+    <Provider store={store}>
       <Navbar />
       <Homepage />
     
-    </div>
+    </Provider>
   );
 }
 
