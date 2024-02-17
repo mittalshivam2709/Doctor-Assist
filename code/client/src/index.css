@@ -98,3 +98,16 @@ body {
   background-color: #E5F0FF;
   margin: 3%;
 }
+
+.input-bar {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-bar:focus {
+  outline: none;
+  border-color: #007bff;
+}
