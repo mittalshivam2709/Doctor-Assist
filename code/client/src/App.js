@@ -15,7 +15,7 @@ function App() {
     <Provider store={store}>
       <Navbar />
       <Homepage />
-    
+      
     </Provider>
   );
 }

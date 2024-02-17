@@ -4,8 +4,10 @@ const Placeholder = () => {
   const {selectedChat, setSelectedChat} = ChatState();
     return (
       <p>
-       {LoremIpsum}
-       Currently selected = {selectedChat}
+        {
+          selectedChat?
+          `Currently selected = ${selectedChat}`:LoremIpsum
+        }
       </p>
     );
   };

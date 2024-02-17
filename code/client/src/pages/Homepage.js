@@ -3,17 +3,11 @@ import Dropdown from "../components/Dropdown";
 import Placeholder from "../components/Placeholder";
 import Template from "../components/Template";
 import data from "../utils/data";
-import { selectClickedDropdown, setClickedDropdown } from "../state/dropdownSlice";
-import { useDispatch, useSelector } from "react-redux";
-
+import ChatPage from "./ChatPage";
+import { ChatState } from "../context/ChatProvider";
 
 const Homepage = () => {
-  const dispatch = useDispatch();
-  const clickedButton = useSelector(selectClickedDropdown);
-
-  const handleButtonClick = (buttonId) => {
-    dispatch(selectClickedDropdown(buttonId));
-  };
+  const {selectedChat} = ChatState();
   return (
     <div className="flex-container wrapper">
       <div className="column">
@@ -23,19 +17,11 @@ const Homepage = () => {
         {data.map((item) => (
           <Dropdown data={item} />
         ))}
-        {/* {data.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleButtonClick(item.id)}
-            className={clickedButton === item.id ? 'active-button' : ''}
-          >
-          BUTTONS   
-          </button>
-        ))} */}
       </div>
       <div className="column">
-        <h1 className="text-3xl font-bold underline">Second column</h1>
-        <Placeholder />
+        <h1 className="text-3xl font-bold underline">{`Hello ${selectedChat}`}</h1>
+        <ChatPage />
+        {/* <Placeholder /> */}
       </div>
     </div>
   );
