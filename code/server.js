@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv/config')
 
 const app = express();
 
@@ -12,6 +13,18 @@ app.get('/', (req, res) => {
 });
 const PORT = process.env.PORT || 3000; 
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("connected");
+    const collections = await mongoose.connection.db.collections();
+    console.log("Collections in the database:");
+    console.log(mongoose.connection.db);
+    collections.forEach(collection => {
+      console.log(mongoose.connection.db);
+    });
+  } catch (error) {
+    console.log(error);
+  }
   console.log(`Server is running on port ${PORT}`);
-});
+}); 
