@@ -9,9 +9,9 @@ function App() {
     <div>
       {/* <Route path="/" component={Homepage} exact /> */}
       {/* <Route /> */}
-      {/* <Navbar /> */}
-      {/* <Homepage /> */}
-      <LoginPage />
+      <Navbar />
+      <Homepage />
+      {/* <LoginPage /> */}
     </div>
       
   );
