@@ -1,22 +1,19 @@
-import Dropdown from "./components/Dropdown";
 import Navbar from "./components/Navbar";
-import Placeholder from "./components/Placeholder";
-import Template from "./components/Template";
 import Homepage from "./pages/Homepage";
-import { Provider } from 'react-redux';
-import store from "./state/dropdownStore";
-
-import { createContext } from "react";
+import {Route} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   
     return (
-    
-    <Provider store={store}>
-      <Navbar />
-      <Homepage />
+    <div>
+      {/* <Route path="/" component={Homepage} exact /> */}
+      {/* <Route /> */}
+      {/* <Navbar /> */}
+      {/* <Homepage /> */}
+      <LoginPage />
+    </div>
       
-    </Provider>
   );
 }
 
