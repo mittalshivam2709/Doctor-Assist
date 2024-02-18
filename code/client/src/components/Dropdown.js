@@ -5,7 +5,7 @@ import { ChatState } from "../context/ChatProvider";
 
 
 
-const Dropdown = ({ data }) => {
+const Dropdown = ({ data}) => {
   // const {AmbulanceNo, Problem} = data[0];
   const {
     AmbulanceNo,
@@ -29,7 +29,7 @@ const Dropdown = ({ data }) => {
   else {
     color = "blue";
   }
-  const {chatState, setSelectedChat} = ChatState();
+  const {selectedChat, setSelectedChat} = ChatState();
   const [expanded, setExpanded] = useState(false);
 
   const handleToggle = (id) => {

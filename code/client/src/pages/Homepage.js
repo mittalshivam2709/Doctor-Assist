@@ -15,11 +15,14 @@ const Homepage = () => {
         <Template />
 
         {data.map((item) => (
-          <Dropdown data={item} />
+          <Dropdown
+            key={item.id}
+            data={item}
+          />
         ))}
       </div>
       <div className="column">
-        <h1 className="text-3xl font-bold underline">{`Hello ${selectedChat}`}</h1>
+        <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1>
         <ChatPage />
         {/* <Placeholder /> */}
       </div>

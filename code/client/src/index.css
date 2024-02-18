@@ -17,6 +17,7 @@ body {
 }
 
 .column:first-child {
+  overflow-y: scroll;
   flex: 0 0 25%; /* First column occupies 25% of the width */
 }
 
