@@ -5,6 +5,7 @@ import Template from "../components/Template";
 import data from "../utils/data";
 import ChatPage from "./ChatPage";
 import { ChatState } from "../context/ChatProvider";
+import Navbar from "../components/Navbar";
 
 const Homepage = () => {
   const {selectedChat} = ChatState();
