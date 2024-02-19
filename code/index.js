@@ -1,15 +1,27 @@
-const {ApolloServer} = require('apollo-server');
+const {ApolloServer, gql} = require('apollo-server');
 const mongoose  = require('mongoose');
 const dotenv = require('dotenv/config')
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
+const userTypedef = require('./graphql/userTypeDefs');
+const userResolvers = require('./graphql/userResolvers')
 
+
+const allDefs = gql`
+    ${typeDefs}
+    ${userTypedef}
+`
+const allResolvers = {
+    ...resolvers,
+    ...userResolvers
+}
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers
-})
+    typeDefs: [typeDefs, userTypedef],
+    resolvers: [resolvers, userResolvers]
+  });
+
 mongoose.connect(process.env.MONGO_URI) 
     .then(() => {
         console.log("Connected to MongoDB");

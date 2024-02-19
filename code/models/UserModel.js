@@ -1,3 +1,15 @@
-import mongoose from "mongoose";
+const { model, Schema } = require('mongoose');
 
-// Contains the user model, for authenticaiton 
+const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
+
+module.exports = model('User', userSchema);
