@@ -56,18 +56,18 @@ function App() {
                 ) : (
                   // <p>Limited information initially...</p>
                   <div style={{ backgroundColor: 'rgb(220,234,254)', paddingTop: '5px',paddingBottom:'8px'}}>
-                    <span style={{ textAlign:'right',color:'rgb(15,96,241)',fontSize:'12px',marginRight:'5%',marginTop:'10%',paddingLeft:'37%' }}>Ambulance No-2304</span>
+                    <span style={{ textAlign:'right',color:'rgb(15,96,241)',fontSize:'12px',marginRight:'5%',marginTop:'10%',paddingLeft:'43%' }}>Ambulance No-2304</span>
                     <span style = {{fontSize:'12px',textAlign:'right'}}>12:11 PM</span>
 
                   
-                   <p style ={{textAlign:'left',paddingLeft:'7%',marginTop:'8px',marginBottom:'5px'}}><strong>Cardiac-cardiac-cardiac-arrest</strong></p>
-                  {/* <div style={{paddingBottom:'10px'}}> */}
-                    <span style={{paddingLeft:'3%',marginRight: '12%',fontSize:'12px',paddingBottom:'10px'}}>Age - 45 Years</span>
-                    {/* {' '} */}
+                   <p style ={{textAlign:'left',paddingLeft:'6%',marginTop:'8px',marginBottom:'5px'}}><strong>Cardiac-cardiac-cardiac-arrest</strong></p>
+
+                    <span style={{paddingLeft:'6%',marginRight: '12%',fontSize:'12px',paddingBottom:'10px'}}>Age - 45 Years</span>
+
                     <span style={{marginRight: '12%',fontSize:'12px'}}>Age type - old</span>
-                    {/* {' '} */}
+
                     <span style={{fontSize:'12px'}}>Gender - Male</span>
-                    {/* </div> */}
+
                   </div>
                 )}
               </div>
@@ -75,7 +75,16 @@ function App() {
 
           </div>
           <div className="larger-column">
-            Content for the second column
+          {/* <p>Chief Complaint -  Breathing Problem-Breathing Problem-Breathing Problem</p> */}
+            <div className='long-column-header'>
+
+              <span style={{marginRight:'1px'}}>Chief Complaint -  </span>
+              <span style={{fontWeight:'bold',marginLeft:'0',paddingRight:'28%'}}>Breathing Problem-Breathing Problem-Breathing Problem</span>
+            </div>
+            <div className='right-column'>
+              ehvckhwkv
+            </div>
+
           </div>
 
         </div>
