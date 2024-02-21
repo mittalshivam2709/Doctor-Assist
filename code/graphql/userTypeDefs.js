@@ -5,6 +5,7 @@ type User{
     username: String!
     password: String!
     token: String 
+    id: String
 }
 
 input UserInput{

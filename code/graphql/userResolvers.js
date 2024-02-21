@@ -54,7 +54,7 @@ module.exports = {
       );
       user.token = token;
       return {
-        id: user.id,
+        id: user._id,
         ...user._doc
       };
     }

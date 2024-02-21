@@ -25,7 +25,7 @@ const server = new ApolloServer({
 mongoose.connect(process.env.MONGO_URI) 
     .then(() => {
         console.log("Connected to MongoDB");
-        return server.listen({ port: process.env.PORT || 3000 }); // Use environment variable for port, with a default of 3000
+        return server.listen({ port: process.env.PORT || 5000 }); // Use environment variable for port, with a default of 3000
     })
     .then(({ url }) => {
         console.log(`Server ready at ${url}`);
