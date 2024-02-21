@@ -1,20 +1,26 @@
-import Dropdown from "./components/Dropdown";
 import Navbar from "./components/Navbar";
-import Placeholder from "./components/Placeholder";
-import Template from "./components/Template";
 import Homepage from "./pages/Homepage";
-import { Provider } from 'react-redux';
-import store from "./state/dropdownStore";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-  
-    return (
-    
-    <Provider store={store}>
-      <Navbar />
-      <Homepage />
-    
-    </Provider>
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/home"
+            element={
+              <>
+                <Navbar />
+                <Homepage />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

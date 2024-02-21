@@ -5,6 +5,7 @@
 
 body {
   background: #3d70b2;
+  overflow-y: hidden;
 }
 .flex-container {
   display: flex;
@@ -13,10 +14,10 @@ body {
 
 .column {
   padding: 10px;
-  /* border: 1px solid #ccc; */
 }
 
 .column:first-child {
+  overflow-y: scroll;
   flex: 0 0 25%; /* First column occupies 25% of the width */
 }
 
@@ -61,5 +62,53 @@ body {
 .custom-navbar img{
   margin-left: 5px;
   width: 113px;
-  height: 64px;
+  height: 32px;
+}
+.chat-navbar{
+  font-size:large;
+  background-color: red;
+  height: 40px;
+}
+
+
+.chat-container {
+  background-color: white;
+  display: flex;
+  height: 85vh;
+  grid-template-rows: auto;
+}
+.chat {
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.chat:first-child {
+  background-color: #F0F6FF;
+  flex: 0 0 25%; 
+}
+
+.chat:last-child {
+  background-color: #F0F6FF;
+  flex: 1; 
+}
+.chat-message{
+  background-color: #E5F0FF;
+  margin: 3%;
+}
+
+.input-bar {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-bar:focus {
+  outline: none;
+  border-color: #007bff;
 }
