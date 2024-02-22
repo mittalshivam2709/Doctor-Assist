@@ -5,7 +5,9 @@ const dotenv = require('dotenv/config')
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 const userTypedef = require('./graphql/userTypeDefs');
-const userResolvers = require('./graphql/userResolvers')
+const userResolvers = require('./graphql/userResolvers');
+const messageTypeDefs = require('./graphql/messageTypeDefs');
+const messageResolvers = require('./graphql/messageResolvers');
 
 
 const allDefs = gql`
@@ -18,8 +20,8 @@ const allResolvers = {
 }
 
 const server = new ApolloServer({
-    typeDefs: [typeDefs, userTypedef],
-    resolvers: [resolvers, userResolvers]
+    typeDefs: [typeDefs, userTypedef, messageTypeDefs],
+    resolvers: [resolvers, userResolvers, messageResolvers]
   });
 
 mongoose.connect(process.env.MONGO_URI) 
