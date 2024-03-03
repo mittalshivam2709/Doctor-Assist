@@ -13,7 +13,7 @@ const ChatPage = () => {
       <div className="chat">
       Vitals template
       </div>
-      <div className="chat">
+      <div  className="chat">
 
         <div><SingleChat /></div>
       </div>

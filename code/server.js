@@ -13,24 +13,46 @@ const messageResolvers = require('./graphql/messageResolvers');
 
 const app = express();
 
-const server = new ApolloServer({
+const apollo_server = new ApolloServer({
   typeDefs: [typeDefs, userTypedef, messageTypeDefs],
   resolvers: [resolvers, userResolvers, messageResolvers],
 });
 
 async function startServer() {
-  await server.start(); // connect to apollo server
+  await apollo_server.start(); // connect to apollo server
 
-  server.applyMiddleware({ app }); // connects the app to the server
+  apollo_server.applyMiddleware({ app }); // connects the app to the apollo server
 
   app.use(cors());
 
   mongoose.connect(process.env.MONGO_URI)
     .then(() => {
       console.log("Connected to MongoDB");
-      app.listen({ port: process.env.PORT || 5000 }, () => {
-        console.log(`server listening at http://localhost:${process.env.PORT || 5000}${server.graphqlPath}`);
+      const server = app.listen({ port: process.env.PORT || 5000 }, () => {
+        console.log(`server listening at http://localhost:${process.env.PORT || 5000}${apollo_server.graphqlPath}`);
       });
+      const io = require('socket.io')(server, {
+        pingTimeout:60000,
+        cors: {
+          origin: "http://localhost:3000",
+        },
+      });
+      io.on("connection", (socket) => {
+        console.log("socket connection ", /* socket* */);
+        
+        socket.on("initialize", (user) => {
+          console.log("Connected with ", user);
+        })
+
+        socket.on("setChat", (chat) => {
+          socket.join(chat);
+          console.log(chat);
+        })
+
+        socket.on("send message", (selectedChat, message) => {
+          console.log(selectedChat, message);
+        })
+      })
     })
     .catch(err => {
       console.error('Error:', err.message);
