@@ -10,3 +10,13 @@ mutation LoginUser($userInput: UserInput!) {
   }
 }
 `
+
+export const SEND_MESSAGE = gql`
+mutation Mutation($messageInput: MessageInput!) {
+  sendMessage(messageInput: $messageInput) {
+    sender
+    content
+    receiver
+  }
+}
+`

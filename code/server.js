@@ -1,32 +1,40 @@
-const express = require('express');
-const morgan = require('morgan');
+const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv/config')
+const dotenv = require('dotenv/config');
 const cors = require('cors');
+const express = require('express');
+
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+const userTypedef = require('./graphql/userTypeDefs');
+const userResolvers = require('./graphql/userResolvers');
+const messageTypeDefs = require('./graphql/messageTypeDefs');
+const messageResolvers = require('./graphql/messageResolvers');
 
 const app = express();
 
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(cors())
-
-app.get('/', (req, res) => {
-  res.send('Hello world');
+const server = new ApolloServer({
+  typeDefs: [typeDefs, userTypedef, messageTypeDefs],
+  resolvers: [resolvers, userResolvers, messageResolvers],
 });
-const PORT = process.env.PORT || 3000; 
 
-app.listen(PORT, async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("connected");
-    const collections = await mongoose.connection.db.collections();
-    console.log("Collections in the database:");
-    console.log(mongoose.connection.db);
-    collections.forEach(collection => {
-      console.log(mongoose.connection.db);
+async function startServer() {
+  await server.start(); // connect to apollo server
+
+  server.applyMiddleware({ app });
+
+  app.use(cors());
+
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("Connected to MongoDB");
+      app.listen({ port: process.env.PORT || 5000 }, () => {
+        console.log(`server listening at http://localhost:${process.env.PORT || 5000}${server.graphqlPath}`);
+      });
+    })
+    .catch(err => {
+      console.error('Error:', err.message);
     });
-  } catch (error) {
-    console.log(error);
-  }
-  console.log(`Server is running on port ${PORT}`);
-}); 
+}
+
+startServer(); 

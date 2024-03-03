@@ -1,37 +1,41 @@
-const {ApolloServer, gql} = require('apollo-server');
-const mongoose  = require('mongoose');
-const dotenv = require('dotenv/config')
+// const { ApolloServer } = require('apollo-server-express');
+// const mongoose = require('mongoose');
+// const dotenv = require('dotenv/config');
+// const cors = require('cors');
+// const express = require('express');
 
-const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers');
-const userTypedef = require('./graphql/userTypeDefs');
-const userResolvers = require('./graphql/userResolvers');
-const messageTypeDefs = require('./graphql/messageTypeDefs');
-const messageResolvers = require('./graphql/messageResolvers');
+// const typeDefs = require('./graphql/typeDefs');
+// const resolvers = require('./graphql/resolvers');
+// const userTypedef = require('./graphql/userTypeDefs');
+// const userResolvers = require('./graphql/userResolvers');
+// const messageTypeDefs = require('./graphql/messageTypeDefs');
+// const messageResolvers = require('./graphql/messageResolvers');
 
+// const app = express();
+/* DEPRICATED */
+// const server = new ApolloServer({
+//   typeDefs: [typeDefs, userTypedef, messageTypeDefs],
+//   resolvers: [resolvers, userResolvers, messageResolvers],
+// });
 
-const allDefs = gql`
-    ${typeDefs}
-    ${userTypedef}
-`
-const allResolvers = {
-    ...resolvers,
-    ...userResolvers
-}
+// async function startServer() {
+//   await server.start(); // connect to apollo server
+/* DEPRICATED */
+//   server.applyMiddleware({ app });
+/* DEPRICATED */
+//   app.use(cors());
+/* DEPRICATED */
+//   mongoose.connect(process.env.MONGO_URI)
+//     .then(() => {
+//       console.log("Connected to MongoDB");
+//       app.listen({ port: process.env.PORT || 5000 }, () => {
+//         console.log(`server listening at http://localhost:${process.env.PORT || 5000}${server.graphqlPath}`);
+//       });
+//     })
+//     .catch(err => {
+//       console.error('Error:', err.message);
+//     });
+// }
 
-const server = new ApolloServer({
-    typeDefs: [typeDefs, userTypedef, messageTypeDefs],
-    resolvers: [resolvers, userResolvers, messageResolvers]
-  });
-
-mongoose.connect(process.env.MONGO_URI) 
-    .then(() => {
-        console.log("Connected to MongoDB");
-        return server.listen({ port: process.env.PORT || 5000 }); // Use environment variable for port, with a default of 3000
-    })
-    .then(({ url }) => {
-        console.log(`Server ready at ${url}`);
-    })
-    .catch(err => {
-        console.error('Error :', err.message);
-    });
+// startServer(); 
+/* DEPRICATED */

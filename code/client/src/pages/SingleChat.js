@@ -39,8 +39,8 @@ const SingleChat = () => {
         {messages.map((message, index) => (
         <Message key={index} message={message.content} right={message.sender == user} />
       ))}
-        <MessageInput />
       </div>
+        <MessageInput />
     </div>
   );
 };
