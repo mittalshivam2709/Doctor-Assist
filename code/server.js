@@ -21,7 +21,7 @@ const server = new ApolloServer({
 async function startServer() {
   await server.start(); // connect to apollo server
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app }); // connects the app to the server
 
   app.use(cors());
 
