@@ -10,12 +10,14 @@ const userTypedef = require('./graphql/userTypeDefs');
 const userResolvers = require('./graphql/userResolvers');
 const messageTypeDefs = require('./graphql/messageTypeDefs');
 const messageResolvers = require('./graphql/messageResolvers');
+const listDefs = require('./graphql/listDefs');
+const listResolver = require('./graphql/listResolver');
 
 const app = express();
 
 const apollo_server = new ApolloServer({
-  typeDefs: [typeDefs, userTypedef, messageTypeDefs],
-  resolvers: [resolvers, userResolvers, messageResolvers],
+  typeDefs: [typeDefs, userTypedef, messageTypeDefs, listDefs],
+  resolvers: [resolvers, userResolvers, messageResolvers, listResolver],
 });
 
 async function startServer() {
@@ -34,23 +36,25 @@ async function startServer() {
       const io = require('socket.io')(server, {
         pingTimeout:60000,
         cors: {
-          origin: "http://localhost:3000",
+          origin: ["http://localhost:3000", "http://localhost:3001" , "http://localhost:3002"],
         },
       });
       io.on("connection", (socket) => {
         console.log("socket connection ", /* socket* */);
         
         socket.on("initialize", (user) => {
-          console.log("Connected with ", user);
+          // console.log("Connected with ", user);
+          socket.join(user);
         })
 
         socket.on("setChat", (chat) => {
           socket.join(chat);
-          console.log(chat);
+          // console.log("set chat to: ", chat);
         })
 
-        socket.on("send message", (selectedChat, message) => {
-          console.log(selectedChat, message);
+        socket.on("send message", (message) => { // selectedchat -> reciever, message -> content
+          // console.log( message);
+          socket.in(message.receiver).emit("message recieved", message);
         })
       })
     })

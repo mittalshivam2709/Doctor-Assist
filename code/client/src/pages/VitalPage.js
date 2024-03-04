@@ -15,7 +15,7 @@ const VitalPage = () => {
           setVital(numbers[numbers.length - 1]);
         }
       });
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(interval); 
   }, [refetch]); 
