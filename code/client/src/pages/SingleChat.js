@@ -14,14 +14,16 @@ var socket, selectedChatCompare;
 const SingleChat = () => {
   const { user, selectedChat, message, setMessage } = ChatState();
   const [messages, setMessages] = useState([]);
-  const chatRef = useRef(null);
+  const [isSocket, setSocket] = useState(false);
+
   const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
+    socket.on("connection" , () => setSocket(true));
     // socket.emit("send message", selectedChat, message) // send message to selected chat
     // socket.on("recieve message",)
-  }, [message]);
+  }, []);
   
   useEffect(() => {
     fetchMessages({
@@ -33,12 +35,27 @@ const SingleChat = () => {
       if (result.data && result.data.fetchMessage) {
         setMessages(result.data.fetchMessage);
       }
+      socket.emit("setChat", (selectedChat));
     });
   }, [selectedChat]);
 
   useEffect(() => {
+    socket.on("message recieved", (message) => {
+      console.log(message);
+      if(message.receiver == user){
+        console.log("set mssg");
+        setMessages([...messages, message]);
+      }
+      else if(!selectedChat || message.receiver != selectedChatCompare){
+        // notifcation
+      }
+    })
+  })
+
+  useEffect(() => {
     if(message){
       setMessages([...messages, message]);
+      socket.emit("send message", message);
     }
 
   

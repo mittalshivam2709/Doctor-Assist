@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
 import LoremIpsum from "../utils/loremipsum";
 import { ChatState } from "../context/ChatProvider";
@@ -32,8 +32,12 @@ const Dropdown = ({ data}) => {
   const {selectedChat, setSelectedChat} = ChatState();
   const [expanded, setExpanded] = useState(false);
 
+  useEffect(() => { // responsible for minimizing other dropdowns
+    const shouldExpand = id === selectedChat;
+    setExpanded(shouldExpand);
+  }, [selectedChat, id]);
+
   const handleToggle = (id) => {
-    console.log("CSV", id);
     setSelectedChat(id);
     setExpanded(!expanded);
   };
