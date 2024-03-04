@@ -4,15 +4,18 @@ import Navbar from "../components/Navbar";
 import Placeholder from "../components/Placeholder";
 import LoremIpsum from "../utils/loremipsum";
 import SingleChat from "./SingleChat";
+import MessageInput from "../components/MessageInput";
+import VitalPage from "./VitalPage";
+
 const ChatPage = () => {
   const { selectedChat } = ChatState();
 
   return (
     <div className="chat-container wrapper">
       <div className="chat">
-      Vitals template
+      <VitalPage/>
       </div>
-      <div className="chat">
+      <div  className="chat">
 
         <div><SingleChat /></div>
       </div>

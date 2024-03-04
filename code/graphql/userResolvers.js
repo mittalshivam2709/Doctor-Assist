@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   Query: {
     async getUser(_, { ID }) {
+      // const user = await User.findById(ID);
+      // console.log(user);
+      // return user;
       return await User.findById(ID);
     }
   },
