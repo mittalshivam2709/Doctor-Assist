@@ -5,7 +5,7 @@ import Message from "../components/Message";
 import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";
-import { useLazyQuery } from "@apollo/client"; // Import useLazyQuery instead of useQuery
+import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
 
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:5000";
@@ -15,6 +15,7 @@ const SingleChat = () => {
   const { user, selectedChat, message, setMessage } = ChatState();
   const [messages, setMessages] = useState([]);
   const [isSocket, setSocket] = useState(false);
+  const ref = useRef(null);
 
   const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
@@ -57,9 +58,18 @@ const SingleChat = () => {
       setMessages([...messages, message]);
       socket.emit("send message", message);
     }
-
+    
   
   }, [message]);
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({
+      behaviour:"smooth",
+      block:"end",
+    })
+    
+  
+  }, [messages]);
  
   return (
     <div>
@@ -74,6 +84,7 @@ const SingleChat = () => {
         ))}
       </div>
       <MessageInput />
+      <div ref={ref}></div>
     </div>
   );
 };

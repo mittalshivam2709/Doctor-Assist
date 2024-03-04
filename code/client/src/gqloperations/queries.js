@@ -9,3 +9,11 @@ query FetchMessage($sender: ID!, $receiver: ID!) {
   }
 }
 `
+
+export const FETCH_NUMBER = gql`
+query Query {
+  getNumberList {
+    numbers
+  }
+}
+`
