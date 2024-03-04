@@ -12,12 +12,14 @@ const messageTypeDefs = require('./graphql/messageTypeDefs');
 const messageResolvers = require('./graphql/messageResolvers');
 const listDefs = require('./graphql/listDefs');
 const listResolver = require('./graphql/listResolver');
+const ambulanceDefs = require('./graphql/ambulanceDefs');
+const ambulanceResolvers = require('./graphql/ambulanceResolvers');
 
 const app = express();
 
 const apollo_server = new ApolloServer({
-  typeDefs: [typeDefs, userTypedef, messageTypeDefs, listDefs],
-  resolvers: [resolvers, userResolvers, messageResolvers, listResolver],
+  typeDefs: [typeDefs, userTypedef, messageTypeDefs, listDefs, ambulanceDefs],
+  resolvers: [resolvers, userResolvers, messageResolvers, listResolver, ambulanceResolvers],
 });
 
 async function startServer() {

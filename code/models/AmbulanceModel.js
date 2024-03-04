@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 // stores all the data of an ambulance, the patients vitals etc 
-const ambulanceScheme = mongoose.Schema(
+const ambulanceSchema = mongoose.Schema(
     {
         doctor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         emt: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -26,7 +26,9 @@ const ambulanceScheme = mongoose.Schema(
         ercp_advice: String,
         critical_case: String, //yes or no, could be bool
         problem: String, // goes as title
-        
+        symptoms: String,
+        admit_time: String,
+
         age: Number,
         ambulance_no: Number,
 
@@ -42,4 +44,5 @@ const ambulanceScheme = mongoose.Schema(
     { timestamps: true },
 );
 
-export default mongoose.model("Ambulance", ambulanceSchema);
+const Ambulance =  mongoose.model("Ambulance", ambulanceSchema);
+module.exports = Ambulance;
