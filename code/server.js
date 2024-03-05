@@ -15,19 +15,23 @@ const listResolver = require('./graphql/listResolver');
 const ambulanceDefs = require('./graphql/ambulanceDefs');
 const ambulanceResolvers = require('./graphql/ambulanceResolvers');
 
+const corsList = {
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://10.1.132.176:3001"],
+};
 const app = express();
 
 const apollo_server = new ApolloServer({
   typeDefs: [typeDefs, userTypedef, messageTypeDefs, listDefs, ambulanceDefs],
   resolvers: [resolvers, userResolvers, messageResolvers, listResolver, ambulanceResolvers],
+  cors: corsList
 });
 
 async function startServer() {
+  app.use(cors());
   await apollo_server.start(); // connect to apollo server
 
   apollo_server.applyMiddleware({ app }); // connects the app to the apollo server
 
-  app.use(cors());
 
   mongoose.connect(process.env.MONGO_URI)
     .then(() => {
@@ -38,9 +42,10 @@ async function startServer() {
       const io = require('socket.io')(server, {
         pingTimeout:60000,
         cors: {
-          origin: ["http://localhost:3000", "http://localhost:3001" , "http://localhost:3002"],
+          origin: ["http://localhost:3000", "http://localhost:3001" , "http://localhost:3002", "http://10.1.132.176:3001", '*'],
         },
       });
+
       io.on("connection", (socket) => {
         console.log("socket connection ", /* socket* */);
         

@@ -112,3 +112,26 @@ body {
   outline: none;
   border-color: #007bff;
 }
+
+
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transition: bottom 0.3s ease; 
+}
+
+.chat-widget-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.chat-content {
+
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
