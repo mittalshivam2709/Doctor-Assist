@@ -8,7 +8,7 @@ import { FETCH_MESSAGES } from "../gqloperations/queries";
 import { useLazyQuery } from "@apollo/client"; // Import useLazyQuery instead of useQuery
 
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
 const SingleChat = () => {

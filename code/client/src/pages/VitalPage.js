@@ -31,7 +31,7 @@ const VitalPage = () => {
         }
         
       });
-    }, 5000);
+    }, 5001);
 
     return () => clearInterval(interval);
   }, [refetch]);

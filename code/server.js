@@ -33,11 +33,11 @@ async function startServer() {
   apollo_server.applyMiddleware({ app }); // connects the app to the apollo server
 
 
-  mongoose.connect(process.env.MONGO_URI)
+  mongoose.connect('mongodb+srv://dass39:dass39@emri.vubkrrz.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
       console.log("Connected to MongoDB");
-      const server = app.listen({ port: process.env.PORT || 5000 }, () => {
-        console.log(`server listening at http://localhost:${process.env.PORT || 5000}${apollo_server.graphqlPath}`);
+      const server = app.listen({ port: process.env.PORT || 5001 }, () => {
+        console.log(`server listening at http://localhost:${process.env.PORT || 5001}${apollo_server.graphqlPath}`);
       });
       const io = require('socket.io')(server, {
         pingTimeout:60000,
