@@ -6,11 +6,19 @@ type User{
     password: String!
     token: String 
     id: String
+    doctor_name: String
+    doctor_degree: String
+    doctor_number: String
+    doctor_visit: String
 }
 
 input UserInput{
     username: String!
     password: String!
+    doctor_name: String
+    doctor_degree: String
+    doctor_number: String
+    doctor_visit: String
 }
 extend type Query{
     getUser(ID: ID!): User!

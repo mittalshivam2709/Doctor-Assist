@@ -12,6 +12,18 @@ const userSchema = new Schema({
     },
     token: {
         type: String
+    },
+    doctor_name: {
+        type: String
+    },
+    doctor_degree: {
+        type: String
+    },
+    doctor_mobile: {
+        type: String
+    },
+    doctor_visit: {
+        type: String
     }
     
 });

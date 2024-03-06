@@ -12,10 +12,14 @@ module.exports = {
     }
   },
   Mutation: {
-    async addUser(_, { userInput: { username, password } }) {
+    async addUser(_, { userInput: { username, password,doctor_name,doctor_degree,doctor_mobile,doctor_visit } }) {
       const newUser = new User({
         username,
-        password
+        password,
+        doctor_name,
+        doctor_degree,
+        doctor_mobile,
+        doctor_visit
       });
       const oldUser = await User.findOne({username});
       if(oldUser){
