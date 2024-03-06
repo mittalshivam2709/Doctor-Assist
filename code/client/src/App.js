@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import ChatWidget from "./components/ChatWidget";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <>
                 <Navbar />
                 <Homepage />
+                {/* <ChatWidget /> */}
               </>
             }
           />
