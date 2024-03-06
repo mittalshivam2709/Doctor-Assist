@@ -16,6 +16,7 @@ And then,
 Now the server is running, to make GraphQL queries, go to `http://localhost:5000/graphql` to use the ApolloClient for doing so.
 
 Next, open a new terminal and cd to the `client` directory and run the following commands
+
 `npm i`
 
 `npm run start`
