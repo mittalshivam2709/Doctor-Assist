@@ -17,7 +17,7 @@ const ChatPage = () => {
       </div>
       <div  className="chat">
 
-        <div><SingleChat /></div>
+        {/* <div><SingleChat /></div> */}
       </div>
     </div>
   );

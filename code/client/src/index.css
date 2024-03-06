@@ -95,17 +95,24 @@ body {
   background-color: #F0F6FF;
   flex: 1; 
 }
-.chat-message{
-  background-color: #E5F0FF;
-  margin: 3%;
-}
+
 
 .input-bar {
   width: 100%;
   padding: 10px;
   border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 16px;
+  margin-right: "10px";
+  border-radius: "17px";
+  background-color: white;
+  color: #5555FB;
+  margin-top: 2%;
+  
+}
+
+.input-bar::placeholder {
+  color: #5555FB; /* Change the color to your desired color */
 }
 
 .input-bar:focus {
@@ -115,23 +122,105 @@ body {
 
 
 .chat-widget {
+
   position: fixed;
+  
   bottom: 20px;
   right: 20px;
   transition: bottom 0.3s ease; 
+  /* height: 100px; */
+  /* overflow: scroll; */
+  
 }
 
 .chat-widget-button {
-  background-color: #007bff;
+  background-color: #5555FB;
   color: #fff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 8px 8px 0 0;
 }
 
 .chat-content {
 
-  background-color: #fff;
-  padding: 10px;
+  background-color:#F4F4FF;
+  /* padding: 10px; */
   border: 1px solid #ccc;
+  height: 500px;
+  /* overflow: hidden; */
+  background-color: "red";
+  border-radius: 0 0 8px 8px;
+  
 }
+
+.single-chat{
+  /* background-color: blue; */
+  width: 520px;
+  height: 410px;
+  margin-bottom: 2.5%;
+  overflow: scroll;
+  padding: 15px;
+  
+  /* overflow: hidden; */
+}
+
+.bottom-bar
+{
+  position: relative;
+  /* background-color: red; */
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+
+.chat-message{
+  /* background-color: #E5F0FF; */
+  margin: 1.4%;
+
+  display: inline-block;
+  /* justify-content: left; */
+  /* background-color: green; */
+}
+
+.left {
+  /* align-self: flex-start; */
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+  /* display: inline-block; */
+  width: fit-content;
+  padding: 5px;
+  border-radius: 15px;
+  
+}
+
+.right {
+  align-self: flex-end;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  /* text-align: right; */
+  margin-left: auto;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 15px;
+  border: 1px solid rgba(85, 85, 251, 1);
+  color: rgba(85, 85, 251, 1);
+
+}
+
+.chat-box{
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* background-color: black */
+  
+}
+
+
+
+
+
+

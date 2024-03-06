@@ -12,9 +12,36 @@ const Message = ({ message, right }) => {
             flex: "0 0 5%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-end",
+            justifyContent: "center",
+            // backgroundColor:"green"
           }}
         >
+        
+          <img
+            src={user}
+            style={{ width: "100%", height: "auto" }}
+            alt="User"
+          />
+
+        </div>
+      )}
+
+      <div className="chat-box"
+      >
+        <div className={`chat-message ${right == 0 ? 'left' : 'right'}`}>{message}</div>
+      </div>
+
+      {right == 1 && (
+        <div
+          style={{
+            flex: "0 0 5%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            // backgroundColor:"red"
+          }}
+        >
+          
           <img
             src={user}
             style={{ width: "100%", height: "auto" }}
@@ -23,33 +50,8 @@ const Message = ({ message, right }) => {
           
         </div>
       )}
-      <div
-        style={{
-          flex: "1",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-        }}
-      >
-        <div className="chat-message ">{message}</div>
-      </div>
-      {right == 1 && 
-        <div
-          style={{
-            flex: "0 0 5%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-          }}
-        >
-          
-          <img
-            src={user}
-            style={{ width: "100%", height: "auto" }}
-            alt="User"
-          />
-          
-        </div>
-      }
+
+
     </div>
   );
 };

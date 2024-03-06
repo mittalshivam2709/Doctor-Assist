@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SingleChat from '../pages/SingleChat';
 import { ChatState } from '../context/ChatProvider';
+import MessageInput from './MessageInput';
 
 const ChatWidget = () => {
   const [expanded, setExpanded] = useState(false);
@@ -18,8 +19,14 @@ const ChatWidget = () => {
       {expanded && (
         <div className="chat-content">
           <SingleChat />
+          <div className='bottom-bar'>
+          <MessageInput />
+          </div>
+            
         </div>
       )}
+     
+      
     </div>
   );
 };

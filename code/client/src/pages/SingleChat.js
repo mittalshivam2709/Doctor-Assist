@@ -74,7 +74,7 @@ const SingleChat = () => {
   return (
     <div>
       <div  className="single-chat">
-        <div>{user}</div>
+        {/* <div>{user}</div> */}
         {messages.map((message, index) => (
           <Message
             key={index}
@@ -83,7 +83,8 @@ const SingleChat = () => {
           />
         ))}
       </div>
-      <MessageInput />
+
+      {/* <MessageInput /> */}
       <div ref={ref}></div>
     </div>
   );
