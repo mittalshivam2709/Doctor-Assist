@@ -7,7 +7,7 @@ Go to `code` directory, open a terminal and enter the following
 
 Go to `server.js` and change the mongoose connect argument from `process.env.MONGO_URI` to 
 
-`mongodb+srv://dass39:dass39@emri.vubkrrz.mongodb.net/?retryWrites=true&w=majority`
+`"mongodb+srv://dass39:dass39@emri.vubkrrz.mongodb.net/?retryWrites=true&w=majority"
 
 And then,
 
