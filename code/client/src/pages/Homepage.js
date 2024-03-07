@@ -133,6 +133,8 @@ const Homepage = () => {
         ))}
       </div>
       </div>
+      
+
       <div className="column">
         <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1>
         {selectedChat && 
@@ -143,6 +145,7 @@ const Homepage = () => {
         <Placeholder />
       }
       </div>
+
     </div>
   );
 };

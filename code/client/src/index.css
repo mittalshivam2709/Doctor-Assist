@@ -110,7 +110,20 @@ body {
   margin-top: 2%;
   margin-bottom: 2%;
 }
-
+.font-bold_Inbox {
+  color: #5555FB;
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  position: relative;
+  width: 80px;
+  height: 36px;
+  top: 15px;
+  left: 20px;
+}
 .input-bar::placeholder {
   color: #5555FB; /* Change the color to your desired color */
 }
