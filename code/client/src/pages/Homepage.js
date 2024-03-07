@@ -121,8 +121,7 @@ const Homepage = () => {
 
   return (
     <div className="flex-container wrapper">
-      <div className="big_box">
-      <div className="column_left">
+      <div className="column">
         <Template />
 
         {patients.map((item) => (
@@ -131,8 +130,7 @@ const Homepage = () => {
             data={item}
           />
         ))}
-      </div>
-      </div>
+       </div>
       
 
       <div className="column">
