@@ -32,7 +32,7 @@ body {
 
 .expanding-box-header {
   padding: 10px;
-  background-color: #E3EEFE;
+  background-color: white;
 }
 .expanding-box-header *{
   margin-left: 1%;
@@ -47,7 +47,7 @@ body {
 .inbox-box {
   border-radius: 4px;
   margin-bottom: 10px;
-  background-color: #E3EEFE;
+  background-color: white;
 }
 .custom-navbar{
   padding-left: 15px;
@@ -58,12 +58,24 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: large;
+  background-color: #5555FB;
 }
-.custom-navbar img{
-  margin-left: 5px;
-  width: 113px;
-  height: 32px;
+.font-bold_Inbox {
+  color: #5555FB;
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  position: relative;
+  width: 80px;
+  height: 36px;
+  top: 20px;
+  left: 20px;
 }
+
+
 .chat-navbar{
   font-size:large;
   background-color: red;
@@ -219,8 +231,125 @@ body {
   
 }
 
+.container_red {
+  display: flex;
+  align-items: center; 
+  width: 51px;
+  height: 15px;
+  position: relative;
+  top: 22px;
+  left: 20px;
+  border-radius: 2px;
+  justify-content: space-between;
+}
+.red-square {
+  background-color: #EE184E;
+  ;
+  margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  top: 20px;
+  left: 15px;
+  border-radius: 2px;
+}
+.text_critical {
+  color: #646464;
+  font-family: Poppins;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  top: 20px;
+}
 
+.container_yellow {
+  display: flex;
+  align-items: center;
+  width: 65px;
+  height: 15px;
+  position: relative;
+  top: 7px;
+  left: 84px;
+  border-radius: 2px;
+  justify-content: space-between;
+}
+.yellow-square {
+  background-color:#FAA416;
+  ;
+  /* margin-right: 5px; */
+  width: 10px;
+  height: 10px;
+  top: 5px;
+  left: 15px;
+  border-radius: 2px;
+}
+.text_moderate {
+  color: #646464;
+  font-family: Poppins;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
 
+}
+.container_green {
+  display: flex;
+  align-items: center;
+  width: 45px;
+  height: 15px;
+  position: relative;
+  top: -8px;
+  left: 160px;
+  border-radius: 2px;
+  justify-content: space-between;
+}
+.green-square {
+  background-color:#01B48E;
+  ;
+  margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  top: 56px;
+  left: 15px;
+  border-radius: 2px;
+}
+.text_minor {
+  color: #646464;
+  font-family: Poppins;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
 
-
-
+}
+.emri_logo{
+  width: 80px;
+  height: 55px;
+  top: 13px;
+  left: 16px;
+}
+.ambulance_no{
+  color: #5555FB;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.admit_time{
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 75px;
+  height: 24px;
+  left: 300px;
+  top: -25px;
+  position: relative;
+}

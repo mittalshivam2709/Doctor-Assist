@@ -44,7 +44,6 @@ const Homepage = () => {
   return (
     <div className="flex-container wrapper">
       <div className="column">
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <Template />
 
         {patients.map((item) => (

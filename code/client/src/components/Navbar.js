@@ -6,10 +6,8 @@ const Navbar = () => {
       <div className="custom-navbar">
         {/* <div>p</div> */}
         <div className="flex items-center">
-        <img src={logo} alt="Logo" /> 
-        <p className="" style={{marginLeft:"5px"}}>Doctors assist</p>
+        <img src={logo} alt="Logo" className = "emri_logo" /> 
         </div>
-        <div>Username</div>
       </div>
     );
   };

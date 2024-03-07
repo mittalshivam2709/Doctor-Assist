@@ -23,24 +23,24 @@ const Dropdown = ({ data}) => {
     emt,
   } = data;
   console.log(data);
-  var color = "green";
-  if( critical_case == "yes" ){
-    color = "red"
-  }
-  else {
-    color = "blue";
-  }
+  var color = "red";
+  // if( critical_case == "yes" ){
+  //   color = "red"
+  // }
+  // else {
+  //   color = "blue";
+  // }
   const {selectedChat, setSelectedChat} = ChatState();
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => { // responsible for minimizing other dropdowns
     const shouldExpand = emt === selectedChat;
-    setExpanded(shouldExpand);
+    // setExpanded(shouldExpand);
   }, [selectedChat, emt]);
 
   const handleToggle = (emt) => {
     setSelectedChat(emt);
-    setExpanded(!expanded);
+    // setExpanded(!expanded);
   };
 
   return (
@@ -52,27 +52,27 @@ const Dropdown = ({ data}) => {
         onClick={() => {handleToggle(emt)}}
         style={{
           backgroundImage: expanded
-            ? `linear-gradient(to right, ${color} 100%, #E3EEFE 100%)`
-            : `linear-gradient(to right, ${color} 2.5%, #E3EEFE 2.5%)`,
+            ? `linear-gradient(to right, ${color} 100%, #FFFFFF 100%)`
+            : `linear-gradient(to right, ${color} 2.5%, #FFFFFF 2.5%)`,
         }}
       >
         <div className="flex flex-col" style={{ fontFamily:'Inter, sans-serif'}}>
-          <div className="flex justify-end">
-            <p className="text-sm"> Ambulance No-{ambulance_no}</p>
-            <p className="text-sm"> {admit_time}</p>
+          <div className="ambu_time">
+            <p className="ambulance_no"> Ambulance No-{ambulance_no}</p>
+            <p className="admit_time"> {admit_time}</p>
           </div>
           <div className="flex py-2 items-center">
-            <p className="text-sm font-bold"> {problem}</p>
+            <p className="problem_patient"> {problem}</p>
           </div>
           <div className="flex justify-evenly">
-            <p className="text-sm"> Age - {age} years</p>
-            <p className="text-sm"> Age type - {age_type}</p>
-            <p className="text-sm"> Gender - {gender}</p>
+            <p className="age_patient"> Age - {age} years</p>
+            <p className="agetype_patient"> Age type - {age_type}</p>
+            <p className="gender_patient"> Gender - {gender}</p>
           </div>
         </div>
       </div>
 
-      {expanded && (
+      {/* {expanded && (
         <div
           className="expanding-box-content"
           style={{ backgroundColor: `${color}` }}
@@ -87,7 +87,7 @@ const Dropdown = ({ data}) => {
             <p className="text-sm"> id - {emt}</p>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
