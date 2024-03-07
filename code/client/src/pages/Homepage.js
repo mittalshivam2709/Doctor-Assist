@@ -44,7 +44,7 @@ const Homepage = () => {
     return () => clearInterval(interval)
   }, [refetch])
 
-  const [dropdownVisible, setDropdownVisible] = useState(true)
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   return (
     <div className="flex-container wrapper">
