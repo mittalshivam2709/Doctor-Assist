@@ -44,7 +44,7 @@ const Homepage = () => {
     return () => clearInterval(interval)
   }, [refetch])
 
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false)
 
   return (
     <div className="flex-container wrapper">
@@ -66,7 +66,7 @@ const Homepage = () => {
       </div>
 
       <div className="column">
-        <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1>
+        {/* <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1> */}
         {selectedChat && <ChatPage />}
         {!selectedChat && <Placeholder />}
       </div>
