@@ -1,0 +1,54 @@
+.toggle-button-container[data-visible='true'] {
+  justify-content: flex-start; /* List shown: leftmost */
+}
+.toggle-button-container {
+  display: flex;
+  justify-content: flex-end; /* Initial state: rightmost */
+}
+
+.toggle-button {
+  /* Adjust these values to refine the pointer shape */
+  border-top: 1px solid transparent;
+  border-left: 0px solid transparent;
+  border-bottom: 0;
+  border-right: 0;
+  height: 5%;
+  align-self: center;
+  /* Optional styles for visual appeal */
+  background-color: purple; /* Adjust background color as needed */
+  color: #fff; /* Adjust text color as needed */
+  padding: 5px 10px; /* Adjust padding based on your button size */
+  cursor: pointer;
+}
+
+/* Optional: Add a small triangle at the tip (adjust positions as needed) */
+.toggle-button::after {
+  content: '';
+  position: absolute;
+  top: 10px; /* Adjust top position */
+  left: 10px; /* Adjust left position */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  border-color: transparent #333 transparent transparent; /* Adjust color based on button background */
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out; /* Animation */
+}
+
+.sidebar.closed {
+  transform: translateX(-100%); /* Hide the sidebar */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Show the sidebar */
+}
