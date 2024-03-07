@@ -82,10 +82,10 @@ const SingleChat = () => {
             right={message.sender == user}
           />
         ))}
+      <div ref={ref}></div>
       </div>
 
       {/* <MessageInput /> */}
-      <div ref={ref}></div>
     </div>
   );
 };

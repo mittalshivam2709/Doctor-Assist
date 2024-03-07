@@ -173,7 +173,7 @@ body {
   margin-bottom: 2.5%;
   overflow: scroll;
   padding: 15px;
-  
+  overflow-x: hidden;
   /* overflow: hidden; */
 }
 

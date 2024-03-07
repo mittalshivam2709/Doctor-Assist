@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState} from 'react';
 import SingleChat from '../pages/SingleChat';
 import { ChatState } from '../context/ChatProvider';
 import MessageInput from './MessageInput';
@@ -6,21 +6,11 @@ import MessageInput from './MessageInput';
 const ChatWidget = () => {
   const [expanded, setExpanded] = useState(false);
   const {selectedChat, messages}  =  ChatState();
-  const ref = useRef(null);
 
   const toggleExpansion = () => {
     setExpanded(!expanded);
   };
-  
-  useEffect(() => {
-    ref.current?.scrollIntoView({
-      behaviour:"smooth",
-      block:"end",
-    })
-    
-  
-  }, [messages]);
-  
+
   if(!selectedChat) return <></>
   
   return (
@@ -31,7 +21,6 @@ const ChatWidget = () => {
       {expanded && (
         <div className="chat-content">
           <SingleChat />
-          <div ref={ref} /> 
           <div className='bottom-bar'>
           <MessageInput />
           </div>
@@ -39,7 +28,6 @@ const ChatWidget = () => {
         </div>
       )}
      
-      
     </div>
   );
 };
