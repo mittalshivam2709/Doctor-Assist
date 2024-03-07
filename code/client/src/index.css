@@ -357,52 +357,53 @@ body {
 
 .vital-page {
   max-width: 1600px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   /* padding: 20px; */
-  font-family: sans-serif;
+  overflow-y: scroll;
+  font-family: 'Poppins';
 }
 
 .doctor-info {
   display: flex;
   align-items: center;
   background-color: white;
-  padding-left: 5px;
+  padding-left: 0.5%;
   border-radius: 10px;
+  
 }
 
 .doctor-logo {
   width: 65px;
   height: 65px;
-  margin-right: 20px;
+  margin-right: 2%;
 }
 
 .doctor-text {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 .doctor-text h1 {
   font-size: x-large;
   color: #333;
-  margin-top: 0;
-  margin-bottom: 0;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .doctor-text p {
   font-size: small;
   color: #666;
-  margin-top: 0;
   /* margin-bottom: 10px; */
 }
 
 .case-sheet {
-  margin-top: 5px;
+  margin-top: 1%;
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 2%;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 2%;
   /* overflow-y: auto;
   max-height: 90vh; */
   /* border-bottom: 1px solid black; */
@@ -419,7 +420,6 @@ body {
 }
 
 .headingg h3 {
-  margin: 0;
   font-size: x-large; 
   text-align: center;
 }
@@ -440,7 +440,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 1%;
   border: 1px solid #D8D8FF;
   border-radius: 5px;
 }
@@ -448,7 +448,7 @@ body {
 .form-row {
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  margin-left: 1%;
 }
 
 .form-row label {
@@ -457,7 +457,7 @@ body {
 
 .form-row input[type="text"] {
   /* padding: 5px 10px; */
-  margin-left: 5px;
+  margin-left: 1%;
   width: auto;
 }
 
@@ -473,25 +473,25 @@ body {
   display: flex;
   flex-direction: row; 
   align-items: center;
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: 1.5%;
+  margin-left: 1%;
   /* margin-right: 2px; */
-  margin-bottom: 10px; 
+  margin-bottom: 1%; 
   width: 100%; 
 }
 
 .form-row2 label {
   font-weight: bold;
-  margin-right: 10px; 
+  margin-right: 2%; 
   white-space: nowrap;
   text-align: right;
 }
 
 .form-row2 textarea {
   flex-grow: 1; 
-  margin-right: 7px;
-  padding: 10px;
-  height:50px;
+  margin-right: 2%;
+  padding: 0.1%;
+  height:2.1em;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
@@ -502,8 +502,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 2%;
+  margin-top: 1%;
   border-radius: 5px;
   border: 1px solid #D8D8FF;
   border-radius: 5px;
@@ -513,18 +513,18 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center; 
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 .form-row3 label {
   font-weight: bold;
-  margin-right: 20px;
-  margin-left: 10px;
+  margin-right: 2%;
+  margin-left: 1%;
 }
 
 .vitals-grid {
-  margin-left: 10px;
+  margin-left: 1%;
   display: flex; 
   flex-wrap: wrap; 
   gap: 10px;
@@ -536,9 +536,9 @@ body {
   padding: 10px; 
   background-color: #f0f0f0; 
   border-radius: 10px;
-  margin-left: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 
