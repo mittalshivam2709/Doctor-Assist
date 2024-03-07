@@ -11,14 +11,14 @@ const ChatPage = () => {
   const { selectedChat } = ChatState();
 
   return (
-    <div className="chat-container wrapper">
-      <div className="chat">
+    // <div className="chat-container wrapper">
+    <div className="chat">
       <VitalPage/>
-      </div>
-      <div  className="chat">
+      {/* </div> */}
+      {/* <div  className="chat">
 
-        {/* <div><SingleChat /></div> */}
-      </div>
+        <div><SingleChat /></div>
+      </div> */}
     </div>
   );
 };
