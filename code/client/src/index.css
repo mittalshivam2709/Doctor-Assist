@@ -32,7 +32,7 @@ body {
 
 .expanding-box-header {
   padding: 10px;
-  background-color: white;
+  background-color: #E3EEFE;
 }
 .expanding-box-header *{
   margin-left: 1%;
@@ -47,7 +47,7 @@ body {
 .inbox-box {
   border-radius: 4px;
   margin-bottom: 10px;
-  background-color: white;
+  background-color: #E3EEFE;
 }
 .custom-navbar{
   padding-left: 15px;
@@ -58,24 +58,12 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: large;
-  background-color: #5555FB;
 }
-.font-bold_Inbox {
-  color: #5555FB;
-  font-family: Poppins;
-  font-size: 25px;
-  font-weight: 800;
-  line-height: 36px;
-  letter-spacing: 0em;
-  text-align: left;
-  position: relative;
-  width: 80px;
-  height: 36px;
-  top: 20px;
-  left: 20px;
+.custom-navbar img{
+  margin-left: 5px;
+  width: 113px;
+  height: 32px;
 }
-
-
 .chat-navbar{
   font-size:large;
   background-color: red;
@@ -91,12 +79,11 @@ body {
 }
 .chat {
   padding: 10px;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   margin-left: 10px;
   margin-right:10px;
-  /* margin-bottom: 10px; */
+  margin-bottom: 10px;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .chat:first-child {
@@ -112,7 +99,7 @@ body {
 
 .input-bar {
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   border: 2px solid #ccc;
   border-radius: 20px;
   font-size: 16px;
@@ -121,7 +108,7 @@ body {
   background-color: white;
   color: #5555FB;
   margin-top: 2%;
-  
+  margin-bottom: 2%;
 }
 
 .input-bar::placeholder {
@@ -143,6 +130,7 @@ body {
   transition: bottom 0.3s ease; 
   /* height: 100px; */
   /* overflow: scroll; */
+  
 }
 
 .chat-widget-button {
@@ -168,12 +156,12 @@ body {
 
 .single-chat{
   /* background-color: blue; */
-  width: 520px;
+  width: 450px;
   height: 410px;
   margin-bottom: 2.5%;
   overflow: scroll;
   padding: 15px;
-  overflow-x: hidden;
+  
   /* overflow: hidden; */
 }
 
@@ -185,6 +173,7 @@ body {
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 15px;
+  
 }
 
 .chat-message{
@@ -204,33 +193,38 @@ body {
   /* display: inline-block; */
   width: fit-content;
   padding: 5px;
-  border-radius: 15px;
-  
+  border-radius: 25px;
+  color: rgba(59, 59, 59, 1);
 }
 
 .right {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
   /* text-align: right; */
   margin-left: auto;
   width: fit-content;
-  padding: 5px;
-  border-radius: 15px;
+  word-wrap: break-word;
+  max-width: 80%;
+  padding: 5px 15px 5px 15px;
+  border-radius: 25px;
   border: 1px solid rgba(85, 85, 251, 1);
   color: rgba(85, 85, 251, 1);
-
+  /* overflow-x: auto; */
+  
 }
 
 .chat-box{
   flex: 1;
   flex-direction: column;
   justify-content: flex-end;
+  /* margin-right: 15px; */
+ 
+  /* overflow: 'hidden' */
   /* background-color: black */
   
 }
-
 .container_red {
   display: flex;
   align-items: center; 
