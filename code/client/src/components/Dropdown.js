@@ -50,14 +50,16 @@ const Dropdown = ({ data }) => {
           backgroundImage: isSelected
             ? `linear-gradient(to right, ${color} 100%, #FFFFFF 100%)`
             : `linear-gradient(to right, ${color} 2.5%, #FFFFFF 2.5%)`,
-          border: isSelected ? "4px solid blue" : "2px solid transparent"
+          border: isSelected ? "2px solid blue" : "2px solid transparent",
+          background: hovered? hoverColor:"white",
+          backgroundColor: "transparent"
         }}
       >
         <div
           className="flex-col"
           style={{
             fontFamily: 'Inter, sans-serif',
-            backgroundColor: hovered ? hoverColor : "transparent",
+            backgroundColor: "transparent",
           }}
         >
           <div className=" flex flex-col md:flex-row justify-between">
@@ -66,7 +68,7 @@ const Dropdown = ({ data }) => {
             <div  style={{ width: '20px', height: '20px', borderRadius: '50%', position: 'relative', right: '8px',backgroundColor: hoverC }}></div>
             <div style={{ color: hovered ? hoverC : "blue" ,width :'250px'}}>Ambulance No: {ambulance_no}</div>
             </div>
-            <div className="text-xs" style={{fontSize :'15px'}} >{admit_time}</div>
+            <div className="text-xs">{admit_time}</div>
           </div>
           <div className="flex py-2 items-center">
             <span
@@ -76,9 +78,9 @@ const Dropdown = ({ data }) => {
             </span>
           </div>
           <div className="flex justify-evenly text-sm">
-            <span className="age_patient"> Age - {age} years</span>
-            <span className="agetype_patient"> Age type - {age_type}</span>
-            <span className="gender_patient"> Gender - {gender}</span>
+            <span className="age_patient text-xs"> Age - {age} years</span>
+            <span className="agetype_patient text-xs"> Age type - {age_type}</span>
+            <span className="gender_patient text-xs"> Gender - {gender}</span>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ const Homepage = () => {
   const [dropdownVisible, setDropdownVisible] = useState(true)
 
   return (
-    <div className="flex-container wrapper">
+    <div className="flex-container wrapper" style={{background:"#F4F4FF"}}>
       <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`}>
         <Template />
         {/* the code below this is for extacting an entry from the database */}
@@ -61,7 +61,7 @@ const Homepage = () => {
           className="toggle-button"
           onClick={() => setDropdownVisible(!dropdownVisible)}
         >
-          {dropdownVisible ? 'Show List' : 'Hide List'}
+          {dropdownVisible ? '>' : '<'} 
         </button>
       </div>
 
