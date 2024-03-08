@@ -395,7 +395,7 @@ body {
 
 .doctor-text h1 {
   font-size: x-large;
-  color: #333;
+  color: #6F6B6B;
   font-style: normal;
   font-weight: 400;
   font-family: 'Poppins';
@@ -403,7 +403,7 @@ body {
 
 .doctor-text p {
   font-size: small;
-  color: #666;
+  color: #6F6B6B;
   font-family: 'Poppins';
   /* margin-bottom: 10px; */
 }
@@ -475,6 +475,7 @@ body {
   flex-direction: column;
   margin-left: 1%;
   margin-top: 0.5%;
+  color:#6F6B6B;
 }
 
 .form-row label {
@@ -503,6 +504,7 @@ body {
   margin-left: 1%;
   /* margin-right: 2px; */
   margin-bottom: 1%; 
+  color: #6F6B6B;
   width: 100%; 
 }
 
@@ -546,6 +548,7 @@ body {
   width: 100%;
   border: 1px solid #D8D8FF;
   border-radius: 5px; 
+  
 }
 
 
@@ -555,6 +558,7 @@ body {
   margin-left: 1%;
   white-space: nowrap;
   text-align: right;
+  color: #6F6B6B;
 }
 
 /* .form-row3 textarea {
