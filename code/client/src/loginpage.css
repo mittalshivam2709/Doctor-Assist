@@ -1,0 +1,52 @@
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px; /* Increase max-width for larger login box */
+    width: 80%; /* You can also use percentage for responsiveness */
+    padding: 40px; /* Increase padding for larger internal space */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8); 
+  }
+  
+  .login-container h2 {
+    text-align: center;
+  }
+  
+  .outerlogin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Armstrong_Ambulance_P17.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-container input {
+    margin-bottom: 20px; /* Increase margin between input fields */
+    padding: 15px; /* Increase padding for larger input fields */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase font size for better readability */
+  }
+  
+  .login-container input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .login-container input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  

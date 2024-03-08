@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { LOGIN_USER } from "../gqloperations/mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-
+import '../loginpage.css'
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState("");
@@ -30,11 +30,20 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("username")} placeholder="user name" />
-      <input {...register("password")} placeholder="password" />
-      <input type="submit" />
-    </form>
+    <div className="outerlogin">
+    <div className="login-container">
+      <h2 style={{color:"blue", position:'relative',top:'-20px',fontSize:'30px'}}>Login Page</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input {...register("username")} placeholder="Username" />
+        <br />
+        <input {...register("password")} type="password" placeholder="Password" />
+        <br />
+        <input type="submit" value="Login" />
+      </form>
+      <a href="#" style={{color: "blue",position:'relative',left:'130px',top:'10px',fontSize:'20px'}}>Forgot Password?</a>
+    </div>
+  </div>
+  
   );
 };
 
