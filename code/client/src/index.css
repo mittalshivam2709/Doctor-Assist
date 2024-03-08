@@ -376,7 +376,7 @@ body {
   background-color: white;
   padding-left: 0.5%;
   border-radius: 10px;
-  
+  font-family: 'Poppins';
 }
 
 .doctor-logo {
@@ -390,6 +390,7 @@ body {
   flex-direction: column;
   margin-bottom: 1%;
   margin-top: 1%;
+  font-family: 'Poppins';
 }
 
 .doctor-text h1 {
@@ -397,11 +398,13 @@ body {
   color: #333;
   font-style: normal;
   font-weight: 400;
+  font-family: 'Poppins';
 }
 
 .doctor-text p {
   font-size: small;
   color: #666;
+  font-family: 'Poppins';
   /* margin-bottom: 10px; */
 }
 
@@ -411,6 +414,7 @@ body {
   padding: 2%;
   background-color: white;
   border-radius: 2%;
+  font-family: 'Poppins';
   /* overflow-y: auto;
   max-height: 90vh; */
   /* border-bottom: 1px solid black; */
@@ -423,28 +427,39 @@ body {
   font-size: medium; 
   text-align: right;
   color:black;
+  font-weight: bold;
+  font-family: 'Poppins';
   /* margin-bottom: 20px; */
 }
 
-.headingg h3 {
+/* .headingg h3 {
   /* font-size: x-large;  */
+  /* text-align: center; */
+  /* font-size: 30px; */
+  /* font-weight: 400; */
+  /* color:#5555FB; */
+  /* margin-bottom: 10px; */
+/* }  */
+
+.titlee {
   text-align: center;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 30px;
+  font-weight: 600;
+  color:#5555FB;
+  margin-bottom: 10px;
+  font-family: 'Poppins';
 }
 
-.case-sheet h3{
-  margin: 0; 
-  
+/* .case-sheet h3{
+  margin: 0;
   text-align: center;
   /* font-size: x-large; */
   /* font-style: bold; */
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   /* padding-bottom: 10px; */
-  color:#5555FB;
-  margin-bottom: 10px;
-  
-}
+  /* color:#5555FB; */
+  /* margin-bottom: 10px; */
+/* } */
 
 .form-section {
   display: grid;

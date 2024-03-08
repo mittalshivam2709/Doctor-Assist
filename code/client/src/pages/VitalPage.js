@@ -64,7 +64,7 @@ const VitalPage = () => {
       <div className="case-sheet" style={{ height: "80%" }}>
         <div className="headingg">
           <h3>
-            CASE SHEET
+            <div className="titlee">CASE SHEET</div>
             <div className="datee">Date: DD/MM/YYYY</div>
           </h3>
         </div>
