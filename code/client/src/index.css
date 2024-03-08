@@ -526,7 +526,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
-  resize: vertical;
+  resize: none;
 }
 
 /* .form-section3 {
