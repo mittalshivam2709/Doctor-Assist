@@ -19,7 +19,7 @@ const VitalPage = () => {
   });
 
   // const { loading:loadingPatients, data:dataPatients} = useQuery(FETCH_PATIENTS, {
-  //   variables: { docId: user },
+  //   variables: { docId: selectedPatient },
   // });
 
   useEffect(() => {
@@ -47,7 +47,8 @@ const VitalPage = () => {
   }, [refetchVitals]);
 
   // const patientDetails = dataPatients ? dataPatients.fetchAmbulancesByDoctorId : null;
-
+  // console.log(patientDetails)
+  // if (loadingVitals || loadingPatients || !vitals) return <p>Loading...</p>;
   if (loadingVitals || !vitals) return <p>Loading...</p>;
 
   return (
@@ -75,7 +76,7 @@ const VitalPage = () => {
           </h3>
         </div>
         <>
-          <PatientDetails vitals={vitals} />
+          <PatientDetails selectedPatient={selectedPatient} />
 
           <MedicalInfo vitals={vitals} />
 
