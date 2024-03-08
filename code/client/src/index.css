@@ -137,21 +137,21 @@ body {
 
   position: fixed;
   
-  bottom: 20px;
-  right: 20px;
+  bottom: -5px;
+  right: 5px;
   transition: bottom 0.3s ease; 
   /* height: 100px; */
   /* overflow: scroll; */
-  
+  border-radius: 8px;
 }
 
 .chat-widget-button {
-  background-color: #5555FB;
+  /* background-color: #5555FB; */
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   cursor: pointer;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px 8px 8px 8px;
 }
 
 .chat-content {
@@ -160,6 +160,7 @@ body {
   /* padding: 10px; */
   border: 1px solid #ccc;
   height: 500px;
+  /* width :50px; */
   /* overflow: hidden; */
   background-color: "red";
   border-radius: 0 0 8px 8px;
@@ -217,7 +218,9 @@ body {
   /* text-align: right; */
   margin-left: auto;
   width: fit-content;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
+  text-wrap: wrap;
+
   max-width: 80%;
   padding: 5px 15px 5px 15px;
   border-radius: 25px;

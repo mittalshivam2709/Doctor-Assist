@@ -78,7 +78,7 @@ return (
     // type="text"
     {...register("Message")}
     placeholder={inputText || "Type a reply to EMT Assist..."}
-    style={{paddingLeft: '20px'}}
+    style={{paddingLeft: '20px',paddingRight:"65px"}}
     onChange={handleInputChange}
     rows={1}
     />
