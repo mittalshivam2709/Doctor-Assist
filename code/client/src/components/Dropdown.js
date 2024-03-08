@@ -63,9 +63,9 @@ const Dropdown = ({ data }) => {
             
             <div className=" flex items-center">
             <div  style={{ width: '20px', height: '20px', borderRadius: '50%', position: 'relative', right: '8px',backgroundColor: hoverC }}></div>
-            <div style={{ color: hovered ? hoverC : "blue" }}>Ambulance No: {ambulance_no}</div>
+            <div style={{ color: hovered ? hoverC : "blue" ,width :'250px'}}>Ambulance No: {ambulance_no}</div>
             </div>
-            <div className="text-xs" >{admit_time}</div>
+            <div className="text-xs" style={{fontSize :'15px'}} >{admit_time}</div>
           </div>
           <div className="flex py-2 items-center">
             <span
