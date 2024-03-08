@@ -5,11 +5,11 @@ import Placeholder from "./Placeholder";
 const Message = ({ message, right }) => {
   const text = `This is a really really long text`;
   return (
-    <div className="flex flex-row chat-parent">
+    <div className="flex flex-row chat-parent" style={{ alignItems: 'center' }}>
       {right == 0 && (
         <div
           style={{
-            flex: "0 0 5%",
+            flex: "0 0 7%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -34,7 +34,7 @@ const Message = ({ message, right }) => {
       {right == 1 && (
         <div
           style={{
-            flex: "0 0 5%",
+            flex: "0 0 7%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
