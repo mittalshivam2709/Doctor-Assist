@@ -46,7 +46,7 @@ const VitalPage = () => {
 
   return (
     <div className="vital-page" style={{ height: "100%" }}>
-      <div className="doctor-info" style={{ height: "15%" }}>
+      <div className="doctor-info" style={{ height: "12%" }}>
         <DoctorLogo />
 
         <div className="doctor-text">
