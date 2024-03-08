@@ -7,6 +7,7 @@ import { ChatState } from "../context/ChatProvider";
 import Navbar from "../components/Navbar";
 import { FETCH_PATIENTS } from "../gqloperations/queries";
 import { useQuery } from "@apollo/client";
+import VitalPage from "./VitalPage";
 
 const Homepage = () => {
   const {user, selectedChat} = ChatState();
@@ -42,7 +43,7 @@ const Homepage = () => {
   }, [refetch]); 
 
   return (
-    <div className="flex-container wrapper">
+    <div className="flex-container wrapper" style={{background:"#F4F4FF"}}>
       <div className="column">
         <Template />
 
@@ -56,14 +57,15 @@ const Homepage = () => {
       
 
       <div className="column">
-        <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1>
+        {/* <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1> */}
         {selectedChat && 
-        <ChatPage />
+        <VitalPage />
       }
       {
         !selectedChat && 
         <Placeholder />
       }
+      
       </div>
 
     </div>
