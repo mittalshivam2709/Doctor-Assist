@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  FETCH_NUMBER,
   FETCH_VITAL,
   FETCH_PATIENTS,
 } from "../gqloperations/queries";
@@ -13,24 +12,29 @@ import Vitals from "../components/Vitals";
 import MedicalInfo from "../components/MedicalInfo";
 
 const VitalPage = () => {
-  const { vitals, setVitals, selectedChat } = ChatState();
+  const { vitals, setVitals, selectedChat,selectedPatient } = ChatState();
 
-  const { loading, data, refetch } = useQuery(FETCH_VITAL, {
+  const { loading:loadingVitals, data:dataVitals, refetch:refetchVitals } = useQuery(FETCH_VITAL, {
     variables: { emtId: selectedChat },
   });
 
+  // const { loading:loadingPatients, data:dataPatients} = useQuery(FETCH_PATIENTS, {
+  //   variables: { docId: user },
+  // });
+
   useEffect(() => {
-    refetch().then((response) => {
+    refetchVitals().then((response) => {
       const curr_vitals = response?.data?.fetchVitals;
       if (curr_vitals) {
         setVitals(curr_vitals);
       }
     });
+    console.log(selectedPatient);
   }, [selectedChat]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      refetch().then((response) => {
+      refetchVitals().then((response) => {
         const curr_vitals = response?.data?.fetchVitals;
         if (curr_vitals) {
           setVitals(curr_vitals);
@@ -40,9 +44,11 @@ const VitalPage = () => {
     }, 5001);
 
     return () => clearInterval(interval);
-  }, [refetch]);
+  }, [refetchVitals]);
 
-  if (loading || !vitals) return <p>Loading...</p>;
+  // const patientDetails = dataPatients ? dataPatients.fetchAmbulancesByDoctorId : null;
+
+  if (loadingVitals || !vitals) return <p>Loading...</p>;
 
   return (
     <div className="vital-page" style={{ height: "100%" }}>

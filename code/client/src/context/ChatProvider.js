@@ -7,6 +7,7 @@ const ChatProvider = ({ children }) => {
   const [selectedChat, setSelectedChat] = useState(null); // test id 65d463f3a0b915283dced3e0
   const [message, setMessage] = useState(null);
   const [vitals, setVitals] = useState(null);
+  const [selectedPatient,setSelectedPatient] = useState(null);
 
   useEffect(() => {
     // set for detecting chagnes
@@ -26,6 +27,8 @@ const ChatProvider = ({ children }) => {
         setMessage,
         vitals, 
         setVitals,
+        selectedPatient,
+        setSelectedPatient
       }}
     >
       {children}

@@ -24,11 +24,12 @@ const Dropdown = ({ data }) => {
   const [showProblemDetails, setShowProblemDetails] = useState(false);
   const hoverColor = critical_case === "yes" ? "rgb(244, 183, 183)" : "rgb(169, 235, 169)";
   const hoverC = critical_case === "yes" ? "red" : "green";
-  const { selectedChat, setSelectedChat } = ChatState();
+  const { selectedChat, setSelectedChat, setSelectedPatient } = ChatState();
   const isSelected = selectedChat === emt;
   var color = "white"
   const handleToggle = () => {
     setSelectedChat(isSelected ? null : emt);
+    setSelectedPatient(isSelected ? null : data);
   };
 
   const handleHover = (isHovered) => {
