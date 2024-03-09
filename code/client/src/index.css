@@ -138,18 +138,21 @@ body {
 
 .chat-widget {
 
-  position: fixed;
-  
-  bottom: -5px;
-  right: 5px;
-  transition: bottom 0.3s ease; 
-  /* height: 100px; */
-  /* overflow: scroll; */
-  border-radius: 8px;
+    position: fixed;
+    /* display: flex; */
+    bottom: -5px;
+    right: 5px;
+    transition: bottom 0.3s ease; 
+    /* height: 100px; */
+    /* width: 320px; */
+    /* overflow: scroll; */
+    border-radius: 8px;
+    transition: width 0.2s, height 0.2s; 
 }
 
 .chat-widget-button {
   /* background-color: #5555FB; */
+  position: relative;
   color: #fff;
   border: none;
   /* padding: 10px 20px; */
@@ -159,24 +162,26 @@ body {
 
 .chat-content {
 
-  background-color:#F4F4FF;
-  /* padding: 10px; */
-  border: 1px solid #ccc;
-  height: 500px;
-  /* width :50px; */
-  /* overflow: hidden; */
-  background-color: "red";
-  border-radius: 0 0 8px 8px;
-  
+    position:relative;
+    background-color:#F4F4FF;
+    /* padding: 10px; */
+    border: 1px solid #ccc;
+    height: 500px;
+    /* width :50px; */
+    /* overflow: hidden; */
+    background-color: "red";
+    border-radius: 0 0 8px 8px;
 }
 
 .single-chat{
   /* background-color: blue; */
   width: 450px;
   height: 410px;
+  position: relative;
   margin-bottom: 2.5%;
   overflow: scroll;
   padding: 15px;
+  /* display: flex; */
   
   /* overflow: hidden; */
 }
@@ -243,6 +248,27 @@ body {
   /* background-color: black */
   
 }
+
+.close{
+    display: flex;
+    color: white;
+    /* background-color: red; */
+    /* justify-content: space-between; */
+    padding: 10px; 
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .notif-dot {
+    display: inline-block;
+    margin-left: 8px;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  
 
 .container_red {
   display: flex;
