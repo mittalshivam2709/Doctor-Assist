@@ -52,6 +52,9 @@ query FetchAmbulancesByDoctorId($docId: ID!) {
     createdAt
     admit_time
     symptoms
+    address
+    occupation
+    phone
   }
 }
 `

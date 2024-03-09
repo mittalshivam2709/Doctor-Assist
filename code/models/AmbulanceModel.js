@@ -40,6 +40,10 @@ const ambulanceSchema = mongoose.Schema(
         spo2: [Number], // saturation of peripheral oxygen, <85, <90, >90
         rbs: [Number],  // random blood sugar
 
+        address: String,
+        occupation: String,
+        phone: String,
+
     },
     { timestamps: true },
 );

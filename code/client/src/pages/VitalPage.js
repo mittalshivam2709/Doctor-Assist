@@ -12,7 +12,7 @@ import Vitals from "../components/Vitals";
 import MedicalInfo from "../components/MedicalInfo";
 
 const VitalPage = () => {
-  const { vitals, setVitals, selectedChat,selectedPatient } = ChatState();
+  const { vitals, setVitals, selectedChat,selectedPatient,user,setUser } = ChatState();
 
   const { loading:loadingVitals, data:dataVitals, refetch:refetchVitals } = useQuery(FETCH_VITAL, {
     variables: { emtId: selectedChat },
@@ -29,6 +29,8 @@ const VitalPage = () => {
         setVitals(curr_vitals);
       }
     });
+    console.log(user);
+    console.log(setUser);
     console.log(selectedPatient);
   }, [selectedChat]);
 

@@ -33,6 +33,9 @@ module.exports = gql`
     rbs: [Float]
     createdAt: String
     admit_time: String
+    address: String
+    occupation: String
+    phone: String
   }
   type Vitals {
     name: String
@@ -85,6 +88,9 @@ module.exports = gql`
       pulse_rate: [Float]
       spo2: [Float]
       rbs: [Float]
+      address: String
+      occupation: String
+      phone: String
     ): Ambulance
   }
 `;

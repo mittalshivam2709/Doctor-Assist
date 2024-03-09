@@ -9,23 +9,23 @@ const PatientDetails = ({ selectedPatient }) => {
         <label>Patient's name: {selectedPatient.name}</label>
       </div>
       <div className="form-row">
-        <label>Sex: {selectedPatient.name}</label>
+        <label>Sex: {selectedPatient.gender}</label>
       </div>
       {/* </div> */}
       {/* <div className="flex flex-col form-row" style={{ flex: 1 }}> */}
       <div className="form-row">
-        <label>Address: {selectedPatient.name}</label>
+        <label>Address: {selectedPatient.address}</label>
       </div>
       <div className="form-row">
-        <label>Phone: {selectedPatient.name}</label>
+        <label>Phone: {selectedPatient.phone}</label>
       </div>
       {/* </div> */}
       {/* <div className="flex flex-col form-row" style={{ flex: 1 }}> */}
       <div className="form-row">
-        <label>Age: {selectedPatient.age_type}</label>
+        <label>Age: {selectedPatient.age}</label>
       </div>
       <div className="form-row">
-        <label>Occupation: {selectedPatient.name}</label>
+        <label>Occupation: {selectedPatient.occupation}</label>
       </div>
     </div>
     // </div>
