@@ -16,6 +16,8 @@ To run the application, follow these steps:<br>
 Backend Setup :<br>
 Firstly if you have'nt installed react-draggable once then run on terminal<br>
 **npm install react-draggable**<br>
+Secondly if you have'nt installed re-resizable once then run on terminal<br>
+**npm install re-resizable**<br>
 Navigate to the **code** directory.<br>
 Open a terminal and run **npm i**.<br>
 Modify server.js:
