@@ -68,7 +68,7 @@ const SingleChat = () => {
 
   return (
     <div>
-      <div className="single-chat">
+      <div className="single-chat" style={{overflowX:"hidden"}}>
         {/* <div>{user}</div> */}
         {messages.map((message, index) => (
           <Message

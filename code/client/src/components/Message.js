@@ -5,7 +5,7 @@ import Placeholder from "./Placeholder";
 const Message = ({ message, right }) => {
   const text = `This is a really really long text`;
   return (
-    <div className="flex flex-row chat-parent" style={{ alignItems: "center" }}>
+    <div className="flex flex-row chat-parent" style={{ width:"100%", alignItems: "center" }}>
       {right == 0 && (
         <div
           style={{
@@ -24,7 +24,7 @@ const Message = ({ message, right }) => {
         </div>
       )}
 
-      <div className="chat-box">
+      <div className="chat-box" style={{width:"100%", wordBreak:"break-word"}}>
         <div className={`chat-message ${right == 0 ? "left" : "right"}`}>
           {message}
         </div>

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../index.css";
-import LoremIpsum from "../utils/loremipsum";
 import { ChatState } from "../context/ChatProvider";
 
 const Dropdown = ({ data }) => {
@@ -11,12 +9,7 @@ const Dropdown = ({ data }) => {
     age,
     age_type,
     gender,
-    loc,
     critical_case,
-    past_history,
-    symptoms,
-    ercp_advice,
-    event_during_transport,
     emt,
   } = data;
 

@@ -18,9 +18,7 @@ const VitalPage = () => {
     variables: { emtId: selectedChat },
   });
 
-  // const { loading:loadingPatients, data:dataPatients} = useQuery(FETCH_PATIENTS, {
-  //   variables: { docId: selectedPatient },
-  // });
+
 
   useEffect(() => {
     refetchVitals().then((response) => {
@@ -48,9 +46,6 @@ const VitalPage = () => {
     return () => clearInterval(interval);
   }, [refetchVitals]);
 
-  // const patientDetails = dataPatients ? dataPatients.fetchAmbulancesByDoctorId : null;
-  // console.log(patientDetails)
-  // if (loadingVitals || loadingPatients || !vitals) return <p>Loading...</p>;
   if (loadingVitals || !vitals) return <p>Loading...</p>;
 
   return (
