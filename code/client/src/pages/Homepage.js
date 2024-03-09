@@ -49,10 +49,9 @@ const Homepage = () => {
 
   return (
     <div className="flex-container wrapper" style={{background:"#F4F4FF"}}>
-      <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`}>
+      <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`} style={{width:"full", overflow:"hidden"}} >
         <Template />
-        {/* the code below this is for extacting an entry from the database */}
-        <div style={{background:"white", padding:"5px", paddingTop:"10px", borderRadius:"20px"}}>
+        <div style={{background:"white", padding:"5px", paddingTop:"10px", borderRadius:"20px", height:"85%", overflowY:"scroll", overflowX:"hidden"}}>
           {patients.map((item) => (
             <Dropdown key={item.id} data={item} />
           ))}

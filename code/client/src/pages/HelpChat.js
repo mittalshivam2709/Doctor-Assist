@@ -21,11 +21,11 @@ const SingleChat = () => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
-    socket.on("connection" , () => setSocket(true));
+    socket.on("connection", () => setSocket(true));
     // socket.emit("send message", selectedChat, message) // send message to selected chat
     // socket.on("recieve message",)
   }, []);
-  
+
   useEffect(() => {
     fetchMessages({
       variables: {
@@ -36,44 +36,39 @@ const SingleChat = () => {
       if (result.data && result.data.fetchMessage) {
         setMessages(result.data.fetchMessage);
       }
-      socket.emit("setChat", (selectedChat));
+      socket.emit("setChat", selectedChat);
     });
   }, [selectedChat]);
 
   useEffect(() => {
     socket.on("message recieved", (message) => {
       console.log(message);
-      if(message.receiver == user){
+      if (message.receiver == user) {
         console.log("set mssg");
         setMessages([...messages, message]);
-      }
-      else if(!selectedChat || message.receiver != selectedChatCompare){
+      } else if (!selectedChat || message.receiver != selectedChatCompare) {
         // notifcation
       }
-    })
-  })
+    });
+  });
 
   useEffect(() => {
-    if(message){
+    if (message) {
       setMessages([...messages, message]);
       socket.emit("send message", message);
     }
-    
-  
   }, [message]);
 
   useEffect(() => {
     ref.current?.scrollIntoView({
-      behaviour:"smooth",
-      block:"end",
-    })
-    
-  
+      behaviour: "smooth",
+      block: "end",
+    });
   }, [messages]);
- 
+
   return (
     <div>
-      <div  className="single-chat">
+      <div className="single-chat">
         <div>{user}</div>
         {messages.map((message, index) => (
           <Message
@@ -82,10 +77,10 @@ const SingleChat = () => {
             right={message.sender == user}
           />
         ))}
+        <div ref={ref}></div>
       </div>
 
       {/* <MessageInput /> */}
-      <div ref={ref}></div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Placeholder from "./Placeholder";
 const Message = ({ message, right }) => {
   const text = `This is a really really long text`;
   return (
-    <div className="flex flex-row chat-parent" style={{ alignItems: 'center' }}>
+    <div className="flex flex-row chat-parent" style={{ alignItems: "center" }}>
       {right == 0 && (
         <div
           style={{
@@ -16,19 +16,18 @@ const Message = ({ message, right }) => {
             // backgroundColor:"green"
           }}
         >
-        
           <img
             src={user}
             style={{ width: "100%", height: "auto" }}
             alt="User"
           />
-
         </div>
       )}
 
-      <div className="chat-box"
-      >
-        <div className={`chat-message ${right == 0 ? 'left' : 'right'}`}>{message}</div>
+      <div className="chat-box">
+        <div className={`chat-message ${right == 0 ? "left" : "right"}`}>
+          {message}
+        </div>
       </div>
 
       {right == 1 && (
@@ -41,17 +40,13 @@ const Message = ({ message, right }) => {
             // backgroundColor:"red"
           }}
         >
-          
           <img
             src={user}
             style={{ width: "100%", height: "auto" }}
             alt="User"
           />
-          
         </div>
       )}
-
-
     </div>
   );
 };

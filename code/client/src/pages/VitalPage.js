@@ -70,7 +70,7 @@ const VitalPage = () => {
           </p>
         </div>
       </div>
-      <div className="case-sheet" style={{ height: "80%" }}>
+      <div className="case-sheet" style={{ height: "auto" }}>
         <div className="headingg">
           <h3>
             <div className="titlee">CASE SHEET</div>
