@@ -4,7 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
-  background:#F4F4FF
+  background:#F4F4FF;
+  font-family: 'Poppins';
+  
 }
 .flex-container {
   display: flex;
