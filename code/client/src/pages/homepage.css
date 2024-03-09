@@ -12,13 +12,14 @@
   border-left: 0px solid transparent;
   border-bottom: 0;
   border-right: 0;
-  height: 5%;
   align-self: center;
   /* Optional styles for visual appeal */
-  background-color: purple; /* Adjust background color as needed */
   color: #fff; /* Adjust text color as needed */
   padding: 5px 10px; /* Adjust padding based on your button size */
   cursor: pointer;
+  background-image: url('../buttonlogo.png');
+  height: 100px;
+  width: 15px;
 }
 
 /* Optional: Add a small triangle at the tip (adjust positions as needed) */
