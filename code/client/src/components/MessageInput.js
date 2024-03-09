@@ -9,6 +9,8 @@ import send from "../send.png";
 
 const MessageInput = () => {
   const [inputText, setInputText] = useState("");
+  const [data, setData] = useState("");
+
   // const [selectedFile, setSelectedFile] = useState(null);
   const [placeholderText, setPlaceholderText] = useState(
     "Type a reply to EMT Assist..."
@@ -38,6 +40,7 @@ const MessageInput = () => {
   const { user, selectedChat, setMessage } = ChatState();
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const customSubmit = (data) => {
+    setData(JSON.stringify(data.Message));
     if (data.Message.trim() !== "") {
       const messageData = {
         content: data.Message,
@@ -61,22 +64,32 @@ const MessageInput = () => {
     reset();
   }, [selectedChat]);
 
+  useEffect(() => {
+    console.log(2, inputText);
+  }, [inputText]);
+
   return (
     <form
       onSubmit={handleSubmit((data) => customSubmit(data))}
       style={{ position: "relative", display: "flex", width: "100%" }}
     >
       <input
-        className="input-bar"
+        className="input-bar input-submit"
         // type="text"
         {...register("Message")}
-        placeholder={inputText || "Type a reply to EMT Assist..."}
+        placeholder={inputText !=''? inputText: "Type a reply to EMT Assist..."}
         style={{ paddingLeft: "20px", paddingRight: "65px" }}
-        onChange={handleInputChange}
+        onKeyDown={(e) => {
+          if (e.key == "Enter") {
+            setData(JSON.stringify(e.target.value));
+            handleSubmit((data) => customSubmit(data));
+          }
+          handleInputChange(e);
+        }}
         rows={1}
       />
 
-      {inputText === "" ? (
+      {inputText.length  == 0 ? (
         <>
           <div style={{ position: "absolute", top: 15, right: 50 }}>
             <button
