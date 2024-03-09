@@ -6,7 +6,7 @@ import LoremIpsum from "../utils/loremipsum";
 import SingleChat from "./SingleChat";
 import MessageInput from "../components/MessageInput";
 import VitalPage from "./VitalPage";
-
+// Depricated ?
 const ChatPage = () => {
   const { selectedChat } = ChatState();
 

@@ -3,7 +3,7 @@ import React from "react";
 const Template = () => {
   return (
     <div className="inbox-box bg-white text-black text-sm flex flex-col justify-between" style={{background:"#FFFFFF"}}>
-      <div className="font-bold_Inbox"> Inbox </div>
+      <div className="font-bold text-lg" style={{ fontFamily: 'Poppins',color:"blue" }}> Inbox </div>
       <div className="flex flex-col md:flex-row space-x-4">
         <div className="md:flex md:flex-row items-center">
           <div class="red-square"></div>

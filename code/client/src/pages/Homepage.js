@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar'
 import { FETCH_PATIENTS } from '../gqloperations/queries'
 import { useQuery } from '@apollo/client'
 import './homepage.css'
+import VitalPage from './VitalPage'
 const Homepage = () => {
   const { user, selectedChat } = ChatState()
 
@@ -51,9 +52,11 @@ const Homepage = () => {
       <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`}>
         <Template />
         {/* the code below this is for extacting an entry from the database */}
-        {patients.map((item) => (
-          <Dropdown key={item.id} data={item} />
-        ))}
+        <div style={{background:"white", padding:"5px", paddingTop:"10px", borderRadius:"20px"}}>
+          {patients.map((item) => (
+            <Dropdown key={item.id} data={item} />
+          ))}
+        </div>
       </div>
       {/* the code below this is for button  */}
       <div className="toggle-button-container" data-visible={dropdownVisible}>
@@ -66,8 +69,7 @@ const Homepage = () => {
       </div>
 
       <div className="column">
-        {/* <h1 className="text-3xl font-bold underline">{`Rendering ${selectedChat}`}</h1> */}
-        {selectedChat && <ChatPage />}
+        {selectedChat && <VitalPage />}
         {!selectedChat && <Placeholder />}
       </div>
     </div>

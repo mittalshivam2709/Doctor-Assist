@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
-  background: #FFFFFF;
+  background:#F4F4FF
 }
 .flex-container {
   display: flex;
@@ -25,14 +25,17 @@ body {
   flex-grow: 1;
 }
 .expanding-box {
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   margin-bottom: 10px;
+  border: 0.1px dotted blue;
 }
 
 .expanding-box-header {
   padding: 10px;
   background-color: #E3EEFE;
+  border-radius: 20px;
+  border: 0.1px dotted blue;
 }
 .expanding-box-header *{
   margin-left: 1%;

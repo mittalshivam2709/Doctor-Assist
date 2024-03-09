@@ -58,7 +58,7 @@ const Dropdown = ({ data }) => {
         <div
           className="flex-col"
           style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'Poppins, sans-serif',
             backgroundColor: "transparent",
           }}
         >
@@ -66,18 +66,18 @@ const Dropdown = ({ data }) => {
             
             <div className=" flex items-center">
             <div  style={{ width: '20px', height: '20px', borderRadius: '50%', position: 'relative', right: '8px',backgroundColor: hoverC }}></div>
-            <div style={{ color: hovered ? hoverC : "blue" ,width :'250px'}}>Ambulance No: {ambulance_no}</div>
+            <div className=""  style={{ color: hovered ? hoverC : "blue" ,width :'200px', fontWeight:600}}>Ambulance No: {ambulance_no}</div>
             </div>
-            <div className="text-xs">{admit_time}</div>
+            <div className="text-xs" >{admit_time}</div>
           </div>
-          <div className="flex py-2 items-center">
+          <div className="flex py-2 items-center" style={{fontWeight:400}}>
             <span
               className="problem_patient"
             >
               {showProblemDetails ? problem : "What is the problem?"}
             </span>
           </div>
-          <div className="flex justify-evenly text-sm">
+          <div className="flex justify-between text-sm" style={{fontWeight: 400}}>
             <span className="age_patient text-xs"> Age - {age} years</span>
             <span className="agetype_patient text-xs"> Age type - {age_type}</span>
             <span className="gender_patient text-xs"> Gender - {gender}</span>
