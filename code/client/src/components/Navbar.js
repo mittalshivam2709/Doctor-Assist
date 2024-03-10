@@ -1,5 +1,6 @@
 import "../index.css";
 import logo from "../logo.png"
+import DoctorLogo from "../components/DoctorLogo";
 
 const Navbar = () => {
     return (

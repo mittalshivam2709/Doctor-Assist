@@ -111,7 +111,7 @@ const ChatWidget = () => {
                     : "rgba(95, 95, 255, 1)",
                 padding: "10px 25px 10px 25px",
                 borderRadius: "15px 15px 0 0",
-                marginRight: "25%",
+                marginRight: "24%",
               }}
             >
               Help Centre{" "}

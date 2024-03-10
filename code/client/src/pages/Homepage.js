@@ -9,6 +9,7 @@ import { FETCH_PATIENTS } from '../gqloperations/queries'
 import { useQuery } from '@apollo/client'
 import './homepage.css'
 import VitalPage from './VitalPage'
+import Draggable from "react-draggable";
 const Homepage = () => {
   const { user, selectedChat } = ChatState()
 
@@ -47,6 +48,10 @@ const Homepage = () => {
 
   const [dropdownVisible, setDropdownVisible] = useState(true)
 
+  const handleStop = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <div className="flex-container wrapper" style={{background:"white",padding:"10px"}}>
       <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`} style={{width:"full", overflow:"hidden", background:"#F4F4FF",borderRadius:"10px"}} >
@@ -58,6 +63,8 @@ const Homepage = () => {
         </div>
       </div>
       {/* the code below this is for button  */}
+
+
       <div className="toggle-button-container" data-visible={dropdownVisible}>
         <button
           className="toggle-button"
@@ -66,6 +73,7 @@ const Homepage = () => {
           {/* {dropdownVisible ? '>' : '<'}  */}
         </button>
       </div>
+
 
       <div className="column" style={{backgroundColor:"#F4F4FF",borderRadius:"10px"}}>
         {selectedChat && <VitalPage />}
