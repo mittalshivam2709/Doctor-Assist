@@ -75,7 +75,7 @@ const VitalPage = () => {
         <>
           <PatientDetails selectedPatient={selectedPatient} />
 
-          <MedicalInfo vitals={vitals} />
+          <MedicalInfo selectedPatient={selectedPatient} />
 
           <Vitals vitals={vitals} />
         </>
