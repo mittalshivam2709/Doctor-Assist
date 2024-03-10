@@ -48,8 +48,8 @@ const Homepage = () => {
   const [dropdownVisible, setDropdownVisible] = useState(true)
 
   return (
-    <div className="flex-container wrapper" style={{background:"#F4F4FF"}}>
-      <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`} style={{width:"full", overflow:"hidden"}} >
+    <div className="flex-container wrapper" style={{background:"white",padding:"10px"}}>
+      <div className={`column ${dropdownVisible ? 'hidden' : 'visible'}`} style={{width:"full", overflow:"hidden", background:"#F4F4FF",borderRadius:"10px"}} >
         <Template />
         <div style={{background:"white", padding:"5px", paddingTop:"10px", borderRadius:"20px", height:"85%", overflowY:"scroll", overflowX:"hidden"}}>
           {patients.map((item) => (
@@ -63,11 +63,11 @@ const Homepage = () => {
           className="toggle-button"
           onClick={() => setDropdownVisible(!dropdownVisible)}
         >
-          {dropdownVisible ? '>' : '<'} 
+          {/* {dropdownVisible ? '>' : '<'}  */}
         </button>
       </div>
 
-      <div className="column">
+      <div className="column" style={{backgroundColor:"#F4F4FF",borderRadius:"10px"}}>
         {selectedChat && <VitalPage />}
         {!selectedChat && <Placeholder />}
       </div>

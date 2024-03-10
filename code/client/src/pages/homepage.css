@@ -17,7 +17,9 @@
   color: #fff; /* Adjust text color as needed */
   padding: 5px 10px; /* Adjust padding based on your button size */
   cursor: pointer;
-  background-image: url('../buttonlogo.png');
+  /* background-image: url('../buttonlogo.png'); */
+  background-image: url('../button.svg');
+  background-repeat: no-repeat;
   height: 100px;
   width: 15px;
 }
