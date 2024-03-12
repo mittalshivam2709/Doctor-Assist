@@ -45,12 +45,15 @@ Start the server by running **nodemon server.js**.<br>
 
 <h2>Usage</h2>
 
-    Navigate to / to access the login page. For development, you may directly navigate to /home.
+    Navigate to / to access the login page.<br>
+    For Signup /signup to go to signup page.<br>
+    For development, you may directly navigate to /home.
     Once logged in, you'll be able to view patient vitals, search medical documents, and chat with EMTs.
 
 <h2>Supported Links</h2>
 
-    /: Login page.
+    / Login page.
+    /signup : Signup Page
     /home: Dashboard for doctors.
     /emt-dummy-2: Chat interface for dummy EMT.
 
