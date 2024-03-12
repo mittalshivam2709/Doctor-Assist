@@ -4,6 +4,7 @@ import { LOGIN_USER } from "../gqloperations/mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import '../loginpage.css'
+
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState("");

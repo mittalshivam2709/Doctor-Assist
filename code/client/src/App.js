@@ -1,8 +1,9 @@
-import Navbar from "./components/Navbar";
-import Homepage from "./pages/Homepage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import ChatWidget from "./components/ChatWidget";
+import Navbar from './components/Navbar'
+import Homepage from './pages/Homepage'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import LoginPage from './pages/LoginPage'
+import ChatWidget from './components/ChatWidget'
+import SignupPage from './pages/SignupPage'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/home"
             element={
@@ -23,7 +25,7 @@ function App() {
         </Routes>
       </Router>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
