@@ -14,9 +14,9 @@ The features being provided are the following :-
 
 To run the application, follow these steps:<br>
 Backend Setup :<br>
-Firstly if you have'nt installed react-draggable once then run on terminal<br>
+Firstly if you have not installed react-draggable once then run on terminal<br>
 **npm install react-draggable**<br>
-Secondly if you have'nt installed re-resizable once then run on terminal<br>
+Secondly if you have not installed re-resizable once then run on terminal<br>
 **npm install re-resizable**<br>
 Navigate to the **code** directory.<br>
 Open a terminal and run **npm i**.<br>
@@ -45,8 +45,8 @@ Start the server by running **nodemon server.js**.<br>
 
 <h2>Usage</h2>
 
-    Navigate to / to access the login page.<br>
-    For Signup /signup to go to signup page.<br>
+    Navigate to / to access the login page.
+    For Signup /signup to go to signup page.
     For development, you may directly navigate to /home.
     Once logged in, you'll be able to view patient vitals, search medical documents, and chat with EMTs.
 
@@ -61,8 +61,9 @@ Start the server by running **nodemon server.js**.<br>
 
     Ensure that the port used is 3000 for the client and 3001 for the EMT chat. Modify CORS origin URL if necessary.
 
-If you'd like to contribute to this project, please follow these steps:
+## How to Contribute
 
+If you'd like to contribute to this project, please follow these steps:
 1. Fork the repository.
 2. Create a new branch: `git checkout -b feature/new-feature`.
 3. Make your changes and commit them: `git commit -m 'Add new feature'`.
