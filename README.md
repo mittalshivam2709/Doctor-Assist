@@ -73,7 +73,7 @@ If you'd like to contribute to this project, please follow these steps:
 ## Authors
 
 - [Shivam Mittal](https://github.com/mittalshivam2709)
-- [Manan Garg](https://github.manangarg21)
+- [Manan Garg](https://github.com/manangarg21)
 - [Mayank Mittal](https://github.com/mayankmittal29)
-- [Bassam Adnan](https://github.bassamadnan)
-- [Uday Bindal](https://github.udaybindal01)
+- [Bassam Adnan](https://github.com/bassamadnan)
+- [Uday Bindal](https://github.com/udaybindal01)
