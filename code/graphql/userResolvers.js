@@ -9,26 +9,26 @@ module.exports = {
       // console.log(user);
       // return user;
       return await User.findById(ID);
+    },
+    async getUserByUsername(_, { username }) {
+      try {
+        const user = await User.findOne({ username });
+        if (!user) {
+          throw new ApolloError('User not found', 'USER_NOT_FOUND');
+        }
+        // Extracting required fields
+        const { name, doctor_mobile, doctor_visit, doctor_degree } = user;
+        return {
+          name,
+          doctor_mobile,
+          doctor_visit,
+          doctor_degree
+        };
+      } catch (error) {
+        console.error(error);
+        throw new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR');
+      }
     }
-    // async getUserByUsername(_, { username }) {
-    //   try {
-    //     const user = await User.findOne({ username });
-    //     if (!user) {
-    //       throw new ApolloError('User not found', 'USER_NOT_FOUND');
-    //     }
-    //     // Extracting required fields
-    //     const { name, doctor_mobile, doctor_visit, doctor_degree } = user;
-    //     return {
-    //       name,
-    //       doctor_mobile,
-    //       doctor_visit,
-    //       doctor_degree
-    //     };
-    //   } catch (error) {
-    //     console.error(error);
-    //     throw new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR');
-    //   }
-    // }
   },
   Mutation: {
     async addUser(_, { userInput: { username, password,doctor_name,doctor_degree,doctor_mobile,doctor_visit } }) {

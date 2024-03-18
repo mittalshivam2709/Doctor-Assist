@@ -72,14 +72,13 @@ query Query($emtId: ID!) {
   }
 }
 `
-// New query added below
-// export const FETCH_USER_DETAILS = gql`
-//   query FetchUserDetails($username: String!) {
-//     getUserByUsername(username: $username) {
-//       name
-//       doctor_mobile
-//       doctor_visit
-//       doctor_degree
-//     }
-//   }
-// `;
+export const FETCH_USER_DETAILS = gql`
+  query FetchUserDetails($username: String!) {
+    getUserByUsername(username: $username) {
+      name
+      doctor_mobile
+      doctor_visit
+      doctor_degree
+    }
+  }
+`;
