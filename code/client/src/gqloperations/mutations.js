@@ -10,6 +10,19 @@ mutation LoginUser($userInput: UserInput!) {
   }
 }
 `
+export const SIGNUP_USER = gql`
+mutation addUser($userInput: UserInput!) {
+  addUser(userInput: $userInput) {
+    username
+    password
+    doctor_name,
+    doctor_degree,
+    doctor_mobile,
+    doctor_visit,
+    id
+  }
+}
+`
 
 export const SEND_MESSAGE = gql`
 mutation Mutation($messageInput: MessageInput!) {

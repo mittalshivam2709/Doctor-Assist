@@ -10,7 +10,15 @@ import { useQuery } from '@apollo/client'
 import './homepage.css'
 import VitalPage from './VitalPage'
 import Draggable from "react-draggable";
+import { useLocation } from 'react-router-dom';
 const Homepage = () => {
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const username = queryParams.get('username');
+
+  // // Set the username in the parent component (App)
+  // setUsername(username);
+
   const { user, selectedChat } = ChatState()
 
   const { loading, data, refetch } = useQuery(FETCH_PATIENTS, {

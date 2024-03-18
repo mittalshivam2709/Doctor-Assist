@@ -8,7 +8,7 @@ type User{
     id: String
     doctor_name: String
     doctor_degree: String
-    doctor_number: String
+    doctor_mobile: String
     doctor_visit: String
 }
 
@@ -17,7 +17,7 @@ input UserInput{
     password: String!
     doctor_name: String
     doctor_degree: String
-    doctor_number: String
+    doctor_mobile: String
     doctor_visit: String
 }
 extend type Query{
