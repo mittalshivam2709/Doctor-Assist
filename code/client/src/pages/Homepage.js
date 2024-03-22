@@ -55,8 +55,8 @@ const Homepage = () => {
     return () => clearInterval(interval)
   }, [refetch])
 
-  const [dropdownVisible, setDropdownVisible] = useState(true)
-  const [dropdown2Visible, setDropdown2Visible] = useState(false) // State for Dropdown2 visibility
+  const [dropdownVisible, setDropdownVisible] = useState(false)
+  const [dropdown2Visible, setDropdown2Visible] = useState(true) // State for Dropdown2 visibility
 
   const handleToggle = () => {
     setDropdownVisible(!dropdownVisible)
@@ -133,7 +133,7 @@ const Homepage = () => {
         style={{ backgroundColor: '#F4F4FF', borderRadius: '10px' }}
       >
         {selectedChat && <VitalPage />}
-        {!selectedChat && <Placeholder />}
+        {/* {!selectedChat && <Placeholder />} */}
       </div>
     </div>
   )
