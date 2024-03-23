@@ -428,7 +428,7 @@ body {
 }
 
 .doctor-text h1 {
-  font-size: x-large;
+  font-size: 24px;
   color: #6F6B6B;
   font-style: normal;
   font-weight: 400;
@@ -436,8 +436,8 @@ body {
 }
 
 .doctor-text p {
-  font-size: small;
-  color: #6F6B6B;
+  font-size: 12px;
+  color: #929292;
   font-family: 'Poppins';
   /* margin-bottom: 10px; */
 }
@@ -458,10 +458,10 @@ body {
 
 .datee {
   /* margin: 0; */
-  font-size: medium; 
+  font-size: 18px; 
   text-align: right;
-  color:black;
-  font-weight: bold;
+  color:#6F6B6B;
+  /* font-weight: bold; */
   font-family: 'Poppins';
   font-style: normal;
   /* margin-bottom: 20px; */
@@ -477,8 +477,8 @@ body {
 
 .titlee {
   text-align: center;
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 700;
   color:#5555FB;
   margin-bottom: 10px;
   font-family: 'Poppins';
@@ -513,7 +513,8 @@ body {
 }
 
 .form-row label {
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: 18px;
 }
 
 /* .form-row input[type="text"] {
@@ -543,8 +544,9 @@ body {
 }
 
 .form-row2 label {
-  font-weight: bold;
-  margin-right: 2%; 
+  /* font-weight: bold; */
+  font-size:18px;
+  margin-right: 1%; 
   white-space: nowrap;
   text-align: right;
 }
@@ -587,7 +589,8 @@ body {
 
 
 .form-row3 label {
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size:18px;
   margin-right: 2%;
   margin-left: 1%;
   white-space: nowrap;
