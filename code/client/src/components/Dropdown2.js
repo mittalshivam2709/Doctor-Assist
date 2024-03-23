@@ -133,63 +133,59 @@ const Dropdown2 = ({ data }) => {
    hoverC = "#D2FAF1"
   }
   const [hovered, setHovered] = useState(false)
-  // const [showProblemDetails, setShowProblemDetails] = useState(false)
-  // const hoverColor =
-  //   critical_case === 'yes' ? 'rgb(244, 183, 183)' : 'rgb(169, 235, 169)'
-  // const hoverC = critical_case === 'yes' ? 'red' : 'green'
   const { selectedChat, setSelectedChat, setSelectedPatient } = ChatState()
   const isSelected = selectedChat === emt
-  var color = 'white'
+  var color = "white";
   const handleToggle = () => {
     setSelectedChat(isSelected ? null : emt)
     setSelectedPatient(isSelected ? null : data)
   }
-
+  const [firstNameLetter, lastNameLetter] = name.split(' ').map(namePart => namePart[0])
   const handleHover = (isHovered) => {
     setHovered(isHovered)
   }
 
   return (
     <div
-      className={`expanding-box bg-${isSelected ? hoverColor : 'white'} text-${
+      className={`expanding-box bg-${isSelected ? hoverC : hoverColor} text-${
         isSelected ? 'white' : 'black'
       }`}
+      style={{backgroundColor:hoverColor}}
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
     >
       <div
         className={`expanding-box-header bg-${
-          isSelected ? 'white' : 'white'
+          isSelected ? hoverC : hoverColor
         } text-${isSelected ? 'white' : 'black'}`}
         onClick={handleToggle}
         style={{
           backgroundImage: isSelected
-            ? `linear-gradient(to right, ${color} 100%, #FFFFFF 100%)`
-            : `linear-gradient(to right, ${color} 2.5%, #FFFFFF 2.5%)`,
+            ? `linear-gradient(to right, ${hoverC} 100%, #FFFFFF 100%)`
+            : `linear-gradient(to right, ${hoverC} 2.5%, #FFFFFF 2.5%)`,
           border: isSelected ? '2px solid blue' : '2px solid transparent',
-          background: hovered ? hoverC : 'white',
-          backgroundColor: 'transparent',
-        }}
+          background: hovered ? hoverC : (isSelected ? hoverC : hoverColor),
+          backgroundColor: isSelected ? hoverC : (hovered ? hoverC : hoverColor)     }}
       >
         <div
           className="flex-col"
           style={{
             fontFamily: 'Poppins, sans-serif',
-            backgroundColor: 'transparent',
           }}
         >
           <div className=" flex flex-col md:flex-row justify-between">
             <div className=" flex items-center">
-              <div
+              
+            <div
+                className=""
                 style={{
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  position: 'relative',
-                  right: '8px',
-                  backgroundColor: hoverColor,
+                  color: hovered ? hoverColor : 'blue',
+                  width: '10px',
+                  fontWeight: 600,
                 }}
-              ></div>
+              >
+                {firstNameLetter}
+              </div>
               <div
                 className=""
                 style={{
@@ -198,7 +194,7 @@ const Dropdown2 = ({ data }) => {
                   fontWeight: 600,
                 }}
               >
-                {name[0]}
+                {lastNameLetter}
               </div>
             </div>
           </div>
