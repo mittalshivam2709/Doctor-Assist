@@ -458,7 +458,7 @@ body {
 
 .datee {
   /* margin: 0; */
-  font-size: 18px; 
+  font-size: 16px; 
   text-align: right;
   color:#6F6B6B;
   /* font-weight: bold; */
@@ -514,7 +514,7 @@ body {
 
 .form-row label {
   /* font-weight: bold; */
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* .form-row input[type="text"] {
@@ -545,7 +545,7 @@ body {
 
 .form-row2 label {
   /* font-weight: bold; */
-  font-size:18px;
+  font-size:16px;
   margin-right: 1%; 
   white-space: nowrap;
   text-align: right;
@@ -590,7 +590,7 @@ body {
 
 .form-row3 label {
   /* font-weight: bold; */
-  font-size:18px;
+  font-size:16px;
   margin-right: 2%;
   margin-left: 1%;
   white-space: nowrap;
