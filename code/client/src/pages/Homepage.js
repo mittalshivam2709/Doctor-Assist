@@ -62,7 +62,79 @@ const Homepage = () => {
     setDropdownVisible(!dropdownVisible)
     setDropdown2Visible(!dropdown2Visible) // Toggle Dropdown2 visibility
   }
+  const judgeCriticality = (item) => {
+    let criticality = ''
+    const { critical_case, body_temperature, spo2, pulse_rate, blood_pressure_sys, blood_pressure_dys } = item;
 
+    if (critical_case === "yes") {
+      criticality = "Critical";
+    } else {
+      let count_critical = 0;
+      let count_moderate = 0;
+      let count_minor = 0;
+      
+      // For body temperature
+      if ((body_temperature >= 105) || (body_temperature <= 95)) {
+        count_critical = count_critical + 1;
+      } else if ((body_temperature >= 103) && (body_temperature < 105)) {
+        count_moderate = count_moderate + 1;
+      } else if ((body_temperature < 103)) {
+        count_minor = count_minor + 1;
+      }
+
+      // For Spo2
+      if (spo2 < 85) {
+        count_critical = count_critical + 1;
+      } else if ((spo2 >= 85) && (spo2 <= 90)) {
+        count_moderate = count_moderate + 1;
+      } else if ((spo2 > 90)) {
+        count_minor = count_minor + 1;
+      }
+
+      // For Heart rate
+      if ((pulse_rate >= 130) || (pulse_rate <= 40)) {
+        count_critical = count_critical + 1;
+      } else if ((pulse_rate >= 110) && (pulse_rate <= 60)) {
+        count_moderate = count_moderate + 1;
+      } else if ((pulse_rate < 110) && (pulse_rate > 60)) {
+        count_minor = count_minor + 1;
+      }
+
+      // For Systolic blood pressure
+      if ((blood_pressure_sys >= 180) || (blood_pressure_sys <= 90)) {
+        count_critical = count_critical + 1;
+      } else if ((blood_pressure_sys > 90) && (blood_pressure_sys <= 160)) {
+        count_minor = count_minor + 1;
+      } else if ((blood_pressure_sys < 180) && (blood_pressure_sys > 160)) {
+        count_moderate = count_moderate + 1;
+      }
+
+      // For Diastolic blood pressure
+      if ((blood_pressure_dys >= 120) || (blood_pressure_dys <= 80)) {
+        count_critical = count_critical + 1;
+      } else if ((blood_pressure_dys >= 90) && (blood_pressure_dys <= 120)) {
+        count_moderate = count_moderate + 1;
+      } else if ((blood_pressure_dys < 90) && (blood_pressure_dys > 80)) {
+        count_minor = count_minor + 1;
+      }
+
+      if (count_critical >= 3) {
+        criticality = 'Critical';
+      } else if ((count_critical === 2) && (count_moderate >= 2)) {
+        criticality = 'Moderate';
+      } else if (count_moderate > 0) {
+        criticality = 'Moderate';
+      } else {
+        criticality = 'Minor';
+      }
+    }
+    return criticality;
+  };
+
+  const sortedPatients = patients.slice().sort((a, b) => {
+    const criticalityOrder = { Critical: 0, Moderate: 1, Minor: 2 };
+    return criticalityOrder[judgeCriticality(a)] - criticalityOrder[judgeCriticality(b)];
+  });
   return (
     <div
       className="flex-container wrapper"
@@ -89,7 +161,7 @@ const Homepage = () => {
             overflowX: 'hidden',
           }}
         >
-          {patients.map((item) => (
+          {sortedPatients.map((item) => (
             <Dropdown key={item.id} data={item} />
           ))}
         </div>
@@ -116,7 +188,7 @@ const Homepage = () => {
             overflowX: 'hidden',
           }}
         >
-          {patients.map((item) => (
+          {sortedPatients.map((item) => (
             <Dropdown2 key={item.id} data={item} />
           ))}
         </div>
