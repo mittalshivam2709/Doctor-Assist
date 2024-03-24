@@ -1,6 +1,6 @@
-const { ApolloError } = require('apollo-server');
+const { ApolloError } = require('apollo-server')
 const User = require('../models/UserModel')
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 // todo -> encryption
 module.exports = {
   Query: {
@@ -8,81 +8,108 @@ module.exports = {
       // const user = await User.findById(ID);
       // console.log(user);
       // return user;
-      return await User.findById(ID);
+      return await User.findById(ID)
     },
     async getUserByUsername(_, { username }) {
       try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ username })
         if (!user) {
-          throw new ApolloError('User not found', 'USER_NOT_FOUND');
+          throw new ApolloError('User not found', 'USER_NOT_FOUND')
         }
         // Extracting required fields
-        const { name, doctor_mobile, doctor_visit, doctor_degree } = user;
+        const { name, doctor_mobile, doctor_visit, doctor_degree } = user
         return {
           name,
           doctor_mobile,
           doctor_visit,
-          doctor_degree
-        };
+          doctor_degree,
+        }
       } catch (error) {
-        console.error(error);
-        throw new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR');
+        console.error(error)
+        throw new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR')
       }
-    }
+    },
   },
   Mutation: {
-    async addUser(_, { userInput: { username, password,doctor_name,doctor_degree,doctor_mobile,doctor_visit } }) {
+    async addUser(
+      _,
+      {
+        userInput: {
+          username,
+          password,
+          doctor_name,
+          doctor_degree,
+          doctor_mobile,
+          doctor_visit,
+        },
+      }
+    ) {
       const newUser = new User({
         username,
         password,
         doctor_name,
         doctor_degree,
         doctor_mobile,
-        doctor_visit
-      });
-      const oldUser = await User.findOne({username});
-      if(oldUser){
+        doctor_visit,
+      })
+      const oldUser = await User.findOne({ username })
+      if (oldUser) {
         throw new ApolloError('User with username already exists')
       }
       const token = jwt.sign(
         {
-          user_id: newUser._id, username
+          user_id: newUser._id,
+          username,
         },
-        "SECRET_KEY",
+        'SECRET_KEY',
         {
-          expiresIn: "5h"
+          expiresIn: '5h',
         }
-      );
-      newUser.token = token;
+      )
+      newUser.token = token
 
-      const res = await newUser.save();
+      const res = await newUser.save()
       return {
         id: res.id,
-        ...res._doc
-      };
+        ...res._doc,
+      }
     },
-    async loginUser(_, { userInput: { username, password } }){
-      const user = await User.findOne({username});
-      if(!user){
+    async loginUser(_, { userInput: { username, password } }) {
+      const user = await User.findOne({ username })
+      if (!user) {
         throw new ApolloError('User with username does not exist')
       }
-      if(user.password != password){
+      if (user.password != password) {
         throw new ApolloError('Incorrect password', 'PASSWORD_ERROR')
       }
       const token = jwt.sign(
         {
-          user_id: user._id, username
+          user_id: user._id,
+          username,
         },
-        "SECRET_KEY",
+        'SECRET_KEY',
         {
-          expiresIn: "5h"
+          expiresIn: '5h',
         }
-      );
-      user.token = token;
+      )
+      user.token = token
       return {
         id: user._id,
-        ...user._doc
-      };
-    }
-  }
-};
+        ...user._doc,
+      }
+    },
+    async resetPassword(_, { userInput: { username, password } }) {
+      const user = await User.findOne({ username })
+      if (!user) {
+        throw new ApolloError('User with username does not exist')
+      }
+      console.log('New password', password)
+      user.password = password
+      const res = await user.save()
+      return {
+        id: res.id,
+        ...res._doc,
+      }
+    },
+  },
+}

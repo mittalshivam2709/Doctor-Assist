@@ -18,6 +18,7 @@ const LoginPage = () => {
       navigate('/home')
     },
     onError: (error) => {
+      console.log(error.message)
       alert(error.message)
       reset()
     },
@@ -58,10 +59,13 @@ const LoginPage = () => {
           <input
             {...register('password')}
             type="password"
+            handleSubmit
             placeholder="Password"
           />
           <br />
+          <Link to="/passwordreset">Forgot password ?</Link>
           <input type="submit" value="Login" />
+
           <p>New user ?</p>
           <Link
             to="/signup"
