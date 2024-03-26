@@ -14,6 +14,7 @@ const Password_Reset = () => {
   const [data, setData] = useState('')
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
   const navigate = useNavigate()
   const newpassword = watch('newpassword')
   const renewpassword = watch('renewpassword')
@@ -66,6 +67,9 @@ const Password_Reset = () => {
   const togglePasswordVisibility2 = () => {
     setShowPassword2(!showPassword2);
   };
+  const togglePasswordVisibility3 = () => {
+    setShowPassword3(!showPassword3);
+  };
   return (
     <div className="outerlogin">
       <div className="login-container">
@@ -83,6 +87,16 @@ const Password_Reset = () => {
           <input {...register('username')} placeholder="Username" />
           <br />
           <input
+            {...register('oldpassword')}
+            type={showPassword3 ? 'text' : 'password'} 
+            placeholder="Enter old password"
+          />
+           <FontAwesomeIcon
+              icon={showPassword3 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility3}
+              style={{position:'relative',top:'-55px',left:'170px'}}
+            />
+          <input
             {...register('newpassword')}
             type={showPassword1 ? 'text' : 'password'} 
             placeholder="Enter new password"
@@ -95,7 +109,7 @@ const Password_Reset = () => {
           <input
             {...register('renewpassword')}
             type={showPassword2 ? 'text' : 'password'} 
-            placeholder="Re-enter password"
+            placeholder="Re-enter new password"
           />
            <FontAwesomeIcon
               icon={showPassword2 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
