@@ -6,7 +6,7 @@ import ChatWidget from './components/ChatWidget'
 import SignupPage from './pages/SignupPage'
 import Password_Reset from './pages/Password_Reset'
 import Forgot_password from './pages/Forgot_password'
-
+import Forgot_reset_password from './pages/Forgot_reset_password'
 function App() {
   return (
     <>
@@ -16,6 +16,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/passwordreset" element={<Password_Reset />} />
           <Route path="/forgotpassword" element={<Forgot_password />} />
+          <Route path="/forgotresetpassword" element={<Forgot_reset_password />} />
           <Route
             path="/home"
             element={

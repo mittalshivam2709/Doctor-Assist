@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Forgot_password = () => {
+const Password_Reset = () => {
   const { register, handleSubmit, reset, watch, setError, clearErrors } =
     useForm()
   const [data, setData] = useState('')
@@ -55,6 +55,11 @@ const Forgot_password = () => {
       },
     })
   }
+  // useEffect(() => {
+  //   if (error) {
+  //     alert(error.message);
+  //   }
+  // }, [error]);
   const togglePasswordVisibility1 = () => {
     setShowPassword1(!showPassword1);
   };
@@ -72,14 +77,31 @@ const Forgot_password = () => {
             fontSize: '30px',
           }}
         >
-          Forgot Password
+          Reset Password after Forgetting the real one...
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <input {...register('username')} placeholder="Username" />
+          <br />
           <input
-            {...register('email')}
-            type='email' 
-            placeholder="Enter email"
+            {...register('newpassword')}
+            type={showPassword1 ? 'text' : 'password'} 
+            placeholder="Enter new password"
           />
+           <FontAwesomeIcon
+              icon={showPassword1 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility1}
+              style={{position:'relative',top:'-55px',left:'170px'}}
+            />
+          <input
+            {...register('renewpassword')}
+            type={showPassword2 ? 'text' : 'password'} 
+            placeholder="Re-enter new password"
+          />
+           <FontAwesomeIcon
+              icon={showPassword2 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility2}
+              style={{position:'relative',top:'-55px',left:'170px'}}
+            />
           <br />
           <input type="submit" value="Submit" />
         </form>
@@ -88,4 +110,4 @@ const Forgot_password = () => {
   )
 }
 
-export default Forgot_password
+export default Password_Reset

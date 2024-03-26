@@ -51,7 +51,8 @@ Start the server by running **nodemon server.js**.<br>
     / Login page.
     /signup : Signup Page.
     /passwordreset : To reset password
-    /forgotpassword : Opens after clicking on link sent on Email to change password
+    /forgotpassword : To enter Email to reset password after forgetting the real one
+    /forgotresetpassword : Opens after clicking on link sent on Email to reset password
     /home: Dashboard for doctors.
     /emt-dummy-2: Chat interface for dummy EMT.
 
