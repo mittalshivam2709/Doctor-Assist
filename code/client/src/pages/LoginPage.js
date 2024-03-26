@@ -41,11 +41,6 @@ const LoginPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // useEffect(() => {
-  //   if (error) {
-  //     alert(error.message);
-  //   }
-  // }, [error]);
   return (
     <div className="outerlogin">
       <div className="login-container">
@@ -78,7 +73,7 @@ const LoginPage = () => {
           <Link to="/passwordreset"
             style={{ textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',top:'-25px',left:'250px'}}
             >Reset password ?</Link>
-          <input type="submit" value="Login" />
+          <input type="submit" value="Login"/>
 
           <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'160px',top:'-10px'}}>New user ?</p>
           <Link
@@ -86,11 +81,10 @@ const LoginPage = () => {
             type="button"
             className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
             style={{
-              background: '#007bff',
+              background: '#65a5e9',
               color: 'white',
               backgroundSize: '40px',
-              fontSize: '20px',
-              textAlign: 'center',
+              fontSize: '23px',
             }}
           >
             Signup
