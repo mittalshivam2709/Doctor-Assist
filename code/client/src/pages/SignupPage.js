@@ -1,66 +1,3 @@
-// import React, { useState } from 'react'
-// import '../pages/SignupPage.css'
-// import Axios from "axios"
-// import {Link } from "react-router-dom";
-
-// const handleSubmit = (e) => {
-//   e.preventDefault()
-//   Axios.port('https://localhost:3000/auth/signup', {
-//     username,
-//     email,
-//     password,
-//   }).then(response => {
-//     console.log(response)
-//   }).catch(error => {
-//     console.log(error)
-//   })
-// }
-
-// const SignupPage = () => {
-//   const [username, setUsername] = useState('')
-//   const [email, setEmail] = useState('')
-//   const [password, setPassword] = useState('')
-//   return (
-//     <div className="outersignup">
-//       <div className="sign-up-container">
-//         <form className="sign-up-form" onSubmit={handleSubmit}>
-//           <h2 className="sp">Sign Up</h2>
-//           <label htmlFor="username">Username:</label>
-//           <input
-//             type="text"
-//             placeholder="Username"
-//             onChange={(e) => setUsername(e.target.value)}
-//           />
-
-//           <label htmlFor="email">Email:</label>
-//           <input
-//             type="email"
-//             autoComplete="off"
-//             placeholder="Email"
-//             onChange={(e) => setEmail(e.target.value)}
-//           />
-
-//           <label htmlFor="password">Password:</label>
-//           <input
-//             type="password"
-//             placeholder="******"
-//             onChange={(e) => setPassword(e.target.value)}
-//           />
-
-//           <button type="submit" className="signupbutton">
-//             Sign up
-//           </button>
-//         <Link to='/' className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'>
-//           Login
-//          </Link>
-//         </form>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default SignupPage
-
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { SIGNUP_USER } from '../gqloperations/mutations'
@@ -68,10 +5,13 @@ import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
 import '../pages/SignupPage.css'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const SignupPage = () => {
   const { register, handleSubmit, reset } = useForm()
   const [data, setData] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
   const [signupUser, { error, loading, formdata }] = useMutation(SIGNUP_USER, {
     onCompleted: (formdata) => {
@@ -99,6 +39,9 @@ const SignupPage = () => {
       },
     })
   }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   // useEffect(() => {
   //   if (error) {
   //     alert(error.message);
@@ -121,10 +64,15 @@ const SignupPage = () => {
           <input {...register('username')} placeholder="Username" />
           <br />
           <input
-            {...register('password')}
-            type="password"
-            placeholder="Password"
-          />
+              {...register('password')}
+              type={showPassword ? 'text' : 'password'} // Toggle type between text and password
+              placeholder="Password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility}
+              style={{position:'relative',top:'-55px',left:'170px'}}
+            />
           <br />
           <input {...register('doctor_name')} placeholder="Doctor's Name" />
           <br />
@@ -135,7 +83,7 @@ const SignupPage = () => {
           <input {...register('doctor_visit')} placeholder="Doctor's visit" />
           <br />
           <input type="submit" value="Signup" />
-          <p>Already have an account?</p>
+          <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'70px',top:'-10px'}}>Already have an account?</p>
           <Link
             to="/"
             type="button"

@@ -5,10 +5,13 @@ import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
 import '../loginpage.css'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm()
   const [data, setData] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
   const [logininUser, { error, loading, formdata }] = useMutation(LOGIN_USER, {
     onCompleted: (formdata) => {
@@ -35,6 +38,9 @@ const LoginPage = () => {
       },
     })
   }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   // useEffect(() => {
   //   if (error) {
   //     alert(error.message);
@@ -56,17 +62,25 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <input {...register('username')} placeholder="Username" />
           <br />
-          <input
-            {...register('password')}
-            type="password"
-            handleSubmit
-            placeholder="Password"
-          />
+          <div className="password-input">
+            <input
+              {...register('password')}
+              type={showPassword ? 'text' : 'password'} // Toggle type between text and password
+              placeholder="Password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility}
+              style={{position:'relative',top:'-59px',left:'370px'}}
+            />
+          </div>
           <br />
-          <Link to="/passwordreset">Forgot password ?</Link>
+          <Link to="/passwordreset"
+            style={{ textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',top:'-25px',left:'250px'}}
+            >Reset password ?</Link>
           <input type="submit" value="Login" />
 
-          <p>New user ?</p>
+          <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'160px',top:'-10px'}}>New user ?</p>
           <Link
             to="/signup"
             type="button"

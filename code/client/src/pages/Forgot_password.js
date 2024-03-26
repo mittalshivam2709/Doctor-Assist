@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Password_Reset = () => {
+const Forgot_password = () => {
   const { register, handleSubmit, reset, watch, setError, clearErrors } =
     useForm()
   const [data, setData] = useState('')
@@ -55,11 +55,6 @@ const Password_Reset = () => {
       },
     })
   }
-  // useEffect(() => {
-  //   if (error) {
-  //     alert(error.message);
-  //   }
-  // }, [error]);
   const togglePasswordVisibility1 = () => {
     setShowPassword1(!showPassword1);
   };
@@ -77,17 +72,15 @@ const Password_Reset = () => {
             fontSize: '30px',
           }}
         >
-          Reset Password
+          Forgot Password
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('username')} placeholder="Username" />
-          <br />
           <input
             {...register('newpassword')}
             type={showPassword1 ? 'text' : 'password'} 
             placeholder="Enter new password"
           />
-           <FontAwesomeIcon
+          <FontAwesomeIcon
               icon={showPassword1 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
               onClick={togglePasswordVisibility1}
               style={{position:'relative',top:'-55px',left:'170px'}}
@@ -95,9 +88,9 @@ const Password_Reset = () => {
           <input
             {...register('renewpassword')}
             type={showPassword2 ? 'text' : 'password'} 
-            placeholder="Re-enter password"
+            placeholder="Re-enter new password"
           />
-           <FontAwesomeIcon
+          <FontAwesomeIcon
               icon={showPassword2 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
               onClick={togglePasswordVisibility2}
               style={{position:'relative',top:'-55px',left:'170px'}}
@@ -110,4 +103,4 @@ const Password_Reset = () => {
   )
 }
 
-export default Password_Reset
+export default Forgot_password

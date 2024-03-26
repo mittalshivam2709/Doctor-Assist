@@ -18,7 +18,7 @@ module.exports = {
         }
         // Extracting required fields
         const { name, doctor_mobile, doctor_visit, doctor_degree } = user
-        return {
+        return { 
           name,
           doctor_mobile,
           doctor_visit,
