@@ -98,10 +98,13 @@ module.exports = {
         ...user._doc,
       }
     },
-    async resetPassword(_, { userInput: { username, password } }) {
+    async resetPassword(_, { userInput: { username, password,doctor_name } }) {
       const user = await User.findOne({ username })
       if (!user) {
         throw new ApolloError('User with username does not exist')
+      }
+      if(user.password!=doctor_name){
+        throw new ApolloError('Old password is incoorect')
       }
       console.log('New password', password)
       user.password = password

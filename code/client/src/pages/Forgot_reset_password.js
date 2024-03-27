@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Password_Reset = () => {
+const New_password = () => {
   const { register, handleSubmit, reset, watch, setError, clearErrors } =
     useForm()
   const [data, setData] = useState('')
@@ -110,4 +110,4 @@ const Password_Reset = () => {
   )
 }
 
-export default Password_Reset
+export default New_password

@@ -52,6 +52,7 @@ const Password_Reset = () => {
         userInput: {
           username: data.username,
           password: data.newpassword,
+          doctor_name: data.oldpassword,
         },
       },
     })

@@ -30,6 +30,7 @@ export const RESET_PASSWORD = gql`
     resetPassword(userInput: $userInput) {
       username
       password
+      doctor_name
       id
     }
   }

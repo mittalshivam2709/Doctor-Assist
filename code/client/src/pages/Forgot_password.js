@@ -18,7 +18,7 @@ const Forgot_password = () => {
   const newpassword = watch('newpassword')
   const renewpassword = watch('renewpassword')
 
-  const [passwordrst, { error, loading, formdata }] = useMutation(
+  const [passwRESET_PASSWORDordrst, { error, loading, formdata }] = useMutation(
     RESET_PASSWORD,
     {
       onCompleted: (formdata) => {
