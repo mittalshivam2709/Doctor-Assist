@@ -12,55 +12,15 @@ const Forgot_password = () => {
   const { register, handleSubmit, reset, watch, setError, clearErrors } =
     useForm()
   const [data, setData] = useState('')
-  const [showPassword1, setShowPassword1] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
-  const navigate = useNavigate()
-  const newpassword = watch('newpassword')
-  const renewpassword = watch('renewpassword')
-
-  const [passwRESET_PASSWORDordrst, { error, loading, formdata }] = useMutation(
-    RESET_PASSWORD,
-    {
-      onCompleted: (formdata) => {
-        console.log(formdata.loginUser)
-        // localStorage.setItem("token",formdata.user.token)
-        // console.log(formdata.user.token);
-        navigate('/')
-      },
-      onError: (error) => {
-        alert(error.message)
-        reset()
-      },
-    }
-  )
   const onSubmit = (data) => {
-    // console.log('Form data submitted:', data)
-    if (newpassword !== renewpassword) {
-      alert('Passwords do not match')
-      setError('renewpassword', {
-        type: 'manual',
-        message: 'Passwords do not match',
-      })
-      return
+    if(!data.email)
+    {
+      alert("Please enter the Email");
+      reset()
     }
-    clearErrors('renewpassword')
-    // console.log('', data)
     setData(JSON.stringify(data))
-    passwordrst({
-      variables: {
-        userInput: {
-          username: data.username,
-          password: data.newpassword,
-        },
-      },
-    })
+    
   }
-  const togglePasswordVisibility1 = () => {
-    setShowPassword1(!showPassword1);
-  };
-  const togglePasswordVisibility2 = () => {
-    setShowPassword2(!showPassword2);
-  };
   return (
     <div className="outerlogin">
       <div className="login-container">

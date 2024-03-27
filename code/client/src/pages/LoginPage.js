@@ -27,6 +27,21 @@ const LoginPage = () => {
     },
   })
   const onSubmit = (data) => {
+    if (!data.username && !data.password) {
+      alert("Please enter both username and password");
+      reset()
+      return;
+    }
+    else if (!data.username && data.password) {
+      alert("Please enter Username");
+      reset()
+      return;
+    }
+    else if (data.username && !data.password) {
+      alert("Please enter Password");
+      reset()
+      return;
+    }
     console.log('Form data submitted:', data)
     setData(JSON.stringify(data))
     logininUser({

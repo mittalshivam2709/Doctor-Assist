@@ -24,6 +24,26 @@ const SignupPage = () => {
     },
   })
   const onSubmit = (data) => {
+    if (!data.username && !data.password) {
+      alert("Please enter both Username and Password");
+      reset()
+      return;
+    }
+    else if (!data.username && data.password) {
+      alert("Please enter Username");
+      reset()
+      return;
+    }
+    else if (data.username && !data.password) {
+      alert("Please enter Password");
+      reset()
+      return;
+    }
+    else if(((data.username && data.password))&&((!data.doctor_name||!data.doctor_degree||!data.doctor_mobile||!data.doctor_visit)))
+    {
+      alert("Please enter complete Doctor Details");
+      return;
+    }
     console.log('Form data submitted:', data)
     setData(JSON.stringify(data))
     signupUser({
@@ -42,11 +62,6 @@ const SignupPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // useEffect(() => {
-  //   if (error) {
-  //     alert(error.message);
-  //   }
-  // }, [error]);
   return (
     <div className="outerlogin">
       <div className="login-container">
@@ -65,11 +80,11 @@ const SignupPage = () => {
           <br />
           <input
               {...register('password')}
-              type={showPassword ? 'text' : 'password'} // Toggle type between text and password
+              type={showPassword ? 'text' : 'password'} 
               placeholder="Password"
             />
             <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              icon={showPassword ? faEyeSlash : faEye}
               onClick={togglePasswordVisibility}
               style={{position:'relative',top:'-55px',left:'170px'}}
             />

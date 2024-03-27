@@ -26,6 +26,7 @@ const Password_Reset = () => {
         console.log(formdata.loginUser)
         // localStorage.setItem("token",formdata.user.token)
         // console.log(formdata.user.token);
+        alert("Password updated successfully")
         navigate('/')
       },
       onError: (error) => {
@@ -36,15 +37,40 @@ const Password_Reset = () => {
   )
   const onSubmit = (data) => {
     // console.log('Form data submitted:', data)
-    if (newpassword !== renewpassword) {
-      alert('Passwords do not match')
-      setError('renewpassword', {
-        type: 'manual',
-        message: 'Passwords do not match',
-      })
+    if (!data.username && !data.oldpassword) {
+      alert("Please enter both Username and Old Password");
+      reset()
+      return;
+    }
+    else if (!data.username && data.oldpassword) {
+      alert("Please enter Username");
+      reset()
+      return;
+    }
+    else if (data.username && !data.oldpassword) {
+      alert("Please enter Password");
+      reset()
+      return;
+    }
+    else if((data.username && data.oldpassword && !data.newpassword))
+    {
+      alert("Please enter new password also");
+      return;
+    }
+    else if((data.username && data.oldpassword && data.newpassword && !renewpassword))
+    {
+      alert("Please enter renew password also");
+      return;
+    }
+    else if (newpassword !== renewpassword) {
+      alert('New and Renew passwords do not match')
+      // setError('renewpassword', {
+      //   type: 'manual',
+      //   message: 'Passwords do not match',
+      // })
       return
     }
-    clearErrors('renewpassword')
+    // clearErrors('renewpassword')
     // console.log('', data)
     setData(JSON.stringify(data))
     passwordrst({
@@ -57,11 +83,6 @@ const Password_Reset = () => {
       },
     })
   }
-  // useEffect(() => {
-  //   if (error) {
-  //     alert(error.message);
-  //   }
-  // }, [error]);
   const togglePasswordVisibility1 = () => {
     setShowPassword1(!showPassword1);
   };
