@@ -70,9 +70,9 @@ const LoginPage = () => {
             />
           </div>
           <br />
-          <Link to="/passwordreset"
+          <Link to="/forgotpassword"
             style={{ textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',top:'-25px',left:'250px'}}
-            >Reset password ?</Link>
+            >Forgot password ?</Link>
           <input type="submit" value="Login"/>
 
           <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'160px',top:'-10px'}}>New user ?</p>

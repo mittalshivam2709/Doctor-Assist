@@ -82,6 +82,19 @@ const Forgot_password = () => {
           />
           <br />
           <input type="submit" value="Submit" />
+          <Link
+            to="/"
+            type="button"
+            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
+            style={{
+              background: '#65a5e9',
+              color: 'white',
+              backgroundSize: '40px',
+              fontSize: '23px',
+            }}
+          >
+            Back
+          </Link>
         </form>
       </div>
     </div>
