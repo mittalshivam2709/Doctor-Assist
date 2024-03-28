@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server')
 
 module.exports = gql`
   type Ambulance {
@@ -49,14 +49,10 @@ module.exports = gql`
   extend type Query {
     fetchVitals(emtID: ID!): Vitals
     fetchAmbulancesByDoctorId(docID: ID!): [Ambulance]
+    getUserByUsername(_id: ID!): User!
   }
   extend type Mutation {
-    updateAmbulanceVital(
-      emtId: ID!
-      vitalName: String!
-      value: Float!
-    ): Boolean
-
+    updateAmbulanceVital(emtId: ID!, vitalName: String!, value: Float!): Boolean
 
     createAmbulance(
       doctor: ID!
@@ -93,4 +89,4 @@ module.exports = gql`
       phone: String
     ): Ambulance
   }
-`;
+`
