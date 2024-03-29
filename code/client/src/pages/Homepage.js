@@ -21,6 +21,8 @@ const Homepage = () => {
   // // Set the username in the parent component (App)
   // setUsername(username);
 
+  const [loadingPage, setLoadingPage] = useState(true);
+  
   const { user, selectedChat, setSelectedChat, setSelectedPatient } =
     ChatState();
 
@@ -29,6 +31,7 @@ const Homepage = () => {
   });
 
   const [patients, setPatients] = useState([]);
+  
   useEffect(() => {
     console.log("init fetch");
     refetch().then((response) => {
@@ -36,6 +39,7 @@ const Homepage = () => {
       console.log(resp);
       if (resp && resp.length > 0) {
         setPatients(resp);
+        setLoadingPage(false);
       }
     });
   }, []);
@@ -71,16 +75,23 @@ const Homepage = () => {
       criticalityOrder[judgeCriticality(b)]
     );
   });
+  var done = 0;
   useEffect(() => {
     setTimeout(() => {
-      if(!sortedPatients[0]) return;
+      console.log("useeffect", sortedPatients[0]);
+      if(!sortedPatients[0] || done) return;
       const { emt } = sortedPatients[0];
-      console.log("useeffect", emt);
       setSelectedChat(emt);
       setSelectedPatient(sortedPatients[0]);
-    }, 1000);
-  }, []);
+      done = 1;
+      setLoadingPage(false);
+    }, 500);
+    return () => {
+      done = 1;
+    }
+  }, [loadingPage]);
 
+  if(loadingPage) return  <h1 className="flex justify-center">Loading</h1> // add another page for this?
   return (
     <div
       className="flex-container wrapper"

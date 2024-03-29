@@ -60,7 +60,7 @@ const Dropdown = ({ data }) => {
     >
       <div
         className={`expanding-box-header bg-${isSelected ? "white" : "white"} text-${isSelected ? "white" : "black"}`}
-        onClick={handleToggle}
+        onClick={isSelected ? null: handleToggle}
         style={{
           backgroundImage: isSelected
             ? `linear-gradient(to right, ${color} 100%, #FFFFFF 100%)`

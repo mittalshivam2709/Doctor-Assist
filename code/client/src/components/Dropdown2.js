@@ -62,7 +62,7 @@ const Dropdown2 = ({ data }) => {
         className={`expanding-box-header bg-${
           isSelected ? hoverC : hoverColor
         } text-${isSelected ? 'white' : 'black'}`}
-        onClick={handleToggle}
+        onClick={isSelected ? null: handleToggle}
         style={{
           backgroundImage: isSelected
             ? `linear-gradient(to right, ${hoverC} 100%, #FFFFFF 100%)`
@@ -73,9 +73,6 @@ const Dropdown2 = ({ data }) => {
       >
         <div
           className="flex-col"
-          style={{
-            fontFamily: 'Poppins, sans-serif',
-          }}
         >
           <div className=" flex flex-col md:flex-row justify-between">
             <div className=" flex items-center">
