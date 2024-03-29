@@ -411,6 +411,11 @@ body {
   padding-left: 0.5%;
   border-radius: 10px;
   font-family: 'Poppins';
+  transition: background-color;
+}
+
+.doctor-info:hover{
+  background-color: #EEEDE7;
 }
 
 .doctor-logo {
@@ -502,6 +507,11 @@ body {
   margin-bottom: 2%;
   border: 1px solid #D8D8FF;
   border-radius: 5px;
+  transition: background-color;
+}
+
+.form-section:hover{
+  background-color: #EEEDE7;
 }
 
 .form-row {
@@ -529,7 +539,7 @@ body {
   width: 100%;
   border: 1px solid #D8D8FF;
   border-radius: 7px;
-  padding: 10px; 
+  padding: 10px;
 }
 
 .form-row2 {
@@ -538,8 +548,13 @@ body {
   align-items: center;
   color: #6F6B6B;
   margin-top: 10px; 
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+  /* transition: background-color; */
 }
+
+/* .form-row2:hover{
+  background-color: #EEEDE7;
+} */
 
 .form-row2 label {
   font-size: 16px;
@@ -556,6 +571,11 @@ body {
   border-radius: 7px;
   box-sizing: border-box;
   resize: none;
+  transition: background-color;
+}
+
+.form-row2 textarea:hover{
+  background-color: #EEEDE7;
 }
 
 .form-section2 .form-row2:nth-of-type(1) label,
@@ -592,8 +612,12 @@ body {
   margin-bottom: 1%; 
   width: 100%;
   border: 1px solid #D8D8FF;
-  border-radius: 5px; 
-  
+  border-radius: 5px;
+  transition: background-color;
+}
+
+.form-row3:hover{
+  background-color: #EEEDE7;
 }
 
 
