@@ -22,7 +22,7 @@ const Homepage = () => {
   // setUsername(username);
 
   const [loadingPage, setLoadingPage] = useState(true);
-  
+
   const { user, selectedChat, setSelectedChat, setSelectedPatient } =
     ChatState();
 
@@ -31,7 +31,7 @@ const Homepage = () => {
   });
 
   const [patients, setPatients] = useState([]);
-  
+
   useEffect(() => {
     console.log("init fetch");
     refetch().then((response) => {
@@ -79,7 +79,7 @@ const Homepage = () => {
   useEffect(() => {
     setTimeout(() => {
       console.log("useeffect", sortedPatients[0]);
-      if(!sortedPatients[0] || done) return;
+      if (!sortedPatients[0] || done) return;
       const { emt } = sortedPatients[0];
       setSelectedChat(emt);
       setSelectedPatient(sortedPatients[0]);
@@ -88,17 +88,17 @@ const Homepage = () => {
     }, 500);
     return () => {
       done = 1;
-    }
+    };
   }, [loadingPage]);
 
-  if(loadingPage) return  <h1 className="flex justify-center">Loading</h1> // add another page for this?
+  if (loadingPage) return <h1 className="flex justify-center">Loading</h1>; // add another page for this?
   return (
     <div
-      className="flex-container wrapper"
+      className="flex-container wrapper custom-scrollbar"
       style={{ background: "white", padding: "10px" }}
     >
       <div
-        className={`column ${dropdownVisible ? "hidden" : "visible"}`}
+        className={` column ${dropdownVisible ? "hidden" : "visible"}`}
         style={{
           width: "full",
           overflow: "hidden",
@@ -153,10 +153,7 @@ const Homepage = () => {
       </div>
       {/* the code below this is for button  */}
       <div className="toggle-button-container" data-visible={dropdownVisible}>
-        <button className="toggle-button" onClick={handleToggle}>
-          {/* You can use a text-based toggle like '>' and '<' if you want */}
-          {dropdownVisible ? ">" : "<"}
-        </button>
+        <button className="toggle-button" onClick={handleToggle} />
       </div>
       <div
         className="column"
