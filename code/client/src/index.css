@@ -528,39 +528,48 @@ body {
   flex-direction: column;
   width: 100%;
   border: 1px solid #D8D8FF;
-  border-radius: 5px;
+  border-radius: 7px;
+  padding: 10px; 
 }
 
 .form-row2 {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
-  margin-top: 1.5%;
-  margin-left: 1%;
-  /* margin-right: 2px; */
-  margin-bottom: 1%; 
   color: #6F6B6B;
-  width: 100%; 
+  margin-top: 10px; 
+  margin-bottom: 10px; 
 }
 
 .form-row2 label {
-  /* font-weight: bold; */
-  font-size:16px;
-  margin-right: 1%; 
+  font-size: 16px;
+  margin-right: 10px;
   white-space: nowrap;
-  text-align: right;
+  flex-shrink: 0;
 }
 
 .form-row2 textarea {
-  flex-grow: 1; 
-  margin-right: 2%;
-  padding: 0.1%;
-  height:2.1em;
+  flex-grow: 1;
+  padding: 0.5em;
+  height: 2.1em;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 7px;
   box-sizing: border-box;
   resize: none;
 }
+
+.form-section2 .form-row2:nth-of-type(1) label,
+.form-section2 .form-row2:nth-of-type(2) label,
+.form-section2 .form-row2:nth-of-type(3) label,
+.form-section2 .form-row2:nth-of-type(4) label,
+.form-section2 .form-row2:nth-of-type(5) label {
+  width: 20%; 
+}
+
+.form-section2 .form-row2 textarea {
+  width: 80%;
+}
+
 
 /* .form-section3 {
   display: grid;

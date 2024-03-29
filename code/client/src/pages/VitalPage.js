@@ -76,8 +76,8 @@ const VitalPage = () => {
         <div className="doctor-text">
           <h1>{doctor_name}</h1>
           <p>{doctor_degree}</p>
-          <p>{doctor_mobile}</p>
-          <p>{doctor_visit}</p>
+          <p>Mobile: {doctor_mobile}, Visit Time: {doctor_visit}</p>
+          {/* <p>{doctor_visit}</p> */}
         </div>
       </div>
       <div className="case-sheet" style={{ height: 'auto' }}>
