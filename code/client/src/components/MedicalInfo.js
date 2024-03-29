@@ -10,7 +10,7 @@ const MedicalInfo = ({ selectedPatient }) => {
 
       <div className="form-row2">
         <label>History of present illness:</label>
-        <textarea readOnly>{selectedPatient.name}</textarea>
+        <textarea readOnly>{selectedPatient.event_during_transport}</textarea>
       </div>
 
       <div className="form-row2">
@@ -25,7 +25,7 @@ const MedicalInfo = ({ selectedPatient }) => {
 
       <div className="form-row2">
         <label>Treatment:</label>
-        <textarea readOnly>{selectedPatient.name}</textarea>
+        <textarea readOnly>TBD</textarea>
       </div>
     </div>
   );
