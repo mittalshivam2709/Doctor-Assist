@@ -83,7 +83,7 @@ const Dropdown2 = ({ data }) => {
             <div
                 className=""
                 style={{
-                  color: hovered ? hoverColor : 'blue',
+                  color: hovered ? hoverColor : 'black',
                   width: '10px',
                   fontWeight: 600,
                 }}
@@ -93,8 +93,9 @@ const Dropdown2 = ({ data }) => {
               <div
                 className=""
                 style={{
-                  color: hovered ? hoverColor : 'blue',
+                  color: hovered ? hoverColor : 'black',
                   width: '10px',
+                  marginLeft:"2px",
                   fontWeight: 600,
                 }}
               >

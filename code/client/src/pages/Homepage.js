@@ -21,7 +21,7 @@ const Homepage = () => {
   // // Set the username in the parent component (App)
   // setUsername(username);
 
-  const { user, selectedChat } = ChatState()
+  const { user, selectedChat, setSelectedChat, setSelectedPatient} = ChatState()
 
   const { loading, data, refetch } = useQuery(FETCH_PATIENTS, {
     variables: { docId: user },
@@ -67,6 +67,8 @@ const Homepage = () => {
     const criticalityOrder = { Critical: 0, Moderate: 1, Minor: 2 };
     return criticalityOrder[judgeCriticality(a)] - criticalityOrder[judgeCriticality(b)];
   });
+
+  
   return (
     <div
       className="flex-container wrapper"
@@ -112,7 +114,7 @@ const Homepage = () => {
         {/* <Template /> */}
         <div
           style={{
-            background: 'white',
+            background: '#F4F4FF',
             padding: '5px',
             paddingTop: '10px',
             borderRadius: '20px',
