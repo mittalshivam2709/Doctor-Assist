@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form'
 import { LOGIN_USER } from '../gqloperations/mutations'
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
-import '../loginpage.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
+import '../pages/newauth.css';
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm()
@@ -28,12 +29,12 @@ const LoginPage = () => {
   })
   const onSubmit = (data) => {
     if (!data.username && !data.password) {
-      alert("Please enter both username and password");
+      alert("Please enter both Email and password");
       reset()
       return;
     }
     else if (!data.username && data.password) {
-      alert("Please enter Username");
+      alert("Please enter Email");
       reset()
       return;
     }
@@ -57,56 +58,29 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="outerlogin">
-      <div className="login-container">
-        <h2
-          style={{
-            color: 'blue',
-            position: 'relative',
-            top: '-20px',
-            fontSize: '30px',
-          }}
-        >
-          Login Page
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('username')} placeholder="Username" />
-          <br />
-          <div className="password-input">
-            <input
-              {...register('password')}
-              type={showPassword ? 'text' : 'password'} // Toggle type between text and password
-              placeholder="Password"
-            />
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
-              onClick={togglePasswordVisibility}
-              style={{position:'relative',top:'-59px',left:'370px'}}
-            />
-          </div>
-          <br />
-          <Link to="/forgotpassword"
-            style={{ textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',top:'-25px',left:'250px'}}
-            >Forgot password ?</Link>
-          <input type="submit" value="Login"/>
-
-          <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'160px',top:'-10px'}}>New user ?</p>
+    <div>
+    <Navbar_on_loginpage />
+    <div style={{ background: 'linear-gradient(109.19deg, #F4F4FF 0%, #C8C8FE 100%)', minHeight: 'calc(100vh - 50px)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '5px', background: 'white',width: '500px' }}>
+        <h2 className='login-heading'>Please fill out the details to get started</h2>
+        <input {...register('username')} placeholder="Email" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+        <div>
+          <input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Password" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+        <Link to="/forgotpassword"
+            style={{ textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',top:'-52px',left:'350px'}}
+            > | Forgot</Link>
+            </div>
+        <input type="submit" value="Login" style={{ width: '150px', padding: '10px', borderRadius: '20px', border: 'none', background: '#5555FB', color: 'white', cursor: 'pointer',position:'relative',left:'300px',top:'-20px' }} />
+          <p style={{textDecoration: 'none', color: 'blue', fontSize: '20px',position:'relative',left:'180px',top:'-10px'}}>New user ?</p>
           <Link
             to="/signup"
             type="button"
-            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-            style={{
-              background: '#65a5e9',
-              color: 'white',
-              backgroundSize: '40px',
-              fontSize: '23px',
-            }}
           >
-            Signup
+        <button style={{ width: '150px', padding: '10px', borderRadius: '20px', border: 'none', background: '#5555FB', color: 'white', cursor: 'pointer',position:'relative',left:'160px',top:'-5px' ,height:'40px'}}>Signup</button>
           </Link>
-        </form>
-      </div>
+      </form>
     </div>
+  </div>
   )
 }
 

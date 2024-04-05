@@ -1,0 +1,163 @@
+.login-page {
+    background: linear-gradient(109.19deg, #F4F4FF 0%, #C8C8FE 100%);
+    min-height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    width: 562px;
+    height: 644px;
+  }
+  @media screen and (max-width: 768px) {
+    .login-form {
+      width: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .login-form {
+      width: 90%;
+    }}
+  .login-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #878585;
+    font-family: Poppins;
+    font-size: 18px;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .password-field {
+    position: relative;
+  }
+  
+  .forgot-password {
+    text-decoration: none;
+    color: blue;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: block;
+    text-align: right;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #65a5e9;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .signup-link {
+    text-align: center;
+    margin-top: 15px;
+    width: 100px;
+  }
+  
+  .signup-link a {
+    text-decoration: none;
+    color: blue;
+  }
+.signupbuttoninlogin{
+  width: '150px';
+  padding: '10px';
+  border-radius: '20px';
+  border: 'none';
+  background: '#5555FB';
+  color: 'white';
+  cursor: 'pointer';
+  position:'relative';
+  left:'300px';
+  top:'-20px';
+}
+
+.forgot-password-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 50px);
+}
+
+.forgot-password-form {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.forgot-password-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: blue;
+  font-size: 25px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  position: relative;
+  top: 250px;
+  left: 550px;
+  height: 350px;
+}
+
+.forgot-password-input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.forgot-password-submit {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #5555fb;
+  color: white;
+  cursor: pointer;
+}
+
+.timer-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.resend-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #5555fb;
+  color: white;
+  cursor: pointer;
+}
+
+.back-to-login-link {
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: blue;
+  position: relative;
+  top: 30px;
+  font-size: 20px;
+}

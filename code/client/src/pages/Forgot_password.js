@@ -1,127 +1,168 @@
-// import { useState, useEffect } from 'react'
-// import { useForm } from 'react-hook-form'
-// import { RESET_PASSWORD } from '../gqloperations/mutations'
-// import { useMutation } from '@apollo/client'
-// import { useNavigate } from 'react-router-dom'
-// import '../loginpage.css'
-// import { Link } from 'react-router-dom'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-// const Forgot_password = () => {
-//   const { register, handleSubmit, reset, watch, setError, clearErrors } =
-//     useForm()
-//   const [data, setData] = useState('')
-//   const onSubmit = (data) => {
-//     if(!data.email)
-//     {
-//       alert("Please enter the Email");
-//       reset()
-//     }
-//     setData(JSON.stringify(data))
-    
-//   }
-//   return (
-//     <div className="outerlogin">
-//       <div className="login-container">
-//         <h2
-//           style={{
-//             color: 'blue',
-//             position: 'relative',
-//             top: '-20px',
-//             fontSize: '30px',
-//           }}
-//         >
-//           Forgot Password
-//         </h2>
-//         <form onSubmit={handleSubmit(onSubmit)}>
-//           <input
-//             {...register('email')}
-//             type='email' 
-//             placeholder="Enter email"
-//           />
-//           <br />
-//           <input type="submit" value="Submit" />
-//           <Link
-//             to="/"
-//             type="button"
-//             className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-//             style={{
-//               background: '#65a5e9',
-//               color: 'white',
-//               backgroundSize: '40px',
-//               fontSize: '23px',
-//             }}
-//           >
-//             Back
-//           </Link>
-//         </form>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Forgot_password
+// // import { useState, useEffect } from 'react';
+// // import { useForm } from 'react-hook-form';
+// // import { Link } from 'react-router-dom';
+// // import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
+// // import '../pages/forgotpass.css';
 
 
+// // const ForgotPassword = () => {
+// //   const { register, handleSubmit, reset } = useForm();
+// //   const [timer, setTimer] = useState(0);
+// //   const [resendClicked, setResendClicked] = useState(false);
+
+// //   useEffect(() => {
+// //     let intervalId;
+// //     if (timer > 0) {
+// //       intervalId = setInterval(() => {
+// //         setTimer((prevTimer) => prevTimer - 1);
+// //       }, 1000);
+// //     }
+
+// //     return () => clearInterval(intervalId);
+// //   }, [timer]);
+
+// //   const onSubmit = async (data) => {
+// //     if (!data.email) {
+// //       alert("Please enter the Email");
+// //       return;
+// //     }
+// //     console.log("Reset password link sent to:", data.email);
+// //     setTimer(120);
+// //     setResendClicked(false); // Reset resendClicked state
+// //   };
+
+// //   const handleResendClick = () => {
+// //     reset();
+// //     setResendClicked(true); // Set resendClicked to true when Resend button is clicked
+// //   };
+// //   return (
+// // <div>
+// //       <Navbar_on_loginpage />
+// //       <div className="login-container">
+// //         <div className="login-form">
+// //           <h2 className="login-heading">Forgot Password</h2>
+// //           <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+// //             <input {...register('email')} type="email" placeholder="Enter email" className="login-input" />
+// //             <br />
+// //             <input type="submit" value="Submit" className="login-submit" />
+// //             {timer > 0 && !resendClicked && <p style={{ fontSize: '20px', color: 'red' }}>Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
+// //             {timer > 0 && !resendClicked && <button type="button" onClick={handleResendClick} className="login-submit">Resend</button>}
+// //             <Link to="/" className="login-link">Back to Login</Link>
+// //           </form>
+// //         </div>
+// //       </div>
+// //     </div>
+
+// //   );
+// // };
+
+// // export default ForgotPassword;
+// // import { useState, useEffect } from 'react';
+// // import { useForm } from 'react-hook-form';
+// // import { Link } from 'react-router-dom';
+// // import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
+// // import '../pages/forgotpass.css';
+
+// // const ForgotPassword = () => {
+// //   const { register, handleSubmit, reset } = useForm();
+// //   const [timer, setTimer] = useState(0);
+// //   const [resendClicked, setResendClicked] = useState(false);
+
+// //   useEffect(() => {
+// //     let intervalId;
+// //     if (timer > 0) {
+// //       intervalId = setInterval(() => {
+// //         setTimer((prevTimer) => prevTimer - 1);
+// //       }, 1000);
+// //     }
+
+// //     return () => clearInterval(intervalId);
+// //   }, [timer]);
+
+// //   const onSubmit = async (data) => {
+// //     if (!data.email) {
+// //       alert("Please enter the Email");
+// //       return;
+// //     }
+// //     console.log("Reset password link sent to:", data.email);
+// //     setTimer(120);
+// //     setResendClicked(false); // Reset resendClicked state
+// //   };
+
+// //   const handleResendClick = () => {
+// //     reset();
+// //     setResendClicked(true); // Set resendClicked to true when Resend button is clicked
+// //   };
+
+// //   return (
+// //     <div className="forgot-password-container">
+// //       <Navbar_on_loginpage />
+// //       <div className="forgot-password-form">
+// //         <h2 className="forgot-password-heading">Forgot Password</h2>
+// //         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+// //           <input {...register('email')} type="email" placeholder="Enter email" className="forgot-password-input" />
+// //           <br />
+// //           <input type="submit" value="Submit" className="forgot-password-submit" />
+// //           {timer > 0 && !resendClicked && <p className="timer-text">Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
+// //           {timer > 0 && !resendClicked && <button type="button" onClick={handleResendClick} className="resend-button">Resend</button>}
+// //           <Link to="/" className="back-to-login-link">Back to Login</Link>
+// //         </form>
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // export default ForgotPassword;
 // import { useState, useEffect } from 'react';
 // import { useForm } from 'react-hook-form';
-// import { useMutation } from '@apollo/client';
-// import { RESET_PASSWORD } from '../gqloperations/mutations';
 // import { Link } from 'react-router-dom';
+// import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
+// import '../pages/forgotpass.css';
 
 // const ForgotPassword = () => {
 //   const { register, handleSubmit, reset } = useForm();
 //   const [timer, setTimer] = useState(0);
+//   const [resendClicked, setResendClicked] = useState(false);
 
-//   useEffect(() => {
-//     let intervalId;
-//     if (timer > 0) {
-//       intervalId = setInterval(() => {
-//         setTimer((prevTimer) => prevTimer - 1);
-//       }, 1000);
-//     }
+  // useEffect(() => {
+  //   let intervalId;
+  //   if (timer > 0) {
+  //     intervalId = setInterval(() => {
+  //       setTimer((prevTimer) => prevTimer - 1);
+  //     }, 1000);
+  //   }
 
-//     return () => clearInterval(intervalId);
-//   }, [timer]);
+  //   return () => clearInterval(intervalId);
+  // }, [timer]);
 
-//   const onSubmit = async (data) => {
-//     if (!data.email) {
-//       alert("Please enter the Email");
-//       return;
-//     }
-//     console.log("Reset password link sent to:", data.email);
-//     setTimer(120);
-//   };
-//   const handleResendClick = () => {
-//     reset(); 
-//   };
-//   const handleBackClick = () => {
-//     reset();
-//     setTimer(0);
-//   };
+  // const onSubmit = async (data) => {
+  //   if (!data.email) {
+  //     alert("Please enter the Email");
+  //     return;
+  //   }
+  //   console.log("Reset password link sent to:", data.email);
+  //   setTimer(120);
+  //   setResendClicked(false); // Reset resendClicked state
+  // };
+
+  // const handleResendClick = () => {
+  //   reset();
+  //   setResendClicked(true); // Set resendClicked to true when Resend button is clicked
+  // };
 
 //   return (
-//     <div className="outerlogin">
-//       <div className="login-container">
-//         <h2 style={{ color: 'blue', position: 'relative', top: '-20px', fontSize: '30px' }}>
-//           Forgot Password
-//         </h2>
-//         <form onSubmit={handleSubmit(onSubmit)}>
-//           <input {...register('email')} type="email" placeholder="Enter email" />
+//     <div className="forgot-password-container">
+//       <Navbar_on_loginpage />
+//       <div className="forgot-password-form">
+//         <h2 className="forgot-password-heading">Forgot Password</h2>
+//         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+//           <input {...register('email')} type="email" placeholder="Enter email" className="forgot-password-input" />
 //           <br />
-//           <input type="submit" value="Submit" />
-//           {timer > 0 && <p style={{fontSize:'30px',color:'red',position:'relative',top:'-10px',left:'100px'}}>Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
-//           {timer > 0 && <button type="button" onClick={handleResendClick}>Resend</button>}
-//           <Link
-//             to="/"
-//             onClick={handleBackClick}
-//             type="button"
-//             className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-//             style={{ background: '#65a5e9', color: 'white', backgroundSize: '40px', fontSize: '23px' }}
-//           >
-//             Back
-//           </Link>
+//           <input type="submit" value="Submit" className="forgot-password-submit" />
+//           {timer > 0 && !resendClicked && <p className="timer-text">Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
+//           {timer > 0 && !resendClicked && <button type="button" onClick={handleResendClick} className="resend-button">Resend</button>}
+//           <Link to="/" className="back-to-login-link">Back to Login</Link>
 //         </form>
 //       </div>
 //     </div>
@@ -131,17 +172,34 @@
 // export default ForgotPassword;
 
 
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
-import { RESET_PASSWORD } from '../gqloperations/mutations';
 import { Link } from 'react-router-dom';
+import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
+import '../pages/newauth.css';
 
-const ForgotPassword = () => {
-  const { register, handleSubmit, reset } = useForm();
+const ForgotPasswordPage = () => {
+  const { register, handleSubmit ,reset} = useForm();
   const [timer, setTimer] = useState(0);
   const [resendClicked, setResendClicked] = useState(false);
 
+  // const onSubmit = (data) => {
+  //   // Handle form submission logic
+  //   console.log('Form data submitted:', data);
+  // };
+
+  // const handleResendClick = () => {
+  //   // Handle resend logic
+  //   setResendClicked(true);
+  //   // Start timer again
+  //   setTimer(60);
+  //   const interval = setInterval(() => {
+  //     setTimer((prevTimer) => prevTimer - 1);
+  //   }, 1000);
+  //   setTimeout(() => {
+  //     clearInterval(interval);
+  //   }, 60000);
+  // };
   useEffect(() => {
     let intervalId;
     if (timer > 0) {
@@ -167,30 +225,24 @@ const ForgotPassword = () => {
     reset();
     setResendClicked(true); // Set resendClicked to true when Resend button is clicked
   };
+
+
   return (
-    <div className="outerlogin">
-      <div className="login-container">
-        <h2 style={{ color: 'blue', position: 'relative', top: '-20px', fontSize: '30px' }}>
-          Forgot Password
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('email')} type="email" placeholder="Enter email" />
-          <br />
-          <input type="submit" value="Submit" />
-          {timer > 0 && !resendClicked && <p style={{ fontSize: '30px', color: 'red', position: 'relative', top: '-10px', left: '100px' }}>Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
-          {timer > 0 && !resendClicked && <button type="button" onClick={handleResendClick}>Resend</button>}
-          <Link
-            to="/"
-            type="button"
-            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-            style={{ background: '#65a5e9', color: 'white', backgroundSize: '40px', fontSize: '23px' }}
-          >
-            Back to Login
-          </Link>
-        </form>
+    <div>
+      <Navbar_on_loginpage />
+        <div>
+         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+         <h2 className="forgot-password-heading">Forgot Password</h2>
+           <input {...register('email')} type="email" placeholder="Enter email" className="forgot-password-input" />
+           <br />
+          <input type="submit" value="Submit" className="forgot-password-submit" />
+          {timer > 0 && !resendClicked && <p className="timer-text">Time left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' + (timer % 60) : timer % 60}</p>}
+          {timer > 0 && !resendClicked && <button type="button" onClick={handleResendClick} className="resend-button">Resend</button>}
+          <Link to="/" className="back-to-login-link">Back to Login</Link>
+         </form>
+       </div>
       </div>
-    </div>
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordPage;
