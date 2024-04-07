@@ -115,7 +115,6 @@ const Navbar = ({ username }) => {
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <img src={logo} alt="Logo" className="emri_logo" />
-          <h2>{username}</h2>
         </div>
         <div className="absolute right-5">
           <button
@@ -126,6 +125,11 @@ const Navbar = ({ username }) => {
           </button>
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+              <Link to="/home">
+                <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  Home
+                </button>
+              </Link>
               <Link to="/profile">
                 <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
                   Profile
