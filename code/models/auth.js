@@ -26,7 +26,7 @@ const authSchema = new Schema({
         type: String
     },
     privilege:{
-        type: String
+        type: Number
     }
 });
 

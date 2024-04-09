@@ -79,6 +79,7 @@ export const FETCH_USER_DETAILS = gql`
       doctor_mobile
       doctor_visit
       doctor_degree
+      privilege
     }
   }
 `

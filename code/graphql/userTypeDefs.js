@@ -10,7 +10,7 @@ module.exports = gql`
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
-    privilege : String
+    privilege : Int
   }
 
   input UserInput {
@@ -20,7 +20,7 @@ module.exports = gql`
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
-    privilege :String
+    privilege : Int
   }
   extend type Query {
     getUser(ID: ID!): User!
