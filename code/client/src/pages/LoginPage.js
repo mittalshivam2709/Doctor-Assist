@@ -19,6 +19,7 @@ const LoginPage = () => {
       console.log(formdata.loginUser)
       // localStorage.setItem("token",formdata.user.token)
       // console.log(formdata.user.token);
+      localStorage.setItem('authdata', JSON.stringify(formdata.loginUser));
       navigate('/home')
     },
     onError: (error) => {

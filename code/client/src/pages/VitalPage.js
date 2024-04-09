@@ -12,26 +12,22 @@ import { FETCH_USER_DETAILS } from '../gqloperations/queries'
 const VitalPage = () => {
   const { vitals, setVitals, selectedChat, selectedPatient, user, setUser } =
     ChatState()
-
-  const { loading, data, refetch } = useQuery(FETCH_USER_DETAILS, {
-    variables: { id: user },
+  // const email ="doctor1@gmail.com"
+  const authdata = JSON.parse(localStorage.getItem('authdata'));
+  const email = authdata ? authdata.email : '';
+  // Then use the email variable in your code where needed
+    const { loading, data, refetch } = useQuery(FETCH_USER_DETAILS, {
+    variables: { email },
   })
-
   const [doctor, setdoctor] = useState([])
   useEffect(() => {
-    console.log('init fetch')
     refetch().then((response) => {
-      const resp = response?.data?.getUserByUsername
-      console.log('hi', resp)
-      //   if (resp && resp.length > 0) {
-      console.log(resp.length)
-      console.log('inside')
+      const resp = response?.data?.getUserByEmail
       setdoctor(resp)
       //   }
     })
   }, [])
   const { doctor_name, doctor_mobile, doctor_visit, doctor_degree } = doctor
-
   const {
     loading: loadingVitals,
     data: dataVitals,

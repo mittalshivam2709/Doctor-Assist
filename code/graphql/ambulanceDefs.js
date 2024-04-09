@@ -49,8 +49,9 @@ module.exports = gql`
   extend type Query {
     fetchVitals(emtID: ID!): Vitals
     fetchAmbulancesByDoctorId(docID: ID!): [Ambulance]
-    getUserByUsername(_id: ID!): User!
-  }
+    getUserByEmail(email: String!): User
+    getUserIdByEmail(email: String!): ID
+  }  
   extend type Mutation {
     updateAmbulanceVital(emtId: ID!, vitalName: String!, value: Float!): Boolean
 

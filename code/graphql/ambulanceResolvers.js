@@ -1,5 +1,5 @@
 const Ambulance = require('../models/AmbulanceModel')
-const User = require('../models/UserModel')
+const User = require('../models/auth')
 const { ApolloError } = require('apollo-server')
 
 
@@ -40,35 +40,82 @@ module.exports = {
         throw new Error('Failed to fetch vitals')
       }
     },
+    // fetchAmbulancesByDoctorId: async (_, { docID }) => {
+    //   try {
+    //     const ambulances = await Ambulance.find({ doctor: docID })
+
+    //     return ambulances
+    //   } catch (error) {
+    //     throw new Error('Failed to fetch ambulances by doctor ID')
+    //   }
+    // },
     fetchAmbulancesByDoctorId: async (_, { docID }) => {
       try {
-        const ambulances = await Ambulance.find({ doctor: docID })
-
-        return ambulances
+        const ambulances = await Ambulance.find({ doctor: { $in: docID } });
+        return ambulances;
       } catch (error) {
-        throw new Error('Failed to fetch ambulances by doctor ID')
+        throw new Error('Failed to fetch ambulances by doctor ID');
       }
-    },
-    async getUserByUsername(_, { _id }) {
+    },    
+    async getUserByEmail(_, { email }) {
       try {
-        const user = await User.findOne({ _id: _id })
-        console.log('here')
+        const user = await User.findOne({email })
         if (!user) {
           throw new ApolloError('User not found')
         }
         // Extracting required fields
-        const { doctor_name, doctor_mobile, doctor_visit, doctor_degree} = user
+        const { doctor_name, doctor_mobile, doctor_visit, doctor_degree ,privilege} = user
         return {
           doctor_name,
           doctor_mobile,
           doctor_visit,
           doctor_degree,
+          privilege
         }
       } catch (error) {
         console.error(error)
         throw new ApolloError('Internal server error')
       }
     },
+    // getUserIdByEmail: async (_, { email }) => {
+    //   try {
+    //     const user = await User.findOne({ email })
+    //     if (!user) {
+    //       throw new ApolloError('User not found')
+    //     }
+    //     return user.id
+    //   } catch (error) {
+    //     console.error(error)
+    //     throw new ApolloError('Internal server error')
+    //   }
+    // },
+    // getUserIdByEmail: async (_, { email }) => {
+    //   try {
+    //     const users = await User.find({ email }); // Find all users with matching email
+    //     const userIds = users.map(user => user.id); // Extract IDs from matching users
+    //     return userIds;
+    //   } catch (error) {
+    //     console.error(error);
+    //     throw new ApolloError('Internal server error');
+    //   }
+    // },    
+    getUserIdByEmail: async(_, { email }) =>{
+      try {
+        const user = await User.findOne({ email }); // Find the user with the matching email
+        if (!user) {
+          throw new ApolloError('User not found');
+        }
+        console.log("hell")
+        console.log(user)
+        console.log("hell")
+        console.log(user._id.toString()); // Convert ObjectId to string and log the value
+        console.log("sahi");
+        return user._id.toString(); // Return the ObjectId as a string
+      } catch (error) {
+        console.error(error);
+        throw new ApolloError('Internal server error');
+      }
+    },    
   },
   Mutation: {
     updateAmbulanceVital: async (_, { emtId, vitalName, value }) => {

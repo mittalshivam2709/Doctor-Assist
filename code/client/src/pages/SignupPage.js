@@ -132,7 +132,6 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
 import '../pages/newauth.css';
 
-
 const SignupPage = () => {
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState('');
@@ -140,6 +139,9 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const [signupUser, { error, loading, formdata }] = useMutation(SIGNUP_USER, {
     onCompleted: (formdata) => {
+      const email = formdata.addUser.email
+      console.log("hello",formdata.addUser)
+      localStorage.setItem('authdata', JSON.stringify(formdata.addUser));
       navigate('/home');
     },
     onError: (error) => {
@@ -153,6 +155,7 @@ const SignupPage = () => {
       alert("Please fill in all fields");
       return;
     }
+    // localStorage.setItem('authdata', JSON.stringify(data));
     console.log('Form data submitted:', data);
     setData(JSON.stringify(data));
     signupUser({

@@ -19,8 +19,8 @@ export const FETCH_NUMBER = gql`
 `
 
 export const FETCH_PATIENTS = gql`
-  query FetchAmbulancesByDoctorId($docId: ID!) {
-    fetchAmbulancesByDoctorId(docID: $docId) {
+query FetchAmbulancesByDoctorId($docId: ID!) {
+  fetchAmbulancesByDoctorId(docID: $docId) {
       doctor
       emt
       age_type
@@ -73,8 +73,8 @@ export const FETCH_VITAL = gql`
   }
 `
 export const FETCH_USER_DETAILS = gql`
-  query FetchUserDetails($id: ID!) {
-    getUserByUsername(_id: $id) {
+  query FetchUserDetails($email: String!) {
+    getUserByEmail(email: $email) {
       doctor_name
       doctor_mobile
       doctor_visit
@@ -83,3 +83,11 @@ export const FETCH_USER_DETAILS = gql`
     }
   }
 `
+export const FETCH_USER_ID_BY_EMAIL = gql`
+  query FetchUserIdByEmail($email: String!) {
+    getUserIdByEmail(email: $email) {
+      id
+    }
+  }
+`;
+

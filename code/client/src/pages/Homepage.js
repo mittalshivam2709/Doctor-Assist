@@ -6,7 +6,7 @@ import Template from "../components/Template";
 import ChatPage from "./ChatPage";
 import { ChatState } from "../context/ChatProvider";
 import Navbar from "../components/Navbar";
-import { FETCH_PATIENTS } from "../gqloperations/queries";
+import { FETCH_PATIENTS,FETCH_USER_ID_BY_EMAIL } from "../gqloperations/queries";
 import { useQuery } from "@apollo/client";
 import "./homepage.css";
 import VitalPage from "./VitalPage";
@@ -14,29 +14,79 @@ import Draggable from "react-draggable";
 import { useLocation } from "react-router-dom";
 import { judgeCriticality } from "../utils/criticalityJudgement";
 const Homepage = () => {
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const username = queryParams.get('username');
-
-  // // Set the username in the parent component (App)
-  // setUsername(username);
-
   const [loadingPage, setLoadingPage] = useState(true);
-
+  
   const { user, selectedChat, setSelectedChat, setSelectedPatient } =
-    ChatState();
+  ChatState();
+  const authdata = JSON.parse(localStorage.getItem('authdata'));
+  const email = authdata ? authdata.email : '';
+  const userId = authdata ? authdata.id : '';
+  // const [userId, setUserId] = useState('');
+  // const {error, data } = useQuery(FETCH_USER_ID_BY_EMAIL, {
+  //   variables: { email},
+  //   onError: (error) => {
+  //     console.error('Error:', error);
+  //   }
 
-  const { loading, data, refetch } = useQuery(FETCH_PATIENTS, {
-    variables: { docId: user },
+  // });
+  
+  // // console.log(data)
+  // // console.log(data.getUserIdByEmail)
+  // useEffect(() => {
+  //   // Update user ID when data changes
+
+  //   if (data && data.getUserIdByEmail) {
+  //     setUserId(data.getUserIdByEmail.id);
+  //   }
+  // }, [data]);
+  // console.log("hi")
+  // console.log(userId)
+  // console.log("hi")
+  const userId2 ='6614e491ab6a0ca2f99bdc5b'
+  const { loading, data: patientsData, refetch } = useQuery(FETCH_PATIENTS, {
+    variables: { docId: userId },
   });
-
   const [patients, setPatients] = useState([]);
+
+  // useEffect(() => {
+  //   console.log("init fetch");
+  //   refetch().then((response) => {
+  //     const resp = response?.data?.fetchAmbulancesByDoctorId;
+  //     console.log(resp);
+  //     if (resp && resp.length > 0) {
+  //       setPatients(resp);
+  //       setLoadingPage(false);
+  //     }
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(
+  //     () => {
+  //       refetch().then((response) => {
+  //         const resp = response?.data?.fetchAmbulancesByDoctorId;
+  //         console.log(resp);
+  //         if (resp && resp.length > 0) {
+  //           setPatients(resp);
+  //         }
+  //       });
+  //     },
+  //     patients ? 10000 : 0
+  //   );
+  //   return () => clearInterval(interval);
+  // }, [refetch]);
+  useEffect(() => {
+    if (!loading && patientsData) {
+      setPatients(patientsData.fetchAmbulancesByDoctorId || []); // Set patients state after fetching data
+      setLoadingPage(false);
+    }
+  }, [loading, patientsData]);
 
   useEffect(() => {
     console.log("init fetch");
     refetch().then((response) => {
       const resp = response?.data?.fetchAmbulancesByDoctorId;
-      console.log(resp);
+      // console.log(resp);
       if (resp && resp.length > 0) {
         setPatients(resp);
         setLoadingPage(false);
@@ -49,7 +99,7 @@ const Homepage = () => {
       () => {
         refetch().then((response) => {
           const resp = response?.data?.fetchAmbulancesByDoctorId;
-          console.log(resp);
+          // console.log(resp);
           if (resp && resp.length > 0) {
             setPatients(resp);
           }
@@ -57,10 +107,8 @@ const Homepage = () => {
       },
       patients ? 10000 : 0
     );
-
     return () => clearInterval(interval);
   }, [refetch]);
-
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdown2Visible, setDropdown2Visible] = useState(true); // State for Dropdown2 visibility
 
