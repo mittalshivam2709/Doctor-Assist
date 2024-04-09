@@ -35,9 +35,13 @@ Start the server by running **nodemon server.js**.<br>
     Access the dummy EMT chat at http://localhost:3001.
 
 <h2>Default Login (for Development)</h2>
-
-    Username: admin
-    Password: admin
+    <b>For Doctors :</b><br>
+    Email: doctor1@gmail.com<br>
+    Password: doctor1<br>
+    <b>For Admin :</b><br>
+    Email: admin1@gmail.com<br>
+    Password: admin1<br>
+and same can checked if using doctor2,doctor3... or admin2,admin3 etc <br>
 
 <h2>Usage</h2>
 
