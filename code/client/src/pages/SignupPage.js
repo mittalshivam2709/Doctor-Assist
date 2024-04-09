@@ -149,7 +149,7 @@ const SignupPage = () => {
   });
 
   const onSubmit = (data) => {
-    if (!data.username || !data.password || !data.doctor_name || !data.doctor_degree || !data.doctor_mobile || !data.doctor_visit) {
+    if (!data.email || !data.password || !data.doctor_name || !data.doctor_degree || !data.doctor_mobile || !data.doctor_visit|| !data.privilege) {
       alert("Please fill in all fields");
       return;
     }
@@ -158,12 +158,13 @@ const SignupPage = () => {
     signupUser({
       variables: {
         userInput: {
-          username: data.username,
+          email: data.email,
           password: data.password,
           doctor_name: data.doctor_name,
           doctor_degree: data.doctor_degree,
           doctor_mobile: data.doctor_mobile,
           doctor_visit: data.doctor_visit,
+          privilege : data.privilege
         },
       },
     });
@@ -198,15 +199,16 @@ const SignupPage = () => {
   <div style={{ background: 'linear-gradient(109.19deg, #F4F4FF 0%, #C8C8FE 100%)', minHeight: 'calc(100vh - 50px)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <form onSubmit={handleSubmit(onSubmit)} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '5px', background: 'white',width: '500px' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '20px', color: 'blue', fontSize: '30px' }}>Signup Page</h2>
-      <input {...register('username')} placeholder="Email" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('email')} placeholder="Email" type='email' style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
       <div style={{ position: 'relative' }}>
         <input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Password" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
         <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={togglePasswordVisibility} style={{ position: 'relative', left: '420px', top: '-40px', transform: 'translateY(-50%)', cursor: 'pointer' }} />
       </div>
-      <input {...register('doctor_name')} placeholder="Doctor's Name" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-      <input {...register('doctor_degree')} placeholder="Doctor's Degree" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-      <input {...register('doctor_mobile')} placeholder="Doctor's Mobile" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-      <input {...register('doctor_visit')} placeholder="Doctor's visit" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('privilege')} placeholder="Doctor(0) or Admin(1)" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('doctor_name')} placeholder="Doctor's or Admin Name" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('doctor_degree')} placeholder="Doctor's or Admin Degree" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('doctor_mobile')} placeholder="Doctor's or Admin Mobile" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+      <input {...register('doctor_visit')} placeholder="Doctor's or Admin visit" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
       <input type="submit" value="Signup" style={{ width: '100%', padding: '10px', borderRadius: '20px', border: 'none', background: '#5555FB', color: 'white', cursor: 'pointer' }} />
       <p style={{ textAlign: 'center', marginTop: '15px', color: 'blue', fontSize: '20px' }}>Already have an account?</p>
       <Link to="/" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: '#5555FB', color: 'white', borderRadius: '20px', padding: '10px', marginTop: '10px' }}>Login</Link>

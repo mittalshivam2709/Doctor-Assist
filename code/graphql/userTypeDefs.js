@@ -2,7 +2,7 @@ const { gql } = require('apollo-server')
 // token added to user for rgaphql access
 module.exports = gql`
   type User {
-    username: String!
+    email: String!
     password: String!
     token: String
     id: String
@@ -10,15 +10,17 @@ module.exports = gql`
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
+    privilege : String
   }
 
   input UserInput {
-    username: String!
+    email: String!
     password: String!
     doctor_name: String
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
+    privilege :String
   }
   extend type Query {
     getUser(ID: ID!): User!

@@ -1,5 +1,7 @@
 const Ambulance = require('../models/AmbulanceModel')
 const User = require('../models/UserModel')
+const { ApolloError } = require('apollo-server')
+
 
 function formatToAMPM(isoDateString) {
   // function to convert iso date time to standard am pm 12 hour format
@@ -52,10 +54,10 @@ module.exports = {
         const user = await User.findOne({ _id: _id })
         console.log('here')
         if (!user) {
-          throw new ApolloError('User not found', 'USER_NOT_FOUND')
+          throw new ApolloError('User not found')
         }
         // Extracting required fields
-        const { doctor_name, doctor_mobile, doctor_visit, doctor_degree } = user
+        const { doctor_name, doctor_mobile, doctor_visit, doctor_degree} = user
         return {
           doctor_name,
           doctor_mobile,
@@ -64,7 +66,7 @@ module.exports = {
         }
       } catch (error) {
         console.error(error)
-        throw new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR')
+        throw new ApolloError('Internal server error')
       }
     },
   },

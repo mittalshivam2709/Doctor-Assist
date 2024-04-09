@@ -28,17 +28,17 @@ const LoginPage = () => {
     },
   })
   const onSubmit = (data) => {
-    if (!data.username && !data.password) {
+    if (!data.email && !data.password) {
       alert("Please enter both Email and password");
       reset()
       return;
     }
-    else if (!data.username && data.password) {
+    else if (!data.email && data.password) {
       alert("Please enter Email");
       reset()
       return;
     }
-    else if (data.username && !data.password) {
+    else if (data.email && !data.password) {
       alert("Please enter Password");
       reset()
       return;
@@ -48,7 +48,7 @@ const LoginPage = () => {
     logininUser({
       variables: {
         userInput: {
-          username: data.username,
+          email: data.email,
           password: data.password,
         },
       },
@@ -63,7 +63,7 @@ const LoginPage = () => {
     <div style={{ background: 'linear-gradient(109.19deg, #F4F4FF 0%, #C8C8FE 100%)', minHeight: 'calc(100vh - 50px)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <form onSubmit={handleSubmit(onSubmit)} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '5px', background: 'white',width: '500px' }}>
         <h2 className='login-heading'>Please fill out the details to get started</h2>
-        <input {...register('username')} placeholder="Email" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
+        <input {...register('email')} placeholder="Email" type='email' style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
         <div>
           <input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Password" style={{ width: '100%', marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
         <Link to="/forgotpassword"

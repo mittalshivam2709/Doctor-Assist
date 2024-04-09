@@ -1,6 +1,6 @@
 const { model, Schema } = require('mongoose');
 
-const userSchema = new Schema({
+const authSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -25,12 +25,9 @@ const userSchema = new Schema({
     doctor_visit: {
         type: String
     },
-    username: {
-        type: String,
-        // Set the username field to allow null values
-        // or mark it as optional by removing the required property
-        default: null // If you want to set existing documents' username to null
-      }
+    privilege:{
+        type: String
+    }
 });
 
-module.exports = model('User', userSchema);
+module.exports = model('Authentication', authSchema);

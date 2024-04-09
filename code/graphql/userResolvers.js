@@ -1,5 +1,5 @@
 const { ApolloError } = require('apollo-server')
-const User = require('../models/UserModel')
+const User = require('../models/auth')
 const jwt = require('jsonwebtoken')
 // todo -> encryption
 module.exports = {
@@ -16,31 +16,33 @@ module.exports = {
       _,
       {
         userInput: {
-          username,
+          email,
           password,
           doctor_name,
           doctor_degree,
           doctor_mobile,
           doctor_visit,
+          privilege
         },
       }
     ) {
       const newUser = new User({
-        username,
+        email,
         password,
         doctor_name,
         doctor_degree,
         doctor_mobile,
         doctor_visit,
+        privilege
       })
-      const oldUser = await User.findOne({ username })
+      const oldUser = await User.findOne({ email })
       if (oldUser) {
-        throw new ApolloError('User with username already exists')
+        throw new ApolloError('User with Email already exists')
       }
       const token = jwt.sign(
         {
           user_id: newUser._id,
-          username,
+          email,
         },
         'SECRET_KEY',
         {
@@ -55,10 +57,10 @@ module.exports = {
         ...res._doc,
       }
     },
-    async loginUser(_, { userInput: { username, password } }) {
-      const user = await User.findOne({ username })
+    async loginUser(_, { userInput: { email, password } }) {
+      const user = await User.findOne({ email })
       if (!user) {
-        throw new ApolloError('User with username does not exist')
+        throw new ApolloError('User with Email does not exist')
       }
       if (user.password != password) {
         throw new ApolloError('Incorrect password', 'PASSWORD_ERROR')
@@ -66,7 +68,7 @@ module.exports = {
       const token = jwt.sign(
         {
           user_id: user._id,
-          username,
+          email,
         },
         'SECRET_KEY',
         {
@@ -79,10 +81,10 @@ module.exports = {
         ...user._doc,
       }
     },
-    async resetPassword(_, { userInput: { username, password, doctor_name } }) {
-      const user = await User.findOne({ username })
+    async resetPassword(_, { userInput: { email, password, doctor_name } }) {
+      const user = await User.findOne({ email })
       if (!user) {
-        throw new ApolloError('User with username does not exist')
+        throw new ApolloError('User with Email does not exist')
       }
       if (user.password != doctor_name) {
         throw new ApolloError('Old password is incoorect')

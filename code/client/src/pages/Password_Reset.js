@@ -37,23 +37,23 @@ const Password_Reset = () => {
   )
   const onSubmit = (data) => {
     // console.log('Form data submitted:', data)
-    if (!data.username && !data.oldpassword) {
-      alert('Please enter both Username and Old Password')
+    if (!data.email && !data.oldpassword) {
+      alert('Please enter both Email and Old Password')
       reset()
       return
-    } else if (!data.username && data.oldpassword) {
-      alert('Please enter Username')
+    } else if (!data.email && data.oldpassword) {
+      alert('Please enter Email')
       reset()
       return
-    } else if (data.username && !data.oldpassword) {
-      alert('Please enter Password')
+    } else if (data.email && !data.oldpassword) {
+      alert('Please enter Email')
       reset()
       return
-    } else if (data.username && data.oldpassword && !data.newpassword) {
+    } else if (data.email && data.oldpassword && !data.newpassword) {
       alert('Please enter new password also')
       return
     } else if (
-      data.username &&
+      data.email &&
       data.oldpassword &&
       data.newpassword &&
       !renewpassword
@@ -104,7 +104,7 @@ const Password_Reset = () => {
           Reset Password
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('username')} placeholder="Username" />
+          <input {...register('email')} placeholder="Email" type='email' />
           <br />
           <input
             {...register('oldpassword')}
