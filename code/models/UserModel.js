@@ -32,7 +32,7 @@ const userSchema = new Schema({
         default: null // If you want to set existing documents' username to null
     },
     privelege: {
-        type: Number
+        type: String
     }
 });
 
