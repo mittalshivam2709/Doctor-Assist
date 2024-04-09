@@ -12,16 +12,15 @@ const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
 const SingleChat = () => {
-  const { user, selectedChat, message, setMessage } = ChatState();
+  const { user, selectedChat, message, setMessage, isSocket, setSocket } = ChatState();
   const [messages, setMessages] = useState([]);
-  const [isSocket, setSocket] = useState(false);
   const ref = useRef(null);
 
   const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
-    socket.on("connection", () => setSocket(true));
+    socket.on("connection", () => setSocket(socket));
     // socket.emit("send message", selectedChat, message) // send message to selected chat
     // socket.on("recieve message",)
   }, []);

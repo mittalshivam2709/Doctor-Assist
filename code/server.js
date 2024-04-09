@@ -14,6 +14,8 @@ const listDefs = require('./graphql/listDefs');
 const listResolver = require('./graphql/listResolver');
 const ambulanceDefs = require('./graphql/ambulanceDefs');
 const ambulanceResolvers = require('./graphql/ambulanceResolvers');
+
+
 const corsList = {
   origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://10.1.132.176:3001"],
 };
@@ -58,6 +60,9 @@ async function startServer() {
         })
         socket.on("send message", (message) => { 
           socket.in(message.receiver).emit("message recieved", message);
+        })
+        socket.on("file clicked", () => { 
+          console.log("file input try");
         })
       })
     })

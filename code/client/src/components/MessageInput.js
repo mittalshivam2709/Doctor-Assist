@@ -7,10 +7,14 @@ import mic from "../mic.png";
 import link from "../link.png";
 import send from "../send.png";
 
+import io from "socket.io-client";
+const ENDPOINT = "http://localhost:5001";
+const socket = io(ENDPOINT);
+
 const MessageInput = () => {
   const [inputText, setInputText] = useState("");
   const [data, setData] = useState("");
-
+  const { isSocket } = ChatState();
   // const [selectedFile, setSelectedFile] = useState(null);
   const [placeholderText, setPlaceholderText] = useState(
     "Type a reply to EMT Assist..."
@@ -29,6 +33,8 @@ const MessageInput = () => {
   const handlefilechange = (e) => {
     // setSelectedFile(e.target.value);
     const file = e.target.files[0];
+    socket.emit("file clicked");
+
     if (file) {
       setSelectedFile(file);
       setInputText(file.name);
