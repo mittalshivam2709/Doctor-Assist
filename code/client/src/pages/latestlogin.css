@@ -1,0 +1,70 @@
+/* LoginPage.css */
+
+  .body{
+    background: linear-gradient(249.87deg, rgba(241, 99, 99, 0.8) 0%, rgba(85, 85, 251, 0.8) 100%), url('../login_ambulance.jpeg');  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  }
+  .login-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #878585;
+    font-family: Poppins;
+    font-size: 18px;
+    position: relative;
+    top: 100px;
+    left: -40px;
+  }
+  .form{
+    border: '1px solid #ccc';
+    padding: '20px';
+    border-radius: '20px';
+     background: 'white';
+     width: '562px';
+     height:'644px' ;
+     position:'relative';
+     top:'-5px';
+     left:'-400px';
+  }
+  .login-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    width: 562px;
+    height: 644px;
+    border-radius: 10px;
+  }
+  .icon-emailbox{
+    font-family:"Poppins";
+    font-weight:'700';
+    width: '29px';
+    height:'33px';
+     padding: '10px';
+      border-radius: '10px';
+      border: 'none';
+      background: #5555FB;
+      color: 'white';
+      cursor: 'pointer';
+      position:'absolute';
+      left:'300px';
+      top:'150px';
+      display: 'flex';
+      justify-content: 'center';
+      align-items: 'center'
+  }
+  .emailbox{
+    width: '437px';
+     height: '68px';
+     padding: '10px';
+     padding-left: '60px';
+     border-radius: '20px';
+      border: '1px solid #ccc';
+      font-size: '20px' ;
+      position:'relative';
+      top:'120px';
+      left:'40px';
+  }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown";
 import Dropdown2 from "../components/Dropdown2";
+import Dropdown_hide_admin from "../components/Dropdown_hide_admin";
+import Dropdownadmin from "../components/Dropdownadmin";
 import Placeholder from "../components/Placeholder";
 import Template from "../components/Template";
 import ChatPage from "./ChatPage";
@@ -200,9 +202,7 @@ return(
             overflowX: "hidden",
           }}
         >
-          {sortedPatients.map((item) => (
-            <Dropdown key={item.id} data={item} />
-          ))}
+        <Dropdownadmin options={["Form", "Protocol"]}/>
         </div>
       </div>
 
@@ -227,9 +227,7 @@ return(
             overflowX: "hidden",
           }}
         >
-          {sortedPatients.map((item) => (
-            <Dropdown2 key={item.id} data={item} />
-          ))}
+        <Dropdown_hide_admin options={["Form", "Protocol"]}/>
         </div>
       </div>
       {/* the code below this is for button  */}
