@@ -14,8 +14,8 @@ const listDefs = require('./graphql/listDefs');
 const listResolver = require('./graphql/listResolver');
 const ambulanceDefs = require('./graphql/ambulanceDefs');
 const ambulanceResolvers = require('./graphql/ambulanceResolvers');
-const AWS = require("aws-sdk");
-let multer = require("multer");
+// const AWS = require("aws-sdk");
+// let multer = require("multer");
 
 const corsList = {
   origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://10.1.132.176:3001"],
@@ -95,61 +95,61 @@ const app = express();
     //     },
     //   }
     // }
-    const S3_BUCKET = 'tto-asset';
-const REGION = 'ap-south-1';
-const ACCESS_KEY = 'AKIA3BOLL3RQYEWKMV4B';
-const SECRET_ACCESS_KEY = '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';
-// const bucketName = process.env.bucketName;
+// const S3_BUCKET = 'tto-asset';
+// const REGION = 'ap-south-1';
+// const ACCESS_KEY = 'AKIA3BOLL3RQYEWKMV4B';
+// const SECRET_ACCESS_KEY = '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';
+// // const bucketName = process.env.bucketName;
 
-const awsConfig = {
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
-    region: REGION,
-};
+// const awsConfig = {
+//     accessKeyId: ACCESS_KEY,
+//     secretAccessKey: SECRET_ACCESS_KEY,
+//     region: REGION,
+// };
 
-const S3 = new AWS.S3(awsConfig);
+// const S3 = new AWS.S3(awsConfig);
 
-//middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-    let upload = multer({
-      // storage: multer.memoryStorage(),
-      limits: {
-          fileSize: 1024 * 1024 * 5,
-      },
-      fileFilter: function (req, file, done) {
-          if (
-              file.mimetype === "image/jpeg" ||
-              file.mimetype === "image/png" ||
-              file.mimetype === "image/jpg"
-          ) {
-              done(null, true);
-          } else {
-              //prevent the upload
-              var newError = new Error("File type is incorrect");
-              newError.name = "MulterError";
-              done(newError, false);
-          }
-      },
-  });
+// //middleware
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+//     let upload = multer({
+//       // storage: multer.memoryStorage(),
+//       limits: {
+//           fileSize: 1024 * 1024 * 5,
+//       },
+//       fileFilter: function (req, file, done) {
+//           if (
+//               file.mimetype === "image/jpeg" ||
+//               file.mimetype === "image/png" ||
+//               file.mimetype === "image/jpg"
+//           ) {
+//               done(null, true);
+//           } else {
+//               //prevent the upload
+//               var newError = new Error("File type is incorrect");
+//               newError.name = "MulterError";
+//               done(newError, false);
+//           }
+//       },
+//   });
 
-    const uploadToS3 = (fileData) => {
-      return new Promise((resolve, reject) => {
-          const params = {
-              Bucket: S3_BUCKET,
-              Key: `${Date.now().toString()}.jpg`,
-              Body: fileData,
-          };
-          S3.upload(params, (err, data) => {
-              if (err) {
-                  console.log(err);
-                  return reject(err);
-              }
-              console.log(data);
-              return resolve(data);
-          });
-      });
-  };
+//     const uploadToS3 = (fileData) => {
+//       return new Promise((resolve, reject) => {
+//           const params = {
+//               Bucket: S3_BUCKET,
+//               Key: `${Date.now().toString()}.jpg`,
+//               Body: fileData,
+//           };
+//           S3.upload(params, (err, data) => {
+//               if (err) {
+//                   console.log(err);
+//                   return reject(err);
+//               }
+//               console.log(data);
+//               return resolve(data);
+//           });
+//       });
+//   };
 
   //   app.post("/upload-multiple", upload.array("images", 1), async (req, res) => {
   //     // console.log(req.files);
@@ -165,14 +165,14 @@ app.use(express.urlencoded({ extended: true }));
   //         msg: "Successfully uploaded " + req.files.length + " files!",
   //     });
   // });
-  app.post("/upload-single", upload.single("image"), async (req, res) => {
-    if (req.file) {
-        await uploadToS3(req.file.buffer);
-    }
-    res.send({
-        msg: "File uploaded successfully!",
-    });
-});
+//   app.post("/upload-single", upload.single("image"), async (req, res) => {
+//     if (req.file) {
+//         await uploadToS3(req.file.buffer);
+//     }
+//     res.send({
+//         msg: "File uploaded successfully!",
+//     });
+// });
   
 }
 startServer(); 
