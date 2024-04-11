@@ -33,6 +33,16 @@ Start the server by running **nodemon server.js**.<br>
     Open a terminal and run npm i.
     Start the chat server by running npm run start.
     Access the dummy EMT chat at http://localhost:3001.
+    
+<h2>Setup of other server for uploading</h2>
+
+    Navigate to the code directory.
+    Open a terminal and run npm i.
+    Start the server by running nodemon serverupload.js.
+    Now after going to admin dashboard and selecting and uploading file then
+    can see by using ThunderClient and taking GET request at http://localhost:5002/get-files
+    or to upload use http://localhost:5002/upload-single with POST request and selecting single file with name image
+    Also can upload multiple files however that part is commented now in codebase.
 
 <h2>Default Login (for Development)</h2>
     <b>For Doctors :</b><br>

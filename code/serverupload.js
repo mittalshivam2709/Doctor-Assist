@@ -43,6 +43,7 @@ let upload = multer({
             newError.name = "MulterError";
             done(newError, false);
         }
+        // done(null, true);  // can now accept and store all files
     },
 });
 
@@ -50,6 +51,7 @@ const uploadToS3 = (fileData) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
+            // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
             Key: `${Date.now().toString()}.jpg`,
             Body: fileData,
         };
