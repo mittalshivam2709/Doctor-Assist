@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { SEND_MESSAGE } from "../gqloperations/mutations";
 import { ChatState } from "../context/ChatProvider";
+import axios from 'axios'; 
 import mic from "../mic.png";
 import link from "../link.png";
 import send from "../send.png";
@@ -45,24 +46,63 @@ const MessageInput = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const { user, selectedChat, setMessage } = ChatState();
   const [sendMessage] = useMutation(SEND_MESSAGE);
-  const customSubmit = (data) => {
-    setData(JSON.stringify(data.Message));
-    if (data.Message.trim() !== "") {
-      const messageData = {
-        content: data.Message,
-        sender: user,
-        receiver: selectedChat,
-      };
-      sendMessage({
-        variables: {
-          messageInput: messageData,
-        },
-      }).then(() => {
-        setMessage(messageData);
-        console.log(messageData);
-        reset();
-        setInputText("");
-      });
+  const customSubmit = async (data) => {
+    if(selectedFile){
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        try {
+            // Make a POST request to your Express server
+            const response = await axios.post('http://localhost:5002/upload-single', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response); // Log the response from the server
+            alert("File uploaded successfully!");
+            setSelectedFile(null); // Clear selected file after upload
+            const resp=await axios.get('http://localhost:5002/get-files');
+            // console.log("resp",resp);
+            // console.log("resp.data",);
+            const messageData = {
+              content: resp.data[resp.data.length-1].url,
+              sender: user,
+              receiver: selectedChat,
+            }
+            sendMessage({
+              variables: {
+                messageInput: messageData,
+              },
+            }).then(() => {
+              setMessage(messageData)
+              console.log(messageData)
+              reset()
+              setInputText('')
+            })
+            // console.log("resp.data",resp.data);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert("Error uploading file. Please try again.");
+        }
+    }else{
+      setData(JSON.stringify(data.Message))
+      if (data.Message.trim() !== '') {
+        const messageData = {
+          content: data.Message,
+          sender: user,
+          receiver: selectedChat,
+        }
+        sendMessage({
+          variables: {
+            messageInput: messageData,
+          },
+        }).then(() => {
+          setMessage(messageData)
+          console.log(messageData)
+          reset()
+          setInputText('')
+        })
+      }
     }
   };
 
