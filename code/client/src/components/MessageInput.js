@@ -9,6 +9,7 @@ import link from "../link.png";
 import send from "../send.png";
 
 import io from "socket.io-client";
+import AudioRecorder from "./AudioRecorder";
 const ENDPOINT = "http://localhost:5001";
 const socket = io(ENDPOINT);
 
@@ -166,8 +167,8 @@ const MessageInput = () => {
               />
             </button>
           </div>
-
-          <div style={{ position: "absolute", top: 15, right: 10 }}>
+          <AudioRecorder/>
+          {/* <div style={{ position: "absolute", top: 15, right: 10 }}>
             <button
               type="button"
               style={{
@@ -195,7 +196,7 @@ const MessageInput = () => {
                 }}
               />
             </button>
-          </div>
+          </div> */}
         </>
       ) : (
         <div style={{ position: "absolute", top: 20.5, right: 20 }}>
