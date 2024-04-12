@@ -25,22 +25,22 @@ module.exports = {
         const ambulance = await Ambulance.findOne({ emt: emtID })
 
         const vitals = {
-          name: ambulance.name,
-          body_temperature: ambulance.body_temperature,
-          blood_pressure_sys: ambulance.blood_pressure_sys,
-          blood_pressure_dys: ambulance.blood_pressure_dys,
-          pulse_rate: ambulance.pulse_rate,
-          spo2: ambulance.spo2,
-          rbs: ambulance.rbs,
-          // skin_color: ambulance.skin_color,
-          // skin_temperature: ambulance.skin_temperature,
-          // condition: ambulance.condition,
-          // rhythm: ambulance.rhythm,
-          // capillary_refill: ambulance.capillary_refill,
-          // volume: ambulance.volume,
-          // adventitious_sounds: ambulance.adventitious_sounds,
-          // pupil_size: ambulance.pupil_size,
-          // reaction_to_light: ambulance.reaction_to_light,
+          name: ambulance.name || null,
+          body_temperature: ambulance.body_temperature || null,
+          blood_pressure_sys: ambulance.blood_pressure_sys || null,
+          blood_pressure_dys: ambulance.blood_pressure_dys || null,
+          pulse_rate: ambulance.pulse_rate || null,
+          spo2: ambulance.spo2 || null,
+          rbs: ambulance.rbs || null,
+          skin_color: ambulance.skin_color || null,
+          skin_temperature: ambulance.skin_temperature || null,
+          condition: ambulance.condition || null,
+          rhythm: ambulance.rhythm || null,
+          capillary_refill: ambulance.capillary_refill || null,
+          volume: ambulance.volume || null,
+          adventitious_sounds: ambulance.adventitious_sounds || null,
+          pupil_size: ambulance.pupil_size || null,
+          reaction_to_light: ambulance.reaction_to_light || null,
         }
 
         return vitals

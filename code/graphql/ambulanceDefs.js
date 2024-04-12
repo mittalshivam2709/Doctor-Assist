@@ -45,6 +45,15 @@ module.exports = gql`
     pulse_rate: [Float]
     spo2: [Float]
     rbs: [Float]
+    skin_color: String
+    skin_temperature: String
+    condition: String
+    rhythm: String
+    capillary_refill: String
+    volume: String
+    adventitious_sounds: String
+    pupil_size: String
+    reaction_to_light: String
   }
   extend type Query {
     fetchVitals(emtID: ID!): Vitals

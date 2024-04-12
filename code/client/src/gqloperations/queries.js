@@ -69,6 +69,11 @@ export const FETCH_VITAL = gql`
       pulse_rate
       spo2
       rbs
+      pupil_size
+      pulse_rate
+      condition
+      capillary_refill
+      adventitious_sounds
     }
   }
 `

@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
-  const [user, setUser] = useState("65d463f3a0b915283dced3e0"); // admin id TODO REMOVE LATER
+  const [user, setUser] = useState("65d7ade0b081b21291ac3922"); // admin id TODO REMOVE LATER
   const [selectedChat, setSelectedChat] = useState("65d463dda0b915283dced3dd"); // test id 65d463dda0b915283dced3dd
   const [message, setMessage] = useState(null);
   useEffect(() => {

@@ -15,7 +15,6 @@ const SingleChat = () => {
   const { user, selectedChat, message, setMessage } = ChatState();
   const [messages, setMessages] = useState([]);
   const [isSocket, setSocket] = useState(false);
-  const ref = useRef(null);
 
   const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
@@ -58,18 +57,9 @@ const SingleChat = () => {
       setMessages([...messages, message]);
       socket.emit("send message", message);
     }
-    
+
   
   }, [message]);
-
-  useEffect(() => {
-    ref.current?.scrollIntoView({
-      behaviour:"smooth",
-      block:"end",
-    })
-    
-  
-  }, [messages]);
  
   return (
     <div>
@@ -84,7 +74,6 @@ const SingleChat = () => {
         ))}
       </div>
       <MessageInput />
-      <div ref={ref}></div>
     </div>
   );
 };
