@@ -65,7 +65,7 @@ const VitalPage = () => {
   if (loadingVitals || !vitals) return <p>Loading...</p>
 
   return (
-    <div className="vital-page" style={{ height: '100%' }}>
+    <div className="vital-page">
       <div className="doctor-info" style={{ height: '12%' }}>
         <DoctorLogo />
 

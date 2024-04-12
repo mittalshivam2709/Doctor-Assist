@@ -5,27 +5,27 @@ const MedicalInfo = ({ selectedPatient }) => {
     <div className="form-section2">
       <div className="form-row2">
         <div style={{width:"200px"}}>Chief complaint & duration:</div>
-        <textarea readOnly>{selectedPatient.problem}</textarea>
+        <div className="vital-display">{selectedPatient.problem}</div>
       </div>
 
       <div className="form-row2">
-        <div  style={{width:"200px"}}>History of present illness:</div>
-        <textarea readOnly>{selectedPatient.event_during_transport}</textarea>
+        <div style={{width:"200px"}}>History of present illness:</div>
+        <div className="vital-display">{selectedPatient.event_during_transport}</div>
       </div>
 
       <div className="form-row2">
-        <div  style={{width:"200px"}}>Past medical history:</div>
-        <textarea readOnly>{selectedPatient.past_history}</textarea>
+        <div style={{width:"200px"}}>Past medical history:</div>
+        <div className="vital-display">{selectedPatient.past_history}</div>
       </div>
 
       <div className="form-row2">
         <div style={{width:"200px"}}>Diagnosis:</div>
-        <textarea readOnly>{selectedPatient.symptoms}</textarea>
+        <div className="vital-display">{selectedPatient.symptoms}</div>
       </div>
 
       <div className="form-row2">
         <div style={{width:"200px"}}>Treatment:</div>
-        <textarea readOnly>TBD</textarea>
+        <div className="vital-display">TBD</div>
       </div>
     </div>
   );

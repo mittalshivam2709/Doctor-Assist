@@ -32,6 +32,15 @@ module.exports = {
           pulse_rate: ambulance.pulse_rate,
           spo2: ambulance.spo2,
           rbs: ambulance.rbs,
+          // skin_color: ambulance.skin_color,
+          // skin_temperature: ambulance.skin_temperature,
+          // condition: ambulance.condition,
+          // rhythm: ambulance.rhythm,
+          // capillary_refill: ambulance.capillary_refill,
+          // volume: ambulance.volume,
+          // adventitious_sounds: ambulance.adventitious_sounds,
+          // pupil_size: ambulance.pupil_size,
+          // reaction_to_light: ambulance.reaction_to_light,
         }
 
         return vitals
