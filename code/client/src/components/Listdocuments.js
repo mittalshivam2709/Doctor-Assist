@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
-
+import Protocol from '../components/protocol'
 import { FETCH_PROTOCOL, FETCH_ADMIN_DETAILS } from '../gqloperations/queries'
 
 // homepage lists the patients on the left similarly, the following will list all the 
 // protocols of a document
 // code similar to hoempage 
+
 const Listdocuments = ({ document }) => {
 //   const { user, selectedChat } = ChatState()
   
@@ -55,24 +56,9 @@ const Listdocuments = ({ document }) => {
       className="flex-container wrapper"
       style={{ background: 'white', padding: '10px' }}
     >
-      <div
-        className={`column ${dropdownVisible ? 'hidden' : 'visible'}`}
-        style={{
-          width: 'full',
-          overflow: 'hidden',
-          background: '#F4F4FF',
-          borderRadius: '10px',
-        }}
-     
-      >
-        <div
-        >
-          {patients.map((item) => (
-            <Dropdown key={item.id} data={item} />
+          {protocols.map((item) => (
+            <Protocol key={item.id} data={item} />
           ))}
-        </div>
-      </div>
-
     </div>
   )
 
