@@ -31,29 +31,31 @@ let upload = multer({
         fileSize: 1024 * 1024 * 5,
     },
     fileFilter: function (req, file, done) {
-        if (
-            file.mimetype === "image/jpeg" ||
-            file.mimetype === "image/png" ||
-            file.mimetype === "image/jpg"
-        ) {
-            done(null, true);
-        } else {
-            //prevent the upload
-            var newError = new Error("File type is incorrect");
-            newError.name = "MulterError";
-            done(newError, false);
-        }
-        // done(null, true);  // can now accept and store all files
+        // if (
+        //     file.mimetype === "image/jpeg" ||
+        //     file.mimetype === "image/png" ||
+        //     file.mimetype === "image/jpg"
+        // ) {
+        //     done(null, true);
+        // } else {
+        //     //prevent the upload
+        //     var newError = new Error("File type is incorrect");
+        //     newError.name = "MulterError";
+        //     done(newError, false);
+        // }
+        done(null, true);  // can now accept and store all files
     },
 });
 
-const uploadToS3 = (fileData) => {
+const uploadToS3 = (fileData,filename) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
             // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
-            Key: `${Date.now().toString()}.jpg`,
+            // Key: filename,
+            Key:`emrifol/${filename}`,
             Body: fileData,
+            // ACL: 'public-read', // Make the file public, so you can access it via URL
         };
         S3.upload(params, (err, data) => {
             if (err) {
@@ -70,6 +72,7 @@ const listFilesFromS3 = () => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
+            Prefix: 'emrifol/'
         };
         S3.listObjects(params, (err, data) => {
             if (err) {
@@ -77,8 +80,9 @@ const listFilesFromS3 = () => {
                 return reject(err);
             }
             const files = data.Contents.map((file) => {
-                const fileKey = file.Key;
-                const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${fileKey}`;
+                // const fileKey = file.Key.replace('emrifol/');   // name of file
+                const fileKey = file.Key.split('/').pop(); // Extract only the file name
+                const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${file.Key}`;
                 return {
                     name: fileKey,
                     url: fileUrl
@@ -88,12 +92,76 @@ const listFilesFromS3 = () => {
             resolve(files);
         });
     });
-};
+}; 
+
+// To fetch all files :-
+
+// const listFilesFromS3 = () => {
+//     return new Promise((resolve, reject) => {
+//         const params = {
+//             Bucket: S3_BUCKET,
+//         };
+//         S3.listObjectsV2(params, (err, data) => {
+//             if (err) {
+//                 console.log(err);
+//                 return reject(err);
+//             }
+//             const files = data.Contents.map((file) => {
+//                 const fileKey = file.Key;   // name of file
+//                 const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${fileKey}`;
+//                 return {
+//                     name: fileKey,
+//                     url: fileUrl
+//                 };
+//             });
+//             const folders = data.CommonPrefixes.map((prefix) => {
+//                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
+//                 return {
+//                     name: folderKey,
+//                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
+//                     type: "folder"
+//                 };
+//             });
+//             const allItems = [...files, ...folders];
+//             console.log(allItems);
+//             resolve(allItems);
+//         });
+//     });
+// };
+
+
+// To fetch folders  :-
+
+// const listFilesFromS3 = () => {
+//     return new Promise((resolve, reject) => {
+//         const params = {
+//             Bucket: S3_BUCKET,
+//             Delimiter: '/' // Set delimiter to '/' to only get folders
+//         };
+//         S3.listObjectsV2(params, (err, data) => {
+//             if (err) {
+//                 console.log(err);
+//                 return reject(err);
+//             }
+//             const folders = data.CommonPrefixes.map((prefix) => {
+//                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
+//                 return {
+//                     name: folderKey,
+//                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
+//                     type: "folder"
+//                 };
+//             });
+//             console.log(folders);
+//             resolve(folders);
+//         });
+//     });
+// };
+
 
 
 app.post("/upload-single", upload.single("image"), async (req, res) => {
     if (req.file) {
-        await uploadToS3(req.file.buffer);
+        await uploadToS3(req.file.buffer,req.file.originalname);
     }
     res.send({
         msg: "File uploaded successfully!",
@@ -103,6 +171,7 @@ app.get("/get-files", async (req, res) => {
     try {
         const files = await listFilesFromS3();
         res.send(files);
+        console.log("Number of files:", files.length); // Logging number of files
     } catch (error) {
         res.status(500).send({ error: "Internal server error" });
     }
