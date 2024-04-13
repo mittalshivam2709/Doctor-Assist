@@ -1,5 +1,5 @@
 const Message = require("../models/MessageModel");
-
+const Document = require("../models/Document");
 module.exports = {
   Query: {
     fetchMessage: async (_, { sender, receiver }) => {

@@ -13,12 +13,12 @@ const documentSchema = new Schema(
     },
     document_no:
     {
-      type: Number,
+      type: String,
       required: true
     },
     active_to_train:
     {
-      type: Number,
+      type: String,
       required: true
     }
   },

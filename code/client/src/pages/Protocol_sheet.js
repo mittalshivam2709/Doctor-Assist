@@ -2,6 +2,9 @@ import React, { useState, useRef } from 'react'
 import axios from 'axios' // Import Axios for making HTTP requests
 import drag from '../drag.png'
 import plus from '../plus.png'
+import { SEND_DOCUMENT } from '../gqloperations/mutations'
+import { useMutation } from "@apollo/client";
+
 
 const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -9,6 +12,7 @@ const Protocol_sheet = () => {
   const [fileInputVisible, setFileInputVisible] = useState(false)
   const authdata = JSON.parse(localStorage.getItem('authdata'));
   const email = authdata ? authdata.email : '';
+  const [sendDocument] = useMutation(SEND_DOCUMENT);
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0])
     console.log(e.target.files[0].name)
@@ -44,6 +48,28 @@ const Protocol_sheet = () => {
       )
       console.log(response.data) // Log the response from the server
       alert('File uploaded successfully!')
+      const filename =selectedFile.name
+      const resp=await axios.get('http://localhost:5002/get_documents');
+      let fileUrl = null;
+      for (const file of resp.data) {
+       if (file.name === filename) {
+         fileUrl = file.url;
+         break;
+          }
+        }
+        console.log(fileUrl)
+        const DocData = {
+          admin_email: email,
+          document_url: fileUrl,
+          document_no: '1',
+          active_to_train: '1'
+        }
+        console.log('Sent document data:', DocData)
+        // const sendDocResponse = await sendDocument({
+        //   variables: {
+        //     messageInputDoc: DocData,
+        //   },
+        // })
       setSelectedFile(null) // Clear selected file after upload
     } catch (error) {
       console.error('Error uploading file:', error)

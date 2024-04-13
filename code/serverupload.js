@@ -244,55 +244,55 @@ app.get("/get_files", async (req, res) => {
     }
 });
 
-
-app.get("/get_documents_s/:filename", async (req, res) => {
-    const { filename } = req.params;
-    try {
-        const files = await listFilesFromS3_s(filename);
-        if (files && files.length > 0) {
-            res.send(files);
-        } else {
-            res.status(404).send({ error: "File not found" });
-        }
-    } catch (error) {
-        console.error("Error retrieving files:", error);
-        res.status(500).send({ error: "Internal server error" });
-    }
-});
-
-const listFilesFromS3_s = (filename) => {
-    return new Promise((resolve, reject) => {
-        const params = {
-            Bucket: S3_BUCKET,
-            Prefix: `EMRI_audio_files/DASS_39/Document_query/${filename}`
-        };
-        S3.listObjects(params, (err, data) => {
-            if (err) {
-                console.error("Error listing files from S3:", err);
-                return reject(err);
-            }
-            if (data.Contents.length === 0) {
-                // No files found with the specified filename
-                return resolve([]);
-            }
-            const files = data.Contents.map((file) => {
-                const fileKey = file.Key.split('/').pop(); // Extract only the file name
-                const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${file.Key}`;
-                return {
-                    name: fileKey,
-                    url: fileUrl
-                };
-            });
-            console.log("Files found:", files);
-            resolve(files);
-        });
-    });
-};
-
 app.listen(5002)
 {
     console.log("Server listening on Port", 5002);
 }
+
+
+// app.get("/get_documents_s/:filename", async (req, res) => {
+//     const { filename } = req.params;
+//     try {
+//         const files = await listFilesFromS3_s(filename);
+//         if (files && files.length > 0) {
+//             res.send(files);
+//         } else {
+//             res.status(404).send({ error: "File not found" });
+//         }
+//     } catch (error) {
+//         console.error("Error retrieving files:", error);
+//         res.status(500).send({ error: "Internal server error" });
+//     }
+// });
+
+// const listFilesFromS3_s = (filename) => {
+//     return new Promise((resolve, reject) => {
+//         const params = {
+//             Bucket: S3_BUCKET,
+//             Prefix: `EMRI_audio_files/DASS_39/Document_query/${filename}`
+//         };
+//         S3.listObjects(params, (err, data) => {
+//             if (err) {
+//                 console.error("Error listing files from S3:", err);
+//                 return reject(err);
+//             }
+//             if (data.Contents.length === 0) {
+//                 // No files found with the specified filename
+//                 return resolve([]);
+//             }
+//             const files = data.Contents.map((file) => {
+//                 const fileKey = file.Key.split('/').pop(); // Extract only the file name
+//                 const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${file.Key}`;
+//                 return {
+//                     name: fileKey,
+//                     url: fileUrl
+//                 };
+//             });
+//             console.log("Files found:", files);
+//             resolve(files);
+//         });
+//     });
+// };
 //   app.post("/upload-multiple", upload.array("images", 1), async (req, res) => {
 //     // console.log(req.files);
 

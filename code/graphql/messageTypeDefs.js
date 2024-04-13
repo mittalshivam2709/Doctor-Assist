@@ -17,14 +17,14 @@ input MessageInput{
 type MessageDoc{
     admin_email: String!
     document_url: String!
-    document_no: Int!
-    active_to_train: Int! 
+    document_no: String!
+    active_to_train: String! 
 }
 input MessageInputDoc{
     admin_email: String!
     document_url: String!
-    document_no: Int!
-    active_to_train: Int!
+    document_no: String!
+    active_to_train: String!
 }
 extend type Query{
     fetchMessage(sender: ID!, receiver: ID!): [Message!]!
