@@ -93,6 +93,7 @@ const MessageInput = () => {
             console.error('Error uploading file:', error);
             alert("Error uploading file. Please try again.");
         }
+        setSelectedFile(null)
     }else{
       setData(JSON.stringify(data.Message))
       if (data.Message.trim() !== '') {
@@ -119,10 +120,7 @@ const MessageInput = () => {
     reset();
   }, [selectedChat]);
 
-  useEffect(() => {
-    console.log(2, inputText);
-  }, [inputText]);
-
+ 
   return (
     <form
       onSubmit={handleSubmit((data) => customSubmit(data))}
@@ -175,8 +173,8 @@ const MessageInput = () => {
               />
             </button>
           </div>
-          {/* <AudioRecorder/> */}
-          <div style={{ position: "absolute", top: 15, right: 10 }}>
+          <AudioRecorder/>
+          {/* <div style={{ position: "absolute", top: 15, right: 10 }}>
             <button
               type="button"
               style={{
@@ -204,7 +202,7 @@ const MessageInput = () => {
                 }}
               />
             </button>
-          </div>
+          </div> */}
         </>
       ) : (
         <div style={{ position: "absolute", top: 20.5, right: 20 }}>

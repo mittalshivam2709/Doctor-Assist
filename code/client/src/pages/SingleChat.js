@@ -9,11 +9,13 @@ import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of
 
 import io from "socket.io-client";
 import ImageRender from "../components/ImageRender";
+import AudioRender from "../components/AudioRender";
 const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
 const SingleChat = () => {
-  const { user, selectedChat, message, setMessage, isSocket, setSocket } = ChatState();
+  const { user, selectedChat, message, audioBlob, isSocket, setSocket } =
+    ChatState();
   const [messages, setMessages] = useState([]);
   const ref = useRef(null);
 
@@ -64,30 +66,33 @@ const SingleChat = () => {
       behaviour: "smooth",
       block: "end",
     });
-  }, [messages]);
-
+  }, [messages, audioBlob]);
+console.log(messages);
   return (
     <div>
-      <div className="single-chat" style={{overflowX:"hidden"}}>
-        {messages.map((message, index) => (
-          message.type === null || message.type === "message"?
-          (
-
+      <div className="single-chat" style={{ overflowX: "hidden" }}>
+        {messages.map((message, index) =>
+          message.type === null || message.type === "message" ? (
             <Message
               key={index}
               message={message.content}
               right={message.sender == user}
             />
-          ):
-          (
+          ) :  message.type === "image"? (
             <ImageRender
-              key={index}
-              message={message.content}
-              right={message.sender == user}
-            />
-          )
-
-        ))}
+            key={index}
+            message={message.content}
+            right={message.sender == user}
+          />        
+        ):
+        (
+          <AudioRender
+          key={index}
+          message={message.content}
+          right={message.sender == user}
+        />
+        )
+        )}
         <div ref={ref}></div>
       </div>
     </div>

@@ -6,6 +6,7 @@ export const FETCH_MESSAGES = gql`
       sender
       content
       receiver
+      type
     }
   }
 `

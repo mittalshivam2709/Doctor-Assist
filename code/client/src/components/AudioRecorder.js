@@ -1,94 +1,139 @@
+import React, { useState, useRef, useEffect } from "react";
 import mic from "../mic.png";
-import React, { useState, useRef } from 'react';
-// import axios from 'axios'; // use s3 here
+import axios from "axios";
+import { useMutation } from "@apollo/client";
+import { SEND_MESSAGE } from "../gqloperations/mutations";
+import { ChatState } from "../context/ChatProvider";
+import { useForm } from "react-hook-form";
 
 const AudioRecorder = () => {
-  const [mediaRecorder, setMediaRecorder] = useState(null);
+
+  const { user, selectedChat, setMessage, setSelectedChat, audioBlob, setAudioBlob } = ChatState();
+  const { register, handleSubmit, reset } = useForm();
   const [isRecording, setIsRecording] = useState(false);
-  const [audioChunks, setAudioChunks] = useState([]);
-  const [audioUrl, setAudioUrl] = useState(null);
-  const audioPlayerRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const [sendMessage] = useMutation(SEND_MESSAGE);
 
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
 
-      recorder.addEventListener('dataavailable', (event) => {
-        audioChunks.push(event.data);
+      const chunks = [];
+      mediaRecorder.addEventListener("dataavailable", (event) => {
+        chunks.push(event.data);
       });
 
-      recorder.addEventListener('stop', () => {
-        const audioBlob = new Blob(audioChunks);
-        const url = URL.createObjectURL(audioBlob);
-        setAudioUrl(url);
-        setAudioChunks([]);
+      mediaRecorder.addEventListener("stop", () => {
+        const blob = new Blob(chunks, { type: "audio/mp3" });
+        setAudioBlob(blob);
       });
 
-      recorder.start();
-      setMediaRecorder(recorder);
+      mediaRecorder.start();
       setIsRecording(true);
     } catch (error) {
-      console.error('Error accessing microphone:', error);
+      console.error("Error accessing microphone:", error);
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    const mediaRecorder = mediaRecorderRef.current;
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
       mediaRecorder.stop();
       setIsRecording(false);
     }
   };
 
-  const playRecordedAudio = () => {
-    if (audioUrl) {
-      audioPlayerRef.current.play();
+  const playAudio = () => {
+    if (audioBlob) {
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
     }
   };
 
-  // const uploadRecordedAudio = async () => {
-  //   if (audioUrl) {
-  //     const response = await fetch(audioUrl);
-  //     const blob = await response.blob();
-  //     const formData = new FormData();
-  //     formData.append('audioFile', blob, 'recording.wav');
+  const customSubmit = async () => {
+    if (audioBlob) {
+      const formData = new FormData();
+      const timestamp = Date.now();
+      formData.append("image", audioBlob, `recording_${timestamp}.mp3`);
 
-  //     try {
-  //       await axios.post('/api/upload', formData, {
-  //         headers: {
-  //           'Content-Type': 'multipart/form-data'
-  //         }
-  //       });
-  //       console.log('Audio file uploaded successfully');
-  //     } catch (err) {
-  //       console.error('Error uploading audio file:', err);
-  //     }
-  //   }
-  // };
+      try {
+        const response = await axios.post(
+          "http://localhost:5002/upload_files",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log(response);
+        const resp = await axios.get("http://localhost:5002/get_files");
+        // console.log("resp",resp);
+        // console.log("resp.data",);
+        let fileUrl = null;
+        for (const file of resp.data) {
+          if (file.name === `recording_${timestamp}.mp3`) {
+            fileUrl = file.url;
+            break;
+          }
+        }
+        const messageData = {
+          content: fileUrl,
+          sender: user,
+          receiver: selectedChat,
+          type: "audio",
+        };
+        sendMessage({
+          variables: {
+            messageInput: messageData,
+          },
+        }).then(() => {
+          console.log(messageData);
+          reset();
+        });
+        alert("Audio file uploaded successfully!");
+        setAudioBlob(null);
+        setMessage(messageData)
+        setSelectedChat(selectedChat);
+      } catch (error) {
+        console.error("Error uploading audio file:", error);
+        alert("Error uploading audio file. Please try again.");
+      }
+    } else {
+      alert("No audio recorded. Please record an audio first.");
+    }
+  };
+  useEffect(() => {
+
+  }, [audioBlob])
 
   return (
-    <div>
-      <div>
-        <button
-          type="button"
-          style={{
-            border: 'none',
-            background: 'transparent',
-            cursor: 'pointer',
-          }}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          <img
-            src={mic}
-            alt="Record"
-            style={{ width: '36px', height: '36px' }}
-          />
-        </button>
-      </div>
-      <div>
-        <audio ref={audioPlayerRef} src={audioUrl} controls />
-        <button onClick={playRecordedAudio}>Play Recorded Audio</button>
-      </div>
+    <div style={{ position: "absolute", top: 15, right: 10 }}>
+      <button
+        type="button"
+        style={{
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+        }}
+        onClick={isRecording ? stopRecording : startRecording}
+      >
+        <img
+          src={mic}
+          alt="Record Audio"
+          style={{ width: "36px", height: "36px" }}
+        />
+      </button>
+      {audioBlob && (
+        <div>
+          <button onClick={playAudio}>Play Recording</button>
+          <button onClick={customSubmit}>Upload Recording</button>
+        </div>
+      )}
     </div>
   );
 };

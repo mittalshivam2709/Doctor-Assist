@@ -9,6 +9,7 @@ const ChatProvider = ({ children }) => {
   const [vitals, setVitals] = useState(null);
   const [selectedPatient,setSelectedPatient] = useState(null);
   const [isSocket, setSocket] = useState(null);
+  const [audioBlob, setAudioBlob] = useState(null);
 
   useEffect(() => {
     // set for detecting chagnes
@@ -31,7 +32,9 @@ const ChatProvider = ({ children }) => {
         selectedPatient,
         setSelectedPatient,
         isSocket,
-        setSocket
+        setSocket,
+        audioBlob,
+        setAudioBlob
       }}
     >
       {children}
