@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
-import { judgeCriticality } from '../utils/criticalityJudgement'
-import docion from '../docion.png'
-import deleteicon from '../deleteicon.png' 
+import docion from '../docicon.png'
+import deleteicon from '../delete.png'
 
 // similar to dropdownjs
 
 const Protocol = ({ data }) => {
-  const {
-    admin_email,
-    document_url,
-    protocol_no,
-    created_at,
-  } = data
+  const { admin_email, document_url, document_no, created_at } = data
 
   let hoverColor = ''
   let hoverC = ''
@@ -31,12 +25,25 @@ const Protocol = ({ data }) => {
     // setShowProblemDetails(isHovered);
   }
 
-  return ( 
-    <div>
-        <img src={docion} alt="document-icon" />
-        
-        <img src={deleteicon} alt="delete-icon" />
+  return (
+    <div
+      style=
+      {{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '844px',
+        height: '100px',
+        border: '2px dashed #ccc',
+        borderRadius: '20px',
+        padding: '20px',
+        margin: '10px auto',
+        cursor: 'pointer',
+      }}>
+      <img src={docion} alt="document-icon" />
 
+      <img src={deleteicon} alt="delete-icon" />
     </div>
   )
 }
