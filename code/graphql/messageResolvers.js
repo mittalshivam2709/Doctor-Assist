@@ -36,5 +36,22 @@ module.exports = {
         throw new Error('Failed to send message');
       }
     },
+    sendDocument: async (_, { messageInputDoc }) => {
+      try {
+        // Create a new message using the input data
+        const { admin_email,document_url,document_no,active_to_train } = messageInputDoc;
+        const newMessageDoc = new Document({
+          admin_email,
+          document_url,
+          document_no,
+          active_to_train,
+        });
+        // console.log(newMessage);
+        const savedMessage = await newMessageDoc.save();
+        return savedMessage;
+      } catch (error) {
+        throw new Error('Failed to send message');
+      }
+    },
   },
 };

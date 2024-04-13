@@ -7,7 +7,8 @@ const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const fileInputRef = useRef(null)
   const [fileInputVisible, setFileInputVisible] = useState(false)
-
+  const authdata = JSON.parse(localStorage.getItem('authdata'));
+  const email = authdata ? authdata.email : '';
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0])
     console.log(e.target.files[0].name)

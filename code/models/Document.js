@@ -1,16 +1,28 @@
-const mongoose = require("mongoose");
-// contains all the messages, including if the message was sent to 
-// the doc query or the emt of that ambulance
-const DocumentSchema = mongoose.Schema(
+const { model, Schema } = require('mongoose');
+const documentSchema = new Schema(
   {
-    admin: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    admin_email:
+    {
+      type: String,
+      required: true,
     },
-    urls: [String]
+    document_url: 
+    {
+      type: String,
+      required: true,
+    },
+    document_no:
+    {
+      type: Number,
+      required: true
+    },
+    active_to_train:
+    {
+      type: Number,
+      required: true
+    }
   },
   { timestamps: true }
-);
+)
+module.exports = model('Document', documentSchema);
 
-const Document = mongoose.model("Protocol", DocumentSchema);
-module.exports = Document;

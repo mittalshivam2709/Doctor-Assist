@@ -46,3 +46,13 @@ export const SEND_MESSAGE = gql`
     }
   }
 `
+export const SEND_DOCUMENT = gql`
+  mutation Mutation($messageInputDoc: MessageInputDoc!) {
+    sendDocument(messageInputDoc: $messageInputDoc) {
+      admin_email
+      document_url
+      document_no
+      active_to_train
+    }
+  }
+`
