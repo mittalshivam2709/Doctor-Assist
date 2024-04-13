@@ -8,6 +8,7 @@ import { FETCH_MESSAGES } from "../gqloperations/queries";
 import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
 
 import io from "socket.io-client";
+import ImageRender from "../components/ImageRender";
 const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
@@ -68,18 +69,27 @@ const SingleChat = () => {
   return (
     <div>
       <div className="single-chat" style={{overflowX:"hidden"}}>
-        {/* <div>{user}</div> */}
         {messages.map((message, index) => (
-          <Message
-            key={index}
-            message={message.content}
-            right={message.sender == user}
-          />
+          message.type === null || message.type === "message"?
+          (
+
+            <Message
+              key={index}
+              message={message.content}
+              right={message.sender == user}
+            />
+          ):
+          (
+            <ImageRender
+              key={index}
+              message={message.content}
+              right={message.sender == user}
+            />
+          )
+
         ))}
         <div ref={ref}></div>
       </div>
-
-      {/* <MessageInput /> */}
     </div>
   );
 };

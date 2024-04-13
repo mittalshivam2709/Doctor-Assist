@@ -76,6 +76,7 @@ const MessageInput = () => {
               content: fileUrl,
               sender: user,
               receiver: selectedChat,
+              type:"image"
             }
             sendMessage({
               variables: {

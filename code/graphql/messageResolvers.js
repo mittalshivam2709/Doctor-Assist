@@ -21,11 +21,12 @@ module.exports = {
     sendMessage: async (_, { messageInput }) => {
       try {
         // Create a new message using the input data
-        const { content, sender, receiver } = messageInput;
+        const { content, sender, receiver, type } = messageInput;
         const newMessage = new Message({
             sender,
             content,
             receiver,
+            type
         });
         // console.log(newMessage);
         const savedMessage = await newMessage.save();

@@ -3,7 +3,6 @@ import user from "../user.png";
 import Placeholder from "./Placeholder";
 
 const Message = ({ message, right }) => {
-  const text = `This is a really really long text`;
   return (
     <div className="flex flex-row chat-parent" style={{ width:"100%", alignItems: "center" }}>
       {right == 0 && (

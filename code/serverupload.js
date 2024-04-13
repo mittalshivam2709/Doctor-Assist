@@ -48,6 +48,8 @@ let upload = multer({
 });
 
 const uploadToS3 = (fileData,filename) => {
+    // console.log(fileData);
+    // console.log(filename);
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
