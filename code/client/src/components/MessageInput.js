@@ -54,7 +54,7 @@ const MessageInput = () => {
 
         try {
             // Make a POST request to your Express server
-            const response = await axios.post('http://localhost:5002/upload-single', formData, {
+            const response = await axios.post('http://localhost:5002/upload_files', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -62,11 +62,18 @@ const MessageInput = () => {
             console.log(response); // Log the response from the server
             alert("File uploaded successfully!");
             setSelectedFile(null); // Clear selected file after upload
-            const resp=await axios.get('http://localhost:5002/get-files');
+            const resp=await axios.get('http://localhost:5002/get_files');
             // console.log("resp",resp);
             // console.log("resp.data",);
+            let fileUrl = null;
+            for (const file of resp.data) {
+             if (file.name === selectedFile.name) {
+               fileUrl = file.url;
+               break;
+                }
+              }
             const messageData = {
-              content: resp.data[resp.data.length-1].url,
+              content: fileUrl,
               sender: user,
               receiver: selectedChat,
             }

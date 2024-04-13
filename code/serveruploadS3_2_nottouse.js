@@ -10,10 +10,10 @@ const corsList = {
 dotenv.config();
 const app = express();
 app.use(cors());
-const S3_BUCKET = 'tto-asset';
-const REGION = 'ap-south-1';
-const ACCESS_KEY = 'AKIA3BOLL3RQW7VZIF5X';
-const SECRET_ACCESS_KEY = '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';
+const S3_BUCKET = 'abcwee';
+const REGION = 'us-east-1';
+const ACCESS_KEY = 'AKIA6GBMCT6VEDI6PS7P';
+const SECRET_ACCESS_KEY = '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';
 const awsConfig = {
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
@@ -53,9 +53,8 @@ const uploadToS3 = (fileData,filename) => {
             Bucket: S3_BUCKET,
             // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
             // Key: filename,
-            Key:`EMRI_audio_files/DASS_39/Document_query/${filename}`,
+            Key:`emrifol/${filename}`,
             Body: fileData,
-            // ACL: 'public-read', // Make the file public, so you can access it via URL
             // ACL: 'public-read', // Make the file public, so you can access it via URL
         };
         S3.upload(params, (err, data) => {
@@ -73,54 +72,7 @@ const listFilesFromS3 = () => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
-            Prefix: 'EMRI_audio_files/DASS_39/Document_query/'
-        };
-        S3.listObjects(params, (err, data) => {
-            if (err) {
-                console.log(err);
-                return reject(err);
-            }
-            const files = data.Contents.map((file) => {
-                // const fileKey = file.Key.replace('emrifol/');   // name of file
-                const fileKey = file.Key.split('/').pop(); // Extract only the file name
-                const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${file.Key}`;
-                return {
-                    name: fileKey,
-                    url: fileUrl
-                };
-            });
-            console.log(files);
-            resolve(files);
-        });
-    });
-}; 
-const uploadToS3_chatbox = (fileData,filename) => {
-    return new Promise((resolve, reject) => {
-        const params = {
-            Bucket: S3_BUCKET,
-            // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
-            // Key: filename,
-            Key:`EMRI_audio_files/DASS_39/Message_files/${filename}`,
-            Body: fileData,
-            // ACL: 'public-read', // Make the file public, so you can access it via URL
-            // ACL: 'public-read', // Make the file public, so you can access it via URL
-        };
-        S3.upload(params, (err, data) => {
-            if (err) {
-                console.log(err);
-                return reject(err);
-            }
-            console.log(data);
-            return resolve(data);
-        });
-    });
-};
-
-const listFilesFromS3_chatbox = () => {
-    return new Promise((resolve, reject) => {
-        const params = {
-            Bucket: S3_BUCKET,
-            Prefix: 'EMRI_audio_files/DASS_39/Message_files/'
+            Prefix: 'emrifol/'
         };
         S3.listObjects(params, (err, data) => {
             if (err) {
@@ -207,7 +159,7 @@ const listFilesFromS3_chatbox = () => {
 
 
 
-app.post("/upload_documents", upload.single("image"), async (req, res) => {
+app.post("/upload-single", upload.single("image"), async (req, res) => {
     if (req.file) {
         await uploadToS3(req.file.buffer,req.file.originalname);
     }
@@ -215,26 +167,9 @@ app.post("/upload_documents", upload.single("image"), async (req, res) => {
         msg: "File uploaded successfully!",
     });
 });
-app.get("/get_documents", async (req, res) => {
+app.get("/get-files", async (req, res) => {
     try {
         const files = await listFilesFromS3();
-        res.send(files);
-        console.log("Number of files:", files.length); // Logging number of files
-    } catch (error) {
-        res.status(500).send({ error: "Internal server error" });
-    }
-});
-app.post("/upload_files", upload.single("image"), async (req, res) => {
-    if (req.file) {
-        await uploadToS3_chatbox(req.file.buffer,req.file.originalname);
-    }
-    res.send({
-        msg: "File uploaded successfully!",
-    });
-});
-app.get("/get_files", async (req, res) => {
-    try {
-        const files = await listFilesFromS3_chatbox();
         res.send(files);
         console.log("Number of files:", files.length); // Logging number of files
     } catch (error) {
