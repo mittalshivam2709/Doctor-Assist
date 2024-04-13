@@ -105,13 +105,14 @@ const Homepage = () => {
   return (
     <div
       className="flex-container wrapper custom-scrollbar"
-      style={{ background: "white", padding: "10px" }}
+      style={{ background: "white", padding: "10px", height: "auto" }}
     >
       <div
         className={` column ${dropdownVisible ? "hidden" : "visible"}`}
         style={{
           width: "full",
-          overflow: "hidden",
+          // overflow: "hidden",
+          // height : "auto",
           background: "#F4F4FF",
           borderRadius: "10px",
           transition: "width 5s ease", // CSS transition property
@@ -124,7 +125,7 @@ const Homepage = () => {
             padding: "5px",
             paddingTop: "10px",
             borderRadius: "20px",
-            height: "85%",
+            height: "93%",
             overflowY: "scroll",
             overflowX: "hidden",
           }}
@@ -237,6 +238,7 @@ return(
       <div
         className="column"
         style={{ backgroundColor: "#F4F4FF", borderRadius: "10px" }}
+
       >
         {/* {selectedChat && <Protocol_sheet />} */}
         <Protocol_sheet/>
