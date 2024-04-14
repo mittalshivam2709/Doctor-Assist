@@ -1,0 +1,24 @@
+.parentdocument{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 1102px;
+    height: 97px;
+    background-color: white; 
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.threedots{
+    margin-left: auto;
+}
+.onedot{
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+    margin: 4px auto;
+}

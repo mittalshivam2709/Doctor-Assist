@@ -3,16 +3,15 @@ import axios from 'axios' // Import Axios for making HTTP requests
 import drag from '../drag.png'
 import plus from '../plus.png'
 import { SEND_DOCUMENT } from '../gqloperations/mutations'
-import { useMutation } from "@apollo/client";
-
-
+import { useMutation } from '@apollo/client'
+import Document from '../components/document'
 const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const fileInputRef = useRef(null)
   const [fileInputVisible, setFileInputVisible] = useState(false)
-  const authdata = JSON.parse(localStorage.getItem('authdata'));
-  const email = authdata ? authdata.email : '';
-  const [sendDocument] = useMutation(SEND_DOCUMENT);
+  const authdata = JSON.parse(localStorage.getItem('authdata'))
+  const email = authdata ? authdata.email : ''
+  const [sendDocument] = useMutation(SEND_DOCUMENT)
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0])
     console.log(e.target.files[0].name)
@@ -48,28 +47,28 @@ const Protocol_sheet = () => {
       )
       console.log(response.data) // Log the response from the server
       alert('File uploaded successfully!')
-      const filename =selectedFile.name
-      const resp=await axios.get('http://localhost:5002/get_documents');
-      let fileUrl = null;
+      const filename = selectedFile.name
+      const resp = await axios.get('http://localhost:5002/get_documents')
+      let fileUrl = null
       for (const file of resp.data) {
-       if (file.name === filename) {
-         fileUrl = file.url;
-         break;
-          }
+        if (file.name === filename) {
+          fileUrl = file.url
+          break
         }
-        console.log(fileUrl)
-        const DocData = {
-          admin_email: email,
-          document_url: fileUrl,
-          document_no: '1',
-          active_to_train: '1'
-        }
-        console.log('Sent document data:', DocData)
-        // const sendDocResponse = await sendDocument({
-        //   variables: {
-        //     messageInputDoc: DocData,
-        //   },
-        // })
+      }
+      console.log(fileUrl)
+      const DocData = {
+        admin_email: email,
+        document_url: fileUrl,
+        document_no: '1',
+        active_to_train: '1',
+      }
+      console.log('Sent document data:', DocData)
+      // const sendDocResponse = await sendDocument({
+      //   variables: {
+      //     messageInputDoc: DocData,
+      //   },
+      // })
       setSelectedFile(null) // Clear selected file after upload
     } catch (error) {
       console.error('Error uploading file:', error)
@@ -104,6 +103,7 @@ const Protocol_sheet = () => {
 
   return (
     <div>
+      <Document />
       <div>
         <h1
           style={{
@@ -130,23 +130,23 @@ const Protocol_sheet = () => {
         >
           <div>
             {!fileInputVisible && (
-              <button onClick={handlebuttonClick}>
-                <div
-                  style={{
-                    position: 'relative', // Add this to make positioning of the plus button relative to the container
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start', // Align items to the start (left) of the container
-                    justifyContent: 'flex-start', // Align content to the start (top) of the container
-                    width: '1056px',
-                    height: '444px',
-                    border: '2px dashed #ccc',
-                    borderRadius: '20px',
-                    padding: '20px',
-                    margin: '10px auto',
-                    cursor: 'pointer',
-                  }}
-                >
+              <div
+                style={{
+                  position: 'relative', // Add this to make positioning of the plus button relative to the container
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start', // Align items to the start (left) of the container
+                  justifyContent: 'flex-start', // Align content to the start (top) of the container
+                  width: '1056px',
+                  height: '444px',
+                  border: '2px dashed #ccc',
+                  borderRadius: '20px',
+                  padding: '20px',
+                  margin: '10px auto',
+                  cursor: 'pointer',
+                }}
+              >
+                <button onClick={handlebuttonClick}>
                   <img
                     src={plus}
                     alt=""
@@ -156,34 +156,34 @@ const Protocol_sheet = () => {
                       left: 10, // Place it at the left
                     }}
                   />
-                </div>
-              </button>
+                </button>
+              </div>
             )}
             {fileInputVisible && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '544px',
-                  height: '444px',
-                  border: '2px dashed #ccc',
-                  borderRadius: '20px',
-                  padding: '20px',
-                  margin: '10px auto',
-                  cursor: 'pointer',
-                }}
-                className={`drop-zone ${dragging ? 'dragging' : ''}`}
-              >
-                <img src={drag} alt="image" />
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileInput}
-                  style={{ display: 'none' }} // Hide the file input
-                />
-                <button onClick={handleButtonClick}>
+              <button onClick={handleButtonClick}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '544px',
+                    height: '444px',
+                    border: '2px dashed #ccc',
+                    borderRadius: '20px',
+                    padding: '20px',
+                    margin: '10px auto',
+                    cursor: 'pointer',
+                  }}
+                  className={`drop-zone ${dragging ? 'dragging' : ''}`}
+                >
+                  <img src={drag} alt="image" />
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileInput}
+                    style={{ display: 'none' }} // Hide the file input
+                  />
                   <div
                     style={{
                       fontSize: '26px',
@@ -195,8 +195,8 @@ const Protocol_sheet = () => {
                   >
                     Drag files to upload
                   </div>
-                </button>
-              </div>
+                </div>
+              </button>
             )}
             {selectedFile && <div>Selected File: {selectedFile.name}</div>}
             <br />
