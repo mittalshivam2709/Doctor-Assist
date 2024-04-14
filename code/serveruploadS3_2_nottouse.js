@@ -176,6 +176,51 @@ app.get("/get-files", async (req, res) => {
         res.status(500).send({ error: "Internal server error" });
     }
 });
+
+app.delete("/delete-files", async (req, res) => {
+    try {
+        const deletedCount = await deleteAllFilesFromS3('emrifol/');
+        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
+    } catch (error) {
+        console.error("Error deleting files:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
+
+const deleteAllFilesFromS3 = (prefix) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket: S3_BUCKET,
+            Prefix: prefix
+        };
+        S3.listObjectsV2(params, (err, data) => {
+            if (err) {
+                console.error("Error listing files from S3:", err);
+                return reject(err);
+            }
+            if (data.Contents.length === 0) {
+                // No files found
+                return resolve(0);
+            }
+            const deleteParams = {
+                Bucket: S3_BUCKET,
+                Delete: {
+                    Objects: data.Contents.map(({ Key }) => ({ Key })),
+                },
+            };
+            S3.deleteObjects(deleteParams, (err, data) => {
+                if (err) {
+                    console.error("Error deleting files from S3:", err);
+                    return reject(err);
+                }
+                console.log("Successfully deleted files:", data.Deleted.length);
+                resolve(data.Deleted.length);
+            });
+        });
+    });
+};
+
+
 app.listen(5002)
 {
     console.log("Server listening on Port", 5002);
