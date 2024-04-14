@@ -16,7 +16,7 @@ const VitalPage = () => {
   const authdata = JSON.parse(localStorage.getItem('authdata'));
   const email = authdata ? authdata.email : '';
   // Then use the email variable in your code where needed
-    const { loading, data, refetch } = useQuery(FETCH_USER_DETAILS, {
+  const { loading, data, refetch } = useQuery(FETCH_USER_DETAILS, {
     variables: { email },
   })
   const [doctor, setdoctor] = useState([])
@@ -84,10 +84,11 @@ const VitalPage = () => {
           </h3>
         </div>
         <>
+          <h2 className="boxx">Personal details</h2>
           <PatientDetails selectedPatient={selectedPatient} />
-
+          <h2 className="boxx">Medical diagnosis</h2>
           <MedicalInfo selectedPatient={selectedPatient} />
-
+          <h2 className="boxx">Vitals</h2>
           <Vitals vitals={vitals} />
         </>
       </div>

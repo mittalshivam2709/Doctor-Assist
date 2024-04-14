@@ -550,7 +550,8 @@ body {
   border: 1px solid #D8D8FF;
   border-radius: 7px;
   padding: 10px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
 }
 
 .form-row2 {
@@ -616,7 +617,7 @@ body {
   border: 1px solid #D8D8FF;
   border-radius: 7px;
   padding: 10px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .form-row3 {
@@ -662,6 +663,21 @@ body {
   display: flex;
   align-items: center;
 }
+
+.boxx {
+  background-color: #5555FB;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 12px;
+  /* font-weight: bold; */
+  display: inline-block;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  border: 2px solid white;
+  text-align: center;
+}
+
+
 
 
 /* .form-row3 textarea {
