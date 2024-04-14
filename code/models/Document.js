@@ -56,15 +56,28 @@ const documentSchema = new Schema(
     },
     document_no: {
       type: String,
-      required: true
+      required: true,
+    },
+
+    document_name: {
+      type: String,
+      required: true,
     },
     active_to_train: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
+    admit_time: {
+      type: String,
+      required: true,
+    },
+    last_update_time: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
-);
+)
 
 const Document = model('Document', documentSchema);
 

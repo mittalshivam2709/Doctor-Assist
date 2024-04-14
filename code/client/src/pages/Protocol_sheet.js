@@ -60,8 +60,11 @@ const Protocol_sheet = () => {
       const DocData = {
         admin_email: email,
         document_url: fileUrl,
+        document_name: filename,
         document_no: '1',
         active_to_train: '1',
+        admit_time: '1',
+        last_update_time: '1',
       }
       console.log('Sent document data:', DocData)
       const sendDocResponse = await sendDocument({

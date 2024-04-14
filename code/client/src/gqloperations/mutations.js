@@ -51,8 +51,11 @@ export const SEND_DOCUMENT = gql`
     sendDocument(messageInputDoc: $messageInputDoc) {
       admin_email
       document_url
+      document_name
       document_no
       active_to_train
+      admit_time
+      last_update_time
     }
   }
 `

@@ -3,10 +3,11 @@ import { ChatState } from '../context/ChatProvider'
 import docion from '../docicon.png'
 import deleteicon from '../delete.png'
 import '../admin.css'
+import { DELETE_DOCUMENT } from './file'
 // similar to dropdownjs
 
-const Document = ({ }) => {
-// const Document = ({ data }) => {
+const Document = ({}) => {
+  // const Document = ({ data }) => {
   // const { admin_email, document_url, document_no, created_at } = data
 
   let hoverColor = ''
@@ -27,13 +28,45 @@ const Document = ({ }) => {
     // setShowProblemDetails(isHovered);
   }
 
-  const handledelete=()=>{
-    
+  const handledelete = () => {
+    const { loading, data, refetch } = useQuery(DELETE_DOCUMENT, {
+      variables: { document_url: data }, // data will be the document_url
+    })
+
+    useEffect(() => {
+      console.log('init fetch')
+      refetch().then((response) => {
+        const resp = response?.data?.deletedocumentbydocumenturl
+        console.log(resp)
+        if (resp && resp.length > 0) {
+          // setdocs(resp)
+        }
+      })
+    }, [])
+
+    useEffect(() => {
+      const interval = setInterval(
+        () => {
+          refetch().then((response) => {
+            const resp = response?.data?.deletedocumentbydocumenturl
+            console.log(resp)
+            if (resp && resp.length > 0) {
+              // setdocs(resp)
+            }
+          })
+        },
+        // docs ? 10000 : 0
+      )
+
+      return () => clearInterval(interval)
+    }, [refetch])
   }
 
-  const handletoggleforactive=()=>{
-      
-    }
+  const handletoggleforactive = () => {
+    
+
+
+  }
   return (
     <div className="parentdocument">
       <img

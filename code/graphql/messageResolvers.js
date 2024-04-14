@@ -39,12 +39,15 @@ module.exports = {
     sendDocument: async (_, { messageInputDoc }) => {
       try {
         // Create a new message using the input data
-        const { admin_email,document_url,document_no,active_to_train } = messageInputDoc;
+        const { admin_email,document_url,document_name,document_no,active_to_train,admit_time,last_update_time } = messageInputDoc;
         const newMessageDoc = new Document({
           admin_email,
           document_url,
+          document_name,
           document_no,
           active_to_train,
+          admit_time,
+          last_update_time,
         });
         // console.log(newMessage);
         const savedMessage2 = await newMessageDoc.save();
