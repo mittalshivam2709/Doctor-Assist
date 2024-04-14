@@ -1,86 +1,70 @@
 import React, { useEffect, useState, useRef } from "react";
-import LoremIpsum from "../utils/loremipsum";
-import Placeholder from "../components/Placeholder";
+import axios from "axios";
 import Message from "../components/Message";
-import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
-import { FETCH_MESSAGES } from "../gqloperations/queries";
-import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
-
 import io from "socket.io-client";
+
 const ENDPOINT = "http://localhost:5001";
-var socket, selectedChatCompare;
+var socket;
 
 const SingleChat = () => {
-  const { user, selectedChat, message, setMessage } = ChatState();
+  const { user, selectedChat } = ChatState();
   const [messages, setMessages] = useState([]);
-  const [isSocket, setSocket] = useState(false);
+  const [inputText, setInputText] = useState(""); // State to store the input text
   const ref = useRef(null);
 
-  const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
-    socket.on("connection", () => setSocket(true));
-    // socket.emit("send message", selectedChat, message) // send message to selected chat
-    // socket.on("recieve message",)
+    socket.on("connection", () => {
+      // Handle socket connection logic here if needed
+    });
   }, []);
 
-  useEffect(() => {
-    fetchMessages({
-      variables: {
-        sender: user,
-        receiver: selectedChat,
-      },
-    }).then((result) => {
-      if (result.data && result.data.fetchMessage) {
-        setMessages(result.data.fetchMessage);
-      }
-      socket.emit("setChat", selectedChat);
-    });
-  }, [selectedChat]);
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
 
-  useEffect(() => {
-    socket.on("message recieved", (message) => {
-      console.log(message);
-      if (message.receiver == user) {
-        console.log("set mssg");
-        setMessages([...messages, message]);
-      } else if (!selectedChat || message.receiver != selectedChatCompare) {
-        // notifcation
-      }
-    });
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!inputText.trim()) return;  // Prevent sending empty messages
 
-  useEffect(() => {
-    if (message) {
-      setMessages([...messages, message]);
-      socket.emit("send message", message);
+    const newMessage = {
+      content: inputText,
+      sender: user,
+      fromUser: true // Custom flag to differentiate user messages and responses
+    };
+    setMessages(prev => [...prev, newMessage]);  // Add the user's message to the chat
+    try {
+      const response = await axios.post('https://yourapiendpoint.com/message', { message: inputText });
+      const apiResponse = {
+        content: response.data.message, 
+        sender: 'API Response',
+        fromUser: false
+      };
+      setMessages(prev => [...prev, apiResponse]); 
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessages(prev => [...prev, { content: 'Error fetching response', sender: 'Error', fromUser: false }]);
     }
-  }, [message]);
+    setInputText(""); 
+  };
 
   useEffect(() => {
-    ref.current?.scrollIntoView({
-      behaviour: "smooth",
-      block: "end",
-    });
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages]);
 
   return (
-    <div>
-      <div className="single-chat">
-        <div>{user}</div>
-        {messages.map((message, index) => (
-          <Message
-            key={index}
-            message={message.content}
-            right={message.sender == user}
-          />
-        ))}
-        <div ref={ref}></div>
-      </div>
-
-      {/* <MessageInput /> */}
+    <div className="single-chat">
+      <div>{user}</div>
+      {messages.map((message, index) => (
+        <Message key={index} message={message.content} right={message.sender == user} />
+      ))}
+      <div ref={ref}></div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={inputText} onChange={handleInputChange} placeholder="Type a message..." />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 };
