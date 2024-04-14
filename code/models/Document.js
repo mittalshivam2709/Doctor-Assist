@@ -76,25 +76,25 @@ const documentSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  // { timestamps: true }
 )
 
 const Document = model('Document', documentSchema);
 
 // Function to format date to IST time in "15:13 PM" format
-function formatISTDate(date) {
-    const ISTOptions = { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit' };
-    return date.toLocaleTimeString([], ISTOptions);
-}
+// function formatISTDate(date) {
+//     const ISTOptions = { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit' };
+//     return date.toLocaleTimeString([], ISTOptions);
+// }
 
-// Override default toJSON method to format timestamps in IST before sending response
-documentSchema.set('toJSON', {
-  transform: function (doc, ret) {
-    ret.createdAt = formatISTDate(ret.createdAt);
-    ret.updatedAt = formatISTDate(ret.updatedAt);
-    return ret;
-  }
-});
+// // Override default toJSON method to format timestamps in IST before sending response
+// documentSchema.set('toJSON', {
+//   transform: function (doc, ret) {
+//     ret.createdAt = formatISTDate(ret.createdAt);
+//     ret.updatedAt = formatISTDate(ret.updatedAt);
+//     return ret;
+//   }
+// });
 
 module.exports = Document;
 
