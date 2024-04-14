@@ -10,14 +10,13 @@ var socket;
 const SingleChat = () => {
   const { user, selectedChat } = ChatState();
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState(""); // State to store the input text
+  const [inputText, setInputText] = useState(""); 
   const ref = useRef(null);
 
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
     socket.on("connection", () => {
-      // Handle socket connection logic here if needed
     });
   }, []);
 
@@ -27,14 +26,14 @@ const SingleChat = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!inputText.trim()) return;  // Prevent sending empty messages
+    if (!inputText.trim()) return;  
 
     const newMessage = {
       content: inputText,
       sender: user,
-      fromUser: true // Custom flag to differentiate user messages and responses
+      fromUser: true 
     };
-    setMessages(prev => [...prev, newMessage]);  // Add the user's message to the chat
+    setMessages(prev => [...prev, newMessage]);  
     try {
       const response = await axios.post('https://yourapiendpoint.com/message', { message: inputText });
       const apiResponse = {
