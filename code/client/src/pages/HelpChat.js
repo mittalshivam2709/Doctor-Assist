@@ -97,6 +97,8 @@ import axios from "axios";
 import Message from "../components/Message";
 import { useMutation } from "@apollo/client";
 import { SEND_MESSAGE } from "../gqloperations/mutations";
+import { FETCH_MESSAGES } from "../gqloperations/queries";
+import { useLazyQuery } from "@apollo/client";
 import { ChatState } from "../context/ChatProvider";
 import io from "socket.io-client";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -111,7 +113,20 @@ const SingleChat = () => {
   const [inputText, setInputText] = useState("");
   const ref = useRef(null);
   const [sendMessage] = useMutation(SEND_MESSAGE);
-
+  const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
+  useEffect(() => {
+    fetchMessages({
+      variables: {
+        sender: user,
+        receiver: selectedChat,
+      },
+    }).then((result) => {
+      if (result.data && result.data.fetchMessage) {
+        setMessages(result.data.fetchMessage);
+      }
+      socket.emit("setChat", selectedChat);
+    });
+  }, [selectedChat]);
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
@@ -176,9 +191,10 @@ const SingleChat = () => {
   return (
     <div className="single-chat">
       <div>{user}</div>
-      {messages.map((message, index) => (
+      {messages.map((message, index) => 
+      message.type === "LLM" ? (
         <Message key={index} message={message.content} right={message.sender === user} />
-      ))}
+      ): "")}
       <div ref={ref}></div>
       <form onSubmit={handleSubmit}>
         <input type="text" value={inputText} onChange={handleInputChange} placeholder="Type a message..." />
