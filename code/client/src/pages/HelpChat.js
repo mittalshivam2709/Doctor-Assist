@@ -3,9 +3,24 @@ import axios from "axios";
 import Message from "../components/Message";
 import { ChatState } from "../context/ChatProvider";
 import io from "socket.io-client";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const ENDPOINT = "http://localhost:5001";
+const genAI = new GoogleGenerativeAI("AIzaSyBsROOsRnI1JopbvCzM2-FpkSre0lFzaXo");
 var socket;
+
+// async function run() {
+//   const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+//   const prompt = "Write a story about a magic backpack."
+
+//   const result = await model.generateContent(prompt);
+//   const response = await result.response;
+//   const text = response.text();
+//   console.log(text);
+// }
+
+// run();
 
 const SingleChat = () => {
   const { user, selectedChat } = ChatState();
@@ -27,6 +42,14 @@ const SingleChat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;  
+  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+  const prompt =inputText;
+
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const resp = response.text();
+  console.log(inputText);
 
     const newMessage = {
       content: inputText,
@@ -34,18 +57,20 @@ const SingleChat = () => {
       fromUser: true 
     };
     setMessages(prev => [...prev, newMessage]);  
-    try {
-      const response = await axios.post('https://yourapiendpoint.com/message', { message: inputText });
+    // try {
+    //   const response = await axios.post('https://yourapiendpoint.com/message', { message: inputText });
       const apiResponse = {
-        content: response.data.message, 
+        content: resp, 
         sender: 'API Response',
         fromUser: false
       };
       setMessages(prev => [...prev, apiResponse]); 
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setMessages(prev => [...prev, { content: 'Error fetching response', sender: 'Error', fromUser: false }]);
-    }
+    // } catch (error) {
+    //   console.error('Error sending message:', error);
+    //   console.log(response.data.message);
+
+    //   setMessages(prev => [...prev, { content: 'Error fetching response', sender: 'Error', fromUser: false }]);
+    // }
     setInputText(""); 
   };
 
