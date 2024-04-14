@@ -14,10 +14,11 @@ const genAI = new GoogleGenerativeAI("AIzaSyBsROOsRnI1JopbvCzM2-FpkSre0lFzaXo");
 var socket;
 
 const SingleChat = () => {
-  const { user, selectedChat } = ChatState();
+  const { user, selectedChat, setMessage } = ChatState();
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState(""); 
   const ref = useRef(null);
+  const [sendMessage] = useMutation(SEND_MESSAGE);
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -30,19 +31,8 @@ const SingleChat = () => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSendMessage = async () => {
     if (!inputText.trim()) return;
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-    const prompt = inputText;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const resp = response.text();
-    console.log(inputText);
-
-
 
     const newMessage = {
       content: inputText,
@@ -50,24 +40,36 @@ const SingleChat = () => {
       reciever: selectedChat,
       type: "LLM"
     };
-    console.log(newMessage)
-    setMessages(prev => [...prev, newMessage]);
+    
     // try {
-    //   const response = await axios.post('https://yourapiendpoint.com/message', { message: inputText });
+      sendMessage({
+        variables: {
+          messageInput: newMessage,
+        },
+      }).then(() => {
+        setMessage(newMessage)
+        console.log(newMessage)
+        // reset()
+        setInputText('')
+      })
+    }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleSendMessage();
+
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    const result = await model.generateContent(inputText);
+    const response = await result.response;
+    const aiResponse = await response.text();
+
     const apiResponse = {
-      content: resp,
+      content: aiResponse,
       sender: selectedChat,
       reciever: user,
       type: "LLM"
     };
     setMessages(prev => [...prev, apiResponse]);
-    // } catch (error) {
-    //   console.error('Error sending message:', error);
-    //   console.log(response.data.message);
-
-    //   setMessages(prev => [...prev, { content: 'Error fetching response', sender: 'Error', fromUser: false }]);
-    // }
-    setInputText("");
   };
 
   useEffect(() => {
@@ -78,7 +80,7 @@ const SingleChat = () => {
     <div className="single-chat">
       <div>{user}</div>
       {messages.map((message, index) => (
-        <Message key={index} message={message.content} right={message.sender == user} />
+        <Message key={index} message={message.content} right={message.sender === user} />
       ))}
       <div ref={ref}></div>
       <form onSubmit={handleSubmit}>
@@ -90,3 +92,4 @@ const SingleChat = () => {
 };
 
 export default SingleChat;
+

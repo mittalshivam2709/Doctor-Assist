@@ -43,6 +43,7 @@ export const SEND_MESSAGE = gql`
       sender
       content
       receiver
+      type
     }
   }
 `
