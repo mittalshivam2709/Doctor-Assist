@@ -1,0 +1,31 @@
+/* LamaPage.css */
+.container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .box {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 10px;
+  }
+  
+  .result-box {
+    padding-top: 10px;
+  }
+  
+  .result-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .result-list li {
+    margin-bottom: 5px;
+  }
+  

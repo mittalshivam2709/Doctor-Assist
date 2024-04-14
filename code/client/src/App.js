@@ -8,7 +8,7 @@ import Password_Reset from './pages/Password_Reset'
 import Forgot_password from './pages/Forgot_password'
 import Forgot_reset_password from './pages/Forgot_reset_password'
 import Profile from './pages/Profile_page'
-
+import LamaPage from '../src/pages/lama.js'
 function App() {
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
             path="/forgotresetpassword"
             element={<Forgot_reset_password />}
           />
+          <Route path='/query' element={<LamaPage/>}/>
           <Route
             path="/home"
             element={
