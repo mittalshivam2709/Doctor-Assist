@@ -64,11 +64,12 @@ const Protocol_sheet = () => {
         active_to_train: '1',
       }
       console.log('Sent document data:', DocData)
-      // const sendDocResponse = await sendDocument({
-      //   variables: {
-      //     messageInputDoc: DocData,
-      //   },
-      // })
+      const sendDocResponse = await sendDocument({
+        variables: {
+          messageInputDoc: DocData,
+        },
+      })
+      console.log(sendDocResponse)
       setSelectedFile(null) // Clear selected file after upload
     } catch (error) {
       console.error('Error uploading file:', error)

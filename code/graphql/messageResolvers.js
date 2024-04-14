@@ -47,8 +47,8 @@ module.exports = {
           active_to_train,
         });
         // console.log(newMessage);
-        const savedMessage = await newMessageDoc.save();
-        return savedMessage;
+        const savedMessage2 = await newMessageDoc.save();
+        return savedMessage2;
       } catch (error) {
         throw new Error('Failed to send message');
       }

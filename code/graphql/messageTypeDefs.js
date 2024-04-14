@@ -7,7 +7,6 @@ type Message{
     receiver: ID!
     type: String
 }
-
 input MessageInput{
     content: String!
     receiver: ID!

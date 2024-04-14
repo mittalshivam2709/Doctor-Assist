@@ -47,7 +47,7 @@ export const SEND_MESSAGE = gql`
   }
 `
 export const SEND_DOCUMENT = gql`
-  mutation Mutation2($messageInputDoc: MessageInputDoc!) {
+  mutation Mutation($messageInputDoc: MessageInputDoc!) {
     sendDocument(messageInputDoc: $messageInputDoc) {
       admin_email
       document_url
