@@ -57,15 +57,27 @@ const Protocol_sheet = () => {
         }
       }
       console.log(fileUrl)
+      const date =new Date()
+      // const DocData = {
+      //   admin_email: email,
+      //   document_url: fileUrl,
+      //   document_name: filename,
+      //   document_no: '1',
+      //   active_to_train: '1',
+      //   admit_time: '1',
+      //   last_update_time: '1',
+      // }
+      const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+      const formattedTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
       const DocData = {
-        admin_email: email,
-        document_url: fileUrl,
-        document_name: filename,
-        document_no: '1',
-        active_to_train: '1',
-        admit_time: '1',
-        last_update_time: '1',
-      }
+      admin_email: email,
+      document_url: fileUrl,
+      document_name: filename,
+      document_no: '1',
+      active_to_train: '1',
+      admit_time: `${formattedTime}/${formattedDate}`,
+      last_update_time: `${formattedTime}/${formattedDate}`, // Store the current date and time
+      }; 
       console.log('Sent document data:', DocData)
       const sendDocResponse = await sendDocument({
         variables: {
