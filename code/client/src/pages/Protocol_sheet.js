@@ -161,19 +161,7 @@ const Protocol_sheet = () => {
       {docs.map((item) => (
         <Documentcomp key={item.id} data={item} />
       ))}
-      {/* <Documentcomp /> */}
       <div>
-        {/* <h1
-          style={{
-            textAlign: 'center',
-            color: 'rgba(85,85,251,1)',
-            fontWeight: 'bold',
-            marginTop: '20px',
-            fontSize: '30px',
-          }}
-        >
-          File Upload
-        </h1> */}
         <br />
         <br />
         <div

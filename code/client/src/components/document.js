@@ -3,12 +3,12 @@ import { ChatState } from '../context/ChatProvider'
 import docion from '../docicon.png'
 import deleteicon from '../delete.png'
 import '../admin.css'
-import { DELETE_DOCUMENT } from './file'
 // similar to dropdownjs
 
 // const Document = ({}) => {
-  const Document = ({ data }) => {
-  const { admin_email, document_url, document_no, document_name, admit_time} = data
+const Document = ({ data }) => {
+  const { admin_email, document_url, document_no, document_name, admit_time } =
+    data
 
   let hoverColor = ''
   let hoverC = ''
@@ -63,78 +63,67 @@ import { DELETE_DOCUMENT } from './file'
   }
 
   const handletoggleforactive = () => {}
-  // return (
-  //   <div className="parentdocument">
-  //     <img
-  //       style={{ width: '40px', height: '40px' }}
-  //       src={docion}
-  //       alt="document-icon"
-  //     />
 
-  //     <p> '{document_name}{admit_time}'</p>
-  //     <button
-  //       onClick={handledelete}
-  //       style={{
-  //         marginLeft: '950px',
-  //       }}
-  //     >
-  //       <img
-  //         style={{
-  //           width: '40px',
-  //           height: '40px',
-  //         }}
-  //         src={deleteicon}
-  //         alt="delete-icon"
-  //       />
-  //     </button>
-
-  //     {/* button for 1 and 0 */}
-  //     <div
-  //       className="threedots"
-  //       onClick={handletoggleforactive} // Add onClick event to handle button click
-  //     >
-  //       <div className="onedot"></div>
-  //       <div className="onedot"></div>
-  //       <div className="onedot"></div>
-  //     </div>
-  //   </div>
-  // )
   return (
     <div className="parentdocument">
-      <img
-        style={{ width: '40px', height: '40px' }}
-        src={docion}
-        alt="document-icon"
-      />
-      <p>{document_name} {admit_time}</p> {/* Remove single quotes around placeholders */}
-      <button
-        onClick={handledelete}
-        style={{
-          marginLeft: '950px',
-        }}
-      >
-        <img
-          style={{
-            width: '40px',
-            height: '40px',
-          }}
-          src={deleteicon}
-          alt="delete-icon"
-        />
-      </button>
-  
-      {/* button for 1 and 0 */}
-      <div
-        className="threedots"
-        onClick={handletoggleforactive} // Add onClick event to handle button click
-      >
-        <div className="onedot"></div>
-        <div className="onedot"></div>
-        <div className="onedot"></div>
+      <div className="left">
+        <img src={docion} alt="Icon" />
+        {document_name}
+      </div>
+      <div className="right">
+        {admit_time}
+        <button>
+          <img src={deleteicon} alt="Image 1" />
+        </button>
+        <button>
+          <div
+            className="threedots"
+            onClick={handletoggleforactive} // Add onClick event to handle button click
+          >
+            <div className="onedot"></div>
+            <div className="onedot"></div>
+            <div className="onedot"></div>
+          </div>
+        </button>
       </div>
     </div>
+
+    // <div className="parentdocument">
+    //   <img
+    //     style={{ width: '40px', height: '40px' }}
+    //     src={docion}
+    //     alt="document-icon"
+    //   />
+    //   <p style={{ whiteSpace: 'nowrap' }}>
+    //     {document_name} {admit_time}
+    //   </p>
+    //   {/* Remove single quotes around placeholders */}
+    //   <button
+    //     onClick={handledelete}
+    //     style={{
+    //       marginLeft: '950px',
+    //     }}
+    //   >
+    //     <img
+    //       style={{
+    //         width: '40px',
+    //         height: '40px',
+    //       }}
+    //       src={deleteicon}
+    //       alt="delete-icon"
+    //     />
+    //   </button>
+    //   {/* button for 1 and 0 */}
+    //   <div
+    //     className="threedots"
+    //     onClick={handletoggleforactive} // Add onClick event to handle button click
+    //   >
+    //     <div className="onedot"></div>
+    //     <div className="onedot"></div>
+    //     <div className="onedot"></div>
+    //   </div>
+    // </div>
   )
-  
 }
 
 export default Document

@@ -10,10 +10,12 @@
     padding: 20px;
     margin: 10px auto;
     cursor: pointer;
+    justify-content: space-between; /* Pushes left and right divs to the extremes */
+
 }
 
 .threedots{
-    margin-left: auto;
+    margin-left: 10px;
 }
 .onedot{
     width: 5px;
@@ -21,4 +23,46 @@
     background-color: black;
     border-radius: 50%;
     margin: 4px auto;
+}
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  
+}
+
+.left img {
+  width: 50px; /* adjust size as needed */
+  height: 50px; /* adjust size as needed */
+  margin-right: 10px;
+}
+
+.left span {
+  font-size: 16px; /* adjust size as needed */
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    padding: 0; /* remove default padding */
+    margin: 0; /* remove default margin */
+    border: none; /* remove default border */
+    color: black;
+}
+
+.right img {
+  width: 50px; /* adjust size as needed */
+  height: 50px; /* adjust size as needed */
+  margin-left: 10px;
+}
+
+.right span {
+  font-size: 16px; /* adjust size as needed */
 }
