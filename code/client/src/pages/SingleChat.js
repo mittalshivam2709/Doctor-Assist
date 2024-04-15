@@ -84,14 +84,14 @@ console.log(messages);
             message={message.content}
             right={message.sender == user}
           />        
-        ):  message.type === "audio"? 
+        ):
         (
           <AudioRender
           key={index}
           message={message.content}
           right={message.sender == user}
         />
-        ): ("")
+        )
         )}
         <div ref={ref}></div>
       </div>
