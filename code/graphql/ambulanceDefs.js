@@ -55,12 +55,22 @@ module.exports = gql`
     pupil_size: String
     reaction_to_light: String
   }
+  type Document{
+    admin_email: String
+    document_url: String
+    document_no: String
+    document_name: String
+    active_to_train: String
+    admit_time: String
+    last_update_time: String
+  }
   extend type Query {
     fetchVitals(emtID: ID!): Vitals
     fetchAmbulancesByDoctorId(docID: ID!): [Ambulance]
+    fetchdocumentbydocumentid(doc_no: String!): [Document]
     getUserByEmail(email: String!): User
     getUserIdByEmail(email: String!): ID
-  }  
+  }
   extend type Mutation {
     updateAmbulanceVital(emtId: ID!, vitalName: String!, value: Float!): Boolean
 

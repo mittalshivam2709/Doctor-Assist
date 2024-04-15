@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import axios from 'axios' // Import Axios for making HTTP requests
 import drag from '../drag.png'
 import plus from '../plus.png'
 import { SEND_DOCUMENT } from '../gqloperations/mutations'
 import { useMutation } from '@apollo/client'
-import Document from '../components/document'
+import { useQuery } from '@apollo/client'
+import Documentcomp from '../components/document'
+import {FETCH_DOCUMENTS} from "../gqloperations/queries";
 const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const fileInputRef = useRef(null)
@@ -94,6 +96,44 @@ const Protocol_sheet = () => {
 
   const [dragging, setDragging] = useState(false)
 
+
+  const { loading, data, refetch } = useQuery(FETCH_DOCUMENTS, {
+    variables: { doc_no: '1' },
+  })
+
+
+  // /////////////////////////////
+  // below is the code for fetching all the documents
+  // const [docs, setdocs] = useState([])  
+
+  // useEffect(() => {
+  //   console.log('init fetch')
+  //   refetch().then((response) => {
+  //     const resp = response?.data?.fetchdocumentbydocumentid
+  //     console.log(resp)
+  //     if (resp && resp.length > 0) {
+  //       setdocs(resp)
+  //     }
+  //   })
+  // }, [])
+
+  // useEffect(() => {
+  //   const interval = setInterval(
+  //     () => {
+  //       refetch().then((response) => {
+  //         const resp = response?.data?.fetchdocumentbydocumentid
+  //         console.log(resp)
+  //         if (resp && resp.length > 0) {
+  //           setdocs(resp)
+  //         }
+  //       })
+  //     },
+  //     docs ? 10000 : 0
+  //   )
+
+  //   return () => clearInterval(interval)
+  // }, [refetch])
+
   // const handleDragEnter = (e) => {
   //   e.preventDefault()
   //   setDragging(true)
@@ -119,9 +159,12 @@ const Protocol_sheet = () => {
 
   return (
     <div>
-      <Document />
+      {/* {docs.map((item) => (
+        <Documentcomp key={item.id} data={item} />
+      ))} */}
+      <Documentcomp />
       <div>
-        <h1
+        {/* <h1
           style={{
             textAlign: 'center',
             color: 'rgba(85,85,251,1)',
@@ -131,7 +174,7 @@ const Protocol_sheet = () => {
           }}
         >
           File Upload
-        </h1>
+        </h1> */}
         <br />
         <br />
         <div

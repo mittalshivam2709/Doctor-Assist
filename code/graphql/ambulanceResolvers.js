@@ -1,5 +1,6 @@
 const Ambulance = require('../models/AmbulanceModel')
 const User = require('../models/auth')
+const Document = require('../models/Document')
 const { ApolloError } = require('apollo-server')
 
 
@@ -65,7 +66,15 @@ module.exports = {
       } catch (error) {
         throw new Error('Failed to fetch ambulances by doctor ID');
       }
-    },    
+    }, 
+    fetchdocumentbydocumentid: async(_,{doc_no}) =>{
+      try{
+        const documentss= await Document.find({document_no:doc_no}) 
+        return documentss;
+      }catch (error){
+        throw new Error('Failed to fetch document by document number')
+      }
+    },  
     async getUserByEmail(_, { email }) {
       try {
         const user = await User.findOne({email })

@@ -18,7 +18,6 @@ export const FETCH_NUMBER = gql`
     }
   }
 `
-
 export const FETCH_PATIENTS = gql`
 query FetchAmbulancesByDoctorId($docId: ID!) {
   fetchAmbulancesByDoctorId(docID: $docId) {
@@ -56,6 +55,20 @@ query FetchAmbulancesByDoctorId($docId: ID!) {
       address
       occupation
       phone
+    }
+  }
+`
+
+export const FETCH_DOCUMENTS = gql`
+query Fetchdocumentbydocumentid($doc_no: String!) {
+  fetchdocumentbydocumentid(Doc_no: $doc_no) {
+    admin_email
+    document_url
+    document_no
+    document_name
+    active_to_train
+    admit_time
+    last_update_time
     }
   }
 `

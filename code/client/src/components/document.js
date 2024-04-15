@@ -54,7 +54,7 @@ const Document = ({}) => {
               // setdocs(resp)
             }
           })
-        },
+        }
         // docs ? 10000 : 0
       )
 
@@ -62,11 +62,7 @@ const Document = ({}) => {
     }, [refetch])
   }
 
-  const handletoggleforactive = () => {
-    
-
-
-  }
+  const handletoggleforactive = () => {}
   return (
     <div className="parentdocument">
       <img
