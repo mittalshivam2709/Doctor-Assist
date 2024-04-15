@@ -64,12 +64,16 @@ module.exports = gql`
     admit_time: String
     last_update_time: String
   }
+  type Authentication{
+    ID: String
+    jwt_token: String
+  }
   extend type Query {
     fetchVitals(emtID: ID!): Vitals
     fetchAmbulancesByDoctorId(docID: ID!): [Ambulance]
     fetchdocumentbydocumentid(doc_no: String!): [Document]
     getUserByEmail(email: String!): User
-    getUserIdByEmail(email: String!): ID
+    getUserIdByEmail(email: String!): Authentication
   }
   extend type Mutation {
     updateAmbulanceVital(emtId: ID!, vitalName: String!, value: Float!): Boolean

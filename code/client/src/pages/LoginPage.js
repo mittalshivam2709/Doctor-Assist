@@ -101,7 +101,7 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { LOGIN_USER } from '../gqloperations/mutations'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -110,16 +110,32 @@ import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
 import '../pages/newauth.css';
 import emailIcon from '.././emailbox.png';
 import passwordIcon from '.././passwordlogo.png';
+import { ChatState } from '../context/ChatProvider.js'
+import { FETCH_USER_ID_BY_EMAIL } from '../gqloperations/queries.js'
+
+const useAuthUser = (loginEmail) => {
+  const { loading: authLoading, error: authError, data: authData } = useQuery(FETCH_USER_ID_BY_EMAIL, {
+    variables: { loginEmail },
+  });
+  console.log("authDAta ->", authData); 
+  return { authLoading, authError, authData };
+};
+
+
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm();
   const [emailHovered, setEmailHovered] = useState(false);
   const [passwordHovered, setPasswordHovered] = useState(false);
+  const [loginEmail, setLoginEmail] = useState(null);
   const navigate = useNavigate();
+  const {user, setUser} = ChatState()
 
+  
   const [loginUser, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       localStorage.setItem('authdata', JSON.stringify(data.loginUser));
+      setLoginEmail(data.loginUser.email);
       navigate('/home');
     },
     onError: (error) => {

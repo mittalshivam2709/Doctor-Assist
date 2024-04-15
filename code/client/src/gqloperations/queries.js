@@ -105,7 +105,8 @@ export const FETCH_USER_DETAILS = gql`
 export const FETCH_USER_ID_BY_EMAIL = gql`
   query FetchUserIdByEmail($email: String!) {
     getUserIdByEmail(email: $email) {
-      id
+      ID
+      jwt_token
     }
   }
 `;

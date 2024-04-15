@@ -128,7 +128,12 @@ module.exports = {
         console.log("hell")
         console.log(user._id.toString()); // Convert ObjectId to string and log the value
         console.log("sahi");
-        return user._id.toString(); // Return the ObjectId as a string
+        authentication = {
+          ID: user._id.toString(),
+          jwt_token: user.token
+        }
+        console.log(authentication);
+        return authentication; // Return the ObjectId as a string
       } catch (error) {
         console.error(error);
         throw new ApolloError('Internal server error');
