@@ -104,35 +104,34 @@ const Protocol_sheet = () => {
 
   // /////////////////////////////
   // below is the code for fetching all the documents
-  // const [docs, setdocs] = useState([])  
+  const [docs, setdocs] = useState([])  
 
-  // useEffect(() => {
-  //   console.log('init fetch')
-  //   refetch().then((response) => {
-  //     const resp = response?.data?.fetchdocumentbydocumentid
-  //     console.log(resp)
-  //     if (resp && resp.length > 0) {
-  //       setdocs(resp)
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    console.log('init fetch')
+    refetch().then((response) => {
+      const resp = response?.data?.fetchdocumentbydocumentid
+      console.log(resp)
+      if (resp && resp.length > 0) {
+        setdocs(resp)
+      }
+    })
+  }, [])
 
-  // useEffect(() => {
-  //   const interval = setInterval(
-  //     () => {
-  //       refetch().then((response) => {
-  //         const resp = response?.data?.fetchdocumentbydocumentid
-  //         console.log(resp)
-  //         if (resp && resp.length > 0) {
-  //           setdocs(resp)
-  //         }
-  //       })
-  //     },
-  //     docs ? 10000 : 0
-  //   )
-
-  //   return () => clearInterval(interval)
-  // }, [refetch])
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        refetch().then((response) => {
+          const resp = response?.data?.fetchdocumentbydocumentid
+          console.log(resp)
+          if (resp && resp.length > 0) {
+            setdocs(resp)
+          }
+        })
+      },
+      docs ? 10000 : 0
+    )
+    return () => clearInterval(interval)
+  }, [refetch])
 
   // const handleDragEnter = (e) => {
   //   e.preventDefault()
@@ -159,10 +158,10 @@ const Protocol_sheet = () => {
 
   return (
     <div>
-      {/* {docs.map((item) => (
+      {docs.map((item) => (
         <Documentcomp key={item.id} data={item} />
-      ))} */}
-      <Documentcomp />
+      ))}
+      {/* <Documentcomp /> */}
       <div>
         {/* <h1
           style={{

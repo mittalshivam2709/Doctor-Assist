@@ -6,9 +6,9 @@ import '../admin.css'
 import { DELETE_DOCUMENT } from './file'
 // similar to dropdownjs
 
-const Document = ({}) => {
-  // const Document = ({ data }) => {
-  // const { admin_email, document_url, document_no, created_at } = data
+// const Document = ({}) => {
+  const Document = ({ data }) => {
+  const { admin_email, document_url, document_no, document_name, admit_time} = data
 
   let hoverColor = ''
   let hoverC = ''
@@ -63,6 +63,42 @@ const Document = ({}) => {
   }
 
   const handletoggleforactive = () => {}
+  // return (
+  //   <div className="parentdocument">
+  //     <img
+  //       style={{ width: '40px', height: '40px' }}
+  //       src={docion}
+  //       alt="document-icon"
+  //     />
+
+  //     <p> '{document_name}{admit_time}'</p>
+  //     <button
+  //       onClick={handledelete}
+  //       style={{
+  //         marginLeft: '950px',
+  //       }}
+  //     >
+  //       <img
+  //         style={{
+  //           width: '40px',
+  //           height: '40px',
+  //         }}
+  //         src={deleteicon}
+  //         alt="delete-icon"
+  //       />
+  //     </button>
+
+  //     {/* button for 1 and 0 */}
+  //     <div
+  //       className="threedots"
+  //       onClick={handletoggleforactive} // Add onClick event to handle button click
+  //     >
+  //       <div className="onedot"></div>
+  //       <div className="onedot"></div>
+  //       <div className="onedot"></div>
+  //     </div>
+  //   </div>
+  // )
   return (
     <div className="parentdocument">
       <img
@@ -70,11 +106,7 @@ const Document = ({}) => {
         src={docion}
         alt="document-icon"
       />
-
-      <p> {/* name should come here */}</p>
-
-      {/* <p>{created_at}</p> */}
-
+      <p>{document_name} {admit_time}</p> {/* Remove single quotes around placeholders */}
       <button
         onClick={handledelete}
         style={{
@@ -90,7 +122,7 @@ const Document = ({}) => {
           alt="delete-icon"
         />
       </button>
-
+  
       {/* button for 1 and 0 */}
       <div
         className="threedots"
@@ -102,6 +134,7 @@ const Document = ({}) => {
       </div>
     </div>
   )
+  
 }
 
 export default Document

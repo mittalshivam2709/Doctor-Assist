@@ -69,7 +69,7 @@ module.exports = {
     }, 
     fetchdocumentbydocumentid: async(_,{doc_no}) =>{
       try{
-        const documentss= await Document.find({document_no:doc_no}) 
+        const documentss= await Document.find({document_no:{ $in: doc_no}}) ;
         return documentss;
       }catch (error){
         throw new Error('Failed to fetch document by document number')

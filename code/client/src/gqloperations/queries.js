@@ -61,7 +61,7 @@ query FetchAmbulancesByDoctorId($docId: ID!) {
 
 export const FETCH_DOCUMENTS = gql`
 query Fetchdocumentbydocumentid($doc_no: String!) {
-  fetchdocumentbydocumentid(Doc_no: $doc_no) {
+  fetchdocumentbydocumentid(doc_no: $doc_no) {
     admin_email
     document_url
     document_no
