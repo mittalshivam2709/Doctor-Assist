@@ -41,21 +41,21 @@ const LLMInput = () => {
 
       setMessages((prev) => [...prev, inputMessage]);
       setMessage(inputMessage);
-      console.log(messages);
+    //   console.log(messages);
       // Handle AI response
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const prompt = inputText;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const resp = await response.text();
-      console.log("resp- >", resp);
+    //   console.log("resp- >", resp);
       const aiResponse = {
         content: resp,
         sender: selectedChat,
         receiver: user,
         type: "LLM",
       };
-      console.log(aiResponse);
+    //   console.log(aiResponse);
       await sendMessage({
         variables: {
           messageInput: aiResponse,

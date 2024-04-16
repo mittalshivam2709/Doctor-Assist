@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
 import { judgeCriticality } from "../utils/criticalityJudgement";
-const Dropdown2 = ({ data }) => {
+const DropdownMinimized = ({ data }) => {
   const {
     ambulance_no,
     admit_time,
@@ -106,4 +106,4 @@ const Dropdown2 = ({ data }) => {
   )
 }
 
-export default Dropdown2
+export default DropdownMinimized

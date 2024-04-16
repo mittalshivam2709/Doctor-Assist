@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown";
-import Dropdown2 from "../components/Dropdown2";
+import DropdownMinimized from "../components/DropdownMinimized";
 import Dropdown_hide_admin from "../components/Dropdown_hide_admin";
 import Dropdownadmin from "../components/Dropdownadmin";
 import Placeholder from "../components/Placeholder";
@@ -13,13 +13,12 @@ import { useQuery } from "@apollo/client";
 import "./homepage.css";
 import VitalPage from "./VitalPage";
 import Protocol_sheet from "./Protocol_sheet";
-import Draggable from "react-draggable";
-import { useLocation } from "react-router-dom";
 import { judgeCriticality } from "../utils/criticalityJudgement";
+
+
 const Homepage = () => {
   const [loadingPage, setLoadingPage] = useState(true);
-  const { user, selectedChat, setSelectedChat, setSelectedPatient } =
-  ChatState();
+  const { user, selectedChat, setSelectedChat, setSelectedPatient } = ChatState();
   const authdata = JSON.parse(localStorage.getItem('authdata'));
   const email = authdata ? authdata.email : '';
   const userId = authdata ? authdata.id : '';
@@ -44,7 +43,7 @@ const Homepage = () => {
     }
   }, [patientsLoading, patientsData]);
   useEffect(() => {
-    console.log("init fetch");
+    // console.log("init fetch");
     refetchPatients().then((response) => {
       const resp = response?.patientsData?.fetchAmbulancesByDoctorId;
       // console.log(resp);
@@ -70,11 +69,11 @@ const Homepage = () => {
     return () => clearInterval(interval);
   }, [refetchPatients]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [dropdown2Visible, setDropdown2Visible] = useState(true); // State for Dropdown2 visibility
+  const [DropdownMinimizedVisible, setDropdownMinimizedVisible] = useState(true); // State for DropdownMinimized visibility
 
   const handleToggle = () => {
     setDropdownVisible(!dropdownVisible);
-    setDropdown2Visible(!dropdown2Visible); // Toggle Dropdown2 visibility
+    setDropdownMinimizedVisible(!DropdownMinimizedVisible); // Toggle DropdownMinimized visibility
   };
   const sortedPatients = patients.slice().sort((a, b) => {
     const criticalityOrder = { Critical: 0, Moderate: 1, Minor: 2 };
@@ -86,7 +85,7 @@ const Homepage = () => {
   var done = 0;
   useEffect(() => {
     setTimeout(() => {
-      console.log("useeffect", sortedPatients[0]);
+      // console.log("useeffect", sortedPatients[0]);
       if (!sortedPatients[0] || done) return;
       const { emt } = sortedPatients[0];
       setSelectedChat(emt);
@@ -137,7 +136,7 @@ const Homepage = () => {
       </div>
 
       <div
-        className={`column ${dropdown2Visible ? "hidden" : "visible"}`}
+        className={`column ${DropdownMinimizedVisible ? "hidden" : "visible"}`}
         style={{
           width: "full",
           overflow: "hidden",
@@ -158,7 +157,7 @@ const Homepage = () => {
           }}
         >
           {sortedPatients.map((item) => (
-            <Dropdown2 key={item.id} data={item} />
+            <DropdownMinimized key={item.id} data={item} />
           ))}
         </div>
       </div>
@@ -208,7 +207,7 @@ return(
       </div>
 
       <div
-        className={`column ${dropdown2Visible ? "hidden" : "visible"}`}
+        className={`column ${DropdownMinimizedVisible ? "hidden" : "visible"}`}
         style={{
           width: "full",
           overflow: "hidden",
