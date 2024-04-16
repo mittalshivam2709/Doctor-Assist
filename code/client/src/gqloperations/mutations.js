@@ -47,13 +47,6 @@ export const SEND_MESSAGE = gql`
     }
   }
 `
-export const DELETE_DOCUMENT = gql`
-  mutation Mutation($document_url: doc_url!) {
-    delete_doc(document_url: $document_url) {
-      document_url
-    }
-  }
-`
 export const SEND_DOCUMENT = gql`
   mutation Mutation($messageInputDoc: MessageInputDoc!) {
     sendDocument(messageInputDoc: $messageInputDoc) {

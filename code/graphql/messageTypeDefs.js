@@ -13,9 +13,6 @@ module.exports = gql`
     sender: ID!
     type: String
   }
-  input document_url{
-    document_url: String!
-  }
   type MessageDoc {
     admin_email: String!
     document_url: String!
@@ -40,7 +37,6 @@ module.exports = gql`
 
   extend type Mutation {
     sendMessage(messageInput: MessageInput!): Message!
-    delete_doc(document_url: doc_url!): Boolean!
     sendDocument(messageInputDoc: MessageInputDoc!): MessageDoc!
   }
 `

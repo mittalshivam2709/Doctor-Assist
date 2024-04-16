@@ -30,30 +30,13 @@ const Document = ({ data }) => {
       setHovered(isHovered)
       // setShowProblemDetails(isHovered);
     }
-    
-    const [delete_doc] = useMutation(DELETE_DOCUMENT,
-    {
-      onError: (error) => {
-        alert(error.message)
-      },
-    })
-    const handledelete = () => {
-      console.log("inside handle delete ")
-      delete_doc({
-          variables: {
-            doc_url: document_url,
-          },
-        }).then(() => {
-          console.log("here")
-          // setMessage(messageData)
-          // console.log(messageData)
-          // reset()
-          // setInputText('')
-        })
-  }
+
 
   const handletoggleforactive = () => {}
-
+  
+  const handledelete = () => {
+  
+  }
   return (
     <div className="parentdocument">
       <div className="left">

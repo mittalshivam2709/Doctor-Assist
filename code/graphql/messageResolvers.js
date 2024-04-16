@@ -36,20 +36,6 @@ module.exports = {
         throw new Error('Failed to send message');
       }
     },
-    // delete docuement 
-    delete_doc: async (_, { doc_url }) => {
-      try {
-        const doc= await Document.findOneAndDelete({document_url:doc_url});
-        if(!doc){
-          throw new Error('document not found')
-        }
-        await doc.save();
-        return true;
-      } catch (error) {
-        throw new Error('Failed to delete document');
-        return false;
-      }
-    },
     sendDocument: async (_, { messageInputDoc }) => {
       try {
         // Create a new message using the input data
