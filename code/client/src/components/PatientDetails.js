@@ -1,7 +1,6 @@
 import React from "react";
 
 const PatientDetails = ({ selectedPatient }) => {
-  console.log(selectedPatient.name);
   return (
     <div className="form-section">
       {/* <div className="flex flex-col form-row" style={{ flex: 1 }}> */}

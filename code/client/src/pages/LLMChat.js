@@ -8,12 +8,11 @@ import { FETCH_MESSAGES } from "../gqloperations/queries";
 import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
 
 import io from "socket.io-client";
-import ImageRender from "../components/ImageRender";
-import AudioRender from "../components/AudioRender";
 const ENDPOINT = "http://localhost:5001";
+
 var socket, selectedChatCompare;
 
-const SingleChat = () => {
+const LLMChat = () => {
   const { user, selectedChat, message, audioBlob, isSocket, setSocket } =
     ChatState();
   const [messages, setMessages] = useState([]);
@@ -70,27 +69,12 @@ const SingleChat = () => {
   return (
     <div>
       <div className="single-chat" style={{ overflowX: "hidden" }}>
-        {messages.filter(message => message.type !== "LLM").map((message, index) =>
-          message.type === null || message.type === "message" ? (
+        {messages.filter(message => message.type === "LLM").map((message, index) =>
             <Message
               key={index}
               message={message.content}
               right={message.sender == user}
             />
-          ) :  message.type === "image"? (
-            <ImageRender
-            key={index}
-            message={message.content}
-            right={message.sender == user}
-          />        
-        ):
-        (
-          <AudioRender
-          key={index}
-          message={message.content}
-          right={message.sender == user}
-        />
-        )
         )}
         <div ref={ref}></div>
       </div>
@@ -98,4 +82,4 @@ const SingleChat = () => {
   );
 };
 
-export default SingleChat;
+export default LLMChat;

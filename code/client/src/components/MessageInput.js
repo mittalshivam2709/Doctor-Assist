@@ -4,7 +4,6 @@ import { useMutation } from "@apollo/client";
 import { SEND_MESSAGE } from "../gqloperations/mutations";
 import { ChatState } from "../context/ChatProvider";
 import axios from 'axios'; 
-import mic from "../mic.png";
 import link from "../link.png";
 import send from "../send.png";
 
@@ -120,7 +119,13 @@ const MessageInput = () => {
     reset();
   }, [selectedChat]);
 
- 
+  useEffect(() => {
+    if (inputText === '') {
+      const inputField = document.querySelector(".input-bar.input-submit");
+      inputField.value = '';
+    }
+  }, [inputText]);
+
   return (
     <form
       onSubmit={handleSubmit((data) => customSubmit(data))}
@@ -174,35 +179,7 @@ const MessageInput = () => {
             </button>
           </div>
           <AudioRecorder/>
-          {/* <div style={{ position: "absolute", top: 15, right: 10 }}>
-            <button
-              type="button"
-              style={{
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-              }}
-            >
-              <img
-                src={mic}
-                alt="Link"
-                style={{ width: "36px", height: "36px" }}
-              />
-              <input
-                type="file"
-                onChange={handlefilechange}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  width: "100%",
-                  height: "100%",
-                  opacity: 0,
-                  cursor: "pointer",
-                }}
-              />
-            </button>
-          </div> */}
+        
         </>
       ) : (
         <div style={{ position: "absolute", top: 20.5, right: 20 }}>

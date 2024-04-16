@@ -43,9 +43,9 @@ const VitalPage = () => {
         setVitals(curr_vitals)
       }
     })
-    console.log(user)
-    console.log(setUser)
-    console.log(selectedPatient)
+    // console.log(user)
+    // console.log(setUser)
+    // console.log(selectedPatient)
   }, [selectedChat])
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const VitalPage = () => {
         const curr_vitals = response?.data?.fetchVitals
         if (curr_vitals) {
           setVitals(curr_vitals)
-          console.log(curr_vitals)
+          // console.log(curr_vitals)
         }
       })
     }, 5001)

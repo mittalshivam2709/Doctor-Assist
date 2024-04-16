@@ -7,6 +7,8 @@ import { ReactComponent as MySVG } from "../Chat.svg";
 import Draggable from "react-draggable";
 import { Resizable } from "re-resizable";
 import { ReactComponent as MySign } from "../sign.svg";
+import LLMInput from "./LLMInput";
+import LLMChat from "../pages/LLMChat";
 
 const ChatWidget = () => {
   const [expanded, setExpanded] = useState(false);
@@ -61,7 +63,7 @@ const ChatWidget = () => {
       case "SingleChat":
         return <SingleChat />;
       case "HelpChat":
-        return <HelpChat />;
+        return <LLMChat />;
       default:
         return <SingleChat />;
     }
@@ -140,7 +142,12 @@ const ChatWidget = () => {
 
             {renderContent()}
             <div className="bottom-bar">
-              <MessageInput />
+              {
+                activeTab === "SingleChat"?
+                  <MessageInput />:
+                  <LLMInput / >
+              }
+              
             </div>
           </div>
         )}
