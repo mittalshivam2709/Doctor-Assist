@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios' // Import Axios for making HTTP requests
 import drag from '../drag.png'
 import plus from '../plus.png'
@@ -6,10 +6,11 @@ import { SEND_DOCUMENT } from '../gqloperations/mutations'
 import { useMutation } from '@apollo/client'
 import { useQuery } from '@apollo/client'
 import Documentcomp from '../components/document'
-import {FETCH_DOCUMENTS} from "../gqloperations/queries";
+import { FETCH_DOCUMENTS } from '../gqloperations/queries'
 const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
-  const fileInputRef = useRef(null)
+
+  const fileInputRef = useRef()
   const [fileInputVisible, setFileInputVisible] = useState(false)
   const authdata = JSON.parse(localStorage.getItem('authdata'))
   const email = authdata ? authdata.email : ''
@@ -59,7 +60,7 @@ const Protocol_sheet = () => {
         }
       }
       console.log(fileUrl)
-      const date =new Date()
+      const date = new Date()
       // const DocData = {
       //   admin_email: email,
       //   document_url: fileUrl,
@@ -69,17 +70,27 @@ const Protocol_sheet = () => {
       //   admit_time: '1',
       //   last_update_time: '1',
       // }
-      const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-      const formattedTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+      const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, '0')}-${date.getFullYear()}`
+      const formattedTime = `${date
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
       const DocData = {
-      admin_email: email,
-      document_url: fileUrl,
-      document_name: filename,
-      document_no: '1',
-      active_to_train: '1',
-      admit_time: `${formattedTime}/${formattedDate}`,
-      last_update_time: `${formattedTime}/${formattedDate}`, // Store the current date and time
-      }; 
+        admin_email: email,
+        document_url: fileUrl,
+        document_name: filename,
+        document_no: '1',
+        active_to_train: '1',
+        admit_time: `${formattedTime}/${formattedDate}`,
+        last_update_time: `${formattedTime}/${formattedDate}`, // Store the current date and time
+      }
       console.log('Sent document data:', DocData)
       const sendDocResponse = await sendDocument({
         variables: {
@@ -96,15 +107,13 @@ const Protocol_sheet = () => {
 
   const [dragging, setDragging] = useState(false)
 
-
   const { loading, data, refetch } = useQuery(FETCH_DOCUMENTS, {
     variables: { doc_no: '1' },
   })
 
-
   // /////////////////////////////
   // below is the code for fetching all the documents
-  const [docs, setdocs] = useState([])  
+  const [docs, setdocs] = useState([])
 
   useEffect(() => {
     console.log('init fetch')
@@ -156,6 +165,18 @@ const Protocol_sheet = () => {
   //   setSelectedFile(files[0]) // Set the selected file
   // }
 
+  // const [files, setFiles] = useState(null)
+  // const inputRef = useRef()
+
+  const handleDragOver = (event) => {
+    event.preventDefault()
+  }
+
+  const handleDrop = (event) => {
+    event.preventDefault()
+    setSelectedFile(event.dataTransfer.files[0])
+  }
+
   return (
     <div>
       {docs.map((item) => (
@@ -206,43 +227,79 @@ const Protocol_sheet = () => {
               </div>
             )}
             {fileInputVisible && (
-              <button onClick={handleButtonClick}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '544px',
-                    height: '444px',
-                    border: '2px dashed #ccc',
-                    borderRadius: '20px',
-                    padding: '20px',
-                    margin: '10px auto',
-                    cursor: 'pointer',
-                  }}
-                  className={`drop-zone ${dragging ? 'dragging' : ''}`}
-                >
-                  <img src={drag} alt="image" />
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileInput}
-                    style={{ display: 'none' }} // Hide the file input
-                  />
+              <>
+                <button onClick={() => fileInputRef.current.click()}>
                   <div
                     style={{
-                      fontSize: '26px',
-                      width: '235px',
-                      height: '36px',
-                      top: '479px',
-                      left: '449px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '544px',
+                      height: '444px',
+                      border: '2px dashed #ccc',
+                      borderRadius: '20px',
+                      padding: '20px',
+                      margin: '10px auto',
+                      cursor: 'pointer',
                     }}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
                   >
-                    Drag files to upload
+                    <img src={drag} alt="image" />
+                    <h1>Drag and Drop Files to Upload</h1>
+                    <h1>Or</h1>
+                    <input
+                      type="file"
+                      multiple
+                      onChange={(event) =>
+                        setSelectedFile(event.target.files[0])
+                      }
+                      hidden
+                      accept="image/png, image/jpeg"
+                      ref={fileInputRef}
+                    />
+                    Select Files
                   </div>
-                </div>
-              </button>
+                </button>
+              </>
+              // <button onClick={handleButtonClick}>
+              //   <div
+              //     style={{
+              //       display: 'flex',
+              //       flexDirection: 'column',
+              //       alignItems: 'center',
+              //       justifyContent: 'center',
+              //       width: '544px',
+              //       height: '444px',
+              //       border: '2px dashed #ccc',
+              //       borderRadius: '20px',
+              //       padding: '20px',
+              //       margin: '10px auto',
+              //       cursor: 'pointer',
+              //     }}
+              //     className={`drop-zone ${dragging ? 'dragging' : ''}`}
+              //   >
+              //     <img src={drag} alt="image" />
+              //     <input
+              //       type="file"
+              //       ref={fileInputRef}
+              //       onChange={handleFileInput}
+              //       style={{ display: 'none' }} // Hide the file input
+              //     />
+              //     <div
+              //       style={{
+              //         fontSize: '26px',
+              //         width: '235px',
+              //         height: '36px',
+              //         top: '479px',
+              //         left: '449px',
+              //       }}
+              //     >
+              //       Drag files to upload
+              //     </div>
+              //   </div>
+              // </button>
             )}
             {selectedFile && <div>Selected File: {selectedFile.name}</div>}
             <br />
