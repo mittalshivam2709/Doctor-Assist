@@ -16,7 +16,6 @@ import Protocol_sheet from "./Protocol_sheet";
 import Draggable from "react-draggable";
 import { useLocation } from "react-router-dom";
 import { judgeCriticality } from "../utils/criticalityJudgement";
-
 const Homepage = () => {
   const [loadingPage, setLoadingPage] = useState(true);
   const { user, selectedChat, setSelectedChat, setSelectedPatient } =

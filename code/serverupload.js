@@ -232,8 +232,8 @@ app.post("/upload_files", upload.single("image"), async (req, res) => {
     }
     res.send({
         msg: "File uploaded successfully!",
-    });
-});
+    });    
+});    
 app.get("/get_files", async (req, res) => {
     try {
         const files = await listFilesFromS3_chatbox();
@@ -241,30 +241,11 @@ app.get("/get_files", async (req, res) => {
         console.log("Number of files:", files.length); // Logging number of files
     } catch (error) {
         res.status(500).send({ error: "Internal server error" });
-    }
-});
+    }    
+});    
 
-app.delete("/delete_documents", async (req, res) => {
-    try {
-        const deletedCount = await deleteAllFilesFromS3('EMRI_audio_files/DASS_39/Document_query/');
-        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
-    } catch (error) {
-        console.error("Error deleting files:", error);
-        res.status(500).send({ error: "Internal server error" });
-    }
-});
 
-app.delete("/delete_files", async (req, res) => {
-    try {
-        const deletedCount = await deleteAllFilesFromS3('EMRI_audio_files/DASS_39/Message_files/');
-        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
-    } catch (error) {
-        console.error("Error deleting files:", error);
-        res.status(500).send({ error: "Internal server error" });
-    }
-});
-
-const deleteAllFilesFromS3 = (prefix) => {
+const deleteFilesFromS3 = (prefix) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
@@ -297,7 +278,94 @@ const deleteAllFilesFromS3 = (prefix) => {
     });
 };
 
+async function deleteFileFromS3(key) {
+    const params = {
+        Bucket: S3_BUCKET,
+        Key: key
+    };
+    try {
+      await s3.deleteObject(params).promise();
+      return 1; // Return 1 since only one file is deleted
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      throw error;
+    }
+  }
 
+// const deleteFileFromS3 = (key) => {
+//     return new Promise((resolve, reject) => {
+//         const params = {
+//             Bucket: S3_BUCKET,
+//             Key: key
+//         };    
+//         S3.deleteObject(params, (err, data) => {
+//             if (err) {
+//                 console.error("Error deleting file from S3:", err);
+//                 return reject(err);
+//             }    
+//             console.log("Successfully deleted file:", key);
+//             resolve(1); // We deleted one file
+//         });    
+//     });    
+// };    
+app.delete("/delete_documents", async (req, res) => {
+    try {
+        const deletedCount = await deleteFilesFromS3('EMRI_audio_files/DASS_39/Document_query/');
+        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
+    } catch (error) {
+        console.error("Error deleting files:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }    
+});    
+app.delete("/delete_files", async (req, res) => {
+    try {
+        const deletedCount = await deleteFilesFromS3('EMRI_audio_files/DASS_39/Message_files/');
+        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
+    } catch (error) {
+        console.error("Error deleting files:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }    
+});    
+// Endpoint to delete a specific file with a given filename
+// app.delete("/delete_file", async (req, res) => {
+//     try {
+//         const { filename } = req.body; // Extract filename from request body
+//         const deletedCount = await deleteFileFromS3(`EMRI_audio_files/DASS_39/Message_files/${filename}`);
+//         res.send({ msg: `Successfully deleted ${deletedCount} files.` });
+//     } catch (error) {
+//         console.error("Error deleting files:", error);
+//         res.status(500).send({ error: "Internal server error" });
+//     }    
+// });    
+app.delete("/delete_file", async (req, res) => {
+    try {
+        const { filename } = req.body; // Extract filename from JSON request body
+        if (!filename) {
+            return res.status(400).send({ error: "Filename not provided" });
+        }
+        const deletedCount = await deleteFileFromS3(`EMRI_audio_files/DASS_39/Message_files/${filename}`);
+        res.send({ msg: `Successfully deleted file: ${filename}` });
+    } catch (error) {
+        console.error("Error deleting file:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }    
+}); 
+
+// Endpoint to delete a specific document with a given name
+app.delete("/delete_document", async (req, res) => {
+    try {
+        const { documentname } = req.body; // Extract filename from JSON request body
+        if (!documentname) {
+            return res.status(400).send({ error: "Document parameter is missing." });
+        }    
+        const keyToDelete = `EMRI_audio_files/DASS_39/Document_query/${documentname}`;
+        const deletedCount = await deleteFileFromS3(keyToDelete);
+        res.send({ msg: `Successfully deleted ${deletedCount} file.` });
+    } catch (error) {
+        console.error("Error deleting file:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }    
+});    
 
 
 app.listen(5002)

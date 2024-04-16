@@ -42,7 +42,7 @@ const Navbar = ({ username }) => {
         cookies.set("jwt_auth", getUserToken, {
           expires: new Date(decoded.exp*1000),
         })
-        console.log("cookies set ack");
+        console.log("cookies set ack ",decoded);
       }
     })
   }, [])
