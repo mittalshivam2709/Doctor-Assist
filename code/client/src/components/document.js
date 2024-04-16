@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
 import docion from '../docicon.png'
+import { DELETE_DOCUMENT } from '../gqloperations/mutations'
 import deleteicon from '../delete.png'
+import { useMutation } from '@apollo/client'
+
 import '../admin.css'
 // similar to dropdownjs
 
@@ -9,6 +12,7 @@ import '../admin.css'
 const Document = ({ data }) => {
   const { admin_email, document_url, document_no, document_name, admit_time } =
     data
+  const [deleteDocument] = useMutation(DELETE_DOCUMENT)
 
   let hoverColor = ''
   let hoverC = ''
@@ -29,37 +33,16 @@ const Document = ({ data }) => {
   }
 
   const handledelete = () => {
-    const { loading, data, refetch } = useQuery(DELETE_DOCUMENT, {
-      variables: { document_url: data }, // data will be the document_url
-    })
-
-    useEffect(() => {
-      console.log('init fetch')
-      refetch().then((response) => {
-        const resp = response?.data?.deletedocumentbydocumenturl
-        console.log(resp)
-        if (resp && resp.length > 0) {
-          // setdocs(resp)
-        }
-      })
-    }, [])
-
-    useEffect(() => {
-      const interval = setInterval(
-        () => {
-          refetch().then((response) => {
-            const resp = response?.data?.deletedocumentbydocumenturl
-            console.log(resp)
-            if (resp && resp.length > 0) {
-              // setdocs(resp)
-            }
-          })
-        }
-        // docs ? 10000 : 0
-      )
-
-      return () => clearInterval(interval)
-    }, [refetch])
+        // deleteDocument({
+        //   variables: {
+        //     document_url: document_url,
+        //   },
+        // }).then(() => {
+          // setMessage(messageData)
+          // console.log(messageData)
+          // reset()
+          // setInputText('')
+        // })
   }
 
   const handletoggleforactive = () => {}
@@ -72,7 +55,7 @@ const Document = ({ data }) => {
       </div>
       <div className="right">
         {admit_time}
-        <button>
+        <button onClick={handledelete}>
           <img src={deleteicon} alt="Image 1" />
         </button>
         <button>
