@@ -40,7 +40,7 @@ module.exports = gql`
 
   extend type Mutation {
     sendMessage(messageInput: MessageInput!): Message!
-    deletedoc(document_url: document_url!): Boolean!
+    delete_doc(document_url: doc_url!): Boolean!
     sendDocument(messageInputDoc: MessageInputDoc!): MessageDoc!
   }
 `

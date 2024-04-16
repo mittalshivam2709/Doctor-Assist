@@ -12,37 +12,44 @@ import '../admin.css'
 const Document = ({ data }) => {
   const { admin_email, document_url, document_no, document_name, admit_time } =
     data
-  const [deleteDocument] = useMutation(DELETE_DOCUMENT)
-
-  let hoverColor = ''
-  let hoverC = ''
-  const [hovered, setHovered] = useState(false)
-
-  // const { selectedChat, setSelectedChat, setSelectedPatient } = ChatState()
-  // const isSelected = selectedChat === emt
-  var color = 'white'
-
-  const handleToggle = () => {
-    setSelectedChat(isSelected ? null : emt)
-    setSelectedPatient(isSelected ? null : data)
-  }
-
-  const handleHover = (isHovered) => {
-    setHovered(isHovered)
-    // setShowProblemDetails(isHovered);
-  }
-
-  const handledelete = () => {
-        // deleteDocument({
-        //   variables: {
-        //     document_url: document_url,
-        //   },
-        // }).then(() => {
+    
+    let hoverColor = ''
+    let hoverC = ''
+    const [hovered, setHovered] = useState(false)
+    
+    // const { selectedChat, setSelectedChat, setSelectedPatient } = ChatState()
+    // const isSelected = selectedChat === emt
+    var color = 'white'
+    
+    const handleToggle = () => {
+      setSelectedChat(isSelected ? null : emt)
+      setSelectedPatient(isSelected ? null : data)
+    }
+    
+    const handleHover = (isHovered) => {
+      setHovered(isHovered)
+      // setShowProblemDetails(isHovered);
+    }
+    
+    const [delete_doc] = useMutation(DELETE_DOCUMENT,
+    {
+      onError: (error) => {
+        alert(error.message)
+      },
+    })
+    const handledelete = () => {
+      console.log("inside handle delete ")
+      delete_doc({
+          variables: {
+            doc_url: document_url,
+          },
+        }).then(() => {
+          console.log("here")
           // setMessage(messageData)
           // console.log(messageData)
           // reset()
           // setInputText('')
-        // })
+        })
   }
 
   const handletoggleforactive = () => {}

@@ -48,9 +48,9 @@ export const SEND_MESSAGE = gql`
   }
 `
 export const DELETE_DOCUMENT = gql`
-  mutation Mutation($document_url: document_url!) {
-    delete_doc(docuement_url: $docuemnt_url) {
-      docuemnt_url
+  mutation Mutation($document_url: doc_url!) {
+    delete_doc(document_url: $document_url) {
+      document_url
     }
   }
 `
