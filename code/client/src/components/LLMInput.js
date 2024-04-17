@@ -71,9 +71,9 @@ const LLMInput = () => {
     setInputText("");
   };
 
-  useEffect(() => {
-    reset();
-  }, [selectedChat]);
+  // useEffect(() => {
+  //   reset();
+  // }, [selectedChat]);
 
   useEffect(() => {
     if (inputText === "") {
