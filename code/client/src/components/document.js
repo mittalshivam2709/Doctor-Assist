@@ -184,10 +184,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { CHANGE_STATUS } from '../gqloperations/mutations';
+import { DELETE_DOCUMENT } from '../gqloperations/mutations';
 import docion from '../doc_icon.png';
 import deleteicon from '../delete.png';
 import '../admin.css';
 import threedots from '../threeDots.png';
+import axios from 'axios'
 const Document = ({ data }) => {
   const { document_url, document_name, active_to_train, admit_time} = data;
 
@@ -212,8 +214,26 @@ const Document = ({ data }) => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+  const deletedoc = async (document_url) => {
+  deletedocument({
+    variables:{
+      inp:{
+        document_url: document_url
+      },
+    },
+  });
+  try {
+    const response = await axios.delete(
+      `http://localhost:5002/delete_document/${document_name}`);
+    console.log(response.data) 
+    alert('Document deleted successfully!')
+  } catch (error) {
+    console.error('Error uploading document:', error)
+    alert('Error deleting document. Please try again.')
+  }
+  }
   const [changestatus] = useMutation(CHANGE_STATUS);
-
+  const [deletedocument] = useMutation(DELETE_DOCUMENT);
   const change_activity_status1 = (status) => {
     const newStatus = '1';
     if (status == '0'){
@@ -259,7 +279,7 @@ const Document = ({ data }) => {
       </div>
       <div className="right">
         {admit_time}
-        <button>
+        <button onClick={() => deletedoc(document_url)}>
           <img src={deleteicon} alt="Delete" />
         </button>
         <button onClick={toggleDropdown}>

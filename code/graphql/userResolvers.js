@@ -110,5 +110,17 @@ module.exports = {
         ...res._doc,
       }
     },
+    async deletedocument(_, { inp: { document_url } }) {
+      try {
+        // Delete all documents with the provided URL
+        const result = await Document.deleteMany({ document_url });
+        return 1;      
+        } catch (error) {
+        throw new ApolloError('Failed to delete documents', 'DELETE_DOCUMENTS_ERROR', {
+          error: error.message,
+        });
+      }
+    }
+    
   },
 }

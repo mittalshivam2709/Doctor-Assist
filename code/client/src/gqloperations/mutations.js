@@ -49,6 +49,11 @@ export const CHANGE_STATUS = gql`
     }
   }
 `
+export const DELETE_DOCUMENT = gql`
+  mutation deletedocument($inp: deletedocument!) {
+    deletedocument(inp: $inp)
+  }
+`
 
 export const SEND_MESSAGE = gql`
   mutation Mutation($messageInput: MessageInput!) {

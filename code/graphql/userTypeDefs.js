@@ -29,6 +29,9 @@ module.exports = gql`
     document_url: String!
     active_to_train: String!
   }
+  input deletedocument {
+    document_url: String!
+  }
   type Doc{
     admin_email: String!
     document_url: String!
@@ -43,5 +46,6 @@ module.exports = gql`
     loginUser(userInput: UserInput!): User!
     resetPassword(userInput: UserInput!): User!
     changestatus(inp: changestatusinput!): Doc!
+    deletedocument(inp: deletedocument!): Boolean!
   }
 `

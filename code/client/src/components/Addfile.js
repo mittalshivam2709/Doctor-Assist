@@ -241,7 +241,6 @@ const Addfile = () => {
                     multiple
                     onChange={(event) => setSelectedFile(event.target.files[0])}
                     hidden
-                    accept="image/png, image/jpeg"
                     ref={fileInputRef}
                   />
                   Select Files
