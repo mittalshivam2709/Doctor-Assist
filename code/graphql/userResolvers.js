@@ -98,54 +98,18 @@ module.exports = {
         ...res._doc,
       }
     },
-    // async changestatus(_, { inp: { document_url,active_to_train } }) {
-    //   const doc = await Document.findOne({ document_url })
-    //   if (!doc) {
-    //     throw new ApolloError('Document does not exist')
-    //   }
-    //   doc.active_to_train = active_to_train
-    //   const date = new Date()
-    //   const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(
-    //     date.getMonth() + 1
-    //   )
-    //     .toString()
-    //     .padStart(2, '0')}-${date.getFullYear()}`
-    //   const formattedTime = `${date
-    //     .getHours()
-    //     .toString()
-    //     .padStart(2, '0')}:${date
-    //     .getMinutes()
-    //     .toString()
-    //     .padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`
-    //   doc.last_update_time = `${formattedTime}/${formattedDate}`
-    //   const res = await doc.save()
-    //   return {
-    //     id: res.id,
-    //     ...res._doc,
-    //   }
-    // },
-    async changestatus(_, { inp: { document_url, active_to_train } }) {
-      try {
-        const doc = await Document.findOne({ document_url });
-        if (!doc) {
-          throw new ApolloError('Document does not exist');
-        }
-        doc.active_to_train = active_to_train;
-        const date = new Date();
-        const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-        const formattedTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
-        doc.last_update_time = `${formattedTime}/${formattedDate}`;
-        console.log('Updating last_update_time:'); // Log the updated last_update_time
-        const res = await doc.save();
-        return {
-          id: res.id,
-          ...res._doc,
-        };
-      } catch (error) {
-        console.error('Error updating document status:', error);
-        throw new ApolloError('Error updating document status');
+    async changestatus(_, { inp: { document_url,active_to_train } }) {
+      const doc = await Document.findOne({ document_url })
+      if (!doc) {
+        throw new ApolloError('Document does not exist')
       }
-    }
-    
+      doc.active_to_train = active_to_train
+      // console.log('New ', active_to_train)
+      const res = await doc.save()
+      return {
+        id: res.id,
+        ...res._doc,
+      }
+    },
   },
 }

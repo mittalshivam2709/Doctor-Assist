@@ -189,7 +189,7 @@ import deleteicon from '../delete.png';
 import '../admin.css';
 import threedots from '../threeDots.png';
 const Document = ({ data }) => {
-  const { document_url, document_name, active_to_train, admit_time,last_update_time } = data;
+  const { document_url, document_name, active_to_train, admit_time} = data;
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [button1Color, setButton1Color] = useState(active_to_train === '1' ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900');
@@ -251,23 +251,6 @@ const Document = ({ data }) => {
       setButton2Color('bg-gray-200 text-gray-900');
     }
   };
-  function extractDate(dateString) {
-    const parts = dateString.split('/');
-    const datePart = parts[1];
-    const dateParts = datePart.split('-');
-    const day = dateParts[0];
-    const month = dateParts[1];
-    const year = dateParts[2];
-    const formattedDate = `${day}th ${getMonthName(parseInt(month, 10))}, ${year}`;
-    return formattedDate;
-  }
-  function getMonthName(monthNumber) {
-    const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return months[monthNumber - 1];
-  }  
   return (
     <div className="parentdocument">
       <div className="left">
@@ -275,9 +258,7 @@ const Document = ({ data }) => {
         {document_name}
       </div>
       <div className="right">
-        {admit_time === last_update_time ? (
-        <p>{extractDate(admit_time)}</p>) : (
-        <p>Opened {extractDate(last_update_time)}</p>)}
+        {admit_time}
         <button>
           <img src={deleteicon} alt="Delete" />
         </button>
