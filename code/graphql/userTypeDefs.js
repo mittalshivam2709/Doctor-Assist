@@ -10,7 +10,7 @@ module.exports = gql`
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
-    privilege : String
+    privilege: String
   }
 
   input UserInput {
@@ -20,15 +20,28 @@ module.exports = gql`
     doctor_degree: String
     doctor_mobile: String
     doctor_visit: String
-    privilege : String
+    privilege: String
   }
   extend type Query {
     getUser(ID: ID!): User!
   }
-
+  input changestatusinput {
+    document_url: String!
+    active_to_train: String!
+  }
+  type Doc{
+    admin_email: String!
+    document_url: String!
+    document_no: String!
+    document_name: String!
+    active_to_train: String!
+    admit_time: String!
+    last_update_time: String!
+  }
   extend type Mutation {
     addUser(userInput: UserInput!): User!
     loginUser(userInput: UserInput!): User!
     resetPassword(userInput: UserInput!): User!
+    changestatus(inp: changestatusinput!): Doc!
   }
 `

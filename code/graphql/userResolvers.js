@@ -1,5 +1,6 @@
 const { ApolloError } = require('apollo-server')
 const User = require('../models/auth')
+const Document = require('../models/Document')
 const jwt = require('jsonwebtoken')
 // todo -> encryption
 module.exports = {
@@ -92,6 +93,19 @@ module.exports = {
       console.log('New password', password)
       user.password = password
       const res = await user.save()
+      return {
+        id: res.id,
+        ...res._doc,
+      }
+    },
+    async changestatus(_, { inp: { document_url,active_to_train } }) {
+      const doc = await Document.findOne({ document_url })
+      if (!doc) {
+        throw new ApolloError('Document does not exist')
+      }
+      doc.active_to_train = active_to_train
+      console.log('New ', active_to_train)
+      const res = await doc.save()
       return {
         id: res.id,
         ...res._doc,

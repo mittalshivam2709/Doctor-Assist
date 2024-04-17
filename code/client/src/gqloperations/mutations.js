@@ -36,6 +36,19 @@ export const RESET_PASSWORD = gql`
     }
   }
 `
+export const CHANGE_STATUS = gql`
+  mutation changestatus($inp: changestatusinput!) {
+    changestatus(inp: $inp) {
+      admin_email
+      document_url
+      document_no
+      document_name
+      active_to_train
+      admit_time
+      last_update_time
+    }
+  }
+`
 
 export const SEND_MESSAGE = gql`
   mutation Mutation($messageInput: MessageInput!) {
