@@ -3,6 +3,7 @@ import Dropdown from '../components/Dropdown'
 import DropdownMinimized from '../components/DropdownMinimized'
 import Placeholder from '../components/Placeholder'
 import Template from '../components/Template'
+import Addfile from '../components/Addfile'
 import ChatPage from './ChatPage'
 import { ChatState } from '../context/ChatProvider'
 import Navbar from '../components/Navbar'
@@ -13,6 +14,7 @@ import VitalPage from './VitalPage'
 import Protocol_sheet from './Protocol_sheet'
 import { judgeCriticality } from '../utils/criticalityJudgement'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import plus from '../plus.png'
 
 const Homepage = () => {
   const [loadingPage, setLoadingPage] = useState(true)
@@ -105,12 +107,24 @@ const Homepage = () => {
     }
   }, [loadingPage])
 
-  const [showDocumentComponent, setshowDocumentComponent] = useState(true)
+  const [showDocumentComponent, setshowDocumentComponent] = useState(false)
   const [showFormComponent, setshowFormComponent] = useState(false)
+  const [showupload, setshowupload] = useState(false)
 
-  const toggleComponent = () => {
-    setshowDocumentComponent(!showDocumentComponent)
-    setshowFormComponent(!showFormComponent)
+  const formtoggleComponent = () => {
+    setshowDocumentComponent(false)
+    setshowFormComponent(true)
+    setshowupload(false)
+  }
+  const documenttoggleComponent = () => {
+    setshowDocumentComponent(true)
+    setshowFormComponent(false)
+    setshowupload(false)
+  }
+  const uploadtoggleComponent = () => {
+    setshowDocumentComponent(false)
+    setshowFormComponent(false)
+    setshowupload(true)
   }
 
   if (loadingPage) return <h1 className="flex justify-center">Loading</h1> // add another page for this?
@@ -217,7 +231,7 @@ const Homepage = () => {
               overflowX: 'hidden',
             }}
           >
-            <button onClick={toggleComponent}>
+            <button onClick={formtoggleComponent}>
               <div
                 className="expanding-box-header bg-white text-black"
                 style={{
@@ -241,7 +255,7 @@ const Homepage = () => {
             </button>
             <br />
             <br />
-            <button onClick={toggleComponent}>
+            <button onClick={documenttoggleComponent}>
               <div
                 className="expanding-box-header bg-white text-black"
                 style={{
@@ -262,6 +276,8 @@ const Homepage = () => {
                 </p>
               </div>
             </button>
+
+            {/* fix the position of this plus, it must come when document is clicked */}
           </div>
         </div>
 
@@ -276,9 +292,18 @@ const Homepage = () => {
             style={{ backgroundColor: '#F4F4FF', borderRadius: '10px' }}
           >
             <Protocol_sheet />
+            <button onClick={uploadtoggleComponent}>
+              <div
+                className="expanding-box-header bg-white text-black"
+                style={{}}
+              >
+                <img src={plus} alt="" />
+              </div>
+            </button>
           </div>
         )}
         {/* Code similar to above must be written to render the form component using the showFormComponent variable */}
+        {showupload && <Addfile />}
       </div>
     )
   }

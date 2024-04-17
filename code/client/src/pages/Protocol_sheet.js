@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client'
 import { useQuery } from '@apollo/client'
 import Documentcomp from '../components/document'
 import { FETCH_DOCUMENTS } from '../gqloperations/queries'
+import Addfile from '../components/Addfile'
 const Protocol_sheet = () => {
   const [selectedFile, setSelectedFile] = useState(null)
 
@@ -61,15 +62,6 @@ const Protocol_sheet = () => {
       }
       console.log(fileUrl)
       const date = new Date()
-      // const DocData = {
-      //   admin_email: email,
-      //   document_url: fileUrl,
-      //   document_name: filename,
-      //   document_no: '1',
-      //   active_to_train: '1',
-      //   admit_time: '1',
-      //   last_update_time: '1',
-      // }
       const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(
         date.getMonth() + 1
       )
@@ -177,12 +169,18 @@ const Protocol_sheet = () => {
     setSelectedFile(event.dataTransfer.files[0])
   }
 
+  const [showplus, setshowplus] = useState(false)
+  const ShowAddFilePage = () => {
+    setshowplus(!showplus)
+  }
+
   return (
     <div>
       {docs.map((item) => (
         <Documentcomp key={item.id} data={item} />
       ))}
-      <div>
+
+      {/* <div>
         <br />
         <br />
         <div
@@ -323,7 +321,7 @@ const Protocol_sheet = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div>  */}
     </div>
   )
 }
