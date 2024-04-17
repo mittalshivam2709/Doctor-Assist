@@ -83,14 +83,14 @@ const VitalPage = () => {
             <div className="datee">Date: DD/MM/YYYY</div>
           </h3>
         </div>
-        <>
+        {/* <> */}
           <h2 className="boxx">Personal details</h2>
           <PatientDetails selectedPatient={selectedPatient} />
           <h2 className="boxx">Medical diagnosis</h2>
           <MedicalInfo selectedPatient={selectedPatient} />
           <h2 className="boxx">Vitals</h2>
           <Vitals vitals={vitals} />
-        </>
+        {/* </> */}
       </div>
     </div>
   )
