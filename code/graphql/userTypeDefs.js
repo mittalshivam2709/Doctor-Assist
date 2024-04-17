@@ -28,6 +28,7 @@ module.exports = gql`
   input changestatusinput {
     document_url: String!
     active_to_train: String!
+    last_update_time: String!
   }
   type Doc{
     admin_email: String!
