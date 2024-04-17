@@ -73,7 +73,7 @@ const LLMChat = () => {
             <Message
               key={index}
               message={message.content}
-              right={message.sender == user}
+              right={message.sender === user}
             />
         )}
         <div ref={ref}></div>
