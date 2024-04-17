@@ -186,7 +186,17 @@ app.delete("/delete-files", async (req, res) => {
         res.status(500).send({ error: "Internal server error" });
     }
 });
-
+app.delete("/delete-file/:filename", async (req, res) => {
+    const filename = req.params.filename;
+    const prefix = 'emrifol/';
+    try {
+        const deletedCount = await deleteFileFromS3(prefix + filename);
+        res.send({ msg: `Successfully deleted file: ${filename}` });
+    } catch (error) {
+        console.error(`Error deleting file ${filename}:`, error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
 const deleteAllFilesFromS3 = (prefix) => {
     return new Promise((resolve, reject) => {
         const params = {
@@ -220,6 +230,22 @@ const deleteAllFilesFromS3 = (prefix) => {
     });
 };
 
+const deleteFileFromS3 = (key) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket: S3_BUCKET,
+            Key: key
+        };
+        S3.deleteObject(params, (err, data) => {
+            if (err) {
+                console.error(`Error deleting file ${key} from S3:`, err);
+                return reject(err);
+            }
+            console.log(`Successfully deleted file ${key} from S3`);
+            resolve();
+        });
+    });
+};
 
 app.listen(5002)
 {

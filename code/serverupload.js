@@ -31,33 +31,16 @@ let upload = multer({
         fileSize: 1024 * 1024 * 5,
     },
     fileFilter: function (req, file, done) {
-        // if (
-        //     file.mimetype === "image/jpeg" ||
-        //     file.mimetype === "image/png" ||
-        //     file.mimetype === "image/jpg"
-        // ) {
-        //     done(null, true);
-        // } else {
-        //     //prevent the upload
-        //     var newError = new Error("File type is incorrect");
-        //     newError.name = "MulterError";
-        //     done(newError, false);
-        // }
         done(null, true);  // can now accept and store all files
     },
 });
 
 const uploadToS3 = (fileData,filename) => {
-    // console.log(fileData);
-    // console.log(filename);
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
-            // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
-            // Key: filename,
             Key:`EMRI_audio_files/DASS_39/Document_query/${filename}`,
             Body: fileData,
-            // ACL: 'public-read', // Make the file public, so you can access it via URL
             // ACL: 'public-read', // Make the file public, so you can access it via URL
         };
         S3.upload(params, (err, data) => {
@@ -100,11 +83,8 @@ const uploadToS3_chatbox = (fileData,filename) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: S3_BUCKET,
-            // Key: `${Date.now().toString()}_${fileData.originalname}`, // Add original file name to the Key
-            // Key: filename,
             Key:`EMRI_audio_files/DASS_39/Message_files/${filename}`,
             Body: fileData,
-            // ACL: 'public-read', // Make the file public, so you can access it via URL
             // ACL: 'public-read', // Make the file public, so you can access it via URL
         };
         S3.upload(params, (err, data) => {
@@ -140,109 +120,9 @@ const listFilesFromS3_chatbox = () => {
             });
             console.log(files);
             resolve(files);
-        });
-    });
-}; 
-
-// To fetch all files :-
-
-// const listFilesFromS3 = () => {
-//     return new Promise((resolve, reject) => {
-//         const params = {
-//             Bucket: S3_BUCKET,
-//         };
-//         S3.listObjectsV2(params, (err, data) => {
-//             if (err) {
-//                 console.log(err);
-//                 return reject(err);
-//             }
-//             const files = data.Contents.map((file) => {
-//                 const fileKey = file.Key;   // name of file
-//                 const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${fileKey}`;
-//                 return {
-//                     name: fileKey,
-//                     url: fileUrl
-//                 };
-//             });
-//             const folders = data.CommonPrefixes.map((prefix) => {
-//                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
-//                 return {
-//                     name: folderKey,
-//                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
-//                     type: "folder"
-//                 };
-//             });
-//             const allItems = [...files, ...folders];
-//             console.log(allItems);
-//             resolve(allItems);
-//         });
-//     });
-// };
-
-
-// To fetch folders  :-
-
-// const listFilesFromS3 = () => {
-//     return new Promise((resolve, reject) => {
-//         const params = {
-//             Bucket: S3_BUCKET,
-//             Delimiter: '/' // Set delimiter to '/' to only get folders
-//         };
-//         S3.listObjectsV2(params, (err, data) => {
-//             if (err) {
-//                 console.log(err);
-//                 return reject(err);
-//             }
-//             const folders = data.CommonPrefixes.map((prefix) => {
-//                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
-//                 return {
-//                     name: folderKey,
-//                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
-//                     type: "folder"
-//                 };
-//             });
-//             console.log(folders);
-//             resolve(folders);
-//         });
-//     });
-// };
-
-
-
-app.post("/upload_documents", upload.single("image"), async (req, res) => {
-    if (req.file) {
-        await uploadToS3(req.file.buffer,req.file.originalname);
-    }
-    res.send({
-        msg: "File uploaded successfully!",
-    });
-});
-app.get("/get_documents", async (req, res) => {
-    try {
-        const files = await listFilesFromS3();
-        res.send(files);
-        console.log("Number of files:", files.length); // Logging number of files
-    } catch (error) {
-        res.status(500).send({ error: "Internal server error" });
-    }
-});
-app.post("/upload_files", upload.single("image"), async (req, res) => {
-    if (req.file) {
-        await uploadToS3_chatbox(req.file.buffer,req.file.originalname);
-    }
-    res.send({
-        msg: "File uploaded successfully!",
+        });    
     });    
-});    
-app.get("/get_files", async (req, res) => {
-    try {
-        const files = await listFilesFromS3_chatbox();
-        res.send(files);
-        console.log("Number of files:", files.length); // Logging number of files
-    } catch (error) {
-        res.status(500).send({ error: "Internal server error" });
-    }    
-});    
+};     
 
 
 const deleteFilesFromS3 = (prefix) => {
@@ -278,45 +158,73 @@ const deleteFilesFromS3 = (prefix) => {
     });
 };
 
-async function deleteFileFromS3(key) {
-    const params = {
-        Bucket: S3_BUCKET,
-        Key: key
-    };
-    try {
-      await s3.deleteObject(params).promise();
-      return 1; // Return 1 since only one file is deleted
-    } catch (error) {
-      console.error("Error deleting file:", error);
-      throw error;
-    }
-  }
+const deleteFileFromS3 = (key) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket: S3_BUCKET,
+            Key: key
+        };
+        S3.deleteObject(params, (err, data) => {
+            if (err) {
+                console.error(`Error deleting file ${key} from S3:`, err);
+                return reject(err);
+            }
+            console.log(`Successfully deleted file ${key} from S3`);
+            resolve();
+        });
+    });
+};  
 
-// const deleteFileFromS3 = (key) => {
-//     return new Promise((resolve, reject) => {
-//         const params = {
-//             Bucket: S3_BUCKET,
-//             Key: key
-//         };    
-//         S3.deleteObject(params, (err, data) => {
-//             if (err) {
-//                 console.error("Error deleting file from S3:", err);
-//                 return reject(err);
-//             }    
-//             console.log("Successfully deleted file:", key);
-//             resolve(1); // We deleted one file
-//         });    
-//     });    
-// };    
-app.delete("/delete_documents", async (req, res) => {
+
+// To upload documents 
+app.post("/upload_documents", upload.single("image"), async (req, res) => {
+    if (req.file) {
+        await uploadToS3(req.file.buffer,req.file.originalname);
+    }    
+    res.send({
+        msg: "Document uploaded successfully!",
+    });    
+});    
+// to fetch all documents
+app.get("/get_documents", async (req, res) => {
     try {
-        const deletedCount = await deleteFilesFromS3('EMRI_audio_files/DASS_39/Document_query/');
-        res.send({ msg: `Successfully deleted ${deletedCount} files.` });
+        const files = await listFilesFromS3();
+        res.send(files);
+        console.log("Number of documents:", files.length); // Logging number of files
     } catch (error) {
-        console.error("Error deleting files:", error);
         res.status(500).send({ error: "Internal server error" });
     }    
 });    
+// to upload file (one at a time)
+app.post("/upload_files", upload.single("image"), async (req, res) => {
+    if (req.file) {
+        await uploadToS3_chatbox(req.file.buffer,req.file.originalname);
+    }    
+    res.send({
+        msg: "File uploaded successfully!",
+    });        
+});        
+// to fetch all files
+app.get("/get_files", async (req, res) => {
+    try {
+        const files = await listFilesFromS3_chatbox();
+        res.send(files);
+        console.log("Number of files:", files.length); // Logging number of files
+    } catch (error) {
+        res.status(500).send({ error: "Internal server error" });
+    }        
+});      
+// to delete all documents  
+app.delete("/delete_documents", async (req, res) => {
+    try {
+        const deletedCount = await deleteFilesFromS3('EMRI_audio_files/DASS_39/Document_query/');
+        res.send({ msg: `Successfully deleted ${deletedCount} documents.` });
+    } catch (error) {
+        console.error("Error deleting documents:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }        
+});      
+// to delete all files  
 app.delete("/delete_files", async (req, res) => {
     try {
         const deletedCount = await deleteFilesFromS3('EMRI_audio_files/DASS_39/Message_files/');
@@ -324,110 +232,114 @@ app.delete("/delete_files", async (req, res) => {
     } catch (error) {
         console.error("Error deleting files:", error);
         res.status(500).send({ error: "Internal server error" });
-    }    
-});    
-// Endpoint to delete a specific file with a given filename
-// app.delete("/delete_file", async (req, res) => {
-//     try {
-//         const { filename } = req.body; // Extract filename from request body
-//         const deletedCount = await deleteFileFromS3(`EMRI_audio_files/DASS_39/Message_files/${filename}`);
-//         res.send({ msg: `Successfully deleted ${deletedCount} files.` });
-//     } catch (error) {
-//         console.error("Error deleting files:", error);
-//         res.status(500).send({ error: "Internal server error" });
-//     }    
-// });    
-app.delete("/delete_file", async (req, res) => {
+    }        
+});        
+// to delete a file with a specific name
+app.delete("/delete_file/:filename", async (req, res) => {
+    const filename = req.params.filename;
+    const prefix = 'EMRI_audio_files/DASS_39/Message_files/';
     try {
-        const { filename } = req.body; // Extract filename from JSON request body
-        if (!filename) {
-            return res.status(400).send({ error: "Filename not provided" });
-        }
-        const deletedCount = await deleteFileFromS3(`EMRI_audio_files/DASS_39/Message_files/${filename}`);
+        const deletedCount = await deleteFileFromS3(prefix + filename);
         res.send({ msg: `Successfully deleted file: ${filename}` });
     } catch (error) {
-        console.error("Error deleting file:", error);
-        res.status(500).send({ error: "Internal server error" });
-    }    
-}); 
-
-// Endpoint to delete a specific document with a given name
-app.delete("/delete_document", async (req, res) => {
-    try {
-        const { documentname } = req.body; // Extract filename from JSON request body
-        if (!documentname) {
-            return res.status(400).send({ error: "Document parameter is missing." });
-        }    
-        const keyToDelete = `EMRI_audio_files/DASS_39/Document_query/${documentname}`;
-        const deletedCount = await deleteFileFromS3(keyToDelete);
-        res.send({ msg: `Successfully deleted ${deletedCount} file.` });
-    } catch (error) {
-        console.error("Error deleting file:", error);
+        console.error(`Error deleting file ${filename}:`, error);
         res.status(500).send({ error: "Internal server error" });
     }    
 });    
-
+// to delete a document with a specific name
+app.delete("/delete_document/:filename", async (req, res) => {
+    const filename = req.params.filename;
+    const prefix = 'EMRI_audio_files/DASS_39/Document_query/';
+    try {
+        const deletedCount = await deleteFileFromS3(prefix + filename);
+        res.send({ msg: `Successfully deleted document: ${filename}` });
+    } catch (error) {
+        console.error(`Error deleting Document ${filename}:`, error);
+        res.status(500).send({ error: "Internal server error" });
+    }    
+});    
 
 app.listen(5002)
 {
     console.log("Server listening on Port", 5002);
 }
 
+// To upload mutiple files:  
 
-// app.get("/get_documents_s/:filename", async (req, res) => {
-//     const { filename } = req.params;
-//     try {
-//         const files = await listFilesFromS3_s(filename);
-//         if (files && files.length > 0) {
-//             res.send(files);
-//         } else {
-//             res.status(404).send({ error: "File not found" });
-//         }
-//     } catch (error) {
-//         console.error("Error retrieving files:", error);
-//         res.status(500).send({ error: "Internal server error" });
-//     }
-// });
-
-// const listFilesFromS3_s = (filename) => {
-//     return new Promise((resolve, reject) => {
-//         const params = {
-//             Bucket: S3_BUCKET,
-//             Prefix: `EMRI_audio_files/DASS_39/Document_query/${filename}`
-//         };
-//         S3.listObjects(params, (err, data) => {
-//             if (err) {
-//                 console.error("Error listing files from S3:", err);
-//                 return reject(err);
-//             }
-//             if (data.Contents.length === 0) {
-//                 // No files found with the specified filename
-//                 return resolve([]);
-//             }
-//             const files = data.Contents.map((file) => {
-//                 const fileKey = file.Key.split('/').pop(); // Extract only the file name
-//                 const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${file.Key}`;
-//                 return {
-//                     name: fileKey,
-//                     url: fileUrl
-//                 };
-//             });
-//             console.log("Files found:", files);
-//             resolve(files);
-//         });
-//     });
-// };
 //   app.post("/upload-multiple", upload.array("images", 1), async (req, res) => {
-//     // console.log(req.files);
-
-//     if (req.files && req.files.length > 0) {
-//         for (var i = 0; i < req.files.length; i++) {
-//             // console.log(req.files[i]);
-//             await uploadToS3(req.files[i].buffer);
-//         }
-//     }
-
-//     res.send({
-//         msg: "Successfully uploaded " + req.files.length + " files!",
+    //     // console.log(req.files);
+    
+    //     if (req.files && req.files.length > 0) {
+        //         for (var i = 0; i < req.files.length; i++) {
+            //             // console.log(req.files[i]);
+            //             await uploadToS3(req.files[i].buffer);
+            //         }
+            //     }
+            
+            //     res.send({
+                //         msg: "Successfully uploaded " + req.files.length + " files!",
 //     });
+                
+                // To fetch all files :-
+                
+                // const listFilesFromS3 = () => {
+                //     return new Promise((resolve, reject) => {
+                //         const params = {
+                //             Bucket: S3_BUCKET,
+                //         };
+                //         S3.listObjectsV2(params, (err, data) => {
+                //             if (err) {
+                //                 console.log(err);
+                //                 return reject(err);
+                //             }
+                //             const files = data.Contents.map((file) => {
+                //                 const fileKey = file.Key;   // name of file
+                //                 const fileUrl = `https://${S3_BUCKET}.s3.amazonaws.com/${fileKey}`;
+                //                 return {
+                //                     name: fileKey,
+                //                     url: fileUrl
+                //                 };
+                //             });
+                //             const folders = data.CommonPrefixes.map((prefix) => {
+                //                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
+                //                 return {
+                //                     name: folderKey,
+                //                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
+                //                     type: "folder"
+                //                 };
+                //             });
+                //             const allItems = [...files, ...folders];
+                //             console.log(allItems);
+                //             resolve(allItems);
+                //         });
+                //     });
+                // };
+                
+                
+                // To fetch folders  :-
+                
+                // const listFilesFromS3 = () => {
+                //     return new Promise((resolve, reject) => {
+                //         const params = {
+                //             Bucket: S3_BUCKET,
+                //             Delimiter: '/' // Set delimiter to '/' to only get folders
+                //         };
+                //         S3.listObjectsV2(params, (err, data) => {
+                //             if (err) {
+                //                 console.log(err);
+                //                 return reject(err);
+                //             }
+                //             const folders = data.CommonPrefixes.map((prefix) => {
+                //                 const folderKey = prefix.Prefix.slice(0, -1); // Remove trailing '/'
+                //                 return {
+                //                     name: folderKey,
+                //                     url: `https://${S3_BUCKET}.s3.amazonaws.com/${folderKey}`,
+                //                     type: "folder"
+                //                 };
+                //             });
+                //             console.log(folders);
+                //             resolve(folders);
+                //         });
+                //     });
+                // };
 // });

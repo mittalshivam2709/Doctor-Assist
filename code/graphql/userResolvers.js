@@ -104,7 +104,6 @@ module.exports = {
         throw new ApolloError('Document does not exist')
       }
       doc.active_to_train = active_to_train
-      // console.log('New ', active_to_train)
       const res = await doc.save()
       return {
         id: res.id,
