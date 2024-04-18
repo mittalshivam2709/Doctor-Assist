@@ -18,7 +18,7 @@ const ambulanceResolvers = require('./graphql/ambulanceResolvers');
 // let multer = require("multer");
 
 const corsList = {
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://10.1.132.176:3001"],
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://10.1.132.176:3001", "http://10.2.8.18:5000/doctor_assistant"],
 };
 dotenv.config();
 const app = express();
