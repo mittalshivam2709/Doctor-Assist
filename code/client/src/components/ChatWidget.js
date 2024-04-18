@@ -146,7 +146,7 @@ const ChatWidget = () => {
               {
                 activeTab === "SingleChat"?
                   <MessageInput />:
-                  <LLMInput / >
+                  <LLMInput />
               }
               
             </div>

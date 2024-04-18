@@ -6,6 +6,7 @@ import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";
 import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
+import forward from "../forward.svg";
 
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:5001";
@@ -66,15 +67,34 @@ const LLMChat = () => {
       block: "end",
     });
   }, [messages, audioBlob]);
+
+  const handleForward = (content) => {
+    
+    localStorage.setItem("forwardedMessage", content);
+    window.open('/emt-assist', '_blank'); 
+  };
+
   return (
     <div>
-      <div className="single-chat" style={{ overflowX: "hidden" }}>
+      <div className="single-chat" style={{ overflowX: "hidden"}}>
         {messages.filter(message => message.type === "LLM").map((message, index) =>
+        <div>
             <Message
               key={index}
               message={message.content}
               right={message.sender === user}
             />
+
+          {message.sender === selectedChat && (
+            <button onClick={() => handleForward(message.content)}>
+              <img
+              src={forward}
+              alt="Forward"
+              style={{ width: "25px", height: "25px" }}
+            />
+            </button>
+          )}
+         </div>
         )}
         <div ref={ref}></div>
       </div>
@@ -83,3 +103,4 @@ const LLMChat = () => {
 };
 
 export default LLMChat;
+

@@ -69,14 +69,17 @@ const SingleChat = () => {
   }, [messages, audioBlob]);
   return (
     <div>
-      <div className="single-chat" style={{ overflowX: "hidden" }}>
+      <div className="single-chat" style={{ overflowX: "hidden"}}>
         {messages.filter(message => message.type !== "LLM").map((message, index) =>
           message.type === null || message.type === "message" ? (
+          
             <Message
               key={index}
               message={message.content}
               right={message.sender == user}
+              
             />
+
           ) :  message.type === "image"? (
             <ImageRender
             key={index}
