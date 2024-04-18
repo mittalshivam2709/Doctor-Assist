@@ -10,6 +10,7 @@ const ChatProvider = ({ children }) => {
   const [selectedPatient,setSelectedPatient] = useState(null);
   const [isSocket, setSocket] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     // set for detecting chagnes

@@ -5,49 +5,54 @@ import Message from "../components/Message";
 import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";
-import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
+import { useQuery } from "@apollo/client";
 import forward from "../forward.svg";
-
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5001";
 
+const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
 const LLMChat = () => {
-  const { user, selectedChat, message, audioBlob, isSocket, setSocket } =
-    ChatState();
-  const [messages, setMessages] = useState([]);
+  const { user, selectedChat, message, audioBlob, isSocket, setSocket } = ChatState();
+  const [chatMessages, setChatMessages] = useState({});
   const ref = useRef(null);
+  const { data, refetch } = useQuery(FETCH_MESSAGES, {
+    variables: {
+      sender: user,
+      receiver: selectedChat,
+    },
+    skip: !selectedChat, // skip the query if selectedChat is not selected
+  });
 
-  const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
     socket.on("connection", () => setSocket(socket));
-    // socket.emit("send message", selectedChat, message) // send message to selected chat
-    // socket.on("recieve message",)
   }, []);
 
   useEffect(() => {
-    fetchMessages({
-      variables: {
-        sender: user,
-        receiver: selectedChat,
-      },
-    }).then((result) => {
-      if (result.data && result.data.fetchMessage) {
-        setMessages(result.data.fetchMessage);
-      }
+    if (selectedChat) {
+      refetch();
       socket.emit("setChat", selectedChat);
-    });
-  }, [selectedChat]);
+    }
+  }, [selectedChat, refetch]);
+
+  useEffect(() => {
+    if (data && data.fetchMessage) {
+      setChatMessages((prevChatMessages) => ({
+        ...prevChatMessages,
+        [selectedChat]: data.fetchMessage,
+      }));
+    }
+  }, [data, selectedChat]);
 
   useEffect(() => {
     socket.on("message recieved", (message) => {
-      // console.log(message);
       if (message.receiver == user) {
-        // console.log("set mssg");
-        setMessages([...messages, message]);
+        setChatMessages((prevChatMessages) => ({
+          ...prevChatMessages,
+          [selectedChat]: [...(prevChatMessages[selectedChat] || []), message],
+        }));
       } else if (!selectedChat || message.receiver != selectedChatCompare) {
         // notifcation
       }
@@ -56,46 +61,52 @@ const LLMChat = () => {
 
   useEffect(() => {
     if (message) {
-      setMessages([...messages, message]);
+      setChatMessages((prevChatMessages) => {
+        const existingMessages = prevChatMessages[selectedChat] || [];
+        const messageExists = existingMessages.some(
+          (m) => m.content === message.content && m.sender === message.sender
+        );
+
+        if (!messageExists) {
+          return {
+            ...prevChatMessages,
+            [selectedChat]: [...existingMessages, message],
+          };
+        }
+
+        return prevChatMessages;
+      });
       socket.emit("send message", message);
     }
-  }, [message]);
+  }, [message, selectedChat]);
 
   useEffect(() => {
     ref.current?.scrollIntoView({
       behaviour: "smooth",
       block: "end",
     });
-  }, [messages, audioBlob]);
+  }, [chatMessages, audioBlob]);
 
   const handleForward = (content) => {
-    
     localStorage.setItem("forwardedMessage", content);
-    window.open('/emt-assist', '_blank'); 
+    window.open('/emt-assist', '_blank');
   };
 
   return (
     <div>
-      <div className="single-chat" style={{ overflowX: "hidden"}}>
-        {messages.filter(message => message.type === "LLM").map((message, index) =>
-        <div>
-            <Message
-              key={index}
-              message={message.content}
-              right={message.sender === user}
-            />
-
-          {message.sender === selectedChat && (
-            <button onClick={() => handleForward(message.content)}>
-              <img
-              src={forward}
-              alt="Forward"
-              style={{ width: "25px", height: "25px" }}
-            />
-            </button>
-          )}
-         </div>
-        )}
+      <div className="single-chat" style={{ overflowX: "hidden" }}>
+        {(chatMessages[selectedChat] || [])
+          .filter((message) => message.type === "LLM")
+          .map((message, index) => (
+            <div key={index}>
+              <Message message={message.content} right={message.sender === user} />
+              {message.sender === selectedChat && (
+                <button onClick={() => handleForward(message.content)}>
+                  <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" }} />
+                </button>
+              )}
+            </div>
+          ))}
         <div ref={ref}></div>
       </div>
     </div>
@@ -103,4 +114,3 @@ const LLMChat = () => {
 };
 
 export default LLMChat;
-

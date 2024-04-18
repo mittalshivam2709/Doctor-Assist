@@ -3,7 +3,6 @@ import user from "../user.png";
 import Placeholder from "./Placeholder";
 
 const Message = ({ message, right }) => {
-  console.log("message right ->", right);
   return (
     <div className="flex flex-row chat-parent" style={{ width:"100%", alignItems: "center" }}>
       {right == 0 && (
