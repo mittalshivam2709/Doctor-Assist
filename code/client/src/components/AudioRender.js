@@ -18,7 +18,7 @@ const AudioRender = ({ message, right }) => {
       className="flex flex-row chat-parent"
       style={{ width: "100%", alignItems: "center" }}
     >
-      {right === 0 && (
+      {right == 0 && (
         <div
           style={{
             flex: "0 0 7%",
@@ -34,7 +34,7 @@ const AudioRender = ({ message, right }) => {
         className="chat-box"
         style={{ width: "100%", wordBreak: "break-word" }}
       >
-        <div className={`chat-message ${right === 0 ? "left" : "right"}`}>
+        <div className={`chat-message ${right == 0 ? "left" : "right"}`}>
           {isValidURL(message) ? (
             <div
               style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
@@ -50,7 +50,7 @@ const AudioRender = ({ message, right }) => {
           )}
         </div>
       </div>
-      {right === 1 && (
+      {right == 1 && (
         <div
           style={{
             flex: "0 0 7%",

@@ -12,7 +12,7 @@ const ImageRender = ({ message, right }) => {
       className="flex flex-row chat-parent"
       style={{ width: "100%", alignItems: "center" }}
     >
-      {right === 0 && (
+      {right == 0 && (
         <div
           style={{
             flex: "0 0 7%",
@@ -41,7 +41,7 @@ const ImageRender = ({ message, right }) => {
           )}
         </div>
       </div>
-      {right === 1 && (
+      {right == 1 && (
         <div
           style={{
             flex: "0 0 7%",

@@ -44,9 +44,9 @@ const SingleChat = () => {
 
   useEffect(() => {
     socket.on("message recieved", (message) => {
-      console.log(message);
+      // console.log(message);
       if (message.receiver == user) {
-        console.log("set mssg");
+        // console.log("set mssg");
         setMessages([...messages, message]);
       } else if (!selectedChat || message.receiver != selectedChatCompare) {
         // notifcation
@@ -76,7 +76,7 @@ const SingleChat = () => {
             <Message
               key={index}
               message={message.content}
-              right={message.sender == user}
+              right={+(message.sender == user)}
               
             />
 
@@ -84,14 +84,14 @@ const SingleChat = () => {
             <ImageRender
             key={index}
             message={message.content}
-            right={message.sender == user}
+            right={+(message.sender == user)}
           />        
         ):
         (
           <AudioRender
           key={index}
           message={message.content}
-          right={message.sender == user}
+          right={+(message.sender == user)}
         />
         )
         )}

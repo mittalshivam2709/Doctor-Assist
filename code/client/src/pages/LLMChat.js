@@ -44,9 +44,9 @@ const LLMChat = () => {
 
   useEffect(() => {
     socket.on("message recieved", (message) => {
-      console.log(message);
+      // console.log(message);
       if (message.receiver == user) {
-        console.log("set mssg");
+        // console.log("set mssg");
         setMessages([...messages, message]);
       } else if (!selectedChat || message.receiver != selectedChatCompare) {
         // notifcation
