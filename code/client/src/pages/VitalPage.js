@@ -76,7 +76,7 @@ const VitalPage = () => {
           {/* <p>{doctor_visit}</p> */}
         </div>
       </div>
-      <div className="case-sheet" style={{ height: 'auto' }}>
+      <div className="case-sheet" style={{ height: '90vh', overflow:'scroll' }}>
         <div className="headingg">
           <h3>
             <div className="titlee">CASE SHEET</div>
