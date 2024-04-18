@@ -294,10 +294,20 @@ const Homepage = () => {
             <Protocol_sheet />
             <button onClick={uploadtoggleComponent}>
               <div
-                className="expanding-box-header bg-white text-black"
-                style={{}}
+                style={{
+                  
+                }}
               >
-                <img src={plus} alt="" />
+                <img
+                style={{
+                  position: 'absolute',
+                  top: '90%',
+                  right: '0%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '127px',
+                  height: '127px',                
+                }}
+                src={plus} alt="" />
               </div>
             </button>
           </div>

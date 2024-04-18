@@ -1,32 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios' // Import Axios for making HTTP requests
 import drag from '../drag.png'
-import plus from '../plus.png'
 import { SEND_DOCUMENT } from '../gqloperations/mutations'
 import { useMutation } from '@apollo/client'
-import { useQuery } from '@apollo/client'
-import Documentcomp from './document'
-import { FETCH_DOCUMENTS } from '../gqloperations/queries'
 
 const Addfile = () => {
   const [selectedFile, setSelectedFile] = useState(null)
 
   const fileInputRef = useRef()
-  const [fileInputVisible, setFileInputVisible] = useState(false)
   const authdata = JSON.parse(localStorage.getItem('authdata'))
   const email = authdata ? authdata.email : ''
   const [sendDocument] = useMutation(SEND_DOCUMENT)
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0])
     console.log(e.target.files[0].name)
-  }
-
-  const handleButtonClick = () => {
-    fileInputRef.current.click()
-  }
-
-  const handlebuttonClick = () => {
-    setFileInputVisible(true)
   }
 
   const handleUpload = async () => {
@@ -99,67 +86,6 @@ const Addfile = () => {
 
   const [dragging, setDragging] = useState(false)
 
-  const { loading, data, refetch } = useQuery(FETCH_DOCUMENTS, {
-    variables: { doc_no: '1' },
-  })
-
-  // /////////////////////////////
-  // below is the code for fetching all the documents
-  const [docs, setdocs] = useState([])
-
-  useEffect(() => {
-    console.log('init fetch')
-    refetch().then((response) => {
-      const resp = response?.data?.fetchdocumentbydocumentid
-      console.log(resp)
-      if (resp && resp.length > 0) {
-        setdocs(resp)
-      }
-    })
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => {
-        refetch().then((response) => {
-          const resp = response?.data?.fetchdocumentbydocumentid
-          console.log(resp)
-          if (resp && resp.length > 0) {
-            setdocs(resp)
-          }
-        })
-      },
-      docs ? 10000 : 0
-    )
-    return () => clearInterval(interval)
-  }, [refetch])
-
-  // const handleDragEnter = (e) => {
-  //   e.preventDefault()
-  //   setDragging(true)
-  // }
-
-  // const handleDragOver = (e) => {
-  //   e.preventDefault()
-  // }
-
-  // const handleDragLeave = () => {
-  //   setDragging(false)
-  // }
-
-  // const handleDrop = (e) => {
-  //   e.preventDefault()
-  //   setDragging(false)
-
-  //   const files = Array.from(e.dataTransfer.files)
-  //   // Handle dropped files here, e.g., upload or read them
-  //   console.log('f',files)
-  //   setSelectedFile(files[0]) // Set the selected file
-  // }
-
-  // const [files, setFiles] = useState(null)
-  // const inputRef = useRef()
-
   const handleDragOver = (event) => {
     event.preventDefault()
   }
@@ -173,48 +99,40 @@ const Addfile = () => {
       <br />
       <br />
       <div
-        style={{
-          fontFamily: 'Arial',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          margin: '0',
-          backgroundColor: '#f8f9fa',
-        }}
       >
         <div>
-          {/* {!fileInputVisible && (
+          <h1
+            style={{
+              color: 'rgba(85,85,251,1)',
+              fontWeight: 'bold',
+              fontSize: '30px',
+              position: 'absolute',
+              left: '59%', 
+              transform: 'translateX(-50%)', 
+            }}
+          >
+            File Upload
+          </h1>
+          <br />
+          <br />
+          <div
+            style={{
+              position: 'absolute',
+              top: '30%',
+              left: '45%',
+            }}
+          >
             <div
               style={{
-                position: 'relative', // Add this to make positioning of the plus button relative to the container
+                fontFamily: 'Arial',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start', // Align items to the start (left) of the container
-                justifyContent: 'flex-start', // Align content to the start (top) of the container
-                width: '1056px',
-                height: '444px',
-                border: '2px dashed #ccc',
-                borderRadius: '20px',
-                padding: '20px',
-                margin: '10px auto',
-                cursor: 'pointer',
+                justifyContent: 'center',
+                alignItems: 'center',
+                //   height: '100vh',
+                margin: '0',
+                backgroundColor: '#f8f9fa',
               }}
             >
-              <button onClick={handlebuttonClick}>
-                <img
-                  src={plus}
-                  alt=""
-                  style={{
-                    position: 'absolute', // Position the plus button absolutely within the container
-                    top: 10, // Place it at the top
-                    left: 10, // Place it at the left
-                  }}
-                />
-              </button>
-            </div>
-          )} */}
-          {
-            <>
               <button onClick={() => fileInputRef.current.click()}>
                 <div
                   style={{
@@ -230,82 +148,57 @@ const Addfile = () => {
                     margin: '10px auto',
                     cursor: 'pointer',
                   }}
-                  onDragOver={handleDragOver}
                   onDrop={handleDrop}
                 >
                   <img src={drag} alt="image" />
-                  <h1>Drag and Drop Files to Upload</h1>
-                  <h1>Or</h1>
-                  <input
-                    type="file"
-                    multiple
-                    onChange={(event) => setSelectedFile(event.target.files[0])}
-                    hidden
-                    ref={fileInputRef}
-                  />
-                  Select Files
+                  <div
+                    style={{
+                      fontSize: '17px',
+                      width: '235px',
+                      height: '36px',
+                      top: '479px',
+                      left: '449px',
+                    }}
+                  >
+                    <h1>Drag and Drop Files to Upload</h1>
+                    <h1>Or</h1>
+                    <input
+                      type="file"
+                      multiple
+                      onChange={(event) =>
+                        setSelectedFile(event.target.files[0])
+                      }
+                      hidden
+                      ref={fileInputRef}
+                    />
+                    Select Files
+                  </div>
                 </div>
               </button>
-            </>
-            // <button onClick={handleButtonClick}>
-            //   <div
-            //     style={{
-            //       display: 'flex',
-            //       flexDirection: 'column',
-            //       alignItems: 'center',
-            //       justifyContent: 'center',
-            //       width: '544px',
-            //       height: '444px',
-            //       border: '2px dashed #ccc',
-            //       borderRadius: '20px',
-            //       padding: '20px',
-            //       margin: '10px auto',
-            //       cursor: 'pointer',
-            //     }}
-            //     className={`drop-zone ${dragging ? 'dragging' : ''}`}
-            //   >
-            //     <img src={drag} alt="image" />
-            //     <input
-            //       type="file"
-            //       ref={fileInputRef}
-            //       onChange={handleFileInput}
-            //       style={{ display: 'none' }} // Hide the file input
-            //     />
-            //     <div
-            //       style={{
-            //         fontSize: '26px',
-            //         width: '235px',
-            //         height: '36px',
-            //         top: '479px',
-            //         left: '449px',
-            //       }}
-            //     >
-            //       Drag files to upload
-            //     </div>
-            //   </div>
-            // </button>
-          }
-          {selectedFile && <div>Selected File: {selectedFile.name}</div>}
+            </div>
+            <br />
+            <button
+              onClick={handleUpload}
+              style={{
+                padding: '20px',
+                borderRadius: '10px',
+                backgroundColor: 'rgba(2,73,255,1)',
+                color: 'rgba(255,255,255,1)',
+                height: '67px',
+                top: '642px',
+                width: '205px',
+                border: 'none',
+                cursor: 'pointer',
+                marginLeft: '170px',
+              }}
+            >
+              SAVE
+            </button>
+          </div>
           <br />
           <br />
-          <button
-            onClick={handleUpload}
-            style={{
-              padding: '20px',
-              borderRadius: '10px',
-              backgroundColor: 'rgba(2,73,255,1)',
-              color: 'rgba(255,255,255,1)',
-              height: '67px',
-              top: '642px',
-              width: '205px',
-              border: 'none',
-              cursor: 'pointer',
-              marginLeft: '170px',
-            }}
-          >
-            SAVE
-          </button>
         </div>
+        {selectedFile && <div>Selected File: {selectedFile.name}</div>}
       </div>
     </div>
   )
