@@ -5,8 +5,7 @@ import Message from "../components/Message";
 import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";
-import { useLazyQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
-
+import { useLazyQuery, useQuery } from "@apollo/client"; // import useLazyQuery instead of useQuery
 import io from "socket.io-client";
 import ImageRender from "../components/ImageRender";
 import AudioRender from "../components/AudioRender";
@@ -18,35 +17,37 @@ const SingleChat = () => {
     ChatState();
   const [messages, setMessages] = useState([]);
   const ref = useRef(null);
+  const { loading, data, refetch } = useQuery(FETCH_MESSAGES, {
+    variables: {
+      sender: user,
+      receiver: selectedChat,
+    },
+    skip: !selectedChat, // skip the query if selectedChat is not there
+  });
 
-  const [fetchMessages, { loading, data }] = useLazyQuery(FETCH_MESSAGES);
+
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("initialize", user);
     socket.on("connection", () => setSocket(socket));
-    // socket.emit("send message", selectedChat, message) // send message to selected chat
-    // socket.on("recieve message",)
   }, []);
 
   useEffect(() => {
-    fetchMessages({
-      variables: {
-        sender: user,
-        receiver: selectedChat,
-      },
-    }).then((result) => {
-      if (result.data && result.data.fetchMessage) {
-        setMessages(result.data.fetchMessage);
-      }
+    if (selectedChat) {
+      refetch();
       socket.emit("setChat", selectedChat);
-    });
-  }, [selectedChat]);
+    }
+  }, [selectedChat, refetch]);
+  
+  useEffect(() => {
+    if (data && data.fetchMessage) {
+      setMessages(data.fetchMessage);
+    }
+  }, [data]);
 
   useEffect(() => {
     socket.on("message recieved", (message) => {
-      // console.log(message);
       if (message.receiver == user) {
-        // console.log("set mssg");
         setMessages([...messages, message]);
       } else if (!selectedChat || message.receiver != selectedChatCompare) {
         // notifcation
