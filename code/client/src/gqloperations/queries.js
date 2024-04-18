@@ -84,9 +84,13 @@ export const FETCH_VITAL = gql`
       spo2
       rbs
       pupil_size
-      pulse_rate
+      skin_color
+      skin_temperature
       condition
       capillary_refill
+      reaction_to_light
+      rhythm
+      volume
       adventitious_sounds
     }
   }

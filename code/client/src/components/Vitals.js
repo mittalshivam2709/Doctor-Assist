@@ -45,8 +45,13 @@ const Vitals = ({ vitals }) => {
     // </div>
     <div className="form-section3">
       <VitalDisplay
-        label="Blood Pressure"
+        label="Blood Pressure (sys)"
         value={getLatestVital(vitals.blood_pressure_sys)}
+        unit="mmHg"
+      />
+      <VitalDisplay
+        label="Blood Pressure (dys)"
+        value={getLatestVital(vitals.blood_pressure_dys)}
         unit="mmHg"
       />
       <VitalDisplay
@@ -68,6 +73,52 @@ const Vitals = ({ vitals }) => {
         label="spO2"
         value={getLatestVital(vitals.spo2)}
         unit="%"
+      />
+      <VitalDisplay
+        label="Pupil Size"
+        value={vitals.pupil_size}
+        unit=""
+      />
+      <VitalDisplay
+        label="Reaction To Light"
+        value={vitals.reaction_to_light}
+        unit=""
+      />
+      
+      <VitalDisplay
+        label="Skin Colour"
+        value={vitals.skin_color}
+        unit=""
+      />
+      <VitalDisplay
+        label="Skin Temperature"
+        value={vitals.skin_temperature}
+        unit=""
+      />
+      <VitalDisplay
+        label="Condition"
+        value={vitals.condition}
+        unit=""
+      />
+      <VitalDisplay
+        label="Capillary Refill"
+        value={vitals.capillary_refill}
+        unit=""
+      />
+      <VitalDisplay
+        label="Rhythm"
+        value={vitals.rhythm}
+        unit=""
+      />
+      <VitalDisplay
+        label="Volume"
+        value={vitals.volume}
+        unit=""
+      />
+      <VitalDisplay
+        label="Adventitious Sounds"
+        value={vitals.adventitious_sounds}
+        unit=""
       />
     </div>
   );
