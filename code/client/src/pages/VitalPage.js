@@ -8,6 +8,7 @@ import PatientDetails from '../components/PatientDetails'
 import Vitals from '../components/Vitals'
 import MedicalInfo from '../components/MedicalInfo'
 import { FETCH_USER_DETAILS } from '../gqloperations/queries'
+import RealTimeDate from '../components/RealTimeDate';
 
 const VitalPage = () => {
   const { vitals, setVitals, selectedChat, selectedPatient, user, setUser } =
@@ -80,7 +81,8 @@ const VitalPage = () => {
         <div className="headingg">
           <h3>
             <div className="titlee">CASE SHEET</div>
-            <div className="datee">Date: DD/MM/YYYY</div>
+            {/* <div className="datee">Date: DD/MM/YYYY</div> */}
+            <RealTimeDate />
           </h3>
         </div>
         {/* <> */}
