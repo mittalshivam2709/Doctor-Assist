@@ -19,11 +19,12 @@ const Message = ({ message, right }) => {
             // backgroundColor:"yellow",
             // marginTop:"0px"
             // margin:"3px"
+            // marginBottom:"230px"
           }}
         >
           <img
             src={book}
-            style={{ width: "100%", height: "40%" }}
+            style={{ width: "100%", height: "29%" }}
             alt="User"
           />
           
@@ -48,7 +49,7 @@ const Message = ({ message, right }) => {
         >
           <img
             src={doc}
-            style={{ width: "95%", height: "auto" }}
+            style={{ width: "95%", height: "43%" }}
             alt="User"
           />
         </div>
