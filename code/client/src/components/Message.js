@@ -17,19 +17,18 @@ const Message = ({ message, right }) => {
             // justifyContent: "flex-start",
             // alignItems: "flex-start"
             // backgroundColor:"yellow",
-            // marginTop:"0px"
+            marginTop:"0px"
             // margin:"3px"
-            // marginBottom:"230px"
           }}
         >
           <img
             src={book}
-            style={{ width: "100%", height: "29%" }}
+            style={{ width: "100%", height: "40%" }}
             alt="User"
           />
           
         </div>
-        // </div>
+        
       )}
       
      
@@ -42,23 +41,20 @@ const Message = ({ message, right }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             marginRight:"5px",
-            marginLeft:"3px",
-            // marginTop:"10px"
+            marginLeft:"3px"
             // backgroundColor:"red"
           }}
         >
           <img
             src={doc}
-            style={{ width: "95%", height: "43%" }}
+            style={{ width: "95%", height: "auto" }}
             alt="User"
           />
         </div>
         
       )}
-       <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",marginTop:"15px",borderRadius:"7px"}}>
-        {right == 0 ? <p style={{marginLeft:"15px",marginBottom:"5px"}}>Knowledge Base</p>: <p style={{marginLeft:"15px",marginBottom:"5px"}}>You</p>}
-        
-        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue",border: "1.3px solid blue",padding:"10px",paddingLeft:"20px",margin:"5px",borderRadius:"7px"} : {}}>
+       <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"5px",borderRadius:"7px" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",borderRadius:"7px"}}>
+        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue"} : {}}>
           {message}
         </div>
       </div>
