@@ -73,6 +73,7 @@ const SingleChat = () => {
 
   useEffect(() => {
     if (message) {
+      message.type = "message";
       setChatMessages((prevChatMessages) => {
         const existingMessages = prevChatMessages[selectedChat] || [];
         const messageExists = existingMessages.some(

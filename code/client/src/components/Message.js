@@ -6,7 +6,8 @@ import doc from "../doc.svg"
 import forward from "../forward.svg";
 
 const Message = ({ message, right }) => {
-  console.log(right)
+  // console.log(right)
+  // console.log(message);
   return (
     <div className="flex flex-row chat-parent" style={{ width:"100%" }}>
       {right == 0 && (
