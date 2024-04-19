@@ -188,6 +188,19 @@ const LLMInput = () => {
       } catch (error) {
         console.error('Failed to get AI response:', error);
         // to handle error some features
+        const fallbackMessage = {
+          content: "Sorry, I can't help you with that.",
+          sender: selectedChat,
+          receiver: user,
+          type: "LLM",
+        };
+        await sendMessage({
+          variables: {
+            messageInput: fallbackMessage,
+          },
+        });
+        setMessages((prev) => [...prev, fallbackMessage]);
+        setMessage(fallbackMessage);
       }
 
       setInputText("");
