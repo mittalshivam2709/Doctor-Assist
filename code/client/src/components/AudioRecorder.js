@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import mic from "../mic.png";
+import play from "../play.svg"
 import axios from "axios";
 import { useMutation } from "@apollo/client";
 import { SEND_MESSAGE } from "../gqloperations/mutations";
 import { ChatState } from "../context/ChatProvider";
 import { useForm } from "react-hook-form";
+import send from "../send.png"
 
 const AudioRecorder = () => {
 
@@ -122,18 +124,49 @@ const AudioRecorder = () => {
         }}
         onClick={isRecording ? stopRecording : startRecording}
       >
-        <img
-          src={mic}
+        {/* <img
+          src={audioBlob ? link : mic}
           alt="Record Audio"
           style={{ width: "36px", height: "36px" }}
-        />
+        /> */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+        {
+          audioBlob ? (
+            <>
+              <img
+                src={play}
+                alt="Recorded Audio"
+                style={{ width: "36px", height: "36px" ,marginRight:"10px",backgroundColor:"white"}}
+                onClick={playAudio}
+              />
+              <img
+                src={send}
+                alt="Microphone"
+                style={{ width: "30px", height: "30px" }}
+                onClick={customSubmit}
+              />
+            </>
+          ) : (
+            <img
+              src={mic}
+              alt="Record Audio"
+              style={{ width: "36px", height: "36px" }}
+            />
+          )
+        }
+        </div>
+
       </button>
-      {audioBlob && (
+      {/* {audioBlob && (
         <div>
           <button onClick={playAudio}>Play Recording</button>
           <button onClick={customSubmit}>Upload Recording</button>
         </div>
-      )}
+      )} */}
+       {/* <div>
+          <button onClick={playAudio}>Play Recording</button>
+          <button onClick={customSubmit}>Upload Recording</button>
+        </div> */}
     </div>
   );
 };
