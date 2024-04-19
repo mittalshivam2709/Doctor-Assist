@@ -5,18 +5,18 @@ import Message from "../components/Message";
 import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import forward from "../forward.svg";
 import io from "socket.io-client";
 import SingleChat from "./SingleChat";
 import LLMInput from "../components/LLMInput";
+import { SEND_MESSAGE } from "../gqloperations/mutations";
 const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 // import { useChat } from '../context/ChatContext'; 
 
 const LLMChat = () => {
-  const { user, selectedChat, message, audioBlob, isSocket, setSocket } = ChatState();
-  const [activeTab, setActiveTab] = useState("LLMChat");
+  const { user, selectedChat, message, audioBlob, activeTab, setActiveTab, setSocket } = ChatState();
   const [chatMessages, setChatMessages] = useState({});
   const ref = useRef(null);
   const { data, refetch } = useQuery(FETCH_MESSAGES, {
@@ -26,6 +26,8 @@ const LLMChat = () => {
     },
     skip: !selectedChat, // skip the query if selectedChat is not selected
   });
+  const [sendMessage] = useMutation(SEND_MESSAGE);
+
   // const { setTab } = useChat(); 
   // const handleForwardClick = () => {
   //   setTab('SingleChat');
@@ -94,8 +96,21 @@ const LLMChat = () => {
     });
   }, [chatMessages, audioBlob]);
 
-
-  const handleForward = (content) => {
+ 
+  const handleForward = async (content) => {
+    console.log(content);
+    const messageData = {
+      content: content,
+      sender: user,
+      receiver: selectedChat,
+      type: "message",
+    }
+    await sendMessage({
+      variables: {
+        messageInput: messageData,
+      },
+    });
+    setActiveTab("SingleChat");
     // localStorage.setItem("forwardedMessage", content);
     // window.open('');
   };
@@ -111,7 +126,7 @@ const LLMChat = () => {
               {/* <div className="chat-messages"> */}
               <Message message={message.content} right={message.sender === user}/>
               {message.sender === selectedChat && (
-                <button >
+                <button onClick={() => handleForward(message.content)}>
                   <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" , marginLeft:"47px",marginBottom:"10px"}} />
                 </button>
               )}

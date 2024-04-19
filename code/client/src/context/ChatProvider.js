@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect } from "react";
 
 const ChatContext = createContext();
@@ -10,7 +11,7 @@ const ChatProvider = ({ children }) => {
   const [selectedPatient,setSelectedPatient] = useState(null);
   const [isSocket, setSocket] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [activeTab, setActiveTab] = useState("SingleChat");
 
   useEffect(() => {
     // set for detecting chagnes
@@ -35,7 +36,9 @@ const ChatProvider = ({ children }) => {
         isSocket,
         setSocket,
         audioBlob,
-        setAudioBlob
+        setAudioBlob, 
+        activeTab, 
+        setActiveTab
       }}
     >
       {children}

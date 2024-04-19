@@ -12,10 +12,9 @@ import LLMChat from "../pages/LLMChat";
 
 const ChatWidget = () => {
   const [expanded, setExpanded] = useState(false);
-  const { selectedChat, messages } = ChatState();
+  const { selectedChat, activeTab, setActiveTab } = ChatState();
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [activeTab, setActiveTab] = useState("SingleChat");
   const [newMessages, setNewMessages] = useState({
     SingleChat: false,
     HelpChat: false,
