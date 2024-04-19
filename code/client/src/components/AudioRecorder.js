@@ -72,7 +72,7 @@ const AudioRecorder = () => {
           }
         );
 
-        console.log(response);
+        // console.log(response);
         const resp = await axios.get("http://localhost:5002/get_files");
         // console.log("resp",resp);
         // console.log("resp.data",);
@@ -94,7 +94,7 @@ const AudioRecorder = () => {
             messageInput: messageData,
           },
         }).then(() => {
-          console.log(messageData);
+          // console.log(messageData);
           reset();
         });
         alert("Audio file uploaded successfully!");

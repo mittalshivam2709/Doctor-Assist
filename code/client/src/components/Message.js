@@ -8,10 +8,7 @@ import forward from "../forward.svg";
 import { ChatState } from "../context/ChatProvider";
 
 const Message = ({ message, right }) => {
-  // console.log(right)
-  const { user, selectedChat, messages, audioBlob, activeTab, setActiveTab, setSocket } = ChatState();
 
-  console.log(message);
   return (
     <div className="flex flex-row chat-parent" style={{ width:"100%",marginTop:"5px" }}>
       {right == 0 && (

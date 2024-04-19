@@ -65,15 +65,23 @@ const SingleChat = () => {
 
           return prevChatMessages;
         });
-      } else if (!selectedChat || message.receiver !== selectedChatCompare) {
+      }
+      if (message.receiver === user && ( message.receiver !== selectedChatCompare)) {
         // send notificaiton
+        // uncomment for deployment
+        // console.log("Notification Recieved !"); 
+        // alert("notifcation from ", selectedChatCompare)
       }
     });
   }, [user, selectedChat, selectedChatCompare]);
 
   useEffect(() => {
     if (message) {
-      message.type = "message";
+      // console.log(message);
+      console.log(message.content, message.type);
+      // if(message.type !== "audio" || message.type !== "image"){
+      //   message.type = "message";
+      // }
       setChatMessages((prevChatMessages) => {
         const existingMessages = prevChatMessages[selectedChat] || [];
         const messageExists = existingMessages.some(
@@ -98,13 +106,13 @@ const SingleChat = () => {
       behaviour: "smooth",
       block: "end",
     });
-  }, [chatMessages, audioBlob]);
+  }, [chatMessages, audioBlob, setChatMessages]);
 
   return (
     <div>
       <div className="single-chat" style={{ overflowX: "hidden" ,backgroundColor:"#D8D8E2"}}>
         {(chatMessages[selectedChat] || [])
-          .filter((message) => message.type !== "LLM")
+          .filter((message) => message.type !== "LLM" && (message.receiver == selectedChat || message.sender == selectedChat ))
           .map((message, index) =>
             message.type === "message" ? (
               <Message key={index} message={message.content} right={+(message.sender == user)} />

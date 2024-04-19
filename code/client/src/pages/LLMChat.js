@@ -115,7 +115,7 @@ const LLMChat = () => {
     // window.open('');
   };
 
-  console.log(activeTab)
+  // console.log(activeTab)
   return (
     // <div>
       <div className="single-chat" style={{ overflowX: "hidden"}}>

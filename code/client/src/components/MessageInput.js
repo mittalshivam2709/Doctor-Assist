@@ -58,12 +58,10 @@ const MessageInput = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(response); // Log the response from the server
+            // console.log(response); // Log the response from the server
             alert("File uploaded successfully!");
             setSelectedFile(null); // Clear selected file after upload
             const resp=await axios.get('http://localhost:5002/get_files');
-            // console.log("resp",resp);
-            // console.log("resp.data",);
             let fileUrl = null;
             for (const file of resp.data) {
              if (file.name === selectedFile.name) {
@@ -77,13 +75,13 @@ const MessageInput = () => {
               receiver: selectedChat,
               type:"image"
             }
-            sendMessage({
+            await sendMessage({
               variables: {
                 messageInput: messageData,
               },
             }).then(() => {
               setMessage(messageData)
-              console.log(messageData)
+              // console.log(messageData)
               reset()
               setInputText('')
             })
@@ -100,6 +98,7 @@ const MessageInput = () => {
           content: data.Message,
           sender: user,
           receiver: selectedChat,
+          type: "message"
         }
         sendMessage({
           variables: {
@@ -107,7 +106,7 @@ const MessageInput = () => {
           },
         }).then(() => {
           setMessage(messageData)
-          console.log(messageData)
+          // console.log(messageData)
           reset()
           setInputText('')
         })
