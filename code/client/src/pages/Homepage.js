@@ -15,6 +15,7 @@ import Protocol_sheet from './Protocol_sheet'
 import { judgeCriticality } from '../utils/criticalityJudgement'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import plus from '../plus.png'
+import homeicon from '../home.png'
 
 const Homepage = () => {
   const [loadingPage, setLoadingPage] = useState(true)
@@ -111,6 +112,11 @@ const Homepage = () => {
   const [showFormComponent, setshowFormComponent] = useState(false)
   const [showupload, setshowupload] = useState(false)
 
+  const RedirectToHome = () => {
+    setshowDocumentComponent(true)
+    setshowFormComponent(false)
+    setshowupload(false)
+  }
   const formtoggleComponent = () => {
     setshowDocumentComponent(false)
     setshowFormComponent(true)
@@ -293,27 +299,44 @@ const Homepage = () => {
           >
             <Protocol_sheet />
             <button onClick={uploadtoggleComponent}>
-              <div
-                style={{
-                  
-                }}
-              >
+              <div style={{}}>
                 <img
+                  style={{
+                    position: 'absolute',
+                    top: '90%',
+                    right: '0%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '127px',
+                    height: '127px',
+                  }}
+                  src={plus}
+                  alt=""
+                />
+              </div>
+            </button>
+          </div>
+        )}
+        {/* Code similar to above must be written to render the form component using the showFormComponent variable */}
+        {showupload && (
+          <>
+            <Addfile />
+
+            <button onClick={RedirectToHome}>
+              <img
                 style={{
                   position: 'absolute',
                   top: '90%',
                   right: '0%',
                   transform: 'translate(-50%, -50%)',
                   width: '127px',
-                  height: '127px',                
+                  height: '127px',
                 }}
-                src={plus} alt="" />
-              </div>
+                src={homeicon}
+                alt=""
+              />
             </button>
-          </div>
+          </>
         )}
-        {/* Code similar to above must be written to render the form component using the showFormComponent variable */}
-        {showupload && <Addfile />}
       </div>
     )
   }
