@@ -1,6 +1,7 @@
 import React from "react";
 import user from "../user.png";
 import doc from '../doc.svg';
+import person from "../person.svg"
 
 const ImageRender = ({ message, right }) => {
   const handleImageClick = (imageURL) => {
@@ -26,6 +27,7 @@ const ImageRender = ({ message, right }) => {
             // margin:"3px"
           }}
         >
+          
           <img
             src={doc}
             style={{ width: "100%", height: "40%" }}
@@ -58,7 +60,7 @@ const ImageRender = ({ message, right }) => {
       )}
         <div
           className="chat-box"
-          style={{ width: "100%", wordBreak: "break-word" }}
+          style={{ width: "100%", wordBreak: "break-word" ,margin:"7px",padding:"10px"}}
         >
           <div className={`chat-message ${right === 0 ? "left" : "right"}`}>
             {isValidURL(message) ? (

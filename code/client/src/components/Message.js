@@ -3,13 +3,16 @@ import user from "../user.png";
 import Placeholder from "./Placeholder";
 import book from "../book.svg"
 import doc from "../doc.svg"
+import person from "../person.svg"
 import forward from "../forward.svg";
+import { ChatState } from "../context/ChatProvider";
 
 const Message = ({ message, right }) => {
   // console.log(right)
-  // console.log(message);
+  // const { user, selectedChat, message, audioBlob, activeTab, setActiveTab, setSocket } = ChatState();
+  // console.log(message.type);
   return (
-    <div className="flex flex-row chat-parent" style={{ width:"100%" }}>
+    <div className="flex flex-row chat-parent" style={{ width:"100%",marginTop:"5px" }}>
       {right == 0 && (
         <div
           style={{
@@ -23,6 +26,7 @@ const Message = ({ message, right }) => {
             // margin:"3px"
           }}
         >
+          
           <img
             src={book}
             style={{ width: "100%", height: "40%" }}
