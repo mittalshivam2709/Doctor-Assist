@@ -1,6 +1,8 @@
 import React from "react";
 import user from "../user.png";
 import Placeholder from "./Placeholder";
+import book from "../book.svg"
+import doc from "../doc.svg"
 
 const Message = ({ message, right }) => {
   console.log(right)
@@ -9,7 +11,7 @@ const Message = ({ message, right }) => {
       {right == 0 && (
         <div
           style={{
-            flex: "0 0 7%",
+            flex: "0 0 5%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -18,7 +20,7 @@ const Message = ({ message, right }) => {
           }}
         >
           <img
-            src={user}
+            src={book}
             style={{ width: "100%", height: "auto" }}
             alt="User"
           />
@@ -27,29 +29,33 @@ const Message = ({ message, right }) => {
         
       )}
       
-      <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"3px",borderRadius:"7px" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",borderRadius:"7px"}}>
-        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue"} : {}}>
-          {message}
-        </div>
-      </div>
+     
 
       {right == 1 && (
         <div
           style={{
-            flex: "0 0 7%",
+            flex: "0 0 5%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            marginRight:"12px",
+            marginLeft:"3px"
             // backgroundColor:"red"
           }}
         >
           <img
-            src={user}
+            src={doc}
             style={{ width: "100%", height: "auto" }}
             alt="User"
           />
         </div>
+        
       )}
+       <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"3px",borderRadius:"7px" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",borderRadius:"7px"}}>
+        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue"} : {}}>
+          {message}
+        </div>
+      </div>
     </div>
   );
 };

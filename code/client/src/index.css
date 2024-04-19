@@ -223,22 +223,21 @@ body {
 }
 
 .right {
-  /* align-self: flex-end; */
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-end;
-  /* text-align: right; */
-  margin-left: auto;
-  width: fit-content;
-  /* word-wrap: break-word; */
-  text-wrap: wrap;
 
-  max-width: 80%;
+
+  display: flex;
+  justify-content: flex-start;
+
+  /* margin-left: auto; */
+  /* width: fit-content; */
+
+  /* text-wrap: wrap; */
+
+  /* max-width: 80%; */
   padding: 5px 15px 5px 15px;
-  border-radius: 25px;
   border: 1px solid rgba(85, 85, 251, 1);
   color: rgba(85, 85, 251, 1);
-  /* overflow-x: auto; */
+
   
 }
 
