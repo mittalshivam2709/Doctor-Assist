@@ -41,11 +41,10 @@ const MessageInput = () => {
       setInputText(file.name);
     }
   };
-  const authdata = JSON.parse(localStorage.getItem('authdata'));
-  const idsender = authdata ? authdata.id : '';
+
   const { register, handleSubmit, reset } = useForm();
   const [selectedFile, setSelectedFile] = useState(null);
-  const { selectedChat, setMessage } = ChatState();
+  const { user, selectedChat, setMessage } = ChatState();
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const customSubmit = async (data) => {
     if(selectedFile){
@@ -74,7 +73,7 @@ const MessageInput = () => {
               }
             const messageData = {
               content: fileUrl,
-              sender: idsender,
+              sender: user,
               receiver: selectedChat,
               type:"image"
             }
@@ -99,7 +98,7 @@ const MessageInput = () => {
       if (data.Message.trim() !== '') {
         const messageData = {
           content: data.Message,
-          sender: idsender,
+          sender: user,
           receiver: selectedChat,
         }
         sendMessage({
