@@ -7,6 +7,64 @@ import '../loginpage.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import Navbar from '../components/Navbar'
+
+
+
+
+
+// import { Viewer, Worker } from '@react-pdf-viewer/core'
+// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
+// import '@react-pdf-viewer/core/lib/styles/index.css'
+// import '@react-pdf-viewer/default-layout/lib/styles/index.css'
+
+//   const [numPages, setNumPages] = useState(0)
+//   const [pageNumber, setPageNumber] = useState(1)
+//   function onDocumentLoadSuccess({ numPages }) {
+//     setNumPages(numPages)
+//   }
+
+//   useEffect(() => {
+//     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
+//   }, [])
+
+// <div className="container">
+//   <form onSubmit={handles}>
+//     <input type="file" className="form-control" onChange={handlechange} />
+//     <button type="submit" className="btn btn-success">
+//       view pdf
+//     </button>
+//   </form>
+//   <h2>View pdf</h2>
+//   <div>
+//     <Worker workerUrl="https://tto-asset.s3.amazonaws.com/EMRI_audio_files/DASS_39/Document_query/Mom_6th_March_2024.pdf">
+//       {/* <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js"> */}
+//       {viewPdf && (
+//         <>
+//           <Viewer fileUrl={viewPdf} plugins={[newplugin]} />
+//         </>
+//       )}
+//       {!viewPdf && <>No PDF</>}
+//     </Worker>
+//   </div>
+// </div>
+
+{
+  /* <div>
+        <Document
+          file="https://tto-asset.s3.amazonaws.com/EMRI_audio_files/DASS_39/Document_query/Mom_6th_March_2024.pdf"
+          onLoadSuccess={onDocumentLoadSuccess}
+        >
+          <Page pageNumber={pageNumber} />
+        </Document>
+        <p>
+          Page {pageNumber} of {numPages}
+        </p>
+      </div> */
+}
+
+
+
 
 const Password_Reset = () => {
   const { register, handleSubmit, reset, watch, setError, clearErrors } =
@@ -91,54 +149,65 @@ const Password_Reset = () => {
     setShowPassword3(!showPassword3)
   }
   return (
-    <div className="outerlogin">
-      <div className="login-container">
-        <h2
-          style={{
-            color: 'blue',
-            position: 'relative',
-            top: '-20px',
-            fontSize: '30px',
-          }}
-        >
-          Reset Password
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register('email')} placeholder="Email" type='email' />
-          <br />
-          <input
-            {...register('oldpassword')}
-            type={showPassword3 ? 'text' : 'password'}
-            placeholder="Enter old password"
-          />
-          <FontAwesomeIcon
-            icon={showPassword3 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
-            onClick={togglePasswordVisibility3}
-            style={{ position: 'relative', top: '-55px', left: '170px' }}
-          />
-          <input
-            {...register('newpassword')}
-            type={showPassword1 ? 'text' : 'password'}
-            placeholder="Enter new password"
-          />
-          <FontAwesomeIcon
-            icon={showPassword1 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
-            onClick={togglePasswordVisibility1}
-            style={{ position: 'relative', top: '-55px', left: '170px' }}
-          />
-          <input
-            {...register('renewpassword')}
-            type={showPassword2 ? 'text' : 'password'}
-            placeholder="Re-enter new password"
-          />
-          <FontAwesomeIcon
-            icon={showPassword2 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
-            onClick={togglePasswordVisibility2}
-            style={{ position: 'relative', top: '-55px', left: '170px' }}
-          />
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
+    <div>
+      <Navbar />
+      <div
+        style={{
+          background: 'linear-gradient(109.19deg, #F4F4FF 0%, #C8C8FE 100%)',
+          minHeight: 'calc(100vh - 50px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <div className="login-container">
+          <h2
+            style={{
+              color: 'blue',
+              position: 'relative',
+              top: '-20px',
+              fontSize: '30px',
+            }}
+          >
+            Reset Password
+          </h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('email')} placeholder="Email" type="email" />
+            <br />
+            <input
+              {...register('oldpassword')}
+              type={showPassword3 ? 'text' : 'password'}
+              placeholder="Enter old password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword3 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility3}
+              style={{ position: 'relative', top: '-55px', left: '170px' }}
+            />
+            <input
+              {...register('newpassword')}
+              type={showPassword1 ? 'text' : 'password'}
+              placeholder="Enter new password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword1 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility1}
+              style={{ position: 'relative', top: '-55px', left: '170px' }}
+            />
+            <input
+              {...register('renewpassword')}
+              type={showPassword2 ? 'text' : 'password'}
+              placeholder="Re-enter new password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword2 ? faEyeSlash : faEye} // Use FontAwesome icon based on showPassword state
+              onClick={togglePasswordVisibility2}
+              style={{ position: 'relative', top: '-55px', left: '170px' }}
+            />
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     </div>
   )
