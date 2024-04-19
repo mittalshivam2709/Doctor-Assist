@@ -154,12 +154,18 @@ body {
 
 .chat-widget-button {
   /* background-color: #5555FB; */
+
+  transition: transform 0.3s ease;
   position: relative;
   color: #fff;
   border: none;
   /* padding: 10px 20px; */
   cursor: pointer;
   border-radius: 8px 8px 8px 8px;
+}
+
+.chat-widget-button:hover {
+  transform: scale(1.15); 
 }
 
 .chat-content {
