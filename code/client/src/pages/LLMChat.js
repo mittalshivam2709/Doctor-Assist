@@ -8,12 +8,15 @@ import { FETCH_MESSAGES } from "../gqloperations/queries";
 import { useQuery } from "@apollo/client";
 import forward from "../forward.svg";
 import io from "socket.io-client";
-
+import SingleChat from "./SingleChat";
+import LLMInput from "../components/LLMInput";
 const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
+// import { useChat } from '../context/ChatContext'; 
 
 const LLMChat = () => {
   const { user, selectedChat, message, audioBlob, isSocket, setSocket } = ChatState();
+  const [activeTab, setActiveTab] = useState("LLMChat");
   const [chatMessages, setChatMessages] = useState({});
   const ref = useRef(null);
   const { data, refetch } = useQuery(FETCH_MESSAGES, {
@@ -23,6 +26,10 @@ const LLMChat = () => {
     },
     skip: !selectedChat, // skip the query if selectedChat is not selected
   });
+  // const { setTab } = useChat(); 
+  // const handleForwardClick = () => {
+  //   setTab('SingleChat');
+  // };
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -87,30 +94,37 @@ const LLMChat = () => {
     });
   }, [chatMessages, audioBlob]);
 
+
   const handleForward = (content) => {
-    localStorage.setItem("forwardedMessage", content);
-    window.open('/emt-assist', '_blank');
+    // localStorage.setItem("forwardedMessage", content);
+    // window.open('');
   };
 
+  console.log(activeTab)
   return (
-    <div>
-      <div className="single-chat" style={{ overflowX: "hidden" }}>
+    // <div>
+      <div className="single-chat" style={{ overflowX: "hidden"}}>
         {(chatMessages[selectedChat] || [])
           .filter((message) => message.type === "LLM")
           .map((message, index) => (
             <div key={index}>
-              <Message message={message.content} right={message.sender === user} />
+              {/* <div className="chat-messages"> */}
+              <Message message={message.content} right={message.sender === user}/>
               {message.sender === selectedChat && (
-                <button onClick={() => handleForward(message.content)}>
+                <button >
                   <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" }} />
                 </button>
               )}
-            </div>
+              </div>
+            // </div>
           ))}
+        
         <div ref={ref}></div>
       </div>
-    </div>
+      
+    // </div> 
   );
 };
 
 export default LLMChat;
+

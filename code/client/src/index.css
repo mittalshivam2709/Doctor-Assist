@@ -215,8 +215,8 @@ body {
   background-color: white;
   /* display: inline-block; */
   width: fit-content;
-  padding: 5px;
-  border-radius: 25px;
+  padding: 13px;
+  border-radius: 7px;
   color: rgba(59, 59, 59, 1);
 }
 
@@ -245,7 +245,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   /* margin-right: 15px; */
- 
+  width: 10px;
   /* overflow: 'hidden' */
   /* background-color: black */
   
