@@ -1,186 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import { ChatState } from '../context/ChatProvider'
-// import { useForm } from 'react-hook-form'
-// import docion from '../doc_icon.png'
-// import { DELETE_DOCUMENT } from '../gqloperations/mutations'
-// import { CHANGE_STATUS } from '../gqloperations/mutations'
-// import deleteicon from '../delete.png'
-// import { useMutation } from '@apollo/client'
-// import { Link } from 'react-router-dom'
-// import '../admin.css'
-// // similar to dropdownjs
-// // const Document = ({}) => {
-// const Document = ({ data }) => {
-//   const {document_url,document_name,active_to_train, admit_time} =
-//     data
-//   const [hovered, setHovered] = useState(false)
-//   // console.log(active_to_train)
-//   const handleHover = (isHovered) => {
-//     setHovered(isHovered)
-//   }
-
-//   const [dropdownOpen, setDropdownOpen] = useState(false)
-
-//   const toggleDropdown = () => {
-//     setDropdownOpen(!dropdownOpen)
-//   }
-
-//   const [changestatus] = useMutation(CHANGE_STATUS)
-//   const change_activity_status_to_1 = () => {
-//   const newStatus = active_to_train === '0' ? '1' : '0'; 
-//    changestatus({
-//      variables: {
-//        inp: {
-//          document_url: document_url,
-//          active_to_train: newStatus,
-//        },
-//      },
-//    })
-//   }
-//   const change_activity_status_to_0 = () => {
-//   const newStatus = active_to_train === '1' ? '0' : '1'; 
-//    changestatus({
-//      variables: {
-//        inp: {
-//          document_url: document_url,
-//          active_to_train: newStatus,
-//        },
-//      },
-//    })
-//   }
-//   return (
-//     <div className="parentdocument">
-//       <div className="left">
-//         <img src={docion} alt="Icon" />
-//         {document_name}
-//       </div>
-//       <div className="right">
-//         {admit_time}
-//         <button>
-//           <img src={deleteicon} alt="Image 1" />
-//         </button>
-
-//           <button onClick={toggleDropdown}>
-//             <div className="threedots">
-//               <div className="onedot"></div>
-//               <div className="onedot"></div>
-//               <div className="onedot"></div>
-//             </div>
-//           </button>
-//           </div>
-//           {dropdownOpen && (
-//             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-//               <button
-//                 className={`block w-full text-left px-4 py-2 text-sm ${
-//                   active_to_train === '1'
-//                     ? 'bg-gray-200 text-gray-900'
-//                     : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-//                 }`}
-//                 onClick={change_activity_status_to_1}
-//               >
-//                 Active to Train
-//               </button>
-//               <button
-//                 className={`block w-full text-left px-4 py-2 text-sm ${
-//                   active_to_train === '0'
-//                     ? 'bg-gray-200 text-gray-900'
-//                     : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-//                 }`}
-//                 onClick={change_activity_status_to_0}
-//               >
-//                 Inactive to Train
-//               </button>
-//             </div>
-//           )}
-//     </div>
-//   )
-// }
-
-// export default Document
-// import React, { useState } from 'react';
-// import { useMutation } from '@apollo/client';
-// import { CHANGE_STATUS } from '../gqloperations/mutations';
-// import docion from '../doc_icon.png';
-// import deleteicon from '../delete.png';
-// import '../admin.css';
-
-// const Document = ({ data }) => {
-//   const { document_url, document_name, active_to_train, admit_time } = data;
-
-//   const [dropdownOpen, setDropdownOpen] = useState(false);
-//   const [button1Color, setButton1Color] = useState(active_to_train === '1' ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900');
-//   const [button2Color, setButton2Color] = useState(active_to_train === '0' ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900');
-
-//   const toggleDropdown = () => {
-//     setDropdownOpen(!dropdownOpen);
-//   };
-
-//   const [changestatus] = useMutation(CHANGE_STATUS);
-
-//   const change_activity_status = (status) => {
-//     const newStatus = status === '1' ? '0' : '1';
-//     changestatus({
-//       variables: {
-//         inp: {
-//           document_url: document_url,
-//           active_to_train: newStatus,
-//         },
-//       },
-//     });
-//     // Close dropdown after clicking
-//     setDropdownOpen(false);
-//     // Change button colors
-//     if (newStatus === '1') {
-//       setButton1Color('bg-gray-200 text-gray-900');
-//       setButton2Color('text-gray-700 hover:bg-gray-100 hover:text-gray-900');
-//     } else {
-//       setButton1Color('text-gray-700 hover:bg-gray-100 hover:text-gray-900');
-//       setButton2Color('bg-gray-200 text-gray-900');
-//     }
-//   };
-
-//   return (
-//     <div className="parentdocument">
-//       <div className="left">
-//         <img src={docion} alt="Icon" />
-//         {document_name}
-//       </div>
-//       <div className="right">
-//         {admit_time}
-//         <button>
-//           <img src={deleteicon} alt="Delete" />
-//         </button>
-
-//         <button onClick={toggleDropdown}>
-//           <div className="threedots">
-//             <div className="onedot"></div>
-//             <div className="onedot"></div>
-//             <div className="onedot"></div>
-//           </div>
-//         </button>
-//       </div>
-//       {dropdownOpen && (
-//         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-//           <button
-//             className={`block w-full text-left px-4 py-2 text-sm ${button1Color}`}
-//             onClick={() => change_activity_status('1')}
-//           >
-//             Active to Train
-//           </button>
-//           <button
-//             className={`block w-full text-left px-4 py-2 text-sm ${button2Color}`}
-//             onClick={() => change_activity_status('0')}
-//           >
-//             Inactive to Train
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Document;
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { CHANGE_STATUS } from '../gqloperations/mutations';
@@ -273,17 +90,17 @@ const Document = ({ data }) => {
   };
   return (
     <div className="parentdocument">
-      <div className="left">
-        <img src={docion} alt="Icon" />
+      <a className="left" href={document_url} target="_blank" rel="noopener noreferrer">
+        <img src={docion} alt="Icon"  />
         {document_name}
-      </div>
+      </a>
       <div className="right">
         {admit_time}
         <button onClick={() => deletedoc(document_url)}>
           <img src={deleteicon} alt="Delete" />
         </button>
         <button onClick={toggleDropdown}>
-        <img src={threedots} alt="Dropdown" />
+        <img src={threedots} alt="Dropdown" style={{width:'50px',height:'80px'}} />
         </button>
       </div>
       {dropdownOpen && (
