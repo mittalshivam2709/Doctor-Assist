@@ -3,6 +3,7 @@ import user from "../user.png";
 import Placeholder from "./Placeholder";
 import book from "../book.svg"
 import doc from "../doc.svg"
+import forward from "../forward.svg";
 
 const Message = ({ message, right }) => {
   console.log(right)
@@ -14,7 +15,7 @@ const Message = ({ message, right }) => {
             flex: "0.05 0 5%",
             display: "flex",
             flexDirection: "column",
-            // justifyContent: "flex-start",
+            justifyContent: "center",
             // alignItems: "flex-start"
             // backgroundColor:"yellow",
             marginTop:"0px"
@@ -39,7 +40,7 @@ const Message = ({ message, right }) => {
             flex: "0.05 0 5%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             marginRight:"5px",
             marginLeft:"3px"
             // backgroundColor:"red"
@@ -53,10 +54,16 @@ const Message = ({ message, right }) => {
         </div>
         
       )}
-       <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"5px",borderRadius:"7px" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",borderRadius:"7px"}}>
-        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue"} : {}}>
+       <div className="chat-box" style={right == 1 ? {wordBreak:"break-word",backgroundColor:"transparent" }:{width:"100%", wordBreak:"break-word",backgroundColor:"transparent",padding:"3px",margin:"1px",borderRadius:"7px"}}>
+        <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"5px",borderRadius:"7px"} : {}}>
           {message}
         </div>
+        {right == 0 &&(
+            <button style ={{marginBottom:"15px"}} >
+            <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" }} />
+            </button> 
+        )}
+          
       </div>
     </div>
   );
