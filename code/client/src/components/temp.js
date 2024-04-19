@@ -208,7 +208,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import drag from '../dragToUpload.png'
+import drag from '../drag.png'
 import { SEND_DOCUMENT } from '../gqloperations/mutations'
 import { useMutation } from '@apollo/client'
 
@@ -247,6 +247,7 @@ const Addfile = () => {
     setSelectedFile(event.dataTransfer.files[0])
     console.log(event.dataTransfer.files[0].name)
   }
+
   const [progress, setProgress] = useState(0)
   const [showProgressBar, setShowProgressBar] = useState(false)
 
@@ -256,7 +257,6 @@ const Addfile = () => {
       return
     }
     setShowProgressBar(true)
-
     const formData = new FormData()
     formData.append('image', selectedFile)
 
@@ -364,6 +364,7 @@ const Addfile = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   margin: '0',
+                  backgroundColor: '#f8f9fa',
                 }}
               >
                 <button onClick={() => fileInputRef.current.click()}>
@@ -375,6 +376,7 @@ const Addfile = () => {
                       justifyContent: 'center',
                       width: '544px',
                       height: '444px',
+                      border: `2px dashed ${dragging ? '#000' : '#ccc'}`,
                       borderRadius: '20px',
                       padding: '20px',
                       margin: '10px auto',
@@ -395,12 +397,16 @@ const Addfile = () => {
                         left: '449px',
                       }}
                     >
+                      <h1>Drag and Drop Files to Upload</h1>
+                      <h1>Or</h1>
                       <input
                         type="file"
+                        multiple
                         onChange={handleFileInput}
                         hidden
                         ref={fileInputRef}
                       />
+                      Select Files
                     </div>
                   </div>
                 </button>
