@@ -29,7 +29,7 @@ const Message = ({ message, right }) => {
         >
           
           <img
-            src={person}
+            src={book}
             style={{ width: "100%", height: "40%" }}
             alt="User"
           />

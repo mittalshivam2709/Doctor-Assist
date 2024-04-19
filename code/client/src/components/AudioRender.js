@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import user from "../user.png";
 import doc from "../doc.svg"
+import person from "../person.svg"
 
 const AudioRender = ({ message, right }) => {
   const audioRef = useRef(null);
@@ -34,7 +35,7 @@ const AudioRender = ({ message, right }) => {
         >
           
           <img
-            src={doc}
+            src={person}
             style={{ width: "100%", height: "40%" }}
             alt="User"
           />

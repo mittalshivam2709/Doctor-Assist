@@ -38,7 +38,7 @@ const ChatProvider = ({ children }) => {
         audioBlob,
         setAudioBlob, 
         activeTab, 
-        setActiveTab
+        setActiveTab,
       }}
     >
       {children}

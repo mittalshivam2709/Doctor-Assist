@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import LoremIpsum from "../utils/loremipsum";
 import Placeholder from "../components/Placeholder";
-import Message from "../components/Message";
+import Message from "../components/MessageLLM";
 import MessageInput from "../components/MessageInput";
 import { ChatState } from "../context/ChatProvider";
 import { FETCH_MESSAGES } from "../gqloperations/queries";

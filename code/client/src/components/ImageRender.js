@@ -29,7 +29,7 @@ const ImageRender = ({ message, right }) => {
         >
           
           <img
-            src={doc}
+            src={person}
             style={{ width: "100%", height: "40%" }}
             alt="User"
           />
