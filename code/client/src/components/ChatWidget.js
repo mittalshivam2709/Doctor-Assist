@@ -90,13 +90,14 @@ const ChatWidget = () => {
                 setNewMessages((prev) => ({ ...prev, SingleChat: false }));
               }}
               style={{
-                backgroundColor:
+                backgroundColor: 
                   activeTab === "SingleChat"
                     ? "rgba(120, 120, 255, 1)"
                     : "rgba(95, 95, 255, 1)",
-                padding: "10px 25px 10px 25px",
+                padding: "10px 20px 10px 20px",
                 borderRadius: "15px 15px 0 0",
                 marginRight: "10px",
+                width:"150%"
               }}
             >
               EMT Assist{" "}
@@ -112,12 +113,13 @@ const ChatWidget = () => {
                   activeTab === "HelpChat"
                     ? "rgba(120, 120, 255, 1)"
                     : "rgba(95, 95, 255, 1)",
-                padding: "10px 25px 10px 25px",
+                padding: "5px 15px 5px 15px",
                 borderRadius: "15px 15px 0 0",
                 marginRight: "24%",
+                width:"200%"
               }}
             >
-              Help Centre{" "}
+              Knowledge Base{" "}
               {newMessages.HelpChat && <span className="notif-dot"></span>}{" "}
             </button>
             <button onClick={toggleExpansion} className="chat-widget-button">
@@ -138,7 +140,9 @@ const ChatWidget = () => {
          </div>
       )} */}
         {expanded && (
-          <div className="chat-content">
+          <div className="chat-content"  style={{
+            backgroundColor: activeTab === "SingleChat" ? "#D8D8E2" :"#DBDBFF" 
+          }}>
             {/* <SingleChat /> */}
 
             {renderContent()}

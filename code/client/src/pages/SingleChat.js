@@ -101,7 +101,7 @@ const SingleChat = () => {
 
   return (
     <div>
-      <div className="single-chat" style={{ overflowX: "hidden" }}>
+      <div className="single-chat" style={{ overflowX: "hidden" ,backgroundColor:"#D8D8E2"}}>
         {(chatMessages[selectedChat] || [])
           .filter((message) => message.type !== "LLM")
           .map((message, index) =>
