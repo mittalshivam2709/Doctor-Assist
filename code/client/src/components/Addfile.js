@@ -208,7 +208,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import drag from '../drag.png';
+import drag from '../dragToUpload.png';
 import { SEND_DOCUMENT } from '../gqloperations/mutations';
 import { useMutation } from '@apollo/client';
 
@@ -315,10 +315,10 @@ const Addfile = () => {
           <br />
           <br />
           <div style={{ position: 'absolute', top: '30%', left: '45%' }}>
-            <div style={{ fontFamily: 'Arial', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0', backgroundColor: '#f8f9fa' }}>
+          <div style={{ fontFamily: 'Arial', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0'}}>
               <button onClick={() => fileInputRef.current.click()}>
                 <div
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '544px', height: '444px', border: `2px dashed ${dragging ? '#000' : '#ccc'}`, borderRadius: '20px', padding: '20px', margin: '10px auto', cursor: 'pointer' }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '544px', height: '444px', borderRadius: '20px', padding: '20px', margin: '10px auto', cursor: 'pointer' }}
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onDragEnter={handleDragEnter}
@@ -326,16 +326,12 @@ const Addfile = () => {
                 >
                   <img src={drag} alt="Drag and drop file here" />
                   <div style={{ fontSize: '17px', width: '235px', height: '36px', top: '479px', left: '449px' }}>
-                    <h1>Drag and Drop Files to Upload</h1>
-                    <h1>Or</h1>
                     <input
                       type="file"
-                      multiple
                       onChange={handleFileInput}
                       hidden
                       ref={fileInputRef}
                     />
-                    Select Files
                   </div>
                 </div>
               </button>

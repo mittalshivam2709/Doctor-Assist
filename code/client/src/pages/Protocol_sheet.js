@@ -39,7 +39,12 @@ const Protocol_sheet = () => {
   }, [refetch])
 
   return (
-    <div>
+    // <div>
+    //   {docs.map((item) => (
+    //     <Documentcomp key={item.id} data={item} />
+    //   ))}
+    // </div>
+    <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
       {docs.map((item) => (
         <Documentcomp key={item.id} data={item} />
       ))}
