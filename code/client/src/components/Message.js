@@ -59,11 +59,11 @@ const Message = ({ message, right }) => {
         <div className={`chat-message ${right == 0 ? "left" : "right"}`} style={right == 1 ?{color:"blue",padding:"10px",paddingLeft:"20px",border: "1.3px solid blue",margin:"5px",borderRadius:"7px"} : {}}>
           {message}
         </div>
-        {right == 0 &&(
+        {/* {right == 0 &&(
             <button style ={{marginBottom:"15px"}} >
             <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" }} />
             </button> 
-        )}
+        )} */}
           
       </div>
     </div>

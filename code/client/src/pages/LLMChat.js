@@ -110,11 +110,11 @@ const LLMChat = () => {
             <div key={index}>
               {/* <div className="chat-messages"> */}
               <Message message={message.content} right={message.sender === user}/>
-              {/* {message.sender === selectedChat && (
+              {message.sender === selectedChat && (
                 <button >
                   <img src={forward} alt="Forward" style={{ width: "25px", height: "25px" }} />
                 </button>
-              )} */}
+              )}
               </div>
             // </div>
           ))}
