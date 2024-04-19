@@ -60,7 +60,7 @@ const ImageRender = ({ message, right }) => {
       )}
         <div
           className="chat-box"
-          style={{ width: "100%", wordBreak: "break-word" ,margin:"7px",padding:"10px"}}
+          style={{ width: "100%", wordBreak: "break-word" ,margin:"5px",padding:"10px"}}
         >
           <div className={`chat-message ${right === 0 ? "left" : "right"}`}>
             {isValidURL(message) ? (

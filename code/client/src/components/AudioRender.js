@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import user from "../user.png";
+import doc from "../doc.svg"
 
 const AudioRender = ({ message, right }) => {
   const audioRef = useRef(null);
@@ -16,23 +17,55 @@ const AudioRender = ({ message, right }) => {
   return (
     <div
       className="flex flex-row chat-parent"
-      style={{ width: "100%", alignItems: "center" }}
+      style={{ width: "100%" }}
     >
       {right == 0 && (
         <div
           style={{
-            flex: "0 0 7%",
+            flex: "0.05 0 5%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            // alignItems: "flex-start"
+            // backgroundColor:"yellow",
+            marginTop:"0px"
+            // margin:"3px"
           }}
         >
-          <img src={user} style={{ width: "100%", height: "auto" }} alt="User" />
+          
+          <img
+            src={doc}
+            style={{ width: "100%", height: "40%" }}
+            alt="User"
+          />
+          
         </div>
+        
       )}
-      <div
+    
+    {right == 1 && (
+        <div
+          style={{
+            flex: "0.05 0 5%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginRight:"5px",
+            marginLeft:"3px"
+            // backgroundColor:"red"
+          }}
+        >
+          <img
+            src={doc}
+            style={{ width: "95%", height: "auto" }}
+            alt="User"
+          />
+        </div>
+        
+      )}
+        <div
         className="chat-box"
-        style={{ width: "100%", wordBreak: "break-word" }}
+        style={{ width: "100%", wordBreak: "break-word",margin:"5px" }}
       >
         <div className={`chat-message ${right == 0 ? "left" : "right"}`}>
           {isValidURL(message) ? (
@@ -50,18 +83,6 @@ const AudioRender = ({ message, right }) => {
           )}
         </div>
       </div>
-      {right == 1 && (
-        <div
-          style={{
-            flex: "0 0 7%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <img src={user} style={{ width: "100%", height: "auto" }} alt="User" />
-        </div>
-      )}
     </div>
   );
 };
