@@ -232,7 +232,7 @@ const Homepage = () => {
               padding: '5px',
               paddingTop: '10px',
               borderRadius: '20px',
-              height: '85%',
+              height: '100%',
               overflowY: 'scroll',
               overflowX: 'hidden',
             }}
