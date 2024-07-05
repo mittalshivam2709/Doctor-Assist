@@ -10,8 +10,8 @@ The features being provided are the following :-
 2. Document Query: Search for medicines or procedures from uploaded medical documents from admins by the doctors.
 3. Live Chat: Communicate with EMT assistants of the ambulances regarding critical cases.
 4. Document Uploading : Admins can upload documents on which doctors can query to handle critical cases and also edit/view/delete them.
-## Setup Instructions
 
+## Setup Instructions
 ### Backend Setup:
 
 1. Navigate to the **code** directory.
@@ -22,7 +22,7 @@ The features being provided are the following :-
 
 ### Frontend Setup
 
-1. Navigate to the client directory.
+1. Navigate to the code/client directory.
 2. Open a terminal and run `npm i`.
 3. Start the frontend server by running `npm run start`.
 4. Access the application at [http://localhost:3000](http://localhost:3000).
@@ -101,6 +101,10 @@ Please note that you can also upload multiple files; however, this part is curre
 <h2>Note</h2>
 
     Ensure that the port used is 3000 for the client and 3001 for the EMT chat. Modify CORS origin URL if necessary.
+
+## Documentation 
+
+To view the code documentation [click here](https://www.notion.so/Overview-e1316e28c1584187913a2143ad0d023f)
 
 ## How to Contribute
 
