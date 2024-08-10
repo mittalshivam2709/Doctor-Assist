@@ -18,9 +18,12 @@ export const FETCH_NUMBER = gql`
     }
   }
 `
+
+// docID is the name of the variable that is used in typedefs
+// lol can be defined here and lol must be used while using the query in react
 export const FETCH_PATIENTS = gql`
-query FetchAmbulancesByDoctorId($docId: ID!) {
-  fetchAmbulancesByDoctorId(docID: $docId) {
+query FetchAmbulancesByDoctorId($lol: ID!) {
+  fetchAmbulancesByDoctorId(docID: $lol) {
       doctor
       emt
       age_type

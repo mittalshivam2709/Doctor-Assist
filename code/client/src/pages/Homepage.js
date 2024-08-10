@@ -18,9 +18,9 @@ import plus from '../plus.png'
 import homeicon from '../home.png'
 
 const Homepage = () => {
+  
   const [loadingPage, setLoadingPage] = useState(true)
-  const { user, selectedChat, setSelectedChat, setSelectedPatient } =
-    ChatState()
+  const { user, selectedChat, setSelectedChat, setSelectedPatient } = ChatState()
   const authdata = JSON.parse(localStorage.getItem('authdata'))
   const email = authdata ? authdata.email : ''
   const userId = authdata ? authdata.id : ''
@@ -31,27 +31,36 @@ const Homepage = () => {
   } = useQuery(FETCH_USER_DETAILS, {
     variables: { email },
   })
+  
   const [doctor, setDoctor] = useState({})
+
+
   useEffect(() => {
     if (!doctorLoading && doctorData && doctorData.getUserByEmail) {
       setDoctor(doctorData.getUserByEmail)
     }
   }, [doctorLoading, doctorData])
+
   const { privilege } = doctor
+  // privilege is a field in doctor object which is set to 0 if it is a doctor
+  // and set to 1 if it is an admin
+
   const {
     loading: patientsLoading,
     data: patientsData,
     refetch: refetchPatients,
   } = useQuery(FETCH_PATIENTS, {
-    variables: { docId: userId },
+    variables: { lol: userId },
   })
   const [patients, setPatients] = useState([])
+
   useEffect(() => {
     if (!patientsLoading && patientsData) {
       setPatients(patientsData.fetchAmbulancesByDoctorId || []) // Set patients state after fetching data
       setLoadingPage(false)
     }
   }, [patientsLoading, patientsData])
+
   useEffect(() => {
     // console.log("init fetch");
     refetchPatients().then((response) => {
@@ -63,6 +72,7 @@ const Homepage = () => {
       }
     })
   }, [])
+
   useEffect(() => {
     const interval = setInterval(
       () => {
@@ -78,6 +88,7 @@ const Homepage = () => {
     )
     return () => clearInterval(interval)
   }, [refetchPatients])
+
   const [dropdownVisible, setDropdownVisible] = useState(false)
   const [DropdownMinimizedVisible, setDropdownMinimizedVisible] = useState(true) // State for DropdownMinimized visibility
 
@@ -85,14 +96,18 @@ const Homepage = () => {
     setDropdownVisible(!dropdownVisible)
     setDropdownMinimizedVisible(!DropdownMinimizedVisible) // Toggle DropdownMinimized visibility
   }
-  const sortedPatients = patients.slice().sort((a, b) => {
+
+  const comparator = (a, b) => {
     const criticalityOrder = { Critical: 0, Moderate: 1, Minor: 2 }
     return (
       criticalityOrder[judgeCriticality(a)] -
       criticalityOrder[judgeCriticality(b)]
     )
-  })
+  }
+  const sortedPatients = patients.slice().sort(comparator)
+
   var done = 0
+
   useEffect(() => {
     setTimeout(() => {
       // console.log("useeffect", sortedPatients[0]);
@@ -140,12 +155,14 @@ const Homepage = () => {
         className="flex-container wrapper custom-scrollbar"
         style={{ background: 'white', padding: '10px', height: 'auto' }}
       >
+        {/* following div if for the left sidebar when not hidden */}
         <div
           className={` column ${dropdownVisible ? 'hidden' : 'visible'}`}
           style={{
             width: 'full',
             // overflow: "hidden",
-            // height : "auto",
+            // height : "900px",
+            height : "auto",
             background: '#F4F4FF',
             borderRadius: '10px',
             transition: 'width 5s ease', // CSS transition property
@@ -153,15 +170,16 @@ const Homepage = () => {
         >
           <Template />
           <div
-            style={{
-              background: 'white',
-              padding: '5px',
-              paddingTop: '10px',
-              borderRadius: '20px',
-              height: '93%',
-              overflowY: 'scroll',
-              overflowX: 'hidden',
-            }}
+            className="templateclass"
+            // style={{
+            //   background: 'white',
+            //   padding: '5px',
+            //   paddingTop: '10px',
+            //   borderRadius: '20px',
+            //   height: '93%',
+            //   overflowY: 'scroll',
+            //   overflowX: 'hidden',
+            // }}
           >
             {sortedPatients.map((item) => (
               <Dropdown key={item.id} data={item} />
@@ -169,6 +187,7 @@ const Homepage = () => {
           </div>
         </div>
 
+        {/* following div is for left sidebar when it is hidden */}
         <div
           className={`column ${
             DropdownMinimizedVisible ? 'hidden' : 'visible'
@@ -180,27 +199,29 @@ const Homepage = () => {
             borderRadius: '10px',
           }}
         >
-          {/* <Template /> */}
           <div
-            style={{
-              background: '#F4F4FF',
-              padding: '5px',
-              paddingTop: '10px',
-              borderRadius: '20px',
-              height: '85%',
-              overflowY: 'scroll',
-              overflowX: 'hidden',
-            }}
+          className='templateclass'
+            // style={{
+            //   background: '#F4F4FF',
+            //   padding: '5px',
+            //   paddingTop: '10px',
+            //   borderRadius: '20px',
+            //   height: '85%',
+            //   overflowY: 'scroll',
+            //   overflowX: 'hidden',
+            // }}
           >
             {sortedPatients.map((item) => (
               <DropdownMinimized key={item.id} data={item} />
             ))}
           </div>
         </div>
+
         {/* the code below this is for button  */}
         <div className="toggle-button-container" data-visible={dropdownVisible}>
           <button className="toggle-button" onClick={handleToggle} />
         </div>
+        
         <div
           className="column"
           style={{ backgroundColor: '#F4F4FF', borderRadius: '10px' }}
@@ -210,7 +231,10 @@ const Homepage = () => {
         </div>
       </div>
     )
-  } else {
+  }
+
+  // the following code is for admin page
+  else {
     return (
       <div
         className="flex-container wrapper custom-scrollbar"

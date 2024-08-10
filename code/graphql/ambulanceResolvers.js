@@ -21,6 +21,8 @@ function formatToAMPM(isoDateString) {
 
 module.exports = {
   Query: {
+    // the first argument is the parent, which is not used here so it is replaced with an underscore
+    // here the name emtID must be same as the typeDefs
     fetchVitals: async (_, { emtID }) => {
       try {
         const ambulance = await Ambulance.findOne({ emt: emtID })

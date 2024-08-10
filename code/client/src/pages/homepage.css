@@ -1,6 +1,17 @@
+.templateclass{
+    background: white;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 20px;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .toggle-button-container[data-visible='true'] {
   justify-content: flex-start; /* List shown: leftmost */
 }
+
 .toggle-button-container {
   display: flex;
   justify-content: flex-end; /* Initial state: rightmost */

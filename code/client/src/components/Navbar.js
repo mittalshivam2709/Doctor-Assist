@@ -15,13 +15,16 @@ import Cookies from "universal-cookie"
 
 
 const Navbar = ({ username }) => {
+
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
+  
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen)
   }
 
   const { user, selectedChat, setUser} = ChatState()
+
   // const email="doctor1@gmail.com"
   const authdata = JSON.parse(localStorage.getItem('authdata'));
   const email = authdata ? authdata.email : '';
@@ -34,6 +37,7 @@ const Navbar = ({ username }) => {
   })
   // console.log("fetched-> ",   (authData?.getUserIdByEmail?.jwt_token)); // works !
   const cookies = new Cookies();
+  
   useEffect(() => {
     authRefetch().then((response) => {
       const getUserToken =  (response?.data?.getUserIdByEmail?.jwt_token);
@@ -56,11 +60,13 @@ const Navbar = ({ username }) => {
     })
   }, [])
   const { doctor_name} = doctor
+
   const handleLogout = () => {
     localStorage.removeItem('authdata');
     cookies.remove("jwt_auth");
     navigate('/');
   };
+  
   return (
     <div className="custom-navbar">
       <div className="flex justify-between items-center">

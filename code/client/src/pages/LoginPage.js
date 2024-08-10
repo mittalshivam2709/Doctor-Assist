@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Navbar_on_loginpage from '../components/Navbar_on_loginpage.js';
-import '../pages/newauth.css';
+import './newauth.css';
 import emailIcon from '.././emailbox.png';
 import passwordIcon from '.././passwordlogo.png';
 import { ChatState } from '../context/ChatProvider.js'
@@ -23,13 +23,13 @@ const useAuthUser = (loginEmail) => {
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [emailHovered, setEmailHovered] = useState(false);
-  const [passwordHovered, setPasswordHovered] = useState(false);
   const [loginEmail, setLoginEmail] = useState(null);
   const navigate = useNavigate();
   const {user, setUser} = ChatState()
-
   
+  
+  // useMutation hook return a tuple with 2 values where first is a function and second is an object
+  // here loginUser is a function and error and loading are objects
   const [loginUser, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       localStorage.setItem('authdata', JSON.stringify(data.loginUser));
@@ -58,7 +58,11 @@ const LoginPage = () => {
       reset();
       return;
     }
+
+    // this means that both email and password are entered
     console.log('Form data submitted:', data);
+    
+    // function call 
     loginUser({
       variables: {
         userInput: {
@@ -69,33 +73,43 @@ const LoginPage = () => {
     });
   };
 
+  const [emailHovered, setEmailHovered] = useState(false);
+  const [passwordHovered, setPasswordHovered] = useState(false);
+
   return (
     <div>
       <Navbar_on_loginpage />
+
       <div className='body'>
+      
+
+        {/* this records the data and sends the value to onsubmit fn  */}
         <form onSubmit={handleSubmit(onSubmit)} className='login-form'>
+      
           <h2 className='login-heading'>Please fill out the details to get started</h2>
-          <div className='input-container' 
-          onMouseEnter={() => setEmailHovered(true)}
-          onMouseLeave={() => setEmailHovered(false)} >
+          
+          {/* input div for email (includes image input and Email ) */}
+          <div className='input-container' onMouseEnter={() => setEmailHovered(true)} onMouseLeave={() => setEmailHovered(false)} >
+           
             <input
               {...register('email')}
               // placeholder="Email"
               type='email'
               className='input-field emailbox'
               style={{
-                border: 
-                  (emailHovered && !document.activeElement.classList.contains('emailbox')) ? '2px solid #007bff' : '1px solid #ccc',
-                boxShadow: 
-                  (emailHovered && !document.activeElement.classList.contains('emailbox')) ? '0 0 2px 1px rgba(0, 0, 0, 0.2)' : 'none'
+                border: (emailHovered && !document.activeElement.classList.contains('emailbox')) ? '2px solid #007bff' : '1px solid #ccc',
+                boxShadow: (emailHovered && !document.activeElement.classList.contains('emailbox')) ? '0 0 2px 1px rgba(0, 0, 0, 0.2)' : 'none'
               }}
             />
+
             <div className='email-logo' >Email</div>
             <img src={emailIcon} alt="Email icon" className='input-icon' />
+          
           </div>
-          <div className='input-container'
-            onMouseEnter={() => setPasswordHovered(true)}
-            onMouseLeave={() => setPasswordHovered(false)}
+          
+          
+          
+          <div className='input-container' onMouseEnter={() => setPasswordHovered(true)} onMouseLeave={() => setPasswordHovered(false)}
           >
             <input
               {...register('password')}
@@ -103,14 +117,21 @@ const LoginPage = () => {
               type='password'
               className='input-field passwordbox'
               style={{border: passwordHovered ? '2px solid #007bff' : '1px solid #ccc',
-              boxShadow: passwordHovered ? '0 0 2px 1px rgba(0, 0, 0, 0.2)' : 'none'}}
+                      boxShadow: passwordHovered ? '0 0 2px 1px rgba(0, 0, 0, 0.2)' : 'none'}}
             />
             <div className='email-logo' >Password</div>
             <img src={passwordIcon} alt="Password icon" className='input-icon' />
+                
           </div>
+         
+          {/* login button with type=submit  */}
+
           <input type="submit" value="Login" className='submit-btn' />
+
           <p className='signup-link'>New user ? <Link to="/signup">Signup</Link></p>
         </form>
+      
+      
       </div>
     </div>
   );
